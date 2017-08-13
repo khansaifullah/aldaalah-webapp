@@ -26,10 +26,11 @@ module.exports = function(app) {
         }
             let phoneNo = req.query.phoneNo;
             let country = req.query.country;
+            let resend = req.query.resend;
 		console.log("in routes /verificationcode ");
 		//var reqData=req.body;
-         console.log(phoneNo+country);
-             regCtrl.sendVerificationCode(phoneNo,country,res);	
+         console.log(phoneNo+country+resend);
+             regCtrl.sendVerificationCode(phoneNo,country,resend,res);	
 	
 	});
     
@@ -67,6 +68,17 @@ module.exports = function(app) {
 		var userData=req.body;
          console.log(userData);
 		regCtrl.completeProfile(userData,res);		
+	});
+    
+    app.post('/contacts',function(req,res){
+		
+	   if(req.body === undefined||req.body === null) {
+        res.end("Empty Body"); 
+        }
+		console.log("in routes /contacts");
+		//var reqData=req.body;
+        // console.log(reqData);
+		regCtrl.syncContacts(req,res);
 	});
 
     	app.post('/group',function(req,res){

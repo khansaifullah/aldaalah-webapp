@@ -1,5 +1,5 @@
 
-
+var AppUserController= require('../controller/AppUserController.js');
 var User = require('../models/User.js');
 var db = require('../config/db');
 require('datejs');
@@ -36,15 +36,24 @@ var userExists=function(phoneNo,callback){
      });
 }
                               
-exports.sendVerificationCode=function(phoneNo,country,res){
+exports.sendVerificationCode=function(phoneNo,country,resend,res){
     console.log("In Controller Send Code Method");
     console.log(phoneNo);
+    //var User;
    
      //var query = { phone : phoneNo };
     //find user by phone no.
     userExists(phoneNo,function(user){
        // console.log("in side user exiss call"+user);
         if (!user){
+            
+            if (resend==="true"||resend==1){
+            res.jsonp({status:"failure",
+                            message:"Please Create User First",
+                            object:[]}); 
+            
+            }
+            else{
                      var newuser = new User({                    
                     phone: phoneNo,
                     country:country,
@@ -60,7 +69,7 @@ exports.sendVerificationCode=function(phoneNo,country,res){
                     }
                          else{
                              // send verification code logic
-                             
+                             //generate a code and set to user.verification_code
                              
                               res.jsonp({status:"success",
                         message:"Verification code Sent!",
@@ -69,14 +78,31 @@ exports.sendVerificationCode=function(phoneNo,country,res){
                          }
                    
                      });
+            }
             
                    
         }
         else{
-            
-            res.jsonp({status:"failure",
+            if (resend==="true"||resend==1){
+                
+                console.log ("in resend true");
+                 // send verification code logic
+                 //generate a code and set to user.verification_code
+                             
+                              res.jsonp({status:"success",
+                        message:"Verification code Sent Again!",
+                        object:[]});
+                
+                
+            }else{
+                console.log ("in resend false");
+                 res.jsonp({status:"failure",
                             message:"User with this number already exists",
-                            object:[]}); 
+                            object:[]});
+                
+            }
+            
+            
         }
             
     });
@@ -94,7 +120,7 @@ exports.verifyCode=function(data,res){
     userExists(phoneNo,function(user){
         if (user){
             
-            if (code==="1234"){
+            if ((code==="12345")||(code===user.verification_code)){
                  
                 res.jsonp({status:"success",
                      message:"Code Verified!",
@@ -158,6 +184,59 @@ console.log("In Controller completeProfile Method");
             
     });
 }
+
+
+
+exports.syncContacts = function(req,res) {
+    	
+console.log("In Controller syncContacts Method");
+        var arrayOfNumbers = req.body.phoneNumberList;
+     console.log(arrayOfNumbers);
+        //var phoneNo=req.body.userPhoneNo;
+        var arrayToSend = [];
+        var query ;
+    //if()
+    arrayOfNumbers.forEach(function(number) {
+           // console.log(number);
+   // userExists(number,function(user){
+     //   if (user){ 
+          query = { phone : number };
+            User.findOne(query).exec(function(err, user){
+           // console.log(user);
+            
+        
+        //}              
+    }).then(function(){
+                arrayToSend.push(number);
+            });
+    }).then(function(){
+                res.jsonp({status:"success",
+                           message:"Contacts Synced",
+                          object:arrayToSend});
+            });
+   
+    
+    
+}
+               
+            
+               
+//    AppUserController.findAllPhoneNo(function(users){
+//        if (users){
+//                
+//            res.jsonp({status:"success",
+//                     message:"User List!",
+//                     object:users}); 
+//        }
+//        else{
+//             res.jsonp({status:"failure",
+//                            message:"No User Found to Update!",
+//                            object:[]});
+//        }
+//    });
+//    
+    
+
    /* 
 var newuser = new User({ 
 	

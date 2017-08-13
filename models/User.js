@@ -20,10 +20,12 @@ var userSchema = new Schema({
       email_address:String,
       verified_user:Boolean,
       country:String,
-      created_at:Date
+      created_at:Date,
+      verification_code:String
   //updated_at: Date
 });
 
+//userSchema.index({phone:1})
 
 
 // the schema is useless so far

@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+	  #contentWrap{
+	  
+	  display:none;
+	  
+	  }
+	  
+	  #chatWrap{
+	  float:left;
+	  border:1px solid;
+	  
+	  }'
+	  #chat{
+	  height:500px;
+	  }
+    </style>
+  </head>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+    <script src="http://127.0.0.1:3000/socket.io/socket.io.js"></script>
+    <script>
+    $(document).ready(function() {
+    var socket = io.connect('http://localhost:3000');
+	var $users=$('#users');
+	var $chat=$('#chat')
+	//var $nickForm=$('#setNick');
+	//var $nickError=$('#nickError');
+	//var $nickBox=$('#nickname');
+	/*
+	socket.on('newclientconnect',function(data){
+				  document.body.innerHTML = '';
+				  document.write(data.description);
+		  });
+		  */
+    $('#sender').live('click',function() {
+            var user_message = $('#message_box').val()
+            socket.emit('send_message',{message: user_message}, function(data){
+			//add here
+			});
+			
+    });
+	
+	$('#NameBtn').live('click',function() {
+	//alert('clicked');
+            var userName = $('#user_name').val()
+            socket.emit('join',userName,function(data){
+			console.log(data);
+	if (data)	{
+	console.log('recieved data');
+	$('#nickWrap').hide();
+	$('#contentWrap').show();
+	}
+	else
+	{
+	alert('name taken');
+	}
+	});
+	
+	});
+			
+    
+	
+    //socket.on('get_message', function(data) {
+      //  $('#data').append(data.message);
+        //});
+	
+	
+
+    socket.on('new message', function(data) {
+	
+	console.log(data);
+       $chat.append('<b>' + data.nick +' : </b>'+ data.msg.message+'</br>');
+        });
+		
+		socket.on('private message', function(data) {
+	
+	console.log(data);
+       $chat.append('<b>' + data.nick +' : </b>'+ data.msg.message+'</br>');
+        });
+		
+		socket.on('usernames', function(data) {
+        var html= '';
+		for(i=0;i<data.length;i++)
+		{
+		html+=data[i]+'</br>'
+		}
+		$users.html(html);
+        });
+    });
+</script>
+  <body>
+  
+  <div id="nickWrap">
+	  <p>Enter User Name </p>
+	  <p id="nickError"></p>
+	  <input type='text' id='user_name' placeholder='user name'>
+		<button id='NameBtn'>Save</button>
+
+  </div>
+  
+  <div id ="contentWrap">
+	<div id ="chatWrap">
+		<div id='chat'></div>
+		<input type='text' id='message_box' placeholder='send message'>
+		<button id='sender'>Send Message</button>
+	</div>
+	
+	<div id ="users"></div>
+  </div>
+  
+  </body>
+</html>
