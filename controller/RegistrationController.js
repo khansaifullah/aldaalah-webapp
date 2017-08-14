@@ -191,34 +191,127 @@ exports.syncContacts = function(req,res) {
     	
 console.log("In Controller syncContacts Method");
         var arrayOfNumbers = req.body.phoneNumberList;
-     console.log(arrayOfNumbers);
+    // console.log(arrayOfNumbers);
         //var phoneNo=req.body.userPhoneNo;
         var arrayToSend = [];
         var query ;
-    //if()
+  let promiseArr = [];
+    
+    
+    function compare(num){
+    
+        
+        return new Promise((resolve,reject) => {
+       
+            query = { phone : num };
+             User.findOne(query).exec(function(err, user){
+                 
+                  if (err) reject(err);
+                 else if(user) {
+                     //console.lo
+                     console.log(num+"found");
+                     arrayToSend.push(num);
+                      resolve();
+                 }
+                 else resolve();
+                 
+             });
+        });
+    }
+                           
+            
+    
+    
+     arrayOfNumbers.forEach(function(number) {
+     
+
+  //       if(number.done===true){
+             
+             promiseArr.push(compare(number));
+    //     }
+        
+     
+     });
+    
+     Promise.all(promiseArr)
+         .then((result)=> res.jsonp({status:"success",
+                           message:"Contacts Synced",
+                          object:arrayToSend}))
+         .catch((err)=>res.send({status:"failure",
+                           message:"Error Occured while syncing contacts",
+                          object:[]}));
+}
+
+
+
+
+
+
+
+            /**********  Above Code is Working*****/
+    
+
+
+/*
     arrayOfNumbers.forEach(function(number) {
+    
+        });
+    
+    function compare(arrayOfNumbers){
+        return new Promise(function (fulfill, reject){
+        
+              arrayOfNumbers.forEach(function(number) {
            // console.log(number);
-   // userExists(number,function(user){
-     //   if (user){ 
+    
           query = { phone : number };
             User.findOne(query).exec(function(err, user){
            // console.log(user);
-            
+            if (user){
+                console.log(number);
+                 arrayToSend.push(number);
+            }                             
+    });
+    }).then(function(res){
         
-        //}              
-    }).then(function(){
-                arrayToSend.push(number);
-            });
-    }).then(function(){
-                res.jsonp({status:"success",
+        try {
+        fulfill( res.jsonp({status:"success",
+                           message:"Contacts Synced",
+                          object:arrayToSend}));
+      } catch (ex) {
+        reject(ex);
+      }
+       
+    }, reject);
+    
+           }); 
+        }
+    compare(arrayOfNumbers);
+    
+*/
+        
+//}
+/*
+    arrayOfNumbers.forEach(function(number,index) {
+           // console.log(number);
+    
+          query = { phone : number };
+            User.findOne(query).exec(function(err, user){
+           // console.log(user);
+            if (user){
+                console.log(number);
+                 arrayToSend.push(number);
+            }
+        
+                     
+    });
+    }).done(function(res){
+        res.jsonp({status:"success",
                            message:"Contacts Synced",
                           object:arrayToSend});
-            });
-   
-    
-    
+    });
+       
 }
-               
+    */           
             
                
 //    AppUserController.findAllPhoneNo(function(users){
