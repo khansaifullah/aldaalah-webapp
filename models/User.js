@@ -1,5 +1,5 @@
 // grab the things we need
-
+var Country = require('./Country');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 //mongoose.Promise = global.Promise;
@@ -19,7 +19,7 @@ var userSchema = new Schema({
       OS:String,
       email_address:String,
       verified_user:Boolean,
-      country:String,
+      country_id:Number,
       created_at:Date,
       verification_code:String
   //updated_at: Date

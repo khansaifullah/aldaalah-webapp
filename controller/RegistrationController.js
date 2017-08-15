@@ -1,16 +1,18 @@
 
-var AppUserController= require('../controller/AppUserController.js');
+//var AppController= require('../controller/AppController.js');
 var User = require('../models/User.js');
 var db = require('../config/db');
 require('datejs');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 mongoose.createConnection(db.url);
 //Get the default connection
-var db = mongoose.connection;
+var dbCon = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 var userExists=function(phoneNo,callback){
@@ -36,7 +38,7 @@ var userExists=function(phoneNo,callback){
      });
 }
                               
-exports.sendVerificationCode=function(phoneNo,country,resend,res){
+exports.sendVerificationCode=function(phoneNo,countryId,resend,res){
     console.log("In Controller Send Code Method");
     console.log(phoneNo);
     //var User;
@@ -56,7 +58,7 @@ exports.sendVerificationCode=function(phoneNo,country,resend,res){
             else{
                      var newuser = new User({                    
                     phone: phoneNo,
-                    country:country,
+                    country_id:countryId,
                     verified_user:false,                            
                     created_at:  new Date()
                      });

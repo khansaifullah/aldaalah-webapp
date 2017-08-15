@@ -1,4 +1,5 @@
 var User = require('../models/User.js');
+var Country = require('../models/Country.js');
 var db = require('../config/db');
 require('datejs');
 var mongoose = require('mongoose');
@@ -30,6 +31,28 @@ exports.findAllUser=function(callback){
     } 
     });
 }
+
+
+
+exports.findAllCountries=function(callback){
+    
+    
+    Country.find({}, function(err, countries) {
+    if (err){
+         res.status(400).send({status:"failure",
+                                  message:err,
+                                  object:[]
+                                });
+    }
+    
+    else{ 
+       // console.log(countries);
+        callback(countries);
+       // process.exit();
+    } 
+    });
+}
+
 
 exports.findAllPhoneNo=function(callback){
      
