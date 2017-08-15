@@ -33,8 +33,10 @@ dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
 module.exports = function(app) {
 		//app.use(bodyParser);
 	// parse application/x-www-form-urlencoded
-	app.use(bodyParser.urlencoded())
-
+	//app.use(bodyParser.urlencoded())
+    app.use(bodyParser.urlencoded({
+        extended: true
+    }));
 	// parse application/json
 	app.use(bodyParser.json())
 	
@@ -91,8 +93,11 @@ module.exports = function(app) {
         }
     
 		console.log("in routes");
+//        var userData=req.body;
+//         console.log(userData);
+//         console.log(req.profilePhoto);
         
-           var upload = multer({
+	 var upload = multer({
 		storage: storage,
 		fileFilter: function(req, file, callback) {
 			var ext = path.extname(file.originalname)
@@ -103,11 +108,25 @@ module.exports = function(app) {
 		}
 	}).single('profilePhoto');
 	upload(req, res, function(err) {
-		res.end('File is uploaded')
+        if (err){
+            res.jsonp({status:"Failure",
+                        message:"Error Uploading File",
+                        object:[]});
+        }
+        else{
+            console.log("File Is uploaded");
+            //var userData=req.body;
+         console.log(req.body.phone);
+         console.log(req.body.profilePhoto);
+        regCtrl.completeProfile(req.body,res);
+            //res.end('File is uploaded')
+            
+        }
+		
 	})
-		var userData=req.body;
-         console.log(userData);
-		regCtrl.completeProfile(userData,res);		
+		//var userData=req.body;
+         //console.log(userData);
+		//regCtrl.completeProfile(userData,res);		
 	});
     
     app.post('/contacts',function(req,res){
@@ -126,6 +145,7 @@ module.exports = function(app) {
   // req.body will hold the text fields, if there were any
         
    var upload = multer({
+       
 		storage: storage,
 		fileFilter: function(req, file, callback) {
 			var ext = path.extname(file.originalname)
@@ -142,11 +162,12 @@ module.exports = function(app) {
     
     app.get('/country',function(req,res){
 //		  console.log("start"); 
-//	      var country = new Country({  
-//                    country_id:3,
-//                    name: "England", 
-//                    code:"044",
-//                    shortForm:"UK"
+//	      var country = new Country({ 
+//                    _id:"4",
+//                    country_id:4,
+//                    name: "India", 
+//                    code:"021",
+//                    shortForm:"ind"
 //                     });
 //          country.save(function (err, country) {
 //               console.log("in save"); 

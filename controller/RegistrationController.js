@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
-
+  //User = mongoose.model('User')
 mongoose.createConnection(db.url);
 //Get the default connection
 var dbCon = mongoose.connection;
@@ -148,12 +148,14 @@ exports.verifyCode=function(data,res){
 
 exports.completeProfile = function(user,res) {
 console.log("In Controller completeProfile Method");
-        var userName =user.userName;
-        var phoneNo = user.phone;
-        var photoUrl= user.profilePhotoUrl;
+       // var userName =user.userName;
+    var phoneNo = user.phone;
+    //console.log(phoneNo);
+       // var photoUrl= user.profilePhotoUrl;
         var fullName=user.fullName;
+    // console.log(fullName);
         var os=user.os;
-        var email=user.email;
+       // var email=user.email;
     
     // update profile
     
@@ -162,12 +164,12 @@ console.log("In Controller completeProfile Method");
     userExists(phoneNo,function(user){
         if (user){            
             //update user model
-              user.user_name=userName;
+              //user.user_name=userName;
               user.full_name=fullName,
-              user.profile_photo_url=photoUrl,
+              //user.profile_photo_url=photoUrl,
               user.active=false, 
               user.OS=os,
-              user.email_address=email,
+              //user.email_address=email,
               user.verified_user=true,      
                 
               user.save();
