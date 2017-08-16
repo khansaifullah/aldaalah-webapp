@@ -85,9 +85,8 @@ exports.sendVerificationCode=function(phoneNo,countryId,resend,res){
                    
         }
         else{
-            if (resend==="true"||resend==1){
-                
-                console.log ("in resend true");
+           // if (resend==="true"||resend==1){
+                console.log (" User Exists  sending verification code again");
                  // send verification code logic
                  //generate a code and set to user.verification_code
                              
@@ -96,14 +95,14 @@ exports.sendVerificationCode=function(phoneNo,countryId,resend,res){
                         object:[]});
                 
                 
-            }else{
-                console.log ("in resend false");
-                 res.jsonp({status:"failure",
-                            message:"User with this number already exists",
-                            object:[]});
-                
-            }
-            
+//            }else{
+//                console.log ("in resend false");
+//                 res.jsonp({status:"failure",
+//                            message:"User with this number already exists",
+//                            object:[]});
+//                
+//            }
+//            
             
         }
             
