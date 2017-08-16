@@ -19,7 +19,7 @@ var userSchema = new Schema({
       OS:String,
       email_address:String,
       verified_user:Boolean,
-      country_id:Number,
+      country_code:String,
       created_at:Date,
       verification_code:String
   //updated_at: Date

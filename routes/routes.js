@@ -52,12 +52,12 @@ module.exports = function(app) {
         res.end("Empty Body"); 
         }
             let phoneNo = req.query.phoneNo;
-            let country = req.query.countryId;
+            let countryCode = req.query.countryCode;
             let resend = req.query.resend;
 		console.log("in routes /verificationcode ");
 		//var reqData=req.body;
-         console.log(phoneNo+country+resend);
-             regCtrl.sendVerificationCode(phoneNo,country,resend,res);	
+         console.log(phoneNo+countryCode+resend);
+             regCtrl.sendVerificationCode(phoneNo,countryCode,resend,res);	
 	
 	});
     

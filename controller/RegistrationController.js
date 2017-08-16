@@ -38,7 +38,7 @@ var userExists=function(phoneNo,callback){
      });
 }
                               
-exports.sendVerificationCode=function(phoneNo,countryId,resend,res){
+exports.sendVerificationCode=function(phoneNo,countryCode,resend,res){
     console.log("In Controller Send Code Method");
     console.log(phoneNo);
     //var User;
@@ -58,7 +58,7 @@ exports.sendVerificationCode=function(phoneNo,countryId,resend,res){
             else{
                      var newuser = new User({                    
                     phone: phoneNo,
-                    country_id:countryId,
+                    country_code:countryCode,
                     verified_user:false,                            
                     created_at:  new Date()
                      });
