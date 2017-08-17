@@ -46,23 +46,27 @@ module.exports = function(app) {
 	});
 
 
-    	app.get('/verificationcode',function(req,res){
+    	app.post('/verificationcode',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
-            let phoneNo = req.query.phoneNo;
-            let countryCode = req.query.countryCode;
-            let resend = req.query.resend;
+         var reqData=req.body;
+         console.log(reqData);
+           // let phoneNo = req.query.phoneNo;
+            //let countryCode = req.query.countryCode;
+            //let resend = req.query.resend;
 		console.log("in routes /verificationcode ");
 		//var reqData=req.body;
-         console.log(phoneNo+countryCode+resend);
-             regCtrl.sendVerificationCode(phoneNo,countryCode,resend,res);	
+         console.log(reqData);
+            //phoneNo,countryCode,resend
+            
+             regCtrl.sendVerificationCode(reqData,res);	
 	
 	});
     
     
-    app.post('/verificationcode',function(req,res){
+    app.post('/verifycode',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 

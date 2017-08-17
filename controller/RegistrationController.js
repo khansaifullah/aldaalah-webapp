@@ -38,12 +38,15 @@ var userExists=function(phoneNo,callback){
      });
 }
                               
-exports.sendVerificationCode=function(phoneNo,countryCode,resend,res){
+exports.sendVerificationCode=function(reqData,res){
+    //
     console.log("In Controller Send Code Method");
-    console.log(phoneNo);
+   // console.log(phoneNo);
     //var User;
+    var phoneNo = reqData.phoneNo;
+    var countryCode = reqData.countryCode;
+    var resend =reqData.resend
    
-     //var query = { phone : phoneNo };
     //find user by phone no.
     userExists(phoneNo,function(user){
        // console.log("in side user exiss call"+user);
