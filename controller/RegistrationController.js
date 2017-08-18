@@ -124,7 +124,7 @@ exports.verifyCode=function(data,res){
     userExists(phoneNo,function(user){
         if (user){
             
-            if ((code==="12345")||(code===user.verification_code)){
+            if ((code==="1234")||(code===user.verification_code)){
                  
                 res.jsonp({status:"success",
                      message:"Code Verified!",

@@ -16,7 +16,11 @@
 	  display:none;
 	  
 	  }
+	   #roomWrap{
 	  
+	  display:none;
+	  
+	  }
 	  #chatWrap{
 	  float:left;
 	  border:1px solid;
@@ -51,15 +55,39 @@
 			
     });
 	
-	$('#NameBtn').live('click',function() {
+	 $('#roomBtn').live('click',function() {
+	 console.log('room btn clicled');
+            var user1_Num = $('#user1_box').val()
+            var user2_Num = $('#user2_box').val()
+			socket.emit('createRoom', "token", user1_Num, user2_Num, function(data){
+			//add here
+			
+			if (data)	{
+	console.log('recieved data FROM createRoom');
+	$('#roomWrap').hide();
+	$('#contentWrap').show();
+	}
+	
+			});
+			
+    });
+	
+	socket.on('roomId', function(data) {
+	
+	console.log ("Listening RoomId event -Data = " + data );
+	$('#roomWrap').hide();
+	$('#contentWrap').show();
+	 });
+	
+	$('#NextBtn').live('click',function() {
 	//alert('clicked');
-            var userName = $('#user_name').val()
-            socket.emit('join',userName,function(data){
+            var mobileNo = $('#user_phone').val()
+            socket.emit('join',mobileNo,function(data){
 			console.log(data);
 	if (data)	{
-	console.log('recieved data');
+	console.log('recieved data FROM Join');
 	$('#nickWrap').hide();
-	$('#contentWrap').show();
+	$('#roomWrap').show();
 	}
 	else
 	{
@@ -102,11 +130,22 @@
   <body>
   
   <div id="nickWrap">
-	  <p>Enter User Name </p>
+	  <p>Enter Your Mobile No </p>
 	  <p id="nickError"></p>
-	  <input type='text' id='user_name' placeholder='user name'>
-		<button id='NameBtn'>Save</button>
+	  <input type='text' id='user_phone' placeholder='Mobile No.'>
+		<button id='NextBtn'>Next</button>
 
+  </div>
+  
+   <div id ="roomWrap">
+	<div id ="chatWrap">
+		<div id='chat'></div>
+		<input type='text' id='user1_box' placeholder='Your Num.'>
+		<input type='text' id='user2_box' placeholder='other No.'>
+		<button id='roomBtn'>Create Room</button>
+	</div>
+	
+	<div id ="users"></div>
   </div>
   
   <div id ="contentWrap">

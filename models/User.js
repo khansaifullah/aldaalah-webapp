@@ -21,7 +21,10 @@ var userSchema = new Schema({
       verified_user:Boolean,
       country_code:String,
       created_at:Date,
-      verification_code:String
+      verification_code:String,
+      app_id:String
+      //gps_location_lat: ,
+     // gps_location_long: ,
   //updated_at: Date
 });
 
