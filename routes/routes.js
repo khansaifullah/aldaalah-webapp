@@ -4,6 +4,7 @@ var AppController= require('../controller/AppController.js');
 var bodyParser = require('body-parser');
 var Country = require('../models/Country.js');
 var db = require('../config/db');
+var logger = require('../config/lib/logger.js');
 require('datejs');
 var mongoose = require('mongoose');
 var path = require('path');
@@ -47,12 +48,23 @@ module.exports = function(app) {
 
 
     	app.post('/verificationcode',function(req,res){
-		
+             
+           /// logger.checkExport();
+            
+//            logger.debug('Debugging info');
+//            logger.verbose('Verbose info');
+//            logger.info('Hello world');
+//            logger.warn('Warning message');
+//            logger.error('Error info');
+//		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
+            
+            logger.verbose('verificationcode-POST called ');
+            
          var reqData=req.body;
-         console.log(reqData);
+         console.log("reqData : "+ reqData.phoneNo);
            // let phoneNo = req.query.phoneNo;
             //let countryCode = req.query.countryCode;
             //let resend = req.query.resend;

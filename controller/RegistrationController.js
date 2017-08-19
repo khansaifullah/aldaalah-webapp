@@ -2,11 +2,12 @@
 //var AppController= require('../controller/AppController.js');
 var User = require('../models/User.js');
 var db = require('../config/db');
+var logger = require('../config/lib/logger.js');
 require('datejs');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
+var upload = multer({ dest: './uploads/' })
   //User = mongoose.model('User')
 mongoose.createConnection(db.url);
 //Get the default connection
@@ -16,9 +17,12 @@ dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 var userExists=function(phoneNo,callback){
+    
+    logger.info('UserExists Method Called');
      var query = { phone : phoneNo };
      User.findOne(query).exec(function(err, user){
         if (err){
+            logger.error('Some Error while finding user' + err );
             res.status(400).send({status:"failure",
                                   message:err,
                                   object:[]
@@ -26,19 +30,33 @@ var userExists=function(phoneNo,callback){
         }
         else{
             if (user){
+                
+                  logger.info('User Found with Phone Num. :' 
+                  +phoneNo);
+                
                 console.log("user found with phone no "+phoneNo);
                 callback (user);
             }
             else{
+                
+                 logger.info('User Not Found with Phone Num. :' 
+                  +phoneNo);
                 console.log("user not found with phone no "+phoneNo);
                 callback( user);
                 
             }
        }
      });
+    
+    logger.info(' Exit UserExists Method');
 }
                               
 exports.sendVerificationCode=function(reqData,res){
+    
+    
+    logger.info('RegistrationController.sendVerificationCode called  :' 
+                  + reqData.phoneNo );
+    
     //
     console.log("In Controller Send Code Method");
    // console.log(phoneNo);
@@ -53,6 +71,7 @@ exports.sendVerificationCode=function(reqData,res){
         if (!user){
             
             if (resend==="true"||resend==1){
+               // logger.info('User Do not Exist and resend ' );
             res.jsonp({status:"failure",
                             message:"Please Create User First",
                             object:[]}); 
@@ -68,6 +87,7 @@ exports.sendVerificationCode=function(reqData,res){
 
                      newuser.save(function (err, user) {
                     if(err){
+                        logger.error('Some Error while saving user' + err );
                         res.jsonp({status:"failure",
                             message:"Some Error while saving user",
                             object:[]}); 
@@ -75,7 +95,7 @@ exports.sendVerificationCode=function(reqData,res){
                          else{
                              // send verification code logic
                              //generate a code and set to user.verification_code
-                             
+                                 logger.info('User Created With Phone Num ' + phoneNo );
                               res.jsonp({status:"success",
                         message:"Verification code Sent!",
                         object:[]});
@@ -110,10 +130,17 @@ exports.sendVerificationCode=function(reqData,res){
         }
             
     });
+    
+    logger.info(' Exit RegistrationController.sendVerificationCode Method');
+    
 }
             
 
 exports.verifyCode=function(data,res){
+    
+    logger.info('RegistrationController.verifyCode called  :' 
+                  + data.phoneNo + " - " +data.code );
+    
     console.log("In Controller verify Code Method");
     console.log(data.code);
      var code = data.code;
@@ -132,12 +159,15 @@ exports.verifyCode=function(data,res){
              }
            
             else{
+                logger.info('Wrong Code Sent For Verifcation :' + code );
                     res.jsonp({status:"failure",
                      message:"Wrong Code !",
                      object:[]});
              }                 
         }
         else{
+             logger.info('User Not Found with Phone Num. :' 
+                  +phoneNo);
             
             res.jsonp({status:"failure",
                             message:"User with this number do not exists!",
@@ -145,11 +175,16 @@ exports.verifyCode=function(data,res){
         }
             
     });
+    
+    logger.info(' Exit RegistrationController.verifyCode Method');
   }
 
 
 exports.completeProfile = function(user,res) {
 console.log("In Controller completeProfile Method");
+    
+    logger.info('RegistrationController.completeProfile called for user  :' 
+                  + user.phone  );
        // var userName =user.userName;
     var phoneNo = user.phone;
     //console.log(phoneNo);
@@ -174,21 +209,36 @@ console.log("In Controller completeProfile Method");
               //user.email_address=email,
               user.verified_user=true,      
                 
-              user.save();
-                
-            res.jsonp({status:"success",
+              user.save(function (err, user){
+                 if(err){
+                        logger.error('Some Error while updating user' + err );
+                         
+                    }
+                         else{
+                            
+                                 logger.info('User updated With Phone Num ' + phoneNo );
+                                  
+                             res.jsonp({status:"success",
                      message:"Profile Updated!",
-                     object:user});                
+                     object:user}); 
+                         }
+                     
+                  
+              });
+                
+                           
                               
         }
         else{
-            
+            logger.info('UNo User Found to Update With Phone Num ' + phoneNo );
             res.jsonp({status:"failure",
                             message:"No User Found to Update!",
                             object:[]}); 
         }
             
     });
+    
+    logger.info(' Exit RegistrationController.completeProfile Method');
 }
 
 
@@ -196,6 +246,8 @@ console.log("In Controller completeProfile Method");
 exports.syncContacts = function(req,res) {
     	
 console.log("In Controller syncContacts Method");
+    
+      logger.info('RegistrationController.syncContacts called  :');
         var arrayOfNumbers = req.body.phoneNumberList;
     // console.log(arrayOfNumbers);
         //var phoneNo=req.body.userPhoneNo;
@@ -212,7 +264,10 @@ console.log("In Controller syncContacts Method");
             query = { phone : num };
              User.findOne(query).exec(function(err, user){
                  
-                  if (err) reject(err);
+                  if (err) {
+                      
+                      reject(err);
+                  }
                  else if(user) {
                      //console.lo
                      console.log(num+"found");
@@ -246,6 +301,8 @@ console.log("In Controller syncContacts Method");
          .catch((err)=>res.send({status:"failure",
                            message:"Error Occured while syncing contacts",
                           object:[]}));
+    
+    logger.info(' Exit RegistrationController.syncContacts Method');
 }
 
 
