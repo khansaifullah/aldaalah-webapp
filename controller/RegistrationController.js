@@ -6,14 +6,15 @@ var logger = require('../config/lib/logger.js');
 require('datejs');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
+ObjectId = require('mongodb').ObjectID;
 var multer  = require('multer')
-var upload = multer({ dest: './uploads/' })
+var upload = multer({ dest: './public/images/profileImages' })
   //User = mongoose.model('User')
 mongoose.createConnection(db.url);
 //Get the default connection
-var dbCon = mongoose.connection;
+//var dbCon = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
-dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
+//dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 var userExists=function(phoneNo,callback){
@@ -78,13 +79,18 @@ exports.sendVerificationCode=function(reqData,res){
             
             }
             else{
-                     var newuser = new User({                    
+               // phoneNo.trim();
+                     var newuser = new User({  
+                      // mongoose.Types.ObjectId  
+                         
+                       // _id: mongoose.Types.ObjectId (phoneNo),
                     phone: phoneNo,
                     country_code:countryCode,
                     verified_user:false,                            
                     created_at:  new Date()
                      });
-
+                // console.log("outside user constructor");
+                    //newuser._id= ObjectId("507f1f77bcf86cd799439011");
                      newuser.save(function (err, user) {
                     if(err){
                         logger.error('Some Error while saving user' + err );

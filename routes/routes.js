@@ -11,7 +11,7 @@ var path = require('path');
 var multer = require('multer');
 var storage = multer.diskStorage({
 	destination: function(req, file, callback) {
-		callback(null, './uploads')
+		callback(null, './public/images/profileImages')
 	},
 	filename: function(req, file, callback) {
 		console.log(file)
@@ -24,9 +24,9 @@ mongoose.Promise = global.Promise;
 mongoose.createConnection(db.url);
 
 //Get the default connection
-var dbCon = mongoose.connection;
+//var dbCon = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
-dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
+//dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 // CHANGE API CONVENTION- NO CamelCase, no verbs.....
@@ -35,6 +35,13 @@ module.exports = function(app) {
 		//app.use(bodyParser);
 	// parse application/x-www-form-urlencoded
 	//app.use(bodyParser.urlencoded())
+    
+    //app.use(express.directory('/public/images/profileImages'));
+    //app.use(express.static('/public/images/profileImages'));
+    
+    //var directory = require('serve-index');
+    //app.use(directory(__dirname +'/public'));
+    
     app.use(bodyParser.urlencoded({
         extended: true
     }));

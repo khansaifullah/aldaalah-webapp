@@ -1,0 +1,61 @@
+{"level":"verbose","message":"verificationcode-POST called ","timestamp":"12:42:38 PM"}
+{"level":"info","message":"RegistrationController.sendVerificationCode called  :+444","timestamp":"12:42:38 PM"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:42:38 PM"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:42:38 PM"}
+{"level":"info","message":" Exit RegistrationController.sendVerificationCode Method","timestamp":"12:42:38 PM"}
+{"level":"info","message":"User Not Found with Phone Num. :+444","timestamp":"12:42:38 PM"}
+{"level":"info","message":"User Created With Phone Num +444","timestamp":"12:42:38 PM"}
+{"level":"info","message":"RegistrationController.verifyCode called  :+444 - 1234","timestamp":"12:43:08 PM"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:43:08 PM"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:43:08 PM"}
+{"level":"info","message":" Exit RegistrationController.verifyCode Method","timestamp":"12:43:08 PM"}
+{"level":"info","message":"User Found with Phone Num. :+444","timestamp":"12:43:08 PM"}
+{"level":"info","message":"RegistrationController.completeProfile called for user  :+444","timestamp":"12:43:54 PM"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:43:54 PM"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:43:54 PM"}
+{"level":"info","message":" Exit RegistrationController.completeProfile Method","timestamp":"12:43:54 PM"}
+{"level":"info","message":"User Found with Phone Num. :+444","timestamp":"12:43:55 PM"}
+{"level":"info","message":"User updated With Phone Num +444","timestamp":"12:43:55 PM"}
+{"level":"verbose","message":"verificationcode-POST called ","timestamp":"12:46:48 PM"}
+{"level":"info","message":"RegistrationController.sendVerificationCode called  :+333","timestamp":"12:47:44 PM"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:47:44 PM"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:47:44 PM"}
+{"level":"info","message":" Exit RegistrationController.sendVerificationCode Method","timestamp":"12:47:44 PM"}
+{"level":"info","message":"User Not Found with Phone Num. :+333","timestamp":"12:47:44 PM"}
+{"level":"info","message":"User Created With Phone Num +333","timestamp":"12:47:44 PM"}
+{"level":"verbose","message":"verificationcode-POST called ","timestamp":"12:47:56 PM"}
+{"level":"info","message":"RegistrationController.sendVerificationCode called  :+333","timestamp":"12:47:56 PM"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:47:56 PM"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:47:56 PM"}
+{"level":"info","message":" Exit RegistrationController.sendVerificationCode Method","timestamp":"12:47:56 PM"}
+{"level":"info","message":"User Found with Phone Num. :+333","timestamp":"12:47:56 PM"}
+{"level":"verbose","message":"verificationcode-POST called ","timestamp":"12:48:06 PM"}
+{"level":"info","message":"RegistrationController.sendVerificationCode called  :+666","timestamp":"12:48:06 PM"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:48:06 PM"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:48:06 PM"}
+{"level":"info","message":" Exit RegistrationController.sendVerificationCode Method","timestamp":"12:48:06 PM"}
+{"level":"info","message":"User Not Found with Phone Num. :+666","timestamp":"12:48:06 PM"}
+{"level":"info","message":"User Created With Phone Num +666","timestamp":"12:48:07 PM"}
+{"level":"info","message":"RegistrationController.verifyCode called  :+666 - 1234","timestamp":"12:48:17 PM"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:48:17 PM"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:48:17 PM"}
+{"level":"info","message":" Exit RegistrationController.verifyCode Method","timestamp":"12:48:17 PM"}
+{"level":"info","message":"User Found with Phone Num. :+666","timestamp":"12:48:17 PM"}
+{"level":"info","message":"RegistrationController.verifyCode called  :+666 - 1234","timestamp":"12:48:19 PM"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:48:19 PM"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:48:19 PM"}
+{"level":"info","message":" Exit RegistrationController.verifyCode Method","timestamp":"12:48:19 PM"}
+{"level":"info","message":"User Found with Phone Num. :+666","timestamp":"12:48:19 PM"}
+{"level":"info","message":"RegistrationController.verifyCode called  :+666 - 1234","timestamp":"12:48:25 PM"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:48:25 PM"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:48:25 PM"}
+{"level":"info","message":" Exit RegistrationController.verifyCode Method","timestamp":"12:48:25 PM"}
+{"level":"info","message":"User Found with Phone Num. :+666","timestamp":"12:48:26 PM"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"12:48:37 PM"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"12:48:37 PM"}
+{"level":"info","message":"RegistrationController.completeProfile called for user  :+666","timestamp":"12:49:00 PM"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:49:00 PM"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:49:00 PM"}
+{"level":"info","message":" Exit RegistrationController.completeProfile Method","timestamp":"12:49:00 PM"}
+{"level":"info","message":"User Found with Phone Num. :+666","timestamp":"12:49:00 PM"}
+{"level":"info","message":"User updated With Phone Num +666","timestamp":"12:49:01 PM"}
