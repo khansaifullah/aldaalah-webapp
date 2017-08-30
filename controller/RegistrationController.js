@@ -89,7 +89,12 @@ exports.sendVerificationCode=function(reqData,res){
                     verified_user:false,                            
                     created_at:  new Date()
                      });
-                // console.log("outside user constructor");
+//                 console.log("outside user constructor");
+//                        if (phoneNo != null && phoneNo.length > 0) {
+//                            phoneNo.trim();
+//                            newuser._id = mongoose.Types.ObjectId (phoneNo);
+//                            }
+                
                     //newuser._id= ObjectId("507f1f77bcf86cd799439011");
                      newuser.save(function (err, user) {
                     if(err){

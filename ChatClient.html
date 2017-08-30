@@ -37,7 +37,11 @@
     $(document).ready(function() {
     var socket = io.connect('http://localhost:3000');
 	var $users=$('#users');
-	var $chat=$('#chat')
+	var $chat=$('#chat');
+	var roomId;
+	var user1_Num;
+    var user2_Num;
+	
 	//var $nickForm=$('#setNick');
 	//var $nickError=$('#nickError');
 	//var $nickBox=$('#nickname');
@@ -48,12 +52,21 @@
 		  });
 		  */
     $('#sender').live('click',function() {
-            var user_message = $('#message_box').val()
-            socket.emit('send_message',{message: user_message}, function(data){
-			//add here
-			});
+            var user_message = $('#message_box').val();
+	var msg ={
+     messageType:"text",
+     messageText:user_message,
+     _conversationId:roomId,
+     _messageToMobile:user1_Num,
+     _messageFromMobile:user2_Num
+	 }
+            socket.emit('sendMessage',msg);
 			
     });
+	
+	socket.on('receiveMessage', function(data) {
+	console.log ("Listening receiveMessage - Data = " + data.messageText );
+	 });
 	
 	 $('#roomBtn').live('click',function() {
 	 console.log('room btn clicled');
@@ -74,7 +87,8 @@
 	
 	socket.on('roomId', function(data) {
 	
-	console.log ("Listening RoomId event -Data = " + data );
+	console.log ("Listening RoomId event - Data = " + data );
+	roomId=data;
 	$('#roomWrap').hide();
 	$('#contentWrap').show();
 	 });
@@ -82,16 +96,17 @@
 	$('#NextBtn').live('click',function() {
 	//alert('clicked');
             var mobileNo = $('#user_phone').val()
-            socket.emit('join',mobileNo,function(data){
-			console.log(data);
+            socket.emit('verifyUser',mobileNo,function(data){
+			console.log("Response From verifyUser :"+data);
 	if (data)	{
 	console.log('recieved data FROM Join');
+	
 	$('#nickWrap').hide();
 	$('#roomWrap').show();
 	}
 	else
 	{
-	alert('name taken');
+	alert('Creat User First');
 	}
 	});
 	
@@ -99,23 +114,6 @@
 			
     
 	
-    //socket.on('get_message', function(data) {
-      //  $('#data').append(data.message);
-        //});
-	
-	
-
-    socket.on('new message', function(data) {
-	
-	console.log(data);
-       $chat.append('<b>' + data.nick +' : </b>'+ data.msg.message+'</br>');
-        });
-		
-		socket.on('private message', function(data) {
-	
-	console.log(data);
-       $chat.append('<b>' + data.nick +' : </b>'+ data.msg.message+'</br>');
-        });
 		
 		socket.on('usernames', function(data) {
         var html= '';
