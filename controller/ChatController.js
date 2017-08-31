@@ -73,54 +73,72 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
               $match:{$or: [{ _userMobile: toMobileNo }, { _userMobile: fromMobileNo }]}
           },
           {
-              $group: {_id:"$_conversationId" }                                    
+              $group: {
+				 _id:"$_conversationId",
+				count: { $sum: 1 }				  
+			  }                                    
           }
-      ],function (err, ConversationUserList) {
+      ],function (err, ConversationIdsList) {
+		  
+		/*  		
+		console.log ('printing list :');
+		  for (var k in ConversationIdsList){
+			  if (ConversationIdsList[k].count === 2){
+			  console.log (ConversationIdsList[k]);
+			  }
+		  }
+		  */
+		 
 		   var sendBackConversation;
 		 
-		  function getIndvidualConversationId(ConversationUserList){	
+		  function getIndvidualConversationId(ConversationIdsList){	
 
 			return new Promise(
 				function (resolve, reject) {
-							
-							
-								  
-				if (ConversationUserList!==undefined){
-					console.log (ConversationUserList.length);
-					for (var i =0 ; i <ConversationUserList.length;i++){
+																						  
+				if (ConversationIdsList!==undefined){
+					//console.log (ConversationIdsList.length);
+					for (var i =0 ; i <ConversationIdsList.length;i++){
 			 
-					console.log ("conversation user : "+ConversationUserList[i]._id);
-					Conversation.find({_id:(ConversationUserList[i]._id)})
-					.exec(function(err, Conversation){
-						if (err){
-							reject(error);
-						}
-							            
-				
-					if (Conversation){
-						if (!Conversation.isGroupConversation){
-							//console.log( Conversation+ " is indivdual Conversation");
-							console.log( Conversation._id+ " is indivdual Conversation");
-							sendBackConversation=Conversation;
-						}
-					//sendBackConversation.add(Conversation);
+					if (ConversationIdsList[i].count === 2){
+						console.log ('In individual Conversation Check ')
+					console.log ("conversation id : "+ConversationIdsList[i]._id);
+					Conversation.find({_id:(ConversationIdsList[i]._id)})
+						.exec(function(err, conversation){
+							if (err){
+								console.log ( 'An Error Occured before returning Promise' );
+								reject(error);
+							}
+											
+						
+							if (conversation){
+								//console.log ('!conversation.isGroupConversation : ' + !conversation.isGroupConversation);
+								if (!conversation.isGroupConversation){
+									console.dir( conversation + " is indivdual Conversation");
+									console.log( conversation._id + " is indivdual Conversation");
+									sendBackConversation=conversation;
+									resolve(sendBackConversation);
+								}
+							//sendBackConversation.add(Conversation);
+							}
+					
+						});
 					}
-                
-				});
-             
 					}
-			}
-			console.log ('printing before Resolve' + sendBackConversation);
+				}
+			console.log ('printing before Resolve  in fuction : ' + sendBackConversation);
 				resolve(sendBackConversation);
 					});
 			}
+			
+	
 		  
-		  getIndvidualConversationId(ConversationUserList)
+		  getIndvidualConversationId(ConversationIdsList)
 			.then(result => {
-				console.log ('printing before Resolve' + result);
-				callback(result); b 
+				console.log ('printing before Resolve Function response : ' + result);
+				callback(result); 
 				})
-			.catch(error => { logger.info ('An Error Has Occured' + err); });
+			.catch(error => { logger.error ('An Error Has Occured : ' + err); });
 		 
          
      });
