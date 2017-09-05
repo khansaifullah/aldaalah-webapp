@@ -12,11 +12,11 @@ var ConversationMessagesSchema   = new mongoose.Schema({
     _messageFromUserId: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     _messageFromMobile: String,
     _messageToMobile: {type : String, default :null },
-    createdOnUTC: { type: Date, default: Date.now },
-    updatedOnUTC: { type: Date, default: Date.now },
+  //  createdOnUTC: { type: Date, default: Date.now },
+   // updatedOnUTC: { type: Date, default: Date.now },
     userMessageFromDeliverStatus: { type: Boolean, default: false },
     deletedByUserMobile: String,
-});
+}, {timestamps: true});
 ConversationMessagesSchema.index({_conversationId:1, _messageFromMobile: 1,_messageToMobile: 1,createdOnUTC:1})
 // Export the Mongoose model
 module.exports = mongoose.model('ConversationMessages', ConversationMessagesSchema);

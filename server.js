@@ -1,6 +1,7 @@
 var app = require('express')();
 var http = require('http').Server(app);
  require('./routes/routes.js')(app);
+ require('datejs');
 var io = require('socket.io')(http);
 var HashMap = require('hashmap');
 var User = require('./models/User.js');
@@ -95,6 +96,7 @@ io.sockets.on('connection', function(socket) {
                         _conversationId: conversationId,
                        // _userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
                         _userMobile: userMobileNumberFrom,
+						createdAt: new Date().getTime()
                        // leaveConversation:{ type: Boolean, default: true },
                        
                                           });

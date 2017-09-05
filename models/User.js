@@ -20,13 +20,14 @@ var userSchema = new Schema({
       email_address:String,
       verified_user:Boolean,
       country_code:String,
-      created_at:Date,
+	 // created_at: { type: Date, default: Date.now },
+	 // updated_at: { type: Date, default: Date.now },
       verification_code:String,
       app_id:String
       //gps_location_lat: ,
      // gps_location_long: ,
   //updated_at: Date
-});
+}, {timestamps: true});
 
 //userSchema.index({phone:1})
 

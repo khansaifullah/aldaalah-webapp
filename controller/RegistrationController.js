@@ -264,8 +264,8 @@ console.log("In Controller syncContacts Method");
         //var phoneNo=req.body.userPhoneNo;
         var arrayToSend = [];
         var query ;
-  let promiseArr = [];
-    
+		let promiseArr = [];
+		var tempObject;
     
     function compare(num){
     
@@ -282,7 +282,10 @@ console.log("In Controller syncContacts Method");
                  else if(user) {
                      //console.lo
                      console.log(num+"found");
-                     arrayToSend.push(num);
+					 tempObject=new Object ();
+					 tempObject.phoneNo=user.phone;
+					 tempObject.profileUrl=user.profile_photo_url;
+                     arrayToSend.push(tempObject);
                       resolve();
                  }
                  else resolve();
