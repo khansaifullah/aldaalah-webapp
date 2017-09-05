@@ -294,15 +294,8 @@ console.log("In Controller syncContacts Method");
             
     
     
-     arrayOfNumbers.forEach(function(number) {
-     
-
-  //       if(number.done===true){
-             
-             promiseArr.push(compare(number));
-    //     }
-        
-     
+     arrayOfNumbers.forEach(function(number) {              
+             promiseArr.push(compare(number));        
      });
     
      Promise.all(promiseArr)

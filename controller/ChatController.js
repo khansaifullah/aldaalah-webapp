@@ -80,6 +80,65 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
           }
       ],function (err, ConversationIdsList) {
 		  
+		  
+		  
+	 
+	 /*************/
+	 
+	  let promiseArr = [];
+    
+      var sendBackConversation;
+    function chkIndvidualConversation(conversationId){
+     
+        return new Promise((resolve,reject) => {
+       
+	   Conversation.findOne({_id:(conversationId)})
+						.exec(function(err, conversation){
+							
+							if (err){
+								console.log ( 'An Error Occured before returning Promise' );
+								reject(error);
+							}
+											
+						
+							if (conversation){
+								//conversation=conversation.toJSON();
+								//conversation=JSON.parse(conversation);
+								//console.log ('!conversation.isGroupConversation : ' + !conversation.isGroupConversation);
+								if (!conversation.isGroupConversation){
+									conversation=conversation.toObject({getters: false});
+									console.log ('typeof conversation : ' + typeof(conversation));
+									console.log( conversation + " is indivdual Conversation");
+									console.log( conversation._id + " con id is indivdual Conversation");
+									sendBackConversation=conversation._id;
+									//console.log ('Indivdual conversation found before resolve : ' + sendBackConversation);
+									resolve();
+									
+								}
+						
+							}
+					
+						});				               
+            
+        });
+    }
+                           
+            
+    
+    
+     ConversationIdsList.forEach(function(conversationId) {              
+             promiseArr.push(chkIndvidualConversation(conversationId));        
+     });
+    
+     Promise.all(promiseArr)
+         .then((result)=> {
+				console.log ('printing before Resolve Function response : ' + result);
+				callback(sendBackConversation); 
+				})
+         .catch(error => { logger.error ('An Error Has Occured : ' + err); });
+		 
+    /***********/
+	
 		/*  		
 		console.log ('printing list :');
 		  for (var k in ConversationIdsList){
@@ -89,6 +148,7 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 		  }
 		  */
 		 
+		 /*
 		   var sendBackConversation;
 		 
 		  function getIndvidualConversationId(ConversationIdsList){	
@@ -100,9 +160,9 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 					//console.log (ConversationIdsList.length);
 					for (var i =0 ; i <ConversationIdsList.length;i++){
 			 
-					if (ConversationIdsList[i].count === 2){
-						console.log ('In individual Conversation Check ')
-					console.log ("conversation id : "+ConversationIdsList[i]._id);
+					if (ConversationIdsList[i].count === 2){ 
+					//	console.log ('In individual Conversation Check ')
+					//console.log ("conversation id : "+ConversationIdsList[i]._id);
 					Conversation.find({_id:(ConversationIdsList[i]._id)})
 						.exec(function(err, conversation){
 							if (err){
@@ -112,14 +172,19 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 											
 						
 							if (conversation){
+								//conversation=conversation.toJSON();
+								//conversation=JSON.parse(conversation);
 								//console.log ('!conversation.isGroupConversation : ' + !conversation.isGroupConversation);
 								if (!conversation.isGroupConversation){
-									console.dir( conversation + " is indivdual Conversation");
-									console.log( conversation._id + " is indivdual Conversation");
+									console.log ('typeof conversation : ' + typeof(conversation));
+									console.log( conversation + " is indivdual Conversation");
+									console.log( conversation._id + " con id is indivdual Conversation");
 									sendBackConversation=conversation;
+									//console.log ('Indivdual conversation found before resolve : ' + sendBackConversation);
 									resolve(sendBackConversation);
+									
 								}
-							//sendBackConversation.add(Conversation);
+						
 							}
 					
 						});
@@ -127,7 +192,7 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 					}
 				}
 			console.log ('printing before Resolve  in fuction : ' + sendBackConversation);
-				resolve(sendBackConversation);
+				
 					});
 			}
 			
@@ -139,10 +204,13 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 				callback(result); 
 				})
 			.catch(error => { logger.error ('An Error Has Occured : ' + err); });
-		 
+		 */
+		 	 
          
      });
 
+	 
+	 
    
     logger.info(' Exit ChatController.chkPreviousConversation Method');
     
