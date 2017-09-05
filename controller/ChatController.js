@@ -61,11 +61,9 @@ exports.userExists =function(phoneNo,callback){
 
 exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callback){
     
-         //Returns Conversation id if exists
-    
-   // console.log("In Chat Controller chkPreviousConversation Method");
-    logger.info('ChatController.chkPreviousConversation called  : ' 
-                  + toMobileNo + "-"  +fromMobileNo);
+         //Returns Conversation id if exists else undefined
+    logger.info('ChatController.chkPreviousConversation called - toMobileNo : ' 
+                  + toMobileNo + "- fromMobileNo :"  +fromMobileNo);
     
 	
       ConversationUser.aggregate([
@@ -79,55 +77,52 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 			  }                                    
           }
       ],function (err, ConversationIdsList) {
-		  
-		  
-		  
-	 
-	 /*************/
 	 
 	  let promiseArr = [];
-    
       var sendBackConversation;
-    function chkIndvidualConversation(conversationId){
+ 
+ function chkIndvidualConversation(conversation){
      
         return new Promise((resolve,reject) => {
        
-	   Conversation.findOne({_id:(conversationId)})
+	   if (conversation.count===2){
+				Conversation.findOne({_id:(conversation._id)})
 						.exec(function(err, conversation){
 							
 							if (err){
 								console.log ( 'An Error Occured before returning Promise' );
 								reject(error);
-							}
-											
-						
+							}																	
 							if (conversation){
-								//conversation=conversation.toJSON();
-								//conversation=JSON.parse(conversation);
-								//console.log ('!conversation.isGroupConversation : ' + !conversation.isGroupConversation);
 								if (!conversation.isGroupConversation){
 									conversation=conversation.toObject({getters: false});
-									console.log ('typeof conversation : ' + typeof(conversation));
-									console.log( conversation + " is indivdual Conversation");
-									console.log( conversation._id + " con id is indivdual Conversation");
+									//console.log ('typeof conversation : ' + typeof(conversation));
+									logger.info( conversation._id + " - indivdual Conversation found")
+									//console.log( conversation + " is indivdual Conversation");
+									//console.log( conversation._id + " con id is indivdual Conversation");
 									sendBackConversation=conversation._id;
-									//console.log ('Indivdual conversation found before resolve : ' + sendBackConversation);
 									resolve();
 									
 								}
 						
 							}
 					
-						});				               
+						});
+		}	
+		else{
+			resolve();
+		} 
+					
+					
             
         });
     }
-                           
-            
-    
-    
-     ConversationIdsList.forEach(function(conversationId) {              
-             promiseArr.push(chkIndvidualConversation(conversationId));        
+                             
+     ConversationIdsList.forEach(function(conversation) { 
+//			console.log ("*********" );
+	//		console.log (" ConversationIdsList object id : "+conversationId._id );
+		//	console.log (" ConversationIdsList object count : "+conversationId.count );			
+             promiseArr.push(chkIndvidualConversation(conversation));        
      });
     
      Promise.all(promiseArr)
@@ -137,6 +132,10 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 				})
          .catch(error => { logger.error ('An Error Has Occured : ' + err); });
 		 
+		          
+     });	 	   
+    logger.info(' Exit ChatController.chkPreviousConversation Method');    
+}
     /***********/
 	
 		/*  		
@@ -206,13 +205,5 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 			.catch(error => { logger.error ('An Error Has Occured : ' + err); });
 		 */
 		 	 
-         
-     });
 
-	 
-	 
-   
-    logger.info(' Exit ChatController.chkPreviousConversation Method');
-    
-}
             
