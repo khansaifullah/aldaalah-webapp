@@ -53,17 +53,8 @@ module.exports = function(app) {
 		res.end("Node-Aldallah-Project"); 
 	});
 
-
-    	app.post('/verificationcode',function(req,res){
-             
-           /// logger.checkExport();
-            
-//            logger.debug('Debugging info');
-//            logger.verbose('Verbose info');
-//            logger.info('Hello world');
-//            logger.warn('Warning message');
-//            logger.error('Error info');
-//		
+    app.post('/verificationcode',function(req,res){                         
+		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
@@ -109,16 +100,13 @@ module.exports = function(app) {
 	});
 
 
-	app.put('/profile',function(req,res){
+	app.post('/profile',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
     
 		console.log("in routes");
-//        var userData=req.body;
-//         console.log(userData);
-//         console.log(req.profilePhoto);
         
 	 var upload = multer({
 		storage: storage,
@@ -138,11 +126,11 @@ module.exports = function(app) {
         }
         else{
             console.log("File Is uploaded");
-            //var userData=req.body;
+           logger.info ("File Is uploaded");
          console.log(req.body.phone);
          console.log(req.body.profilePhoto);
         regCtrl.completeProfile(req.body,res);
-            //res.end('File is uploaded')
+            
             
         }
 		
