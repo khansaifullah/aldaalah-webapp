@@ -228,8 +228,15 @@ io.sockets.on('connection', function(socket) {
  
           //if client 2 is ofline or in other room
           // Push notification  
+		  var msg ={
+     messageType:data.messageType,
+     messageText:data.messageText,
+     _conversationId:data._conversationId,
+     _messageToMobile:data._messageToMobile,
+     _messageFromMobile:data._messageFromMobile
+	 }
           console.log ("Pushing to room : "+socket.room);
-           socket.to(socket.room).emit('receiveMessage', data);
+           socket.to(socket.room).emit('receiveMessage', msg);
   });
     
  socket.on('disconnect', function () {

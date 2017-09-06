@@ -141,6 +141,49 @@ module.exports = function(app) {
 		
 	});
     
+
+	app.post('/profilePhoto',function(req,res){
+		
+	   if(req.body === undefined||req.body === null) {
+        res.end("Empty Body"); 
+        }
+    
+		console.log("in routes");
+        
+	 var upload = multer({
+		storage: storage,
+		fileFilter: function(req, file, callback) {
+			var ext = path.extname(file.originalname)
+			if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+				return callback(res.end('Only images are allowed'), null)
+			}
+			callback(null, true)
+		}
+	}).single('profilePhoto');
+	upload(req, res, function(err) {
+        if (err){
+            res.jsonp({status:"Failure",
+                        message:"Error Uploading File",
+                        object:[]});
+        }
+        else{
+           // console.log("File Is uploaded");
+           logger.info ("Photo Is uploaded");
+         console.log(req.body.phone);
+		 //geneterate a url 
+		 //sending dummy pefile url
+		 var profilePhotoUrl ="https://cdn3.iconfinder.com/data/icons/rcons-user-action/32/boy-512.png";
+	
+        regCtrl.updateProfilePhoto(req.body.phone,profilePhotoUrl,res);
+            
+            
+        }
+		
+	})
+		
+	});
+
+
     app.post('/contacts',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {

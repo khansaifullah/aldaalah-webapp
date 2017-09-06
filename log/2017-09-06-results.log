@@ -66,3 +66,23 @@
 {"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"12:08:45"}
 {"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"12:09:06"}
 {"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"12:09:06"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:11:27"}
+{"level":"info","message":"RegistrationController.completeProfile called for user  :+923345022570","timestamp":"12:11:27"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:11:27"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:11:27"}
+{"level":"info","message":" Exit RegistrationController.completeProfile Method","timestamp":"12:11:27"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"12:11:27"}
+{"level":"info","message":"User updated With Phone Num +923345022570","timestamp":"12:11:27"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"17:18:06"}
+{"level":"info","message":"RegistrationController.updateProfilePhoto called for user  :+923345022570","timestamp":"17:18:06"}
+{"level":"info","message":"UserExists Method Called","timestamp":"17:18:06"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"17:18:06"}
+{"level":"info","message":" Exit RegistrationController.updateProfilePhoto Method","timestamp":"17:18:06"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"17:18:07"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"17:19:28"}
+{"level":"info","message":"RegistrationController.updateProfilePhoto called for user  :+923345022570","timestamp":"17:19:28"}
+{"level":"info","message":"UserExists Method Called","timestamp":"17:19:28"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"17:19:28"}
+{"level":"info","message":" Exit RegistrationController.updateProfilePhoto Method","timestamp":"17:19:28"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"17:19:30"}
+{"level":"info","message":"User Profile Photo updated With Phone Num +923345022570","timestamp":"17:19:30"}

@@ -252,6 +252,41 @@ console.log("In Controller completeProfile Method");
 
 
 
+exports.updateProfilePhoto = function(phoneNo,profilePhotoUrl,res) {
+console.log("In Controller updateProfilePhoto Method");
+    
+    logger.info('RegistrationController.updateProfilePhoto called for user  :' 
+                  + phoneNo  );
+     //find user by phone no.
+    userExists(phoneNo,function(user){
+        if (user){            
+              user.profile_photo_url=profilePhotoUrl, 
+              user.save(function (err, user){
+                 if(err){
+                        logger.error('Some Error while updating user' + err );
+                         
+                    }
+                         else{
+                            
+                            logger.info('User Profile Photo updated With Phone Num ' + phoneNo );
+                            res.jsonp({status:"success",
+							message:"Profile Photo Updated!",
+							object:user}); 
+                         }
+              });
+                
+        }
+        else{
+            logger.info('No User Found to Update With Phone Num ' + phoneNo );
+            res.jsonp({status:"failure",
+                            message:"No User Found to Update!",
+                            object:[]}); 
+        }
+    });
+    
+    logger.info(' Exit RegistrationController.updateProfilePhoto Method');
+}
+
 exports.syncContacts = function(req,res) {
     	
 console.log("In Controller syncContacts Method");
