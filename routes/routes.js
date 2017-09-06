@@ -125,19 +125,20 @@ module.exports = function(app) {
                         object:[]});
         }
         else{
-            console.log("File Is uploaded");
+           // console.log("File Is uploaded");
            logger.info ("File Is uploaded");
-         console.log(req.body.phone);
-         console.log(req.body.profilePhoto);
-        regCtrl.completeProfile(req.body,res);
+         //console.log(req.body.phone);
+         //console.log(req.body.profilePhoto);
+		 //geneterate a url 
+		 //sending dummy pefile url
+		 var profilePhotoUrl ="https://cdn3.iconfinder.com/data/icons/rcons-user-action/32/boy-512.png";
+        regCtrl.completeProfile(req.body,profilePhotoUrl,res);
             
             
         }
 		
 	})
-		//var userData=req.body;
-         //console.log(userData);
-		//regCtrl.completeProfile(userData,res);		
+		
 	});
     
     app.post('/contacts',function(req,res){

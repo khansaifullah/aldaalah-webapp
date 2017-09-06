@@ -191,19 +191,17 @@ exports.verifyCode=function(data,res){
   }
 
 
-exports.completeProfile = function(user,res) {
+exports.completeProfile = function(user,profilePhotoUrl,res) {
 console.log("In Controller completeProfile Method");
     
     logger.info('RegistrationController.completeProfile called for user  :' 
                   + user.phone  );
        // var userName =user.userName;
-    var phoneNo = user.phone;
-    //console.log(phoneNo);
+		var phoneNo = user.phone;
        // var photoUrl= user.profilePhotoUrl;
         var fullName=user.fullName;
-    // console.log(fullName);
         var os=user.os;
-       // var email=user.email;
+  
     
     // update profile
     
@@ -214,10 +212,10 @@ console.log("In Controller completeProfile Method");
             //update user model
               //user.user_name=userName;
               user.full_name=fullName,
-              //user.profile_photo_url=photoUrl,
+              user.profile_photo_url=profilePhotoUrl,
               user.active=false, 
               user.OS=os,
-              //user.email_address=email,
+
               user.verified_user=true,      
                 
               user.save(function (err, user){
