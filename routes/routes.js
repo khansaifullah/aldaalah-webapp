@@ -29,12 +29,8 @@ mongoose.createConnection(db.url);
 //dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
-// CHANGE API CONVENTION- NO CamelCase, no verbs.....
-
 module.exports = function(app) {
-		//app.use(bodyParser);
-	// parse application/x-www-form-urlencoded
-	//app.use(bodyParser.urlencoded())
+	
     
     //app.use(express.directory('/public/images/profileImages'));
     //app.use(express.static('/public/images/profileImages'));
@@ -59,19 +55,15 @@ module.exports = function(app) {
         res.end("Empty Body"); 
         }
             
-            logger.verbose('verificationcode-POST called ');
+        logger.verbose('verificationcode-POST called ');
             
-         var reqData=req.body;
-         console.log("reqData : "+ reqData.phoneNo);
-           // let phoneNo = req.query.phoneNo;
-            //let countryCode = req.query.countryCode;
-            //let resend = req.query.resend;
+        var reqData=req.body;
+        console.log("reqData : "+ reqData.phoneNo);
+        // let phoneNo = req.query.phoneNo;;
 		console.log("in routes /verificationcode ");
-		//var reqData=req.body;
-         console.log(reqData);
-            //phoneNo,countryCode,resend
-            
-             regCtrl.sendVerificationCode(reqData,res);	
+        console.log(reqData);
+           
+        regCtrl.sendVerificationCode(reqData,res);	
 	
 	});
     
@@ -194,26 +186,7 @@ module.exports = function(app) {
         // console.log(reqData);
 		regCtrl.syncContacts(req,res);
 	});
-    
-    app.post('/photo', function (req, res) {
-  // req.file is the `avatar` file 
-  // req.body will hold the text fields, if there were any
-        
-   var upload = multer({
-       
-		storage: storage,
-		fileFilter: function(req, file, callback) {
-			var ext = path.extname(file.originalname)
-			if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
-				return callback(res.end('Only images are allowed'), null)
-			}
-			callback(null, true)
-		}
-	}).single('userFile');
-	upload(req, res, function(err) {
-		res.end('File is uploaded')
-	})
-});
+  
     
     app.get('/country',function(req,res){
 //		  console.log("start"); 
@@ -246,7 +219,7 @@ module.exports = function(app) {
                         object:countries});
                              
 	});		
-	})
+	});
 
     	app.post('/group',function(req,res){
 		
@@ -262,6 +235,20 @@ module.exports = function(app) {
 			res.json(found);
 	});		
 	});
+	
+	
+	 
+    app.get('/user',function(req,res){
+      		console.log("in routes get users");
+ 
+		AppController.findAllUser(function (users) {
+            console.log("Response Of findAllUser Method");
+			 res.jsonp({status:"success",
+                        message:"List Of users",
+                        object:users});
+                             
+	});		
+	})
 	
 };
 

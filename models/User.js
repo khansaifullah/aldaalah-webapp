@@ -9,7 +9,6 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
   
-   // _id: String,
    // username: { type: String, required: true, unique: true },
       user_name: String, 
       phone: { type: String, required: true, unique: true },
@@ -23,14 +22,15 @@ var userSchema = new Schema({
 	 // created_at: { type: Date, default: Date.now },
 	 // updated_at: { type: Date, default: Date.now },
       verification_code:String,
-      app_id:String
-      //gps_location_lat: ,
-     // gps_location_long: ,
-  //updated_at: Date
+      app_id:String,
+      loc: {
+		type: [Number],  // [<longitude>, <latitude>]
+		index: '2d'      // create the geospatial index
+		}
 }, {timestamps: true});
 
-//userSchema.index({phone:1})
-
+userSchema.index({phone:1});
+//userSchema.index({ loc: '2d' });
 
 // the schema is useless so far
 // we need to create a model using it

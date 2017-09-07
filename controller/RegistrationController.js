@@ -293,7 +293,7 @@ console.log("In Controller syncContacts Method");
     
       logger.info('RegistrationController.syncContacts called  :');
         var arrayOfNumbers = req.body.phoneNumberList;
-    // console.log(arrayOfNumbers);
+		// console.log(arrayOfNumbers);
         //var phoneNo=req.body.userPhoneNo;
         var arrayToSend = [];
         var query ;

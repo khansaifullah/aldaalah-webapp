@@ -74,14 +74,14 @@ io.sockets.on('connection', function(socket) {
     //Creating room by concating both users mobile numbers.
   socket.on('createRoom', function (userToken, userMobileNumberFrom, userMobileNumberTo,callback) {
       
-       logger.info('createRoom Event  Called');
+       logger.info('createRoom Event  Called for userMobileNumberFrom : '+userMobileNumberFrom + ' & userMobileNumberTo ' + userMobileNumberTo);
       var conversationId;
       // check if conversation between These Two users ever occured before, send conversationId / roomId in response
       
       
         ChatController.chkPreviousIndividualConversation(userMobileNumberFrom,userMobileNumberTo,function(data){
           
-            console.log ("chkPreviousIndividualConversation response :"+data);
+            logger.info ("chkPreviousIndividualConversation response :"+data);
             if (data==null||data===undefined)
                 {
                 
@@ -89,15 +89,16 @@ io.sockets.on('connection', function(socket) {
                      newconversation.save(function (err, conversation) {
                          if (err) logger.error('Error Occured while Saving new conversation :'+ err);
                     if (conversation){
-						 console.log ('conversation created for id :'+conversation._id );
+						 logger.info ('conversation created for id :'+conversation._id );
 						conversationId=conversation._id;
+						logger.info ('Creating Conversation Users against conversation id : '+conversation._id );
                     var newConversationUser= new ConversationUser({
                                           
                         _conversationId: conversationId,
-                       // _userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+                       // _userId: 
                         _userMobile: userMobileNumberFrom,
-						createdAt: new Date().getTime()
-                       // leaveConversation:{ type: Boolean, default: true },
+						//createdAt: new Date().getTime()
+                       // leaveConversation:
                        
                                           });
                     
@@ -108,9 +109,9 @@ io.sockets.on('connection', function(socket) {
                      newConversationUser= new ConversationUser({
                                           
                         _conversationId: conversationId,
-                       // _userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+                       // _userId: 
                         _userMobile: userMobileNumberTo,
-                       // leaveConversation:{ type: Boolean, default: true },
+                       // leaveConversation:
                        
                             });
                     
@@ -122,6 +123,7 @@ io.sockets.on('connection', function(socket) {
 				
 				 socket.room = conversationId;
 				 socket.join(conversationId);
+				 logger.info ('Sending room Id To client : ' + conversationId );
 				 socket.emit('roomId',conversationId);
 					
 					
@@ -130,13 +132,13 @@ io.sockets.on('connection', function(socket) {
               
                 }
             else {
-				console.log ('Previous Conversation Id Received :' + data );
-                conversationId=data;
-				
-				
+				logger.info ('Previous Conversation Id Received :' + data );
+                
+				conversationId=data;
                  socket.room = conversationId;
 				 socket.join(conversationId);
-				  socket.emit('roomId',conversationId);
+				 logger.info ('Sending room Id To client : ' + conversationId );
+				 socket.emit('roomId',conversationId);
             }
         });
     
@@ -203,7 +205,8 @@ io.sockets.on('connection', function(socket) {
     
       socket.on('sendMessage', function (data) {
           //IOS will send Room Name (not updated)
-          console.log ("message Data on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageToMobile+"**"+data._messageToMobile);
+          logger.info("listening sendMessage event on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageToMobile+"**"+data._messageToMobile);
+		  console.log ("message Data on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageToMobile+"**"+data._messageToMobile);
     var conversationMessage = new ConversationMessages();
     conversationMessage.messageType = data.messageType;
     conversationMessage.messageText = data.messageText;
