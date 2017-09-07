@@ -205,9 +205,9 @@ io.sockets.on('connection', function(socket) {
     
       socket.on('sendMessage', function (data) {
           //IOS will send Room Name (not updated)
-		  logger.info(data);
+		  logger.info('Data Object : '+data);
          // logger.info("listening sendMessage event on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageToMobile+"**"+data._messageToMobile);
-		  console.log ("message Data on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageToMobile+"**"+data._messageToMobile);
+		  //console.log ("message Data on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageToMobile+"**"+data._messageToMobile);
     var conversationMessage = new ConversationMessages();
     conversationMessage.messageType = data.messageType;
     conversationMessage.messageText = data.messageText;
