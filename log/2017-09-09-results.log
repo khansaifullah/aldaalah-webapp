@@ -19,3 +19,12 @@
 {"level":"info","message":"Conversation User Created for Phone No5555","timestamp":"11:11:36"}
 {"level":"info","message":"Conversation User Created for Phone No222","timestamp":"11:11:36"}
 {"level":"info","message":"Conversation User Created for Phone No333","timestamp":"11:11:36"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : Friends  Group+923345022570+92335022570,+92335022571,+92335022572","timestamp":"11:29:56"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"11:29:56"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b38a6412ee802e2419a5d5","timestamp":"11:29:56"}
+{"level":"info","message":"Creating Conversation User for Phone No+92335022570","timestamp":"11:29:56"}
+{"level":"info","message":"Creating Conversation User for Phone No+92335022571","timestamp":"11:29:56"}
+{"level":"info","message":"Creating Conversation User for Phone No+92335022572","timestamp":"11:29:56"}
+{"level":"info","message":"Conversation User Created for Phone No+92335022571","timestamp":"11:29:56"}
+{"level":"info","message":"Conversation User Created for Phone No+92335022570","timestamp":"11:29:56"}
+{"level":"info","message":"Conversation User Created for Phone No+92335022572","timestamp":"11:29:56"}

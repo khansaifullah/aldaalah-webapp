@@ -83,7 +83,7 @@ module.exports = function(app) {
     
 	app.post('/login',function(req,res){
 		var email = req.body.email;
-        	var password = req.body.password;
+        var password = req.body.password;
 
 		login.login(email,password,function (found) {
 			
@@ -250,9 +250,9 @@ module.exports = function(app) {
 	});		
 	})
 		 // getting User  By user id in Query Params
-	app.get('/user',function(req,res){
-      	
-		let phoneNo = req.query.phoneNo;
+	app.post('/user',function(req,res){
+      	var phoneNo = req.body.phoneNo;
+		//let phoneNo = req.query.phoneNo;
 		logger.info("In routes get single user, where phone NO. : "+phoneNo);
 		AppController.userExists(phoneNo,function (user) {
             logger.info("Response Of userExists Method : " + user);
