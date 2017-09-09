@@ -147,6 +147,7 @@ io.sockets.on('connection', function(socket) {
 				 socket.emit('roomId',conversationId);
 				 //send an invitation
 				 var socketid= userHashMaps.get (userMobileNumberTo);
+				 logger.info('sending a notification to socket: '+ socketid);
 				 if (io.sockets.connected[socketid]) {
 				io.sockets.connected[socketid].emit('conversationRequest', newconversation);
 				}
