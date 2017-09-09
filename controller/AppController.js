@@ -1,7 +1,11 @@
 var User = require('../models/User.js');
 var Country = require('../models/Country.js');
+var ConversationMessages = require('../models/ConversationMessages.js');
+var Conversation = require('../models/Conversation.js');ConversationUser
+var ConversationUser = require('../models/ConversationUser.js');
 var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
+
 require('datejs');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -26,9 +30,9 @@ exports.findAllUser=function(callback){
     }
     
     else{ 
-        console.log(users);
+        logger.info(users.length + ' Users Found');
         callback(users);
-        process.exit();
+        //process.exit();
     } 
     });
 }
@@ -70,7 +74,7 @@ exports.findAllPhoneNo=function(callback){
     else{ 
         console.log(usersContactNumber);
         callback(usersContactNumber);
-        process.exit();
+       // process.exit();
     } 
     });
 }
@@ -113,7 +117,27 @@ exports.findAllPhoneNo=function(callback){
     else{ 
         console.log(usersContactNumber);
         callback(usersContactNumber);
-        process.exit();
+       // process.exit();
+    } 
+    });
+}
+
+
+exports.findAllGroups=function(callback){
+     
+    //query with mongoose
+   Conversation.find({'isGroupConversation': true}, function(err, groups) {
+    if (err){
+         res.status(400).send({status:"failure",
+                                  message:err,
+                                  object:[]
+                                });
+    }
+    
+    else{ 
+        logger.info(groups.length + ' groups Found');
+        callback(groups);
+        //process.exit();
     } 
     });
 }

@@ -295,7 +295,7 @@ module.exports = function(app) {
                         object:users});
                              
 	});		
-	})
+	});
 		 // getting User  By user id in Query Params
 	app.post('/user',function(req,res){
       	var phoneNo = req.body.phoneNo;
@@ -318,7 +318,20 @@ module.exports = function(app) {
 			}
                              
 	});		
-	})
+	});
+	
+	 // getting List of Groups
+    app.get('/groups',function(req,res){
+      	
+		logger.info("in routes get groups");
+		AppController.findAllGroups(function (groups) {
+            logger.info("Response Of findAllGroups Method");
+			 res.jsonp({status:"success",
+                        message:"List Of groups",
+                        object:groups});
+                             
+	});		
+	});
 	
 };
 

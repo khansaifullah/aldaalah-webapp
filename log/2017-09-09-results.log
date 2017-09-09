@@ -228,3 +228,34 @@
 {"level":"info","message":"Creating Conversation User for Phone No222","timestamp":"22:23:20"}
 {"level":"info","message":"Conversation User Created for Phone No111","timestamp":"22:23:21"}
 {"level":"info","message":"Conversation User Created for Phone No222","timestamp":"22:23:22"}
+{"level":"info","message":"in routes get users","timestamp":"23:19:54"}
+{"level":"info","message":"Response Of findAllUser Method","timestamp":"23:19:54"}
+{"level":"info","message":"in routes get users","timestamp":"23:20:54"}
+{"level":"info","message":"Response Of findAllUser Method","timestamp":"23:20:56"}
+{"level":"info","message":"in routes get users","timestamp":"23:21:15"}
+{"level":"info","message":"Response Of findAllUser Method","timestamp":"23:21:17"}
+{"level":"info","message":"in routes get users","timestamp":"23:21:34"}
+{"level":"info","message":"Response Of findAllUser Method","timestamp":"23:21:34"}
+{"level":"info","message":"in routes get users","timestamp":"23:21:39"}
+{"level":"info","message":"Response Of findAllUser Method","timestamp":"23:21:39"}
+{"level":"info","message":"in routes get groups","timestamp":"23:26:03"}
+{"level":"info","message":"Response Of findAllGroups Method","timestamp":"23:26:03"}
+{"level":"info","message":"in routes get groups","timestamp":"23:30:43"}
+{"level":"info","message":"Response Of findAllGroups Method","timestamp":"23:30:43"}
+{"level":"info","message":"in routes get groups","timestamp":"23:32:37"}
+{"level":"info","message":"20 groups Found","timestamp":"23:32:39"}
+{"level":"info","message":"Response Of findAllGroups Method","timestamp":"23:32:39"}
+{"level":"info","message":"verifyUser Event  Called for Phone Num:+923345022570","timestamp":"23:33:04"}
+{"level":"info","message":" Exit verifyUser Event","timestamp":"23:33:04"}
+{"level":"info","message":"User Found For Phone No: +923345022570","timestamp":"23:33:05"}
+{"level":"info","message":"createRoom Event  Called for userMobileNumberFrom : 11111 & userMobileNumberTo 222222","timestamp":"23:33:13"}
+{"level":"info","message":"ChatController.chkPreviousConversation called - toMobileNo : 222222- fromMobileNo :11111","timestamp":"23:33:13"}
+{"level":"info","message":" Exit ChatController.chkPreviousConversation Method","timestamp":"23:33:14"}
+{"level":"info","message":" Exit createRoom Event","timestamp":"23:33:14"}
+{"level":"info","message":"chkPreviousIndividualConversation response :undefined","timestamp":"23:33:14"}
+{"level":"info","message":"conversation created for id :59b433ea35c08f15207b0bec","timestamp":"23:33:14"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b433ea35c08f15207b0bec","timestamp":"23:33:14"}
+{"level":"info","message":"Sending room Id To client : 59b433ea35c08f15207b0bec","timestamp":"23:33:14"}
+{"level":"info","message":"in routes get groups","timestamp":"23:33:54"}
+{"level":"info","message":"20 groups Found","timestamp":"23:33:57"}
+{"level":"info","message":"Response Of findAllGroups Method","timestamp":"23:33:57"}
