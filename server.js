@@ -148,6 +148,12 @@ io.sockets.on('connection', function(socket) {
 				 //send an invitation
 				 var socketid= userHashMaps.get (userMobileNumberTo);
 				 logger.info('sending a notification to socket: '+ socketid);
+				 
+				  console.log("Users on sicket " + userHashMaps.count());
+				  for (var i ; i < userHashMaps.count() ; i++){
+					  console.log (userHashMaps[i]);
+				  }
+				  
 				 if (io.sockets.connected[socketid]) {
 				io.sockets.connected[socketid].emit('conversationRequest', newconversation);
 				}
