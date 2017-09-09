@@ -145,8 +145,9 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 	//var groupObj=JSON.parse(groupData);
 	var groupName=groupData.groupName;
 	var adminPhone=groupData.adminPhone;
-	var conversationUsers=groupData.groupMembersList;
-	
+	var obj=JSON.parse(groupData.groupMembersList);
+	var conversationUsers=obj.values;
+
 	var conversationId; 
 	var newConversationUser;
 	
