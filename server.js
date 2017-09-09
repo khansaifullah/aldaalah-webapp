@@ -68,7 +68,7 @@ io.sockets.on('connection', function(socket) {
     
     
     //Creating room by concating both users mobile numbers.
-  socket.on('createRoom', function (userToken, userMobileNumberFrom, userMobileNumberTo,callback) {
+  socket.on('createRoom', function ( userMobileNumberFrom, userMobileNumberTo,callback) {
       
        logger.info('createRoom Event  Called for userMobileNumberFrom : '+userMobileNumberFrom + ' & userMobileNumberTo ' + userMobileNumberTo);
       var conversationId;

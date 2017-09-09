@@ -110,3 +110,36 @@
 {"level":"info","message":"Sending room Id To client : 59b3c31fe6f45b326822ce6a","timestamp":"15:43:51"}
 {"level":"info","message":"Data Object : [object Object]","timestamp":"15:43:57"}
 {"level":"info","message":"listening sendMessage event on server : \n asasa**text**59b3c31fe6f45b326822ce6a**undefined**undefined","timestamp":"15:43:57"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"16:02:17"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : undefinedundefinedundefined","timestamp":"16:02:17"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"16:02:17"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b3ca39d3a3842df8893de0","timestamp":"16:02:18"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"16:02:54"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : undefinedundefinedundefined","timestamp":"16:02:54"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"16:02:54"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b3ca5e4872bd0cf059b84d","timestamp":"16:03:01"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"16:03:47"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : undefinedundefinedundefined","timestamp":"16:03:47"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"16:03:47"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b3ca934938651350a728ba","timestamp":"16:03:48"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"16:08:12"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : undefinedundefinedundefined","timestamp":"16:08:12"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"16:08:12"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b3cb9c6adf16153c11f85c","timestamp":"16:08:19"}
+{"level":"info","message":"reqData :[object Object]","timestamp":"16:10:44"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"16:10:44"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : undefinedundefinedundefined","timestamp":"16:10:44"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"16:10:44"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b3cc3405a283310caf8fa8","timestamp":"16:10:48"}
+{"level":"info","message":"reqData  :undefined","timestamp":"16:17:47"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"16:17:47"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : undefinedundefinedundefined","timestamp":"16:17:47"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"16:17:47"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b3cddb7c8ad4055422c389","timestamp":"16:17:47"}
+{"level":"info","message":"File Is uploaded","timestamp":"16:26:23"}
+{"level":"info","message":"RegistrationController.completeProfile called for user  :923345022570","timestamp":"16:26:23"}
+{"level":"info","message":"UserExists Method Called","timestamp":"16:26:23"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"16:26:23"}
+{"level":"info","message":" Exit RegistrationController.completeProfile Method","timestamp":"16:26:23"}
+{"level":"info","message":"User Not Found with Phone Num. :923345022570","timestamp":"16:26:38"}
+{"level":"info","message":"UNo User Found to Update With Phone Num 923345022570","timestamp":"16:26:38"}

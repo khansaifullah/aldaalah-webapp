@@ -140,7 +140,7 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 
 
 //Create User Groups
-exports.createGroup=function(groupData,res){
+exports.createGroup=function(groupData,profilePhotoUrl,res){
     
 	//var groupObj=JSON.parse(groupData);
 	var groupName=groupData.groupName;
@@ -156,7 +156,8 @@ exports.createGroup=function(groupData,res){
 					var newconversation= new Conversation({
 						conversationName:groupName,
 						adminMobile:adminPhone,
-						isGroupConversation:true
+						isGroupConversation:true,
+						conversationImageUrl:profilePhotoUrl
 					});
                      newconversation.save(function (err, conversation) {
                          if (err) {
@@ -168,24 +169,7 @@ exports.createGroup=function(groupData,res){
 						if (conversation){
 							conversationId=conversation._id;
 							logger.info ('Creating Conversation Users against conversation id : '+conversation._id );
-							/*
-						for (var i; i <conversationUsers.length; i++ )	{
-								logger.info ('Creating Conversation User for Phone No' +  conversationUsers[i] );
-								newConversationUser= new ConversationUser({                                          
-								_conversationId: conversationId,
-								_userMobile: conversationUsers[i]       
-												  });
-												
-							newConversationUser.save(function (err, conversationUser) {
-								 if (err) logger.error('Error Occured while Saving new newConversationUser 1 :'+ err);
-								 if (conversationUser){
-									 logger.info ('Conversation User Created for Phone No' +  conversationUsers[i] );
-								 }
-								});
-							}
-							*/
-										
-						let promiseArr = [];
+				let promiseArr = [];
 				
 				function createConversationUser(userMobile){	
 					return new Promise((resolve,reject) => {

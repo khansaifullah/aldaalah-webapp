@@ -229,8 +229,40 @@ module.exports = function(app) {
         }
 		console.log("in routes");
 		var reqData=req.body;
-         //logger.info(reqData);
-		ChatController.createGroup(reqData,res);		
+         logger.info("reqData  :"+reqData.groupName);
+		 
+		 
+		 
+	 var upload = multer({
+		storage: storage,
+		fileFilter: function(req, file, callback) {
+			var ext = path.extname(file.originalname)
+			if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+				return callback(res.end('Only images are allowed'), null)
+			}
+			callback(null, true)
+		}
+	}).single('profilePhoto');
+	upload(req, res, function(err) {
+        if (err){
+            res.jsonp({status:"Failure",
+                        message:"Error Uploading File",
+                        object:[]});
+        }
+        else{
+           // console.log("File Is uploaded");
+           logger.info ("Photo Is uploaded");
+         console.log(req.body.phone);
+		 //geneterate a url 
+		 //sending dummy pefile url
+		 var profilePhotoUrl ="https://cdn0.iconfinder.com/data/icons/education-59/128/communication_discussion_workshop-256.png";
+		 
+		 
+		ChatController.createGroup(reqData,profilePhotoUrl,res);		
+		
+		  }
+		
+	});
 	});
 	
 	
