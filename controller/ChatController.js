@@ -15,6 +15,8 @@ var upload = multer({ dest: './public/images/profileImages' })
 mongoose.createConnection(db.url);
 
 exports.userExists =function(phoneNo,callback){
+	
+	try{
     
     logger.info('UserExists Method Called');
      var query = { phone : phoneNo };
@@ -47,6 +49,9 @@ exports.userExists =function(phoneNo,callback){
      });
     
     logger.info(' Exit UserExists Method');
+	}catch(err){
+		
+	}
 }
    
 
@@ -199,7 +204,7 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 				 Promise.all(promiseArr)
 					 .then((result)=> res.jsonp({status:"success",
 										message:"Group Created",
-										object:[{"conversationId":conversationId}]}))
+										object:conversation}))
 					 .catch((err)=>res.send({status:"failure",
 									   message:"Error Occured while creating Group" + err,
 									  object:[]}));

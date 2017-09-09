@@ -144,21 +144,30 @@ io.sockets.on('connection', function(socket) {
   });
     
        //Swithing Room 
-  socket.on('switchRoom', function (conversationId) {
-       logger.info('switchRoom Event  Called');
+  socket.on('joinRoom', function (conversationId) {
+       logger.info('joinRoom Event  Called');
       
     //Leaving the socket's current room
-    socket.leave(socket.room);
+    //socket.leave(socket.room);
+   
 	//Joining New Room
       rooms.push(conversationId);
       socket.room = conversationId;
       socket.join(conversationId);
-      socket.emit('onRoomSet', conversationId);
+      socket.emit('roomId',conversationId);
     
       
-      logger.info(' Exit switchRoom Event'); 
+      logger.info(' Exit joinRoom Event'); 
   });
     
+	  socket.on('leaveRoom', function (conversationId) {
+       logger.info('leaveRoom Event  Called');
+      
+	//Leaving the socket's current room
+    socket.leave(socket.room);
+	socket.emit('roomId',null);
+    logger.info(' Exit leaveRoom Event'); 
+  });
     
       socket.on('sendMessage', function (data) {
           //IOS will send Room Name (not updated)

@@ -201,3 +201,30 @@
 {"level":"info","message":" Exit UserExists Method","timestamp":"18:38:10"}
 {"level":"info","message":" Exit RegistrationController.verifyCode Method","timestamp":"18:38:10"}
 {"level":"info","message":"User Found with Phone Num. :+923345022574","timestamp":"18:38:11"}
+{"level":"info","message":"reqData  :undefined","timestamp":"19:55:15"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"19:55:15"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : Group222+923345022570111,222","timestamp":"19:55:15"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"19:55:15"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b400d324fb9428ecbbe420","timestamp":"19:55:15"}
+{"level":"info","message":"Creating Conversation User for Phone No111","timestamp":"19:55:15"}
+{"level":"info","message":"Creating Conversation User for Phone No222","timestamp":"19:55:15"}
+{"level":"info","message":"Conversation User Created for Phone No222","timestamp":"19:55:16"}
+{"level":"info","message":"Conversation User Created for Phone No111","timestamp":"19:55:16"}
+{"level":"info","message":"reqData  :undefined","timestamp":"19:55:52"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"19:55:52"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : Group222+923345022570111,222","timestamp":"19:55:52"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"19:55:52"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b400f824fb9428ecbbe423","timestamp":"19:55:52"}
+{"level":"info","message":"Creating Conversation User for Phone No111","timestamp":"19:55:52"}
+{"level":"info","message":"Creating Conversation User for Phone No222","timestamp":"19:55:52"}
+{"level":"info","message":"Conversation User Created for Phone No111","timestamp":"19:55:53"}
+{"level":"info","message":"Conversation User Created for Phone No222","timestamp":"19:55:53"}
+{"level":"info","message":"reqData  :undefined","timestamp":"22:23:20"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"22:23:20"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : Group222+923345022570111,222","timestamp":"22:23:20"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"22:23:20"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b42388337c3732908ddcf1","timestamp":"22:23:20"}
+{"level":"info","message":"Creating Conversation User for Phone No111","timestamp":"22:23:20"}
+{"level":"info","message":"Creating Conversation User for Phone No222","timestamp":"22:23:20"}
+{"level":"info","message":"Conversation User Created for Phone No111","timestamp":"22:23:21"}
+{"level":"info","message":"Conversation User Created for Phone No222","timestamp":"22:23:22"}
