@@ -143,28 +143,18 @@ io.sockets.on('connection', function(socket) {
       logger.info(' Exit createRoom Event'); 
   });
     
-    //Switihing Room 
-  socket.on('switchRoom', function (userToken, userMobileNumberFrom, userMobileNumberTo) {
+       //Swithing Room 
+  socket.on('switchRoom', function (conversationId) {
        logger.info('switchRoom Event  Called');
       
     //Leaving the socket's current room
     socket.leave(socket.room);
-    var isRoomExist = rooms.find(x => x == userMobileNumberFrom + userMobileNumberTo || x == userMobileNumberTo + userMobileNumberFrom);
-    console.log(isRoomExist);
-    if (isRoomExist) {
-      
-      //Joining the new room
-      socket.room = isRoomExist;
-      socket.join(isRoomExist);
-      socket.emit('onRoomSet', isRoomExist);
-    }
-    else {
-      
-      rooms.push(userMobileNumberFrom + userMobileNumberTo);
-      socket.room = userMobileNumberFrom + userMobileNumberTo;
-      socket.join(userMobileNumberFrom + userMobileNumberTo);
-      socket.emit('onRoomSet', userMobileNumberFrom + userMobileNumberTo);
-    }
+	//Joining New Room
+      rooms.push(conversationId);
+      socket.room = conversationId;
+      socket.join(conversationId);
+      socket.emit('onRoomSet', conversationId);
+    
       
       logger.info(' Exit switchRoom Event'); 
   });

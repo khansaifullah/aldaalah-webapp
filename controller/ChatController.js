@@ -141,7 +141,7 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 
 //Create User Groups
 exports.createGroup=function(groupData,profilePhotoUrl,res){
-    
+    try {
 	//var groupObj=JSON.parse(groupData);
 	var groupName=groupData.groupName;
 	var adminPhone=groupData.adminPhone;
@@ -214,6 +214,10 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 }
 	 
     logger.info(' Exit ChatController.createGroup Method');    
+	}catch  (err){
+		logger.info ('An Exception occured ChatController.createGroup ' + err);
+	}
+	
 }
 
 

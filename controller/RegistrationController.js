@@ -3,10 +3,10 @@
 var User = require('../models/User.js');
 var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
-require('datejs');
+//require('datejs');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-ObjectId = require('mongodb').ObjectID;
+//ObjectId = require('mongodb').ObjectID;
 var multer  = require('multer')
 var upload = multer({ dest: './public/images/profileImages' })
   //User = mongoose.model('User')
@@ -87,7 +87,7 @@ exports.sendVerificationCode=function(reqData,res){
                     phone: phoneNo,
                     country_code:countryCode,
                     verified_user:false,                            
-                    created_at:  new Date()
+                    //created_at:  new Date()
                      });
 //                 console.log("outside user constructor");
 //                        if (phoneNo != null && phoneNo.length > 0) {
@@ -325,11 +325,7 @@ console.log("In Controller syncContacts Method");
                  
              });
         });
-    }
-                           
-            
-    
-    
+    }                                   
      arrayOfNumbers.forEach(function(number) {              
              promiseArr.push(compare(number));        
      });

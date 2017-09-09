@@ -1,3 +1,4 @@
+
 var regCtrl= require('../controller/RegistrationController.js');
 var userGroupCtrl= require('../controller/UserGroupsController.js');
 var AppController= require('../controller/AppController.js');
@@ -23,16 +24,29 @@ var storage = multer.diskStorage({
 mongoose.Promise = global.Promise;
 
 mongoose.createConnection(db.url);
-
+var exp = require('express');
 //Get the default connection
 //var dbCon = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 //dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-
+var path = require('path');
 module.exports = function(app) {
 	
-    
+	
+//app.use(exp.static(__dirname, 'public'))
+   // app.use('/', exp.static(__dirname + '/public'));
+	//app.use('/images', exp.static(__dirname + '/public/images/profileImages'));
+	//app.use('/images',exp.directory(__dirname + '/public/images/profileImages'));
+	
+	//app.use(exp.static('public'));
+	
+	//app.use('/public', exp.static(__dirname + '/public'));
+	//app.use('/public',exp.directory(__dirname + '/public'));
+	
+	
+	
+	
     //app.use(express.directory('/public/images/profileImages'));
     //app.use(express.static('/public/images/profileImages'));
     
