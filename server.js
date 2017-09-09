@@ -68,7 +68,7 @@ io.sockets.on('connection', function(socket) {
     
     
     //Creating room by concating both users mobile numbers.
-  socket.on('createRoom', function ( userMobileNumberFrom, userMobileNumberTo,callback) {
+  socket.on('createRoom', function (userToken, userMobileNumberFrom, userMobileNumberTo,callback) {
       
        logger.info('createRoom Event  Called for userMobileNumberFrom : '+userMobileNumberFrom + ' & userMobileNumberTo ' + userMobileNumberTo);
       var conversationId;
@@ -143,18 +143,28 @@ io.sockets.on('connection', function(socket) {
       logger.info(' Exit createRoom Event'); 
   });
     
-    //Switching Room 
-  socket.on('switchRoom', function (conversationId) {
+    //Switihing Room 
+  socket.on('switchRoom', function (userToken, userMobileNumberFrom, userMobileNumberTo) {
        logger.info('switchRoom Event  Called');
       
     //Leaving the socket's current room
     socket.leave(socket.room);
-	//Joining New Room
-      rooms.push(conversationId);
-      socket.room = conversationId;
-      socket.join(conversationId);
-      socket.emit('onRoomSet', conversationId);
-    
+    var isRoomExist = rooms.find(x => x == userMobileNumberFrom + userMobileNumberTo || x == userMobileNumberTo + userMobileNumberFrom);
+    console.log(isRoomExist);
+    if (isRoomExist) {
+      
+      //Joining the new room
+      socket.room = isRoomExist;
+      socket.join(isRoomExist);
+      socket.emit('onRoomSet', isRoomExist);
+    }
+    else {
+      
+      rooms.push(userMobileNumberFrom + userMobileNumberTo);
+      socket.room = userMobileNumberFrom + userMobileNumberTo;
+      socket.join(userMobileNumberFrom + userMobileNumberTo);
+      socket.emit('onRoomSet', userMobileNumberFrom + userMobileNumberTo);
+    }
       
       logger.info(' Exit switchRoom Event'); 
   });
