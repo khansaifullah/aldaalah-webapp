@@ -42,6 +42,7 @@ io.sockets.on('connection', function(socket) {
          logger.info('onConnect Event  Called for Phone Num:' + phoneNo);
          userHashMaps.set(phoneNo,socket.id);
          socket.phoneNo=phoneNo;
+		 logger.info("Users on socket " + userHashMaps.count());				  
 		 logger.info(' Exit onConnect Event'); 
 		 
 	   });
@@ -130,7 +131,7 @@ io.sockets.on('connection', function(socket) {
 				 socket.join(conversationId);
 				 logger.info ('Sending room Id To client : ' + conversationId );
 				 socket.emit('roomId',conversationId);
-				 socket.emit('newChatRequest',conversationId);
+				 //socket.emit('newChatRequest',conversationId);
 					
 					
                 });
@@ -157,13 +158,12 @@ io.sockets.on('connection', function(socket) {
 				 var socketid= userHashMaps.get (userMobileNumberTo);
 				 logger.info('sending a notification to socket: '+ socketid);
 				 
-				  console.log("Users on sicket " + userHashMaps.count());
-				  for (var i ; i < userHashMaps.count() ; i++){
-					  console.log (userHashMaps[i]);
-				  }
-				  
 				 if (io.sockets.connected[socketid]) {
-				io.sockets.connected[socketid].emit('conversationRequest', newconversation);
+					 	var conversationObj ={
+						conversationId:conversationId, 
+						isGroupConversation:false
+				 }
+				io.sockets.connected[socketid].emit('conversationRequest', conversationObj);
 				}
             }
         });
