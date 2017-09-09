@@ -1,0 +1,21 @@
+{"level":"info","message":"In ChatController.createGroup \n Group Data : third  Group+9233450225725555,222,333","timestamp":"11:08:35"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"11:08:35"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b38563133d900364ac9f37","timestamp":"11:08:36"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : third  Group+9233450225725555,222,333","timestamp":"11:09:20"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"11:09:20"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b38590a1b9402c703fcb9d","timestamp":"11:09:20"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : third  Group+9233450225725555,222,333","timestamp":"11:10:24"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"11:10:24"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b385d05a3cb532307f380d","timestamp":"11:10:24"}
+{"level":"info","message":"Creating Conversation User for Phone No5555","timestamp":"11:10:24"}
+{"level":"info","message":"Creating Conversation User for Phone No222","timestamp":"11:10:24"}
+{"level":"info","message":"Creating Conversation User for Phone No333","timestamp":"11:10:24"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : third  Group+9233450225725555,222,333","timestamp":"11:11:34"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"11:11:34"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b3861612ee802e2419a5d1","timestamp":"11:11:36"}
+{"level":"info","message":"Creating Conversation User for Phone No5555","timestamp":"11:11:36"}
+{"level":"info","message":"Creating Conversation User for Phone No222","timestamp":"11:11:36"}
+{"level":"info","message":"Creating Conversation User for Phone No333","timestamp":"11:11:36"}
+{"level":"info","message":"Conversation User Created for Phone No5555","timestamp":"11:11:36"}
+{"level":"info","message":"Conversation User Created for Phone No222","timestamp":"11:11:36"}
+{"level":"info","message":"Conversation User Created for Phone No333","timestamp":"11:11:36"}

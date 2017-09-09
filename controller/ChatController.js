@@ -136,74 +136,105 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
      });	 	   
     logger.info(' Exit ChatController.chkPreviousConversation Method');    
 }
-    /***********/
-	
-		/*  		
-		console.log ('printing list :');
-		  for (var k in ConversationIdsList){
-			  if (ConversationIdsList[k].count === 2){
-			  console.log (ConversationIdsList[k]);
-			  }
-		  }
-		  */
-		 
-		 /*
-		   var sendBackConversation;
-		 
-		  function getIndvidualConversationId(ConversationIdsList){	
 
-			return new Promise(
-				function (resolve, reject) {
-																						  
-				if (ConversationIdsList!==undefined){
-					//console.log (ConversationIdsList.length);
-					for (var i =0 ; i <ConversationIdsList.length;i++){
-			 
-					if (ConversationIdsList[i].count === 2){ 
-					//	console.log ('In individual Conversation Check ')
-					//console.log ("conversation id : "+ConversationIdsList[i]._id);
-					Conversation.find({_id:(ConversationIdsList[i]._id)})
-						.exec(function(err, conversation){
-							if (err){
-								console.log ( 'An Error Occured before returning Promise' );
-								reject(error);
-							}
-											
-						
-							if (conversation){
-								//conversation=conversation.toJSON();
-								//conversation=JSON.parse(conversation);
-								//console.log ('!conversation.isGroupConversation : ' + !conversation.isGroupConversation);
-								if (!conversation.isGroupConversation){
-									console.log ('typeof conversation : ' + typeof(conversation));
-									console.log( conversation + " is indivdual Conversation");
-									console.log( conversation._id + " con id is indivdual Conversation");
-									sendBackConversation=conversation;
-									//console.log ('Indivdual conversation found before resolve : ' + sendBackConversation);
-									resolve(sendBackConversation);
-									
-								}
-						
-							}
-					
-						});
-					}
-					}
-				}
-			console.log ('printing before Resolve  in fuction : ' + sendBackConversation);
-				
-					});
-			}
-			
+
+
+//Create User Groups
+exports.createGroup=function(groupData,res){
+    
+	//var groupObj=JSON.parse(groupData);
+	var groupName=groupData.groupName;
+	var adminPhone=groupData.adminPhone;
+	var conversationUsers=groupData.groupMembersList;
 	
-		  
-		  getIndvidualConversationId(ConversationIdsList)
-			.then(result => {
-				console.log ('printing before Resolve Function response : ' + result);
-				callback(result); 
-				})
-			.catch(error => { logger.error ('An Error Has Occured : ' + err); });
-		 */
-		 	 
+	var conversationId; 
+	var newConversationUser;
+	
+	logger.info('In ChatController.createGroup \n Group Data : ' +groupName + adminPhone + conversationUsers  )
+	// Creating New Conversation and Adding Conversation Users	
+	if(conversationUsers!==undefined||conversationUsers!==null){
+					var newconversation= new Conversation({
+						conversationName:groupName,
+						adminMobile:adminPhone,
+						isGroupConversation:true
+					});
+                     newconversation.save(function (err, conversation) {
+                         if (err) {
+							 logger.error('Error Occured while Saving new conversation :'+ err);
+							res.jsonp({status:"failure",
+							message:"An Error Occured while Creating Group",
+							object:[]});
+						 }
+						if (conversation){
+							conversationId=conversation._id;
+							logger.info ('Creating Conversation Users against conversation id : '+conversation._id );
+							/*
+						for (var i; i <conversationUsers.length; i++ )	{
+								logger.info ('Creating Conversation User for Phone No' +  conversationUsers[i] );
+								newConversationUser= new ConversationUser({                                          
+								_conversationId: conversationId,
+								_userMobile: conversationUsers[i]       
+												  });
+												
+							newConversationUser.save(function (err, conversationUser) {
+								 if (err) logger.error('Error Occured while Saving new newConversationUser 1 :'+ err);
+								 if (conversationUser){
+									 logger.info ('Conversation User Created for Phone No' +  conversationUsers[i] );
+								 }
+								});
+							}
+							*/
+										
+						let promiseArr = [];
+				
+				function createConversationUser(userMobile){	
+					return new Promise((resolve,reject) => {
+					logger.info ('Creating Conversation User for Phone No' +  userMobile );
+											newConversationUser= new ConversationUser({                                          
+											_conversationId: conversationId,
+											_userMobile: userMobile       
+															  });
+															
+										newConversationUser.save(function (err, conversationUser) {
+											 if (err){
+												 logger.error('Error Occured while Saving new newConversationUser 1 :'+ err);
+												 reject(err);
+											 } 
+											 if (conversationUser){
+												 logger.info ('Conversation User Created for Phone No' +  userMobile );
+											 resolve();
+											 }
+											});
+					});
+				}                                   
+				 conversationUsers.forEach(function(userMobile) {              
+						 promiseArr.push(createConversationUser(userMobile));        
+				 });
+				
+				 Promise.all(promiseArr)
+					 .then((result)=> res.jsonp({status:"success",
+										message:"Group Created",
+										object:[{"conversationId":conversationId}]}))
+					 .catch((err)=>res.send({status:"failure",
+									   message:"Error Occured while creating Group" + err,
+									  object:[]}));
+										  
+										
+							
+
+						}
+					
+					//logger.info ('Sending room Id To client : ' + conversationId );					
+                });
+                   
+}
+	 
+    logger.info(' Exit ChatController.createGroup Method');    
+}
+
+
+
+														/*****************************/
+	
 
             

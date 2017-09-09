@@ -1,6 +1,7 @@
 var regCtrl= require('../controller/RegistrationController.js');
 var userGroupCtrl= require('../controller/UserGroupsController.js');
 var AppController= require('../controller/AppController.js');
+var ChatController = require('../controller/ChatController.js');
 var bodyParser = require('body-parser');
 var Country = require('../models/Country.js');
 var db = require('../config/db');
@@ -228,24 +229,46 @@ module.exports = function(app) {
         }
 		console.log("in routes");
 		var reqData=req.body;
-         console.log(reqData);
-		userGroupCtrl.createGroup(reqData,function (found) {
-            console.log("Response Of createGroup Method");
-			console.log(found);
-			res.json(found);
-	});		
+         //logger.info(reqData);
+		ChatController.createGroup(reqData,res);		
 	});
 	
 	
-	 
-    app.get('/user',function(req,res){
-      		console.log("in routes get users");
- 
+	
+	/********  Admin Panel Apis********/
+	
+	 // getting List of users
+    app.get('/users',function(req,res){
+      	
+		logger.info("in routes get users");
 		AppController.findAllUser(function (users) {
-            console.log("Response Of findAllUser Method");
+            logger.info("Response Of findAllUser Method");
 			 res.jsonp({status:"success",
                         message:"List Of users",
                         object:users});
+                             
+	});		
+	})
+		 // getting User  By user id in Query Params
+	app.get('/user',function(req,res){
+      	
+		let phoneNo = req.query.phoneNo;
+		logger.info("In routes get single user, where phone NO. : "+phoneNo);
+		AppController.userExists(phoneNo,function (user) {
+            logger.info("Response Of userExists Method : " + user);
+			
+			
+			if (user){
+			res.jsonp({status:"success",
+                        message:"User Found",
+                        object:user});
+			}
+			else{
+			res.jsonp({status:"Failure",
+                        message:"User Not Found",
+                        object:[]});
+				
+			}
                              
 	});		
 	})

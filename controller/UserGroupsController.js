@@ -22,7 +22,7 @@ exports.createGroup = function(reqData,callback) {
 console.log("In Controller Register Method");
         var groupName =reqData.groupName;
         var adminId = reqData.adminId;
-        var groupPhotoUrl= user.profilePhotoUrl;
+        var groupPhotoUrl= reqData.profilePhotoUrl;
     
 
 var newGroup = new Group({ 

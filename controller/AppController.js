@@ -1,6 +1,7 @@
 var User = require('../models/User.js');
 var Country = require('../models/Country.js');
 var db = require('../config/db');
+var logger = require('../config/lib/logger.js');
 require('datejs');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -85,15 +86,36 @@ exports.userExists=function(phoneNo,callback){
         }
         else{
             if (user){
-                console.log("user found with phone no "+phoneNo);
+               logger.info("user found with phone no "+phoneNo);
                 callback (user);
             }
             else{
-                console.log("user not found with phone no "+phoneNo);
+                logger.info("user not found with phone no "+phoneNo);
                 callback( user);
                 
             }
        }
      });
 }
+
+exports.findAllPhoneNo=function(callback){
+     
+    //query with mongoose
+   User.find({}, {'_id': 0, 'phone' :1}, { sort: { '_id': 1 } }, function(err,usersContactNumber) {
+        if (err) {
+
+         res.status(400).send({status:"failure",
+                                  message:err,
+                                  object:[]
+                                });
+    }
+    
+    else{ 
+        console.log(usersContactNumber);
+        callback(usersContactNumber);
+        process.exit();
+    } 
+    });
+}
+
               
