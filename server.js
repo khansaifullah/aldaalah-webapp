@@ -37,7 +37,15 @@ io.sockets.on('connection', function(socket) {
 
   });
     
-    
+	// to add user mobile no. and socketID in hashmap
+       socket.on('onConnect', function (phoneNo) {
+         logger.info('onConnect Event  Called for Phone Num:' + phoneNo);
+         userHashMaps.set(phoneNo,socket.id);
+         socket.phoneNo=phoneNo;
+		 logger.info(' Exit onConnect Event'); 
+		 
+	   });
+                  
     //new user Event for user info
        socket.on('verifyUser', function (phoneNo, callback) {
          logger.info('verifyUser Event  Called for Phone Num:' + phoneNo);
