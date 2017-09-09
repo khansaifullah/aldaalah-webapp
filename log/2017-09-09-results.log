@@ -28,3 +28,18 @@
 {"level":"info","message":"Conversation User Created for Phone No+92335022571","timestamp":"11:29:56"}
 {"level":"info","message":"Conversation User Created for Phone No+92335022570","timestamp":"11:29:56"}
 {"level":"info","message":"Conversation User Created for Phone No+92335022572","timestamp":"11:29:56"}
+{"level":"info","message":"In routes get single user, where phone NO. : +923345022571","timestamp":"11:47:17"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"11:47:17"}
+{"level":"info","message":"Response Of userExists Method : { _id: 59af98f4c94f5829482989d8,\n  updatedAt: 2017-09-06T06:43:49.478Z,\n  createdAt: 2017-09-06T06:43:00.936Z,\n  phone: '+923345022571',\n  country_code: '+92',\n  verified_user: true,\n  __v: 0,\n  OS: 'android',\n  active: false,\n  full_name: 'Nadeem' }","timestamp":"11:47:17"}
+{"level":"info","message":"In routes get single user, where phone NO. : +923345022570","timestamp":"11:48:46"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:48:46"}
+{"level":"info","message":"Response Of userExists Method : { _id: 59af97049d57ac10ece4b6b1,\n  updatedAt: 2017-09-07T14:00:01.224Z,\n  createdAt: 2017-09-06T06:34:44.109Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  __v: 0,\n  OS: 'Android',\n  active: false,\n  full_name: 'saii',\n  profile_photo_url: 'https://cdn3.iconfinder.com/data/icons/rcons-user-action/32/boy-512.png' }","timestamp":"11:48:46"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : Friends  Group 2+923345022570+92335022570,+92335022571,+92335022572","timestamp":"12:11:09"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"12:11:09"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 59b3940d4f419d20d0215a85","timestamp":"12:11:09"}
+{"level":"info","message":"Creating Conversation User for Phone No+92335022570","timestamp":"12:11:09"}
+{"level":"info","message":"Creating Conversation User for Phone No+92335022571","timestamp":"12:11:09"}
+{"level":"info","message":"Creating Conversation User for Phone No+92335022572","timestamp":"12:11:09"}
+{"level":"info","message":"Conversation User Created for Phone No+92335022570","timestamp":"12:11:10"}
+{"level":"info","message":"Conversation User Created for Phone No+92335022571","timestamp":"12:11:11"}
+{"level":"info","message":"Conversation User Created for Phone No+92335022572","timestamp":"12:11:11"}

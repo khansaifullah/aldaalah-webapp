@@ -46,21 +46,17 @@ io.sockets.on('connection', function(socket) {
               User.findOne(query).exec(function(err, user){
                   if (err){
                       logger.error('Some Error occured while finding user' + err );
-                       callback(false);
+                      callback(false);
                   }
                   if (user){
-                       logger.info('User Found For Phone No: ' + phoneNo );
-                      //console.log ("New User: " + user);
+                      logger.info('User Found For Phone No: ' + phoneNo );
                       userHashMaps.set(phoneNo,socket.id);
-                      socket.phoneNo=phoneNo;
-                      // socket.emit('userExist', "true";
+                      socket.phoneNo=phoneNo;                     
                       callback(true);
                       
                   }
                   else {
-                       logger.info('User not Found For Phone No: ' + phoneNo );
-                      console.log ("No User ");
-                      // socket.emit('userExist', "flase";
+                      logger.info('User not Found For Phone No: ' + phoneNo );                 
                       callback(false);
                   }
                   
@@ -72,7 +68,7 @@ io.sockets.on('connection', function(socket) {
     
     
     //Creating room by concating both users mobile numbers.
-  socket.on('createRoom', function (userToken, userMobileNumberFrom, userMobileNumberTo,callback) {
+  socket.on('createRoom', function ( userMobileNumberFrom, userMobileNumberTo,callback) {
       
        logger.info('createRoom Event  Called for userMobileNumberFrom : '+userMobileNumberFrom + ' & userMobileNumberTo ' + userMobileNumberTo);
       var conversationId;
@@ -143,61 +139,22 @@ io.sockets.on('connection', function(socket) {
         });
     
       
-      console.log("listening create room on server : " + " userMobileNumberFrom : "+userMobileNumberFrom +" , userMobileNumberTo : "+userMobileNumberTo);
-    
-	/*
-	
-	//checking whether a room exists or not in list maintained on server
-   // var isRoomExist = rooms.find(x => x == userMobileNumberFrom + userMobileNumberTo || x == userMobileNumberTo + userMobileNumberFrom);
-  var isRoomExist = rooms.find(x => x == conversationId);
-     
-   console.log ("Result of isRoomExist : "+ isRoomExist);
-    if (!isRoomExist) {
-       // logger.info('Room does not exist ' +userMobileNumberFrom + userMobileNumberTo);
-			logger.info('Room does not exist ' + conversationId );
-              
-	   //isRoomExist=userMobileNumberFrom + userMobileNumberTo;
-      isRoomExist=conversationId;
-	  //rooms.push(userMobileNumberFrom + userMobileNumberTo);
-	  rooms.push(conversationId);
-  
-    }
-    //assigning room to socket isRoomExist
-   // socket.room = userMobileNumberFrom + userMobileNumberTo;
-      socket.room = isRoomExist;
-    //joining the existing room on the socket
-   // socket.join(userMobileNumberFrom + userMobileNumberTo);
-       socket.join(isRoomExist);
-    //emiting the room Id to the client App
-   // socket.emit('roomId', userMobileNumberFrom + userMobileNumberTo);
-      socket.emit('roomId',isRoomExist);
-	  
-	  */
+      //console.log("listening create room on server : " + " userMobileNumberFrom : "+userMobileNumberFrom +" , userMobileNumberTo : "+userMobileNumberTo);
       logger.info(' Exit createRoom Event'); 
   });
     
-    //Switihing Room 
-  socket.on('switchRoom', function (userToken, userMobileNumberFrom, userMobileNumberTo) {
+    //Switching Room 
+  socket.on('switchRoom', function (conversationId) {
        logger.info('switchRoom Event  Called');
       
     //Leaving the socket's current room
     socket.leave(socket.room);
-    var isRoomExist = rooms.find(x => x == userMobileNumberFrom + userMobileNumberTo || x == userMobileNumberTo + userMobileNumberFrom);
-    console.log(isRoomExist);
-    if (isRoomExist) {
-      
-      //Joining the new room
-      socket.room = isRoomExist;
-      socket.join(isRoomExist);
-      socket.emit('onRoomSet', isRoomExist);
-    }
-    else {
-      
-      rooms.push(userMobileNumberFrom + userMobileNumberTo);
-      socket.room = userMobileNumberFrom + userMobileNumberTo;
-      socket.join(userMobileNumberFrom + userMobileNumberTo);
-      socket.emit('onRoomSet', userMobileNumberFrom + userMobileNumberTo);
-    }
+	//Joining New Room
+      rooms.push(conversationId);
+      socket.room = conversationId;
+      socket.join(conversationId);
+      socket.emit('onRoomSet', conversationId);
+    
       
       logger.info(' Exit switchRoom Event'); 
   });
@@ -209,13 +166,13 @@ io.sockets.on('connection', function(socket) {
 		  data=JSON.parse(data);
           logger.info("listening sendMessage event on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageToMobile+"**"+data._messageToMobile);
 		  //console.log ("message Data on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageToMobile+"**"+data._messageToMobile);
-    var conversationMessage = new ConversationMessages();
-    conversationMessage.messageType = data.messageType;
-    conversationMessage.messageText = data.messageText;
-    conversationMessage._conversationId = data._conversationId;
-    conversationMessage._messageToMobile = data._messageToMobile;
-    conversationMessage._messageFromMobile = data._messageFromMobile;
-    conversationMessage.save(function (err, conMes) {
+		var conversationMessage = new ConversationMessages();
+		conversationMessage.messageType = data.messageType;
+		conversationMessage.messageText = data.messageText;
+		conversationMessage._conversationId = data._conversationId;
+		conversationMessage._messageToMobile = data._messageToMobile;
+		conversationMessage._messageFromMobile = data._messageFromMobile;
+		conversationMessage.save(function (err, conMes) {
         if (err){
             logger.error('Eror Saving Conversation message' +err);
         }
@@ -233,12 +190,12 @@ io.sockets.on('connection', function(socket) {
  
           //if client 2 is ofline or in other room
           // Push notification  
-		  var msg ={
-     messageType:data.messageType,
-     messageText:data.messageText,
-     _conversationId:data._conversationId,
-     _messageToMobile:data._messageToMobile,
-     _messageFromMobile:data._messageFromMobile
+		var msg ={
+		 messageType:data.messageType,
+		 messageText:data.messageText,
+		 _conversationId:data._conversationId,
+		 _messageToMobile:data._messageToMobile,
+		 _messageFromMobile:data._messageFromMobile
 	 }
           console.log ("Pushing to room : "+socket.room);
            socket.to(socket.room).emit('receiveMessage', msg);
