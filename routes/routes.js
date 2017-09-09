@@ -99,7 +99,7 @@ module.exports = function(app) {
         res.end("Empty Body"); 
         }
     
-		console.log("in routes");
+		console.log("in routes - Req Body : " + req.body.phone);
         
 	 var upload = multer({
 		storage: storage,
@@ -227,7 +227,8 @@ module.exports = function(app) {
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
-		console.log("in routes");
+		
+		console.log("in routes - Req Body : " + req.body);
 		var reqData=req.body;
          logger.info("reqData  :"+reqData.groupName);
 		 
@@ -252,13 +253,13 @@ module.exports = function(app) {
         else{
            // console.log("File Is uploaded");
            logger.info ("Photo Is uploaded");
-         console.log(req.body.phone);
+        // console.log(req.body.phone);
 		 //geneterate a url 
 		 //sending dummy pefile url
 		 var profilePhotoUrl ="https://cdn0.iconfinder.com/data/icons/education-59/128/communication_discussion_workshop-256.png";
 		 
 		 
-		ChatController.createGroup(reqData,profilePhotoUrl,res);		
+		ChatController.createGroup(req.body,profilePhotoUrl,res);		
 		
 		  }
 		
