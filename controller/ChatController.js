@@ -56,6 +56,40 @@ exports.userExists =function(phoneNo,callback){
    
 
 
+exports.findConversation =function(conversationId,callback){
+	
+	try{
+    
+    logger.info('findConversation Method Called');
+     var query = { _id : conversationId };
+     Conversation.findOne(query).exec(function(err,conversation){
+        if (err){
+            logger.error('Some Error while finding conversation' + err );
+            res.status(400).send({status:"failure",
+                                  message:err,
+                                  object:[]
+            });
+        }
+        else{
+            if (conversation){
+                
+                logger.info('conversation Found with Phone Num. :' +conversationId);
+                callback (conversationId);
+            }
+            else{
+                
+                logger.info('conversation Not Found with Phone Num. :' +conversationId);
+                callback( conversationId);
+                
+            }
+       }
+     });
+    
+    logger.info(' Exit findConversation Method');
+	}catch(err){
+		
+	}
+}
 
 
 

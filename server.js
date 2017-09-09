@@ -71,7 +71,8 @@ io.sockets.on('connection', function(socket) {
   socket.on('createRoom', function ( userMobileNumberFrom, userMobileNumberTo,callback) {
       
        logger.info('createRoom Event  Called for userMobileNumberFrom : '+userMobileNumberFrom + ' & userMobileNumberTo ' + userMobileNumberTo);
-      var conversationId;
+       var newconversation;
+	  var conversationId;
       // check if conversation between These Two users ever occured before, send conversationId / roomId in response
       
       
@@ -81,7 +82,7 @@ io.sockets.on('connection', function(socket) {
             if (data==null||data===undefined)
                 {
                 
-                 var newconversation= new Conversation();
+                  newconversation= new Conversation();
                      newconversation.save(function (err, conversation) {
                          if (err) logger.error('Error Occured while Saving new conversation :'+ err);
                     if (conversation){
@@ -121,6 +122,7 @@ io.sockets.on('connection', function(socket) {
 				 socket.join(conversationId);
 				 logger.info ('Sending room Id To client : ' + conversationId );
 				 socket.emit('roomId',conversationId);
+				 socket.emit('newChatRequest',conversationId);
 					
 					
                 });
@@ -131,10 +133,23 @@ io.sockets.on('connection', function(socket) {
 				logger.info ('Previous Conversation Id Received :' + data );
                 
 				conversationId=data;
+				ChatController.findConversation (conversationId , function(conversation){
+					
+					if (conversation){
+						logger.info ('Conversation Found for Id  : '+ conversationId);
+						newconversation=conversation;
+					}
+					
+				} );
                  socket.room = conversationId;
 				 socket.join(conversationId);
 				 logger.info ('Sending room Id To client : ' + conversationId );
 				 socket.emit('roomId',conversationId);
+				 //send an invitation
+				 var socketid= userHashMaps.get (userMobileNumberTo);
+				 if (io.sockets.connected[socketid]) {
+				io.sockets.connected[socketid].emit('conversationRequest', newconversation);
+				}
             }
         });
     
