@@ -160,6 +160,7 @@ io.sockets.on('connection', function(socket) {
 				 
 				 if (io.sockets.connected[socketid]) {
 					 	var conversationObj ={
+						fromPhoneNo:userMobileNumberFrom,	
 						conversationId:conversationId, 
 						isGroupConversation:false
 				 }
@@ -172,6 +173,8 @@ io.sockets.on('connection', function(socket) {
       //console.log("listening create room on server : " + " userMobileNumberFrom : "+userMobileNumberFrom +" , userMobileNumberTo : "+userMobileNumberTo);
       logger.info(' Exit createRoom Event'); 
   });
+  
+  
     
        //Swithing Room 
   socket.on('joinRoom', function (conversationId) {
@@ -190,6 +193,7 @@ io.sockets.on('connection', function(socket) {
       logger.info(' Exit joinRoom Event'); 
   });
     
+	// leave Room
 	  socket.on('leaveRoom', function (conversationId) {
        logger.info('leaveRoom Event  Called');
       
@@ -198,6 +202,40 @@ io.sockets.on('connection', function(socket) {
 	socket.emit('roomId',null);
     logger.info(' Exit leaveRoom Event'); 
   });
+  
+    socket.on('groupRequest', function (conversationId) {
+		try {
+			var socketid;
+			ChatController.findConversationMembers(conversationId, function(members){
+					for (var i; i < members.length ; i++){
+									socketid= userHashMaps.get (members[i]);
+									logger.info('sending a notification to socket: '+ socketid);
+							 
+									 if (io.sockets.connected[socketid]) {
+											var conversationObj ={
+											fromPhoneNo:userMobileNumberFrom,	
+											conversationId:conversationId, 
+											isGroupConversation:true
+											}
+							 
+									 // add conversation pic , and other data 
+									 // need to as that do i need to emit the same event for group request or new ?
+									 
+									 
+									io.sockets.connected[socketid].emit('conversationRequest', conversationObj);
+										
+											
+										}
+					}
+					
+				});	
+		} catch (err){
+			logger.info('An Exception Has occured ' + err);
+		}
+	
+	
+	
+	});
     
       socket.on('sendMessage', function (data) {
           //IOS will send Room Name (not updated)

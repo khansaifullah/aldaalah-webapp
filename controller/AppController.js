@@ -123,23 +123,6 @@ exports.findAllPhoneNo=function(callback){
 }
 
 
-exports.findAllGroups=function(callback){
-     
-    //query with mongoose
-   Conversation.find({'isGroupConversation': true}, function(err, groups) {
-    if (err){
-         res.status(400).send({status:"failure",
-                                  message:err,
-                                  object:[]
-                                });
-    }
-    
-    else{ 
-        logger.info(groups.length + ' groups Found');
-        callback(groups);
-        //process.exit();
-    } 
-    });
-}
+
 
               

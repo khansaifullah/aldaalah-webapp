@@ -259,3 +259,7 @@
 {"level":"info","message":"in routes get groups","timestamp":"23:33:54"}
 {"level":"info","message":"20 groups Found","timestamp":"23:33:57"}
 {"level":"info","message":"Response Of findAllGroups Method","timestamp":"23:33:57"}
+{"level":"info","message":"in routes get groups","timestamp":"02:39:34"}
+{"level":"info","message":"In ChatController.findAllGroups ","timestamp":"02:39:34"}
+{"level":"info","message":"1 groups Found","timestamp":"02:39:35"}
+{"level":"info","message":"Response Of findAllGroups Method","timestamp":"02:39:35"}

@@ -72,7 +72,7 @@
 	 console.log('room btn clicled');
             var user1_Num = $('#user1_box').val()
             var user2_Num = $('#user2_box').val()
-			socket.emit('createRoom', "token", user1_Num, user2_Num, function(data){
+			socket.emit('createRoom', user1_Num, user2_Num, function(data){
 			//add here
 			
 			if (data)	{

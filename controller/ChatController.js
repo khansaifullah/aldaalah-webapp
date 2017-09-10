@@ -93,7 +93,7 @@ exports.findConversation =function(conversationId,callback){
 
 
 
-/*********************************/
+
 
 
 
@@ -261,6 +261,56 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 }
 
 
+exports.findAllGroups=function(callback){
+     logger.info ('In ChatController.findAllGroups ' ); 
+    //query with mongoose
+   Conversation.find({'isGroupConversation': true}, function(err, groups) {
+    if (err){
+         res.status(400).send({status:"failure",
+                                  message:err,
+                                  object:[]
+                                });
+    }
+    
+    else{ 
+        logger.info(groups.length + ' groups Found');
+        callback(groups);
+        
+    } 
+    });
+}
+
+exports.findConversationMembers=function(conversationId,callback){
+	try{
+		
+		 logger.info ('In ChatController.findAllGroupMembers ' ); 
+	 
+	 //findConversation(conversationId , function (conversation){
+		// if (conversation){
+			 
+							 //query with mongoose
+			   ConversationUser.find({'_conversationId': conversationId}, function(err, members) {
+				if (err){
+					 res.status(400).send({status:"failure",
+											  message:err,
+											  object:[]
+											});
+				}
+				
+				else{ 
+					logger.info(members.length + ' members Found');
+					callback(members);
+					
+				} 
+				});
+		// }	 }); 
+		
+	}catch (err){
+		logger.info('An Exception Has occured ' + err);
+	}
+    
+
+}
 
 														/*****************************/
 	

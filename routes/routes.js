@@ -179,7 +179,7 @@ module.exports = function(app) {
          console.log(req.body.phone);
 		 //geneterate a url 
 		 //sending dummy pefile url
-		 var profilePhotoUrl ="https://cdn3.iconfinder.com/data/icons/rcons-user-action/32/boy-512.png";
+		 var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
 	
         regCtrl.updateProfilePhoto(req.body.phone,profilePhotoUrl,res);
             
@@ -324,7 +324,7 @@ module.exports = function(app) {
     app.get('/groups',function(req,res){
       	
 		logger.info("in routes get groups");
-		AppController.findAllGroups(function (groups) {
+		ChatController.findAllGroups(function (groups) {
             logger.info("Response Of findAllGroups Method");
 			 res.jsonp({status:"success",
                         message:"List Of groups",
