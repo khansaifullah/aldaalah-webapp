@@ -164,6 +164,7 @@ io.sockets.on('connection', function(socket) {
 						conversationId:conversationId, 
 						isGroupConversation:false
 				 }
+				 logger.info( socketid + ' is in connected Sockets List ');
 				io.sockets.connected[socketid].emit('conversationRequest', conversationObj);
 				}
             }
@@ -206,29 +207,45 @@ io.sockets.on('connection', function(socket) {
     socket.on('groupRequest', function (conversationId) {
 		try {
 			var socketid;
-			ChatController.findConversationMembers(conversationId, function(members){
-					for (var i; i < members.length ; i++){
-									socketid= userHashMaps.get (members[i]);
-									logger.info('sending a notification to socket: '+ socketid);
-							 
-									 if (io.sockets.connected[socketid]) {
-											var conversationObj ={
-											fromPhoneNo:userMobileNumberFrom,	
-											conversationId:conversationId, 
-											isGroupConversation:true
-											}
-							 
-									 // add conversation pic , and other data 
-									 // need to as that do i need to emit the same event for group request or new ?
-									 
-									 
-									io.sockets.connected[socketid].emit('conversationRequest', conversationObj);
-										
-											
-										}
+			var conversation;
+			ChatController.findConversation (conversationId , function(con){
+					
+					if (con){
+						logger.info ('Conversation Found for Id  : '+ conversationId);
+						conversation=con;
+					}
+					if (con==null){
+						logger.info ('Conversation For conversationId : '+ conversationId + 'is null');
+						
 					}
 					
-				});	
+				} );
+				if (conversation!==null && conversation !== undefined ){
+					
+					ChatController.findConversationMembers(conversationId, function(members){
+						logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
+							var conversationObj ={
+													//fromPhoneNo:userMobileNumberFrom,	
+													conversationId:conversationId, 
+													isGroupConversation:conversation.isGroupConversation,
+													adminMobile:conversation._adminId,
+													photoUrl:conversation.conversationImageUrl
+													
+													}
+							for (var i; i < members.length ; i++){
+								socketid= userHashMaps.get (members[i]);
+								
+								logger.info('sending a notification to socket: '+ socketid);
+									 
+								if (io.sockets.connected[socketid]) {
+									logger.info( socketid + ' is in connected Sockets List ');
+										io.sockets.connected[socketid].emit('groupConversationRequest', conversationObj);										
+													
+										}
+							}
+							
+						});
+				}				
 		} catch (err){
 			logger.info('An Exception Has occured ' + err);
 		}
