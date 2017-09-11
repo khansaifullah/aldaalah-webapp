@@ -222,16 +222,8 @@ io.sockets.on('connection', function(socket) {
 					if (con){
 						logger.info ('Conversation Found for Id  : '+ conversationId);
 						conversation=con;
-					}
-					if (con==null){
-						logger.info ('Conversation For conversationId : '+ conversationId + 'is null');
 						
-					}
-					
-				} );
-				if (conversation!==null && conversation !== undefined ){
-					
-					ChatController.findConversationMembers(conversationId, function(members){
+						ChatController.findConversationMembers(conversationId, function(members){
 						logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
 							var conversationObj ={
 													//fromPhoneNo:userMobileNumberFrom,	
@@ -254,6 +246,16 @@ io.sockets.on('connection', function(socket) {
 							}
 							
 						});
+					}
+					if (con==null){
+						logger.info ('Conversation For conversationId : '+ conversationId + 'is null');
+						
+					}
+					
+				} );
+				if (conversation!==null && conversation !== undefined ){
+					
+					
 				}				
 		} catch (err){
 			logger.info('An Exception Has occured ' + err);
