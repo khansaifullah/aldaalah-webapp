@@ -228,10 +228,10 @@ io.sockets.on('connection', function(socket) {
 							var conversationObj ={
 													//fromPhoneNo:userMobileNumberFrom,	
 													conversationId:conversationId, 
-													isGroupConversation:conversation.isGroupConversation,
-													adminMobile:conversation._adminId,
-													photoUrl:conversation.conversationImageUrl
-													
+													isGroupConversation:con.isGroupConversation,
+													adminMobile:con._adminId,
+													photoUrl:con.conversationImageUrl,
+													conversationName:con.conversationName
 											}
 							for (var i=0; i < members.length ; i++){
 								logger.info('Getting Socket Id against Phone No :' + members[i]._userMobile)
