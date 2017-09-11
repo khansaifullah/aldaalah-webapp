@@ -234,7 +234,8 @@ io.sockets.on('connection', function(socket) {
 													
 											}
 							for (var i=0; i < members.length ; i++){
-								socketid= userHashMaps.get (members[i]);
+								logger.info('Getting Socket Id against Phone No :' + members[i]._userMobile)
+								socketid= userHashMaps.get (members[i]._userMobile);
 								
 								logger.info('sending a notification to socket: '+ socketid);
 									 
