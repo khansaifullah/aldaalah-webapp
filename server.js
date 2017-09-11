@@ -214,6 +214,7 @@ io.sockets.on('connection', function(socket) {
   
     socket.on('groupRequest', function (conversationId) {
 		try {
+			 logger.info('groupRequest Event  Called for conversation id :' + conversationId);
 			var socketid;
 			var conversation;
 			ChatController.findConversation (conversationId , function(con){
