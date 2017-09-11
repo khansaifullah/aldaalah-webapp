@@ -60,7 +60,9 @@ module.exports = function(app) {
 	app.use(bodyParser.json())
 	
 	app.get('/', function(req, res) {
-
+	//var str = "PB10CV2662";
+	 //str = str.replace(/ +/g, "");
+	 //logger.info(str);
 		res.end("Node-Aldallah-Project"); 
 	});
 
@@ -281,11 +283,19 @@ module.exports = function(app) {
 	});
 	
 	
+	/***** Location Apis ********/ 
+	//get location From Client
+	
+	
+	
+	
+	
+	
 	
 	/********  Admin Panel Apis********/
 	
 	 // getting List of users
-    app.get('/users',function(req,res){
+    app.get('/users',function(req,res){ 
       	
 		logger.info("in routes get users");
 		AppController.findAllUser(function (users) {

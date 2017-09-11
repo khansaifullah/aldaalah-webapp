@@ -39,6 +39,8 @@ io.sockets.on('connection', function(socket) {
     
 	// to add user mobile no. and socketID in hashmap
        socket.on('onConnect', function (phoneNo) {
+		   //removing spaces bw phone no if any
+		   phoneNo = phoneNo.replace(/ +/g, "");
          logger.info('onConnect Event  Called for Phone Num:' + phoneNo);
          userHashMaps.set(phoneNo,socket.id);
          socket.phoneNo=phoneNo;
@@ -49,6 +51,8 @@ io.sockets.on('connection', function(socket) {
                   
     //new user Event for user info
        socket.on('verifyUser', function (phoneNo, callback) {
+		    //removing spaces bw phone no if any
+		    phoneNo = phoneNo.replace(/ +/g, "");
          logger.info('verifyUser Event  Called for Phone Num:' + phoneNo);
            
            var query = { phone : phoneNo };
@@ -79,6 +83,10 @@ io.sockets.on('connection', function(socket) {
     //Creating room by concating both users mobile numbers.
   socket.on('createRoom', function ( userMobileNumberFrom, userMobileNumberTo,callback) {
       
+	 //removing spaces bw phone no if any
+	 userMobileNumberFrom = userMobileNumberFrom.replace(/ +/g, "");
+	 userMobileNumberTo = userMobileNumberTo.replace(/ +/g, "");
+	 
        logger.info('createRoom Event  Called for userMobileNumberFrom : '+userMobileNumberFrom + ' & userMobileNumberTo ' + userMobileNumberTo);
        var newconversation;
 	  var conversationId;
