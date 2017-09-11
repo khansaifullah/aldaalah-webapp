@@ -138,7 +138,7 @@ module.exports = function(app) {
          //console.log(req.body.profilePhoto);
 		 //geneterate a url 
 		 //sending dummy pefile url
-		 var profilePhotoUrl ="https://cdn3.iconfinder.com/data/icons/rcons-user-action/32/boy-512.png";
+		 var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
         regCtrl.completeProfile(req.body,profilePhotoUrl,res);
             
             
