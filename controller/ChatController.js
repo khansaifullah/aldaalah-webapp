@@ -74,12 +74,12 @@ exports.findConversation =function(conversationId,callback){
             if (conversation){
                 
                 logger.info('conversation Found with Phone Num. :' +conversationId);
-                callback (conversationId);
+                callback (conversation);
             }
             else{
                 
                 logger.info('conversation Not Found with Phone Num. :' +conversationId);
-                callback( conversationId);
+                callback( conversation);
                 
             }
        }
