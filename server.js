@@ -179,7 +179,7 @@ io.sockets.on('connection', function(socket) {
     
        //Swithing Room 
   socket.on('joinRoom', function (conversationId) {
-       logger.info('joinRoom Event  Called');
+       logger.info('joinRoom Event  Called for room id :' + conversationId);
       
     //Leaving the socket's current room
     //socket.leave(socket.room);
@@ -196,7 +196,7 @@ io.sockets.on('connection', function(socket) {
     
 	// leave Room
 	  socket.on('leaveRoom', function (conversationId) {
-       logger.info('leaveRoom Event  Called');
+       logger.info('leaveRoom Event  Called for room id :' + conversationId);
       
 	//Leaving the socket's current room
     socket.leave(socket.room);
@@ -231,7 +231,7 @@ io.sockets.on('connection', function(socket) {
 													adminMobile:conversation._adminId,
 													photoUrl:conversation.conversationImageUrl
 													
-													}
+											}
 							for (var i; i < members.length ; i++){
 								socketid= userHashMaps.get (members[i]);
 								
@@ -241,7 +241,7 @@ io.sockets.on('connection', function(socket) {
 									logger.info( socketid + ' is in connected Sockets List ');
 										io.sockets.connected[socketid].emit('groupConversationRequest', conversationObj);										
 													
-										}
+										} 
 							}
 							
 						});
@@ -296,8 +296,9 @@ io.sockets.on('connection', function(socket) {
   });
     
  socket.on('disconnect', function () {
+	logger.info('Disconnect Event \n ' + socket.userMobile + ' is disconnected' );
     userHashMaps.remove(socket.userMobile);
-    console.log("User Disconnect " + userHashMaps.count());
+    logger.info("Connected Users Count : " + userHashMaps.count());
   });
     
 }); //end of Connection Event
