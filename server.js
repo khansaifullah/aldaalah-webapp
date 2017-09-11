@@ -296,8 +296,8 @@ io.sockets.on('connection', function(socket) {
   });
     
  socket.on('disconnect', function () {
-	logger.info('Disconnect Event \n ' + socket.userMobile + ' is disconnected' );
-    userHashMaps.remove(socket.userMobile);
+	logger.info('Disconnect Event \n ' + socket.phoneNo + ' is disconnected' );
+    userHashMaps.remove(socket.phoneNo);
     logger.info("Connected Users Count : " + userHashMaps.count());
   });
     
