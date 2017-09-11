@@ -233,7 +233,7 @@ io.sockets.on('connection', function(socket) {
 													photoUrl:conversation.conversationImageUrl
 													
 											}
-							for (var i; i < members.length ; i++){
+							for (var i=0; i < members.length ; i++){
 								socketid= userHashMaps.get (members[i]);
 								
 								logger.info('sending a notification to socket: '+ socketid);
