@@ -229,7 +229,7 @@ io.sockets.on('connection', function(socket) {
 													//fromPhoneNo:userMobileNumberFrom,	
 													conversationId:conversationId, 
 													isGroupConversation:con.isGroupConversation,
-													adminMobile:con._adminId,
+													adminMobile:con.adminMobile,
 													photoUrl:con.conversationImageUrl,
 													conversationName:con.conversationName
 											}
