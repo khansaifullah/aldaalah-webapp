@@ -3,6 +3,7 @@ var regCtrl= require('../controller/RegistrationController.js');
 var userGroupCtrl= require('../controller/UserGroupsController.js');
 var AppController= require('../controller/AppController.js');
 var ChatController = require('../controller/ChatController.js');
+var LocController = require('../controller/LocationController.js');
 var bodyParser = require('body-parser');
 var Country = require('../models/Country.js');
 var db = require('../config/db');
@@ -62,7 +63,7 @@ module.exports = function(app) {
 	app.get('/', function(req, res) {
 	//var str = "PB10CV2662";
 	 //str = str.replace(/ +/g, "");
-	 //logger.info(str);
+	 //logger.info(str);	 	
 		res.end("Node-Aldallah-Project"); 
 	});
 
@@ -287,6 +288,18 @@ module.exports = function(app) {
 	//get location From Client
 	
 	
+	
+	
+    app.post('/location',function(req,res){
+		
+	   if(req.body === undefined||req.body === null) {
+        res.end("Empty Body"); 
+        }
+		console.log("in routes /location");
+		var reqData=req.body;
+        // console.log(reqData);
+		LocController.updateUserLocation(reqData,res);
+	});
 	
 	
 	

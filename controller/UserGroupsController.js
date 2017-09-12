@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 mongoose.connect(db.url);
+
 //Get the default connection
 //var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)

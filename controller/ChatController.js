@@ -12,6 +12,8 @@ mongoose.Promise = global.Promise;
 ObjectId = require('mongodb').ObjectID;
 var multer  = require('multer')
 var upload = multer({ dest: './public/images/profileImages' })
+
+
 mongoose.createConnection(db.url);
 
 exports.userExists =function(phoneNo,callback){
