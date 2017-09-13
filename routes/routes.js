@@ -21,9 +21,9 @@ var storage = multer.diskStorage({
 	}
 });
 
-mongoose.Promise = global.Promise;
+//mongoose.Promise = global.Promise;
 
-mongoose.createConnection(db.url);
+//mongoose.createConnection(db.url);
 //mongoose.connect(db.url);
 //var exp = require('express');
 //Get the default connection

@@ -1,6 +1,7 @@
 var app = require('express')();
 var http = require('http').Server(app);
  require('./routes/routes.js')(app);
+ var db = require('./config/db');
  require('datejs');
 var io = require('socket.io')(http);
 var HashMap = require('hashmap');
@@ -10,7 +11,11 @@ var ConversationMessages = require('./models/ConversationMessages.js');
 var Conversation = require('./models/Conversation.js');ConversationUser
 var ConversationUser = require('./models/ConversationUser.js');
  var logger = require('./config/lib/logger.js');
+ var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
+//mongoose.createConnection(db.url);
+mongoose.connect(db.url);
 
 // Heroku assigns a port if port = process.env.PORT  
 var port = process.env.PORT || 3000;
