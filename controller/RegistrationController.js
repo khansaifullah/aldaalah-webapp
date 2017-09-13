@@ -5,11 +5,11 @@ var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
 //require('datejs');
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+//mongoose.Promise = global.Promise;
 var multer  = require('multer')
 var upload = multer({ dest: './public/images/profileImages' })
 
-mongoose.createConnection(db.url);
+//mongoose.createConnection(db.url);
 
 //mongoose.connect(db.url);
 

@@ -8,8 +8,8 @@ var logger = require('../config/lib/logger.js');
 
 require('datejs');
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-mongoose.createConnection(db.url);
+//mongoose.Promise = global.Promise;
+//mongoose.createConnection(db.url);
 
 //Get the default connection
 //var db = mongoose.connection;
