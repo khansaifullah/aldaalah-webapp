@@ -39,18 +39,23 @@ io.sockets.on('connection', function(socket) {
     
 	// to add user mobile no. and socketID in hashmap
        socket.on('onConnect', function (phoneNo) {
+		   try{
 		   //removing spaces bw phone no if any
-		   phoneNo = phoneNo.replace(/ +/g, "");
-         logger.info('onConnect Event  Called for Phone Num:' + phoneNo);
-         userHashMaps.set(phoneNo,socket.id);
-         socket.phoneNo=phoneNo;
-		 logger.info("Users on socket " + userHashMaps.count());				  
-		 logger.info(' Exit onConnect Event'); 
+			   phoneNo = phoneNo.replace(/ +/g, "");
+			 logger.info('onConnect Event  Called for Phone Num:' + phoneNo);
+			 userHashMaps.set(phoneNo,socket.id);
+			 socket.phoneNo=phoneNo;
+			 logger.info("Users on socket " + userHashMaps.count());				  
+			 logger.info(' Exit onConnect Event'); 
+			} catch (err){
+			logger.info('An Exception Has occured in onConnect event ' + err);
+		}
 		 
 	   });
                   
     //new user Event for user info
        socket.on('verifyUser', function (phoneNo, callback) {
+		   try{
 		    //removing spaces bw phone no if any
 		    phoneNo = phoneNo.replace(/ +/g, "");
          logger.info('verifyUser Event  Called for Phone Num:' + phoneNo);
@@ -77,6 +82,9 @@ io.sockets.on('connection', function(socket) {
                   
      });
            logger.info(' Exit verifyUser Event'); 
+		      } catch (err){
+			logger.info('An Exception Has occured in verifyUser event' + err);
+		}
   });
     
     
@@ -180,7 +188,7 @@ io.sockets.on('connection', function(socket) {
         });
     
       } catch (err){
-			logger.info('An Exception Has occured ' + err);
+			logger.info('An Exception Has occured in createRoom event' + err);
 		}
       //console.log("listening create room on server : " + " userMobileNumberFrom : "+userMobileNumberFrom +" , userMobileNumberTo : "+userMobileNumberTo);
       logger.info(' Exit createRoom Event'); 
@@ -206,9 +214,8 @@ io.sockets.on('connection', function(socket) {
     
       
       logger.info(' Exit joinRoom Event'); 
-	   }catch(err)
-	  {
-		  logger.info('An Exception Has occured ' + err);		  
+	   }catch(err){
+		  logger.info('An Exception Has occured in joinRoom event ' + err);		  
 	  }
   });
     
@@ -221,9 +228,8 @@ io.sockets.on('connection', function(socket) {
     socket.leave(socket.room);
 	socket.emit('roomId',null);
     logger.info(' Exit leaveRoom Event'); 
-	 }catch(err)
-	  {
-		  logger.info('An Exception Has occured ' + err);		  
+	 }catch(err) {
+		  logger.info('An Exception Has occured in leaveRoom event' + err);		  
 	  }
   });
   
@@ -274,7 +280,7 @@ io.sockets.on('connection', function(socket) {
 					
 				}				
 		} catch (err){
-			logger.info('An Exception Has occured ' + err);
+			logger.info('An Exception Has occured in groupRequest event ' + err);
 		}
 	
 	
@@ -321,9 +327,8 @@ io.sockets.on('connection', function(socket) {
 	 }
           console.log ("Pushing to room : "+socket.room);
            socket.to(socket.room).emit('receiveMessage', msg);
-	  }catch(err)
-	  {
-		  logger.info('An Exception Has occured ' + err);		  
+	  }catch(err){
+		  logger.info('An Exception Has occured in sendMessage event' + err);		  
 	  }
   });
     

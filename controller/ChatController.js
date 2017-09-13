@@ -52,8 +52,8 @@ exports.userExists =function(phoneNo,callback){
     
     logger.info(' Exit UserExists Method');
 	}catch(err){
-		
-	}
+		  logger.info('An Exception Has occured in userExists method' + err);		  
+	  }
 }
    
 
@@ -89,8 +89,8 @@ exports.findConversation =function(conversationId,callback){
     
     logger.info(' Exit findConversation Method');
 	}catch(err){
-		
-	}
+		  logger.info('An Exception Has occured in findConversation method' + err);		  
+	  }
 }
 
 
@@ -101,7 +101,8 @@ exports.findConversation =function(conversationId,callback){
 
 
 exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callback){
-    
+	
+    try{
          //Returns Conversation id if exists else undefined
     logger.info('ChatController.chkPreviousConversation called - toMobileNo : ' 
                   + toMobileNo + "- fromMobileNo :"  +fromMobileNo);
@@ -175,7 +176,12 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 		 
 		          
      });	 	   
-    logger.info(' Exit ChatController.chkPreviousConversation Method');    
+    logger.info(' Exit ChatController.chkPreviousConversation Method');   
+	
+	}catch(err){
+		  logger.info('An Exception Has occured in findConversation method' + err);		  
+	  }
+	
 }
 
 
@@ -262,8 +268,9 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 	
 }
 
-
+// List of All Groups
 exports.findAllGroups=function(callback){
+	try{
      logger.info ('In ChatController.findAllGroups ' ); 
     //query with mongoose
    Conversation.find({'isGroupConversation': true}, function(err, groups) {
@@ -280,12 +287,17 @@ exports.findAllGroups=function(callback){
         
     } 
     });
+	logger.info ('Exit ChatController.findAllGroups ' );
+	}catch(err){
+		  logger.info('An Exception Has occured in findAllGroups method' + err);		  
+	  }
 }
 
+//List all of members of a group
 exports.findConversationMembers=function(conversationId,callback){
 	try{
 		
-		 logger.info ('In ChatController.findAllGroupMembers ' ); 
+		 logger.info ('In ChatController.findConversationMembers ' ); 
 	 
 	 //findConversation(conversationId , function (conversation){
 		// if (conversation){
@@ -293,10 +305,14 @@ exports.findConversationMembers=function(conversationId,callback){
 							 //query with mongoose
 			   ConversationUser.find({'_conversationId': conversationId}, function(err, members) {
 				if (err){
-					 res.status(400).send({status:"failure",
+						/*
+					res.status(400).send({status:"failure",
 											  message:err,
 											  object:[]
 											});
+											*/
+					callback(err);
+					logger.info(' Error Occured While Getting conversation Uses : ' + err);
 				}
 				
 				else{ 
@@ -308,7 +324,7 @@ exports.findConversationMembers=function(conversationId,callback){
 		// }	 }); 
 		
 	}catch (err){
-		logger.info('An Exception Has occured ' + err);
+		logger.info('An Exception Has occured in findConversationMembers method' + err);
 	}
     
 

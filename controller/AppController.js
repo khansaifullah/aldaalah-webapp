@@ -9,8 +9,7 @@ var logger = require('../config/lib/logger.js');
 require('datejs');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-
-//mongoose.createConnection(db.url);
+mongoose.createConnection(db.url);
 
 //Get the default connection
 //var db = mongoose.connection;
@@ -21,28 +20,31 @@ mongoose.Promise = global.Promise;
 
 exports.findAllUser=function(callback){
     
-    
-    User.find({}, function(err, users) {
-    if (err){
-         res.status(400).send({status:"failure",
-                                  message:err,
-                                  object:[]
-                                });
-    }
-    
-    else{ 
-        logger.info(users.length + ' Users Found');
-        callback(users);
-        //process.exit();
-    } 
-    });
+    try{
+			User.find({}, function(err, users) {
+			if (err){
+				 res.status(400).send({status:"failure",
+										  message:err,
+										  object:[]
+										});
+			}
+			
+			else{ 
+				logger.info(users.length + ' Users Found');
+				callback(users);
+				//process.exit();
+			} 
+			});
+		}catch (err){
+		logger.info('An Exception Has occured in getUserLocation method' + err);
+	}
 }
 
 
 
 exports.findAllCountries=function(callback){
     
-    
+    try{
     Country.find({}, function(err, countries) {
     if (err){
          res.status(400).send({status:"failure",
@@ -57,70 +59,83 @@ exports.findAllCountries=function(callback){
        // process.exit();
     } 
     });
+		}catch (err){
+		logger.info('An Exception Has occured in getUserLocation method' + err);
+	}
 }
 
 
 exports.findAllPhoneNo=function(callback){
-     
-    //query with mongoose
-   User.find({}, {'_id': 0, 'phone' :1}, { sort: { '_id': 1 } }, function(err,usersContactNumber) {
-        if (err) {
+     try{
+			//query with mongoose
+		   User.find({}, {'_id': 0, 'phone' :1}, { sort: { '_id': 1 } }, function(err,usersContactNumber) {
+				if (err) {
 
-         res.status(400).send({status:"failure",
-                                  message:err,
-                                  object:[]
-                                });
-    }
-    
-    else{ 
-        console.log(usersContactNumber);
-        callback(usersContactNumber);
-       // process.exit();
-    } 
-    });
+				 res.status(400).send({status:"failure",
+										  message:err,
+										  object:[]
+										});
+			}
+			
+			else{ 
+				console.log(usersContactNumber);
+				callback(usersContactNumber);
+			   // process.exit();
+			} 
+			});
+	}catch (err){
+		logger.info('An Exception Has occured in getUserLocation method' + err);
+	}
 }
 
 exports.userExists=function(phoneNo,callback){
-     var query = { phone : phoneNo };
-     User.findOne(query).exec(function(err, user){
-        if (err){
-            res.status(400).send({status:"failure",
-                                  message:err,
-                                  object:[]
-            });
-        }
-        else{
-            if (user){
-               logger.info("user found with phone no "+phoneNo);
-                callback (user);
-            }
-            else{
-                logger.info("user not found with phone no "+phoneNo);
-                callback( user);
-                
-            }
-       }
-     });
+	try{
+			 var query = { phone : phoneNo };
+			 User.findOne(query).exec(function(err, user){
+				if (err){
+					res.status(400).send({status:"failure",
+										  message:err,
+										  object:[]
+					});
+				}
+				else{
+					if (user){
+					   logger.info("user found with phone no "+phoneNo);
+						callback (user);
+					}
+					else{
+						logger.info("user not found with phone no "+phoneNo);
+						callback( user);
+						
+					}
+			   }
+			 });
+	 	}catch (err){
+		logger.info('An Exception Has occured in getUserLocation method' + err);
+	}
 }
 
 exports.findAllPhoneNo=function(callback){
-     
-    //query with mongoose
-   User.find({}, {'_id': 0, 'phone' :1}, { sort: { '_id': 1 } }, function(err,usersContactNumber) {
-        if (err) {
+     try{
+			//query with mongoose
+		   User.find({}, {'_id': 0, 'phone' :1}, { sort: { '_id': 1 } }, function(err,usersContactNumber) {
+				if (err) {
 
-         res.status(400).send({status:"failure",
-                                  message:err,
-                                  object:[]
-                                });
-    }
-    
-    else{ 
-        console.log(usersContactNumber);
-        callback(usersContactNumber);
-       // process.exit();
-    } 
-    });
+				 res.status(400).send({status:"failure",
+										  message:err,
+										  object:[]
+										});
+			}
+			
+			else{ 
+				console.log(usersContactNumber);
+				callback(usersContactNumber);
+			   // process.exit();
+			} 
+			});
+	}catch (err){
+		logger.info('An Exception Has occured in getUserLocation method' + err);
+	}
 }
 
 

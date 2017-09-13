@@ -6,15 +6,17 @@ var logger = require('../config/lib/logger.js');
 //require('datejs');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-//ObjectId = require('mongodb').ObjectID;
 var multer  = require('multer')
 var upload = multer({ dest: './public/images/profileImages' })
-  //User = mongoose.model('User')
-mongoose.createConnection(db.url);
+
+//mongoose.createConnection(db.url);
+
+mongoose.connect(db.url);
+
 //Get the default connection
-//var dbCon = mongoose.connection;
+var dbCon = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
-//dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
+dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 var userExists=function(phoneNo,callback){
@@ -50,27 +52,25 @@ var userExists=function(phoneNo,callback){
      });
     
     logger.info(' Exit UserExists Method');
+	
 }
                               
 exports.sendVerificationCode=function(reqData,res){
     
-    
+    try{
     logger.info('RegistrationController.sendVerificationCode called  :' 
                   + reqData.phoneNo );
     
-    //
-    console.log("In Controller Send Code Method");
-   // console.log(phoneNo);
-    //var User;
     var phoneNo = reqData.phoneNo;
     var countryCode = reqData.countryCode;
     var resend =reqData.resend
    
     //find user by phone no.
     userExists(phoneNo,function(user){
+		logger.info('User Exists Response : ' + user );
        // console.log("in side user exiss call"+user);
         if (!user){
-            
+             console.log (" User do not exist,  Creating user");
             if (resend==="true"||resend==1){
                // logger.info('User Do not Exist and resend ' );
             res.jsonp({status:"failure",
@@ -81,21 +81,12 @@ exports.sendVerificationCode=function(reqData,res){
             else{
                // phoneNo.trim();
                      var newuser = new User({  
-                      // mongoose.Types.ObjectId  
-                         
-                       // _id: mongoose.Types.ObjectId (phoneNo),
+
                     phone: phoneNo,
                     country_code:countryCode,
                     verified_user:false,                            
-                    //created_at:  new Date()
+                    
                      });
-//                 console.log("outside user constructor");
-//                        if (phoneNo != null && phoneNo.length > 0) {
-//                            phoneNo.trim();
-//                            newuser._id = mongoose.Types.ObjectId (phoneNo);
-//                            }
-                
-                    //newuser._id= ObjectId("507f1f77bcf86cd799439011");
                      newuser.save(function (err, user) {
                     if(err){
                         logger.error('Some Error while saving user' + err );
@@ -128,27 +119,20 @@ exports.sendVerificationCode=function(reqData,res){
                         message:"Verification code Sent Again!",
                         object:[]});
                 
-                
-//            }else{
-//                console.log ("in resend false");
-//                 res.jsonp({status:"failure",
-//                            message:"User with this number already exists",
-//                            object:[]});
-//                
-//            }
-//            
-            
+        
         }
             
     });
     
     logger.info(' Exit RegistrationController.sendVerificationCode Method');
-    
+    }catch (err){
+		logger.info('An Exception Has occured in sendVerificationCode method' + err);
+	}
 }
             
 
 exports.verifyCode=function(data,res){
-    
+    try{
     logger.info('RegistrationController.verifyCode called  :' 
                   + data.phoneNo + " - " +data.code );
     
@@ -188,10 +172,15 @@ exports.verifyCode=function(data,res){
     });
     
     logger.info(' Exit RegistrationController.verifyCode Method');
+	
+	}catch (err){
+		logger.info('An Exception Has occured in verifyCode method' + err);
+	}
   }
 
 
 exports.completeProfile = function(user,profilePhotoUrl,res) {
+	try{
 console.log("In Controller completeProfile Method");
     
     logger.info('RegistrationController.completeProfile called for user  :' 
@@ -248,11 +237,15 @@ console.log("In Controller completeProfile Method");
     });
     
     logger.info(' Exit RegistrationController.completeProfile Method');
+	}catch (err){
+		logger.info('An Exception Has occured in completeProfile method' + err);
+	}
 }
 
 
 
 exports.updateProfilePhoto = function(phoneNo,profilePhotoUrl,res) {
+	try{
 console.log("In Controller updateProfilePhoto Method");
     
     logger.info('RegistrationController.updateProfilePhoto called for user  :' 
@@ -285,10 +278,14 @@ console.log("In Controller updateProfilePhoto Method");
     });
     
     logger.info(' Exit RegistrationController.updateProfilePhoto Method');
+	}catch (err){
+		logger.info('An Exception Has occured in updateProfilePhoto method' + err);
+	}
+	
 }
 
 exports.syncContacts = function(req,res) {
-    	
+    	try{
 console.log("In Controller syncContacts Method");
     
       logger.info('RegistrationController.syncContacts called  :');
@@ -339,6 +336,11 @@ console.log("In Controller syncContacts Method");
                           object:[]}));
     
     logger.info(' Exit RegistrationController.syncContacts Method');
+	
+	}catch (err){
+		logger.info('An Exception Has occured in syncContacts method' + err);
+	}
+	
 }
 
 
@@ -350,133 +352,3 @@ console.log("In Controller syncContacts Method");
             /**********  Above Code is Working*****/
     
 
-
-/*
-    arrayOfNumbers.forEach(function(number) {
-    
-        });
-    
-    function compare(arrayOfNumbers){
-        return new Promise(function (fulfill, reject){
-        
-              arrayOfNumbers.forEach(function(number) {
-           // console.log(number);
-    
-          query = { phone : number };
-            User.findOne(query).exec(function(err, user){
-           // console.log(user);
-            if (user){
-                console.log(number);
-                 arrayToSend.push(number);
-            }                             
-    });
-    }).then(function(res){
-        
-        try {
-        fulfill( res.jsonp({status:"success",
-                           message:"Contacts Synced",
-                          object:arrayToSend}));
-      } catch (ex) {
-        reject(ex);
-      }
-       
-    }, reject);
-    
-           }); 
-        }
-    compare(arrayOfNumbers);
-    
-*/
-        
-//}
-/*
-    arrayOfNumbers.forEach(function(number,index) {
-           // console.log(number);
-    
-          query = { phone : number };
-            User.findOne(query).exec(function(err, user){
-           // console.log(user);
-            if (user){
-                console.log(number);
-                 arrayToSend.push(number);
-            }
-        
-                     
-    });
-    }).done(function(res){
-        res.jsonp({status:"success",
-                           message:"Contacts Synced",
-                          object:arrayToSend});
-    });
-       
-}
-    */           
-            
-               
-//    AppUserController.findAllPhoneNo(function(users){
-//        if (users){
-//                
-//            res.jsonp({status:"success",
-//                     message:"User List!",
-//                     object:users}); 
-//        }
-//        else{
-//             res.jsonp({status:"failure",
-//                            message:"No User Found to Update!",
-//                            object:[]});
-//        }
-//    });
-//    
-    
-
-   /* 
-var newuser = new User({ 
-	
-	user_name: userName, 
-    full_name:fullName,
-    OS:os,
-    email_address:email,
-	phone: phoneNo,
-    profile_photo_url:photoUrl,
-    active:true,                            
-    created_at:  new Date()
-	 });
-	 
-	 newuser.save(function (err, user) {
-	if(err)
-        callback({'response':err});
-         else
-	callback({
-        msg:'not an error - User Data',
-        response:user
-    });
-     });
-     */
-
-                  
-                  
-/*
-user.find({email: email},function(err,users){
-
-var len = users.length;
-
-if(len == 0){
- 	newuser.save(function (err) {
-	
-	callback({'response':"Sucessfully Registered"});
-		
-});
-}else{
-
-	callback({'response':"Email already Registered"});
-
-}});}else{
-
-	callback({'response':"Password Weak"});
-	
-}}else{
-
-	callback({'response':"Email Not Valid"});
-	
-}
-*/
