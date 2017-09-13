@@ -311,7 +311,7 @@ exports.findConversationMembers=function(conversationId,callback){
 											  object:[]
 											});
 											*/
-					callback(err);
+					callback(null);
 					logger.info(' Error Occured While Getting conversation Uses : ' + err);
 				}
 				

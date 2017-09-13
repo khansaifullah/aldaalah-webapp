@@ -193,3 +193,6 @@
 {"level":"info","message":"Adding User in list :+923311334441","timestamp":"22:20:04"}
 {"level":"info","message":"user found with phone no +923345022570","timestamp":"22:20:04"}
 {"level":"info","message":"Adding User in list :+923345022570","timestamp":"22:20:04"}
+{"level":"info","message":"In LocationController.getGroupUserLocations ","timestamp":"22:35:52"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"22:35:52"}
+{"level":"info","message":" Error Occured While Getting conversation Uses : CastError: Cast to ObjectId failed for value \"5922\" at path \"_conversationId\" for model \"ConversationUser\"","timestamp":"22:35:52"}
