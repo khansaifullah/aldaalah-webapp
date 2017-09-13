@@ -196,3 +196,19 @@
 {"level":"info","message":"In LocationController.getGroupUserLocations ","timestamp":"22:35:52"}
 {"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"22:35:52"}
 {"level":"info","message":" Error Occured While Getting conversation Uses : CastError: Cast to ObjectId failed for value \"5922\" at path \"_conversationId\" for model \"ConversationUser\"","timestamp":"22:35:52"}
+{"level":"info","message":"LocationController.updateUserLocation called  :+923345022570**undefined**undefined","timestamp":"22:55:55"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"22:55:55"}
+{"level":"info","message":"location : 73.0923786,33.5212304","timestamp":"22:55:55"}
+{"level":"error","message":"Some Error while updating userValidationError: loc: Cast to Array failed for value \"[ undefined, undefined ]\" at path \"loc\"","timestamp":"22:55:55"}
+{"level":"info","message":"In Controller updatePlayerId Method","timestamp":"22:57:20"}
+{"level":"info","message":"Updating player Id for :+923345022570","timestamp":"22:57:21"}
+{"level":"info","message":"In Controller updatePlayerId Method","timestamp":"22:57:32"}
+{"level":"info","message":"Error in Updating player Id for :+923345022qwq570","timestamp":"22:57:33"}
+{"level":"info","message":"In Controller updatePlayerId Method","timestamp":"23:02:34"}
+{"level":"info","message":"Updating player Id for :+923345022570","timestamp":"23:02:37"}
+{"level":"info","message":"In Controller updatePlayerId Method","timestamp":"23:04:17"}
+{"level":"info","message":"Updating player Id for :+923345022570","timestamp":"23:04:17"}
+{"level":"info","message":"In Controller updatePlayerId Method","timestamp":"23:04:24"}
+{"level":"info","message":"Error in Updating player Id for :+92334ss5022570","timestamp":"23:04:24"}
+{"level":"info","message":"In Controller updatePlayerId Method","timestamp":"23:04:34"}
+{"level":"info","message":"Updating player Id for :+923345022570","timestamp":"23:04:34"}

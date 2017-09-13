@@ -316,6 +316,20 @@ module.exports = function(app) {
 	});
 	
 	
+	/******* Push Notification Apis *****/
+	
+	    app.post('/playerId',function(req,res){
+		
+	   if(req.body === undefined||req.body === null) {
+        res.end("Empty Body"); 
+        }
+		console.log("in routes /playerId ");
+		//var reqData=req.body;
+        // console.log(reqData);
+		regCtrl.updatePlayerId(req,res);
+	});
+	
+	
 	/********  Admin Panel Apis********/
 	
 	 // getting List of users

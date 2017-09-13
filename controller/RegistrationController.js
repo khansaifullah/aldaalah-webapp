@@ -348,7 +348,47 @@ console.log("In Controller syncContacts Method");
 
 
 
+exports.updatePlayerId = function(req,res) {
+    	try{
+			
+    
+			logger.info('In Controller updatePlayerId Method');
+			var phoneNo = req.body.phoneNo;
+			var playerId= req.body.playerId;
+			
+				var query = { phone : phoneNo };
+             User.findOne(query).exec(function(err, user){
 
+                 if(user) {
+                    logger.info('Updating player Id for :' + phoneNo );
+					user.palyer_id=playerId;
+					  user.save(function (err, user) {
+						  if (user){
+							res.jsonp({status:"success",
+                            message:"Player Id Updated!",
+                            object:[]});
+						  }
+                    
+						 else{
+							logger.info('Error in Updating player Id for :' + phoneNo );
+							res.jsonp({status:"failure",
+									message:"Failed updating Player Id !",
+									object:[]});
+						 }
+					  });
+				 }
+				 else {
+					logger.info('Error in Updating player Id for :' + phoneNo );
+					res.jsonp({status:"failure",
+					message:"Failed updating Player Id !",
+					object:[]});
+				 }
+			 });
+			}catch (err){
+		logger.info('An Exception Has occured in updatePlayerId method' + err);
+	}
+	
+}
             /**********  Above Code is Working*****/
     
 

@@ -22,7 +22,7 @@ var userSchema = new Schema({
 	 // created_at: { type: Date, default: Date.now },
 	 // updated_at: { type: Date, default: Date.now },
       verification_code:String,
-      app_id:String,
+      palyer_id:String,
       loc: {
 		type: [Number],  // [<longitude>, <latitude>]
 		index: '2d'      // create the geospatial index
