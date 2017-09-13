@@ -23,13 +23,13 @@ var storage = multer.diskStorage({
 
 mongoose.Promise = global.Promise;
 
-//mongoose.createConnection(db.url);
-mongoose.connect(db.url);
+mongoose.createConnection(db.url);
+//mongoose.connect(db.url);
 //var exp = require('express');
 //Get the default connection
-var dbCon = mongoose.connection;
+//var dbCon = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
-dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
+//dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var path = require('path');
 module.exports = function(app) {
