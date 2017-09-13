@@ -9,14 +9,14 @@ mongoose.Promise = global.Promise;
 var multer  = require('multer')
 var upload = multer({ dest: './public/images/profileImages' })
 
-//mongoose.createConnection(db.url);
+mongoose.createConnection(db.url);
 
-mongoose.connect(db.url);
+//mongoose.connect(db.url);
 
 //Get the default connection
-var dbCon = mongoose.connection;
+//var dbCon = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
-dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
+//dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 var userExists=function(phoneNo,callback){
