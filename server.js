@@ -83,6 +83,7 @@ io.sockets.on('connection', function(socket) {
     //Creating room by concating both users mobile numbers.
   socket.on('createRoom', function ( userMobileNumberFrom, userMobileNumberTo,callback) {
       
+	  try{
 	 //removing spaces bw phone no if any
 	 userMobileNumberFrom = userMobileNumberFrom.replace(/ +/g, "");
 	 userMobileNumberTo = userMobileNumberTo.replace(/ +/g, "");
@@ -178,15 +179,20 @@ io.sockets.on('connection', function(socket) {
             }
         });
     
-      
+      } catch (err){
+			logger.info('An Exception Has occured ' + err);
+		}
       //console.log("listening create room on server : " + " userMobileNumberFrom : "+userMobileNumberFrom +" , userMobileNumberTo : "+userMobileNumberTo);
       logger.info(' Exit createRoom Event'); 
+	  
+	  
   });
   
   
     
        //Swithing Room 
   socket.on('joinRoom', function (conversationId) {
+	  try{
        logger.info('joinRoom Event  Called for room id :' + conversationId);
       
     //Leaving the socket's current room
@@ -200,16 +206,25 @@ io.sockets.on('connection', function(socket) {
     
       
       logger.info(' Exit joinRoom Event'); 
+	   }catch(err)
+	  {
+		  logger.info('An Exception Has occured ' + err);		  
+	  }
   });
     
 	// leave Room
 	  socket.on('leaveRoom', function (conversationId) {
+		  try{
        logger.info('leaveRoom Event  Called for room id :' + conversationId);
       
 	//Leaving the socket's current room
     socket.leave(socket.room);
 	socket.emit('roomId',null);
     logger.info(' Exit leaveRoom Event'); 
+	 }catch(err)
+	  {
+		  logger.info('An Exception Has occured ' + err);		  
+	  }
   });
   
     socket.on('groupRequest', function (conversationId) {
@@ -267,6 +282,7 @@ io.sockets.on('connection', function(socket) {
 	});
     
       socket.on('sendMessage', function (data) {
+		  try {
           //IOS will send Room Name (not updated)
 		  logger.info('Data Object : '+data);
 		  data=JSON.parse(data);
@@ -305,6 +321,10 @@ io.sockets.on('connection', function(socket) {
 	 }
           console.log ("Pushing to room : "+socket.room);
            socket.to(socket.room).emit('receiveMessage', msg);
+	  }catch(err)
+	  {
+		  logger.info('An Exception Has occured ' + err);		  
+	  }
   });
     
  socket.on('disconnect', function () {

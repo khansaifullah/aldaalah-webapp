@@ -1,0 +1,8 @@
+{"level":"info","message":"LocationController.updateUserLocation called  :+923345022570**-73.97**40.77","timestamp":"11:58:29"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:58:29"}
+{"level":"info","message":"location : -73.97,40.77","timestamp":"11:58:29"}
+{"level":"info","message":"User Location With Phone Num +923345022570","timestamp":"11:58:30"}
+{"level":"info","message":"LocationController.updateUserLocation called  :+92334502257rrr0**-73.97**40.77","timestamp":"11:58:35"}
+{"level":"info","message":"user not found with phone no +92334502257rrr0","timestamp":"11:58:36"}
+{"level":"info","message":"LocationController.updateUserLocation called  :+92334502257rrr0**-73ww97**40.77","timestamp":"11:58:52"}
+{"level":"info","message":"user not found with phone no +92334502257rrr0","timestamp":"11:58:52"}

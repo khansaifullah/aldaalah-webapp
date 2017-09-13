@@ -27,17 +27,59 @@ exports.updateUserLocation=function(reqData,res){
                          
                     }
                 else{
-					logger.info('User updated With Phone Num ' + phoneNo );
+					logger.info('User Location With Phone Num ' + phoneNo );
                                   
                     res.jsonp({status:"success",
                     message:"Location Updated!",
                      object:[]}); 
-                         }
+                     }
                      
                   
               });
                 
 			logger.info('location : '+user.loc );
+		}
+		else{
+			res.jsonp({status:"failure",
+            message:"Failed To update Location!",
+            object:[]}); 
+		}
+		
+	});
+}
+
+
+                        
+exports.getUserLocation=function(phoneNo){
+    
+    logger.info('LocationController.getUserLocation called for  :' 
+                  + phoneNo);
+	
+	AppController.userExists(phoneNo, function(user){
+	if (user){
+			user.loc=[longitude,latitude];
+			user.save(function (err, user){
+                if(err){
+                        logger.error('Some Error while updating user' + err );
+                         
+                    }
+                else{
+					logger.info('User Location With Phone Num ' + phoneNo );
+                                  
+                    res.jsonp({status:"success",
+                    message:"Location Updated!",
+                     object:[]}); 
+                     }
+                     
+                  
+              });
+                
+			logger.info('location : '+user.loc );
+		}
+		else{
+			res.jsonp({status:"failure",
+            message:"Failed To update Location!",
+            object:[]}); 
 		}
 		
 	});
