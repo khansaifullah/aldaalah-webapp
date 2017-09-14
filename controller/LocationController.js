@@ -5,7 +5,7 @@ var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
 //require('datejs');
 var mongoose = require('mongoose');
-//mongoose.Promise = global.Promise;
+//mongoose.Promise = global.Promise; 
 var multer  = require('multer')
 var upload = multer({ dest: './public/images/profileImages' })
 //mongoose.createConnection(db.url);
@@ -96,10 +96,19 @@ exports.getGroupUserLocations=function(conversationId,res){
 										logger.info ('Adding User in list :' +user.phone);
 										tempObject=new Object({
 											phone:user.phone,
-											location:user.loc,											 
-											fullName: user.full_name,
-											photoUrl:user.profile_photo_url
+											//if (user.loc){}
+											//longitude:user.loc[0],
+											//latitude:user.loc[1],
+											full_name: user.full_name,
+											profile_photo_url:user.profile_photo_url
 										});
+										if (user.loc){
+											tempObject.longitude=user.loc[0];
+											tempObject.latitude=user.loc[1];
+										}else{
+											tempObject.longitude=null;
+											tempObject.latitude=null;
+										}
 										groupUsersList.push(tempObject); 
 										resolve();										
 										}
