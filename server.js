@@ -180,7 +180,8 @@ io.sockets.on('connection', function(socket) {
 				 
 				 
 				 //Chechking Push Notifications
-				 
+				  logger.info('Sendig Onesignal Notifcation to '+ socket.phoneNo );
+				  
 				  var query = { phone : socket.phoneNo };
               User.findOne(query).exec(function(err, user){
                   if (err){
