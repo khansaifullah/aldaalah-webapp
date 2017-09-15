@@ -182,6 +182,7 @@ io.sockets.on('connection', function(socket) {
 				 logger.info('Sending Onesignal Notifcation to '+userMobileNumberFrom );
 				  
 				 //Chechking Push Notifications
+				 /*
 				 if(userMobileNumberFrom){
 					logger.info('Sending Onesignal Notifcation to '+ userMobileNumberFrom );
 				  
@@ -203,7 +204,7 @@ io.sockets.on('connection', function(socket) {
 						  }                               
 				});
 			}
-
+	*/
 				 socket.emit('roomId',conversationId);
 				 //send an invitation
 				 var socketid= userHashMaps.get (userMobileNumberTo);
