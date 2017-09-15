@@ -3,6 +3,7 @@ var regCtrl= require('../controller/RegistrationController.js');
 var AppController= require('../controller/AppController.js');
 var ChatController = require('../controller/ChatController.js');
 var LocController = require('../controller/LocationController.js');
+var NotificationController = require('../controller/PushNotificationController.js');
 var bodyParser = require('body-parser');
 var Country = require('../models/Country.js');
 var db = require('../config/db');
@@ -61,16 +62,16 @@ module.exports = function(app) {
 	app.use(bodyParser.json())
 	
 	app.get('/', function(req, res) {
-	//var str = "PB10CV2662";
-	 //str = str.replace(/ +/g, "");
-	 //logger.info(str);	 	
+		var object =new Object({"Field1":"Value1","Field2":"Value2"});
+	//NotificationController.sendNotifcationToPlayerId("03bd1410-c6f1-4e14-9e12-02e6fd718691",object,"TestEvent");
+	//NotificationController.sendNotifcationToPlayerId();
 		res.end("Node-Aldallah-Project"); 
 	});
 
     app.post('/verificationcode',function(req,res){                         
 		
 	   if(req.body === undefined||req.body === null) {
-        res.end("Empty Body"); 
+        res.end("Empty Body");  
         }
             
         logger.verbose('verificationcode-POST called ');

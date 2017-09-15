@@ -9,10 +9,13 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 //User = mongoose.model('User')
 mongoose.createConnection(db.url);
+
+
 var https = require('https');
  var headers = {
     "Content-Type": "application/json; charset=utf-8",
-    "Authorization": "Basic OWU2NTgxNDUtOTViNi00N2VmLWIyOWEtZGM0YzZhOGZlZWQ0"
+    "Authorization": "Basic OWU2NTgxNDUtOTViNi00N2VmLWIyOWEtZGM0YzZhOGZlZWQ0",
+	"EventName":null
   };
    var options = {
     host: "onesignal.com",
@@ -21,24 +24,96 @@ var https = require('https');
     method: "POST",
     headers: headers
   };
- var sendNotification = function(data) {
- 
-  
- 
-  
-  
-  
+
+
+exports.sendNotifcationToPlayerId = function (playerId,obj,eventName){
+	try{
+		
+	//setHeader ("EventName",eventName);
+	headers.EventName=eventName;
+	console.log ('playerId : '+playerId);
+	var data = { 
+  app_id:oneSignalConfig.androidAppiId,
+  contents: {"en": "English Message"},
+  include_player_ids: [playerId],
+  object:obj,
+  //event_name:eventName
 };
-
-var message = { 
-  app_id: "8c415ffd-a41d-41cb-9f32-01111cc9dbac",
-  contents: {"en": "Hello Saif"},
-  include_player_ids: ["a894091c-17a8-4e21-ac79-ddba3db81a73"]
-};
-
-sendNotification(message);
-
-export.funcName = function (req. res){
 	
+  var req = https.request(options, function(res) {  
+    res.on('data', function(data) {
+      console.log("Response:");
+      console.log(JSON.parse(data));
+    });
+  });
+  
+  req.on('error', function(e) {
+    console.log("ERROR:");
+    console.log(e);
+  });
+  
+  req.write(JSON.stringify(data));
+  req.end();
+
+}catch (err){
+		logger.info('An Exception Has occured in sendNotifcationToPlayerId method' + err);
+	}
 }
 
+
+// require the module 
+//const OneSignalClient = require('node-onesignal');
+ 
+// create a new clinet 
+//const client = new OneSignalClient(oneSignalConfig.androidAppiId, oneSignalConfig.androidAuthKey);
+//const client = new OneSignalClient("111", "111");
+//client.sendNotification('test notification', {
+  //  included_segments: 'all'
+//});
+
+
+/*
+exports.sendNotifcationToPlayerId=function(){
+ var oneSignal = require('onesignal')("OWU2NTgxNDUtOTViNi00N2VmLWIyOWEtZGM0YzZhOGZlZWQ0","8c415ffd-a41d-41cb-9f32-01111cc9dbac",true);
+// send a notification 
+
+var data= new Object({"field1":"value1" , "field2":"value2" });
+console.log('sending Notification');
+oneSignal.createNotification("message", data, "03bd1410-c6f1-4e14-9e12-02e6fd718691	",function (data){
+	console.log ('Response Received');
+	if (err)
+		console.log ('Error in Sdin Noti'+err);
+	if (data)
+		console.log ('Suucess Sent');
+	
+}); 
+}
+
+*/
+
+
+
+/*
+var onesignal = require('node-opensignal-api');
+var onesignal_client = onesignal.createClient();
+ 
+var userAuthKey = 'MWJhMmJhNjEtOTQyMi00N2YzLWIwMjYtNzMxNjE4OTc4OWE5';
+onesignal_client.apps.viewall(userAuthKey, function (err, response) {
+    if (err) {
+    	console.log('Encountered error', err);
+  	} else {
+    	console.log(response);
+  	}
+});
+var appAuthKey ="OWU2NTgxNDUtOTViNi00N2VmLWIyOWEtZGM0YzZhOGZlZWQ0"
+var params = {
+    app_id: oneSignalConfig.androidAppiId	
+};
+onesignal_client.players.viewall(appAuthKey, params, function (err, response) {
+    if (err) {
+    	console.log('Encountered error', err);
+  	} else {
+    	console.log(response);
+  	}
+});
+*/

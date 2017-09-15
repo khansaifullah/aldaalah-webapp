@@ -96,9 +96,6 @@ exports.getGroupUserLocations=function(conversationId,res){
 										logger.info ('Adding User in list :' +user.phone);
 										tempObject=new Object({
 											phone:user.phone,
-											//if (user.loc){}
-											//longitude:user.loc[0],
-											//latitude:user.loc[1],
 											full_name: user.full_name,
 											profile_photo_url:user.profile_photo_url
 										});
