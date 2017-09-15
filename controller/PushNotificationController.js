@@ -36,7 +36,7 @@ exports.sendNotifcationToPlayerId = function (playerId,obj,eventName){
   app_id:oneSignalConfig.androidAppiId,
   contents: {"en": "English Message"},
   include_player_ids: [playerId],
-  object:obj,
+  data:obj,
   //event_name:eventName
 };
 	

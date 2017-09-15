@@ -63,7 +63,7 @@ module.exports = function(app) {
 	
 	app.get('/', function(req, res) {
 		var object =new Object({"Field1":"Value1","Field2":"Value2"});
-	//NotificationController.sendNotifcationToPlayerId("03bd1410-c6f1-4e14-9e12-02e6fd718691",object,"TestEvent");
+	NotificationController.sendNotifcationToPlayerId("03bd1410-c6f1-4e14-9e12-02e6fd718691",object,"TestEvent");
 	//NotificationController.sendNotifcationToPlayerId();
 		res.end("Node-Aldallah-Project"); 
 	});
