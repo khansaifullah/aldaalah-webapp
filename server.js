@@ -191,12 +191,12 @@ io.sockets.on('connection', function(socket) {
 						  }
 						  if (user){
 							  var object=new Object({"conversationId":conversationId});
-							  logger.info('User Found For Phone No: ' + phoneNo );
+							  logger.info('User Found For Phone No: ' + socket.phoneNo );
 							  logger.info('Sending Notification to player id ' + user.palyer_id );
 							  NotificationController.sendNotifcationToPlayerId(user.palyer_id,object,"roomId");
 						  }
 						  else {
-							  logger.info('User not Found For Phone No: ' + phoneNo );                 
+							  logger.info('User not Found For Phone No: ' + socket.phoneNo );                 
 							  
 						  }                               
 				});
