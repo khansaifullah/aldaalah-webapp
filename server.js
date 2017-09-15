@@ -180,25 +180,27 @@ io.sockets.on('connection', function(socket) {
 				 
 				 
 				 //Chechking Push Notifications
-				  logger.info('Sendig Onesignal Notifcation to '+ socket.phoneNo );
+				 if(socket.phoneNo){
+					logger.info('Sending Onesignal Notifcation to '+ socket.phoneNo );
 				  
-				  var query = { phone : socket.phoneNo };
-              User.findOne(query).exec(function(err, user){
-                  if (err){
-                      logger.error('Some Error occured while finding user' + err );
-                    
-                  }
-                  if (user){
-					  var object=new Object({"conversationId":conversationId});
-                      logger.info('User Found For Phone No: ' + phoneNo );
-					  logger.info('Sending Notification to player id ' + user.palyer_id );
-                      NotificationController.sendNotifcationToPlayerId(user.palyer_id,object,"roomId");
-                  }
-                  else {
-                      logger.info('User not Found For Phone No: ' + phoneNo );                 
-                      
-                  }                               
-     });
+					var query = { phone : socket.phoneNo };
+					User.findOne(query).exec(function(err, user){
+						  if (err){
+							  logger.error('Some Error occured while finding user' + err );
+							
+						  }
+						  if (user){
+							  var object=new Object({"conversationId":conversationId});
+							  logger.info('User Found For Phone No: ' + phoneNo );
+							  logger.info('Sending Notification to player id ' + user.palyer_id );
+							  NotificationController.sendNotifcationToPlayerId(user.palyer_id,object,"roomId");
+						  }
+						  else {
+							  logger.info('User not Found For Phone No: ' + phoneNo );                 
+							  
+						  }                               
+				});
+			}
 
 				 socket.emit('roomId',conversationId);
 				 //send an invitation
