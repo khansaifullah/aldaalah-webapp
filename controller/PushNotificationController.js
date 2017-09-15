@@ -34,9 +34,11 @@ exports.sendNotifcationToPlayerId = function (playerId,obj,eventName){
 	console.log ('playerId : '+playerId);
 	var data = { 
   app_id:oneSignalConfig.androidAppiId,
-  contents: {"en": "English Message"},
+  contents: {"en": "Push Notification"},
+  headings:{"en":eventName},
   include_player_ids: [playerId],
   data:obj,
+  priority:10
   //event_name:eventName
 };
 	
