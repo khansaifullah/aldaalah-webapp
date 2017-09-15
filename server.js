@@ -177,14 +177,15 @@ io.sockets.on('connection', function(socket) {
 				 socket.join(conversationId);
 				 logger.info ('Sending room Id To client : ' + conversationId );
 				 
+				 //socket.phoneNo=userMobileNumberFrom;
 				 
-				 logger.info('Sending Onesignal Notifcation to '+ socket.phoneNo );
+				 logger.info('Sending Onesignal Notifcation to '+userMobileNumberFrom );
 				  
 				 //Chechking Push Notifications
-				 if(socket.phoneNo){
-					logger.info('Sending Onesignal Notifcation to '+ socket.phoneNo );
+				 if(userMobileNumberFrom){
+					logger.info('Sending Onesignal Notifcation to '+ userMobileNumberFrom );
 				  
-					var query = { phone : socket.phoneNo };
+					var query = { phone :userMobileNumberFrom };
 					User.findOne(query).exec(function(err, user){
 						  if (err){
 							  logger.error('Some Error occured while finding user' + err );
@@ -192,12 +193,12 @@ io.sockets.on('connection', function(socket) {
 						  }
 						  if (user){
 							  var object=new Object({"conversationId":conversationId});
-							  logger.info('User Found For Phone No: ' + socket.phoneNo );
+							  logger.info('User Found For Phone No: ' + userMobileNumberFrom );
 							  logger.info('Sending Notification to player id ' + user.palyer_id );
 							  NotificationController.sendNotifcationToPlayerId(user.palyer_id,object,"roomId");
 						  }
 						  else {
-							  logger.info('User not Found For Phone No: ' + socket.phoneNo );                 
+							  logger.info('User not Found For Phone No: ' + userMobileNumberFrom );                 
 							  
 						  }                               
 				});
