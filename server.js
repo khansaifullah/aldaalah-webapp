@@ -217,8 +217,8 @@ io.sockets.on('connection', function(socket) {
 					
 					logger.info( socketid + ' is in connected Sockets List ');
 					io.sockets.connected[socketid].emit('conversationRequest', conversationObj);
-				}
-				else{
+					
+					// paste
 							 logger.info('Sending Onesignal Notifcation to '+userMobileNumberTo );
 				  
 				 //Chechking Push Notifications
@@ -242,6 +242,9 @@ io.sockets.on('connection', function(socket) {
 								  
 							  }                               
 					});
+				}
+				else{
+					//cut
 			}
 				}
             }
