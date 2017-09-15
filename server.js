@@ -208,15 +208,41 @@ io.sockets.on('connection', function(socket) {
 				 //send an invitation
 				 var socketid= userHashMaps.get (userMobileNumberTo);
 				 logger.info('sending a notification to socket: '+ socketid);
-				 
-				 if (io.sockets.connected[socketid]) {
-					 	var conversationObj ={
+				  	var conversationObj ={
 						fromPhoneNo:userMobileNumberFrom,	
 						conversationId:conversationId, 
 						isGroupConversation:false
 				 }
-				 logger.info( socketid + ' is in connected Sockets List ');
-				io.sockets.connected[socketid].emit('conversationRequest', conversationObj);
+				 if (io.sockets.connected[socketid]) {
+					
+					logger.info( socketid + ' is in connected Sockets List ');
+					io.sockets.connected[socketid].emit('conversationRequest', conversationObj);
+				}
+				else{
+							 logger.info('Sending Onesignal Notifcation to '+userMobileNumberTo );
+				  
+				 //Chechking Push Notifications
+					 if(userMobileNumberTo){
+						logger.info('Sending Onesignal Notifcation to '+ userMobileNumberTo );
+					  
+						var query = { phone :userMobileNumberTo };
+						User.findOne(query).exec(function(err, user){
+							  if (err){
+								  logger.error('Some Error occured while finding user' + err );
+								
+							  }
+							  if (user){
+								  //var object=new Object({"conversationId":conversationId});
+								  logger.info('User Found For Phone No: ' + userMobileNumberTo );
+								  logger.info('Sending Notification to player id ' + user.palyer_id );
+								  NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"conversationRequest");
+							  }
+							  else {
+								  logger.info('User not Found For Phone No: ' + userMobileNumberTo );                 
+								  
+							  }                               
+					});
+			}
 				}
             }
         });
@@ -341,9 +367,6 @@ io.sockets.on('connection', function(socket) {
       else if (conMes == null) {
           logger.info('Issue Saving Conversation message, message is  Null ');
       }
-      else {
-
-      }
     });
           // Username is not being used in app, need to add for displaying with chat.
           //if user  client 2 is in room 
@@ -359,8 +382,50 @@ io.sockets.on('connection', function(socket) {
 		 _messageToMobile:data._messageToMobile,
 		 _messageFromMobile:data._messageFromMobile
 	 }
-          console.log ("Pushing to room : "+socket.room);
+	 
+			if (data._messageToMobile){
+			// individual Chat
+						var socketid= userHashMaps.get (members[i]._userMobile);								
+						logger.info('sending a notification to socket: '+ socketid);
+									//if connected on socket send to socket 
+						if (io.sockets.connected[socketid]) {
+							io.sockets.connected[socketid].emit('receiveMessage', msg);									
+						}
+						else {			
+								logger.info('Sending Onesignal Notifcation to '+ data._messageToMobile );
+									  
+								var query = { phone :data._messageToMobile };
+								User.findOne(query).exec(function(err, user){
+								if (err){
+									  logger.error('Some Error occured while finding user' + err );
+												
+								}
+								if (user){
+												  
+									logger.info('User Found For Phone No: ' + data._messageToMobile );
+									logger.info('Sending Notification to player id ' + user.palyer_id );
+									NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
+								 }
+								else {
+									logger.info('User not Found For Phone No: ' + data._messageToMobile );                 
+												  
+								}                               
+									});
+							}
+		   }else{
+			   //group Chat
+			   console.log ("Pushing to room : "+socket.room);
            socket.to(socket.room).emit('receiveMessage', msg);
+		   
+		   } 
+		   		   
+          
+		   //sending PushNotification to other User in individual Chat
+		   
+		   //var conversationId;
+		   
+		   
+		   
 	  }catch(err){
 		  logger.info('An Exception Has occured in sendMessage event' + err);		  
 	  }
