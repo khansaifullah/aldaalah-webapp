@@ -178,7 +178,8 @@ io.sockets.on('connection', function(socket) {
 				 logger.info ('Sending room Id To client : ' + conversationId );
 				 
 				 
-				 
+				 logger.info('Sending Onesignal Notifcation to '+ socket.phoneNo );
+				  
 				 //Chechking Push Notifications
 				 if(socket.phoneNo){
 					logger.info('Sending Onesignal Notifcation to '+ socket.phoneNo );
