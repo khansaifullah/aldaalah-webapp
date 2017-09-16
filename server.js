@@ -331,12 +331,11 @@ io.sockets.on('connection', function(socket) {
 			if (data._messageToMobile){
 			// individual Chat
 						logger.info('Individual Chat - SendMessage');
-						var socketid= userHashMaps.get (data._messageToMobile);
-						
+						var socketid= userHashMaps.get (data._messageToMobile);						
 						logger.info('sending a notification to socket: '+ socketid);
 						var sendNotifcationFlag=true;
 					if (socketid){
-						var recipientSocket=io.sockets.connected[socketId];
+						var recipientSocket=io.sockets.connected[socketid];
 						logger.info('Check room of Sender socket : ' + socket + 'where phone No is :'+socket.phoneNo + 'and room : ' +socket.room);		
 						logger.info('Check room of Recipent socket :' + socketid + 'where phone No is :'+recipientSocket.phoneNo + 'and room : ' +recipientSocket.room);	
 						if (recipientSocket){
