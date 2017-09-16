@@ -241,8 +241,9 @@ io.sockets.on('connection', function(socket) {
 									
 									//Notifying All Group Members
 							for (var i=0; i < members.length ; i++){
-								logger.info('Getting Socket Id against Phone No :' + members[i]._userMobile)
-								socketid= userHashMaps.get (members[i]._userMobile);
+								var phoneNo=members[i]._userMobile;
+								logger.info('Getting Socket Id against Phone No :' +phoneNo)
+								socketid= userHashMaps.get (phoneNo);
 								
 								//Emiting on socket
 								logger.info('Emiting groupConversationRequest to socket: '+ socketid);									 
@@ -252,19 +253,20 @@ io.sockets.on('connection', function(socket) {
 								} 
 								
 								//Sending Push Notiifcation To Group Members								
-								logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  members[i]._userMobile  );								  
-								var query = { phone : members[i]._userMobile };
+								logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
+								//var phoneNo=members[i]._userMobile;
+								var query = { phone : phoneNo };
 								User.findOne(query).exec(function(err, user){
 									if (err){
 									 logger.error('Some Error occured while finding user' + err );
 									 }
 									if (user){
-									logger.info('User Found For Phone No: ' +  members[i]._userMobile );
+									logger.info('User Found For Phone No: ' + phoneNo );
 									logger.info('Sending Notification to player id ' + user.palyer_id );
 									NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupConversationRequest");
 									}
 									else {
-									 logger.info('User not Found For Phone No: ' +  members[i]._userMobile );                 
+									 logger.info('User not Found For Phone No: ' + phoneNo );                 
 									}                               
 								});								
 							}
