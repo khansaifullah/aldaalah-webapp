@@ -389,14 +389,19 @@ io.sockets.on('connection', function(socket) {
 	 
 			if (data._messageToMobile){
 			// individual Chat
-						logger.info('Individual Chat - SendMessage Notification');
+						logger.info('Individual Chat - SendMessage');
 						var socketid= userHashMaps.get (data._messageToMobile);								
 						logger.info('sending a notification to socket: '+ socketid);
-									//if connected on socket send to socket 
-						if (io.sockets.connected[socketid]) {
-							io.sockets.connected[socketid].emit('receiveMessage', msg);									
-						}
-						else {			
+						var sendNotifcationFlag=true;
+					if (socketid){
+						logger.info('Check Both Users in same room '+ socketid.room===socket.room);					
+					//check if socket is in connected socket list and has joined same room
+						if ((io.sockets.connected[socketid])&&(socketid.room===socket.room)) {							
+							io.sockets.connected[socketid].emit('receiveMessage', msg);	
+							sendNotifcationFlag=false;
+						}						
+					}
+					if (sendNotifcationFlag===true){			
 								logger.info('Sending Onesignal Notifcation to '+ data._messageToMobile );
 									  
 								var query = { phone :data._messageToMobile };
