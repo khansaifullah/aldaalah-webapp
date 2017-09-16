@@ -237,6 +237,7 @@ io.sockets.on('connection', function(socket) {
        logger.info('leaveRoom Event  Called for room id :' + conversationId);
       
 	//Leaving the socket's current room
+	socket.room=null;
     socket.leave(socket.room);
 	socket.emit('roomId',null);
     logger.info(' Exit leaveRoom Event'); 
