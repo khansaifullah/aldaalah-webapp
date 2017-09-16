@@ -152,7 +152,7 @@ io.sockets.on('connection', function(socket) {
 				
 				 socket.room = conversationId;
 				 socket.join(conversationId);
-				 logger.info ('Sending room Id To client : ' + conversationId );
+				 logger.info ('Sending room Id ' + conversationId  + ' TO Client : '+ userMobileNumberFrom );
 				 socket.emit('roomId',conversationId);
 				 //socket.emit('newChatRequest',conversationId);
 					
@@ -181,7 +181,7 @@ io.sockets.on('connection', function(socket) {
 				 
 				 logger.info('Sending Onesignal Notifcation to '+userMobileNumberFrom );
 				  
-				 //Chechking Push Notifications
+				 //Chechking Push Notifications of room id
 				 /*
 				 if(userMobileNumberFrom){
 					logger.info('Sending Onesignal Notifcation to '+ userMobileNumberFrom );
@@ -394,7 +394,8 @@ io.sockets.on('connection', function(socket) {
 						logger.info('sending a notification to socket: '+ socketid);
 						var sendNotifcationFlag=true;
 					if (socketid){
-						logger.info('Check Both Users in same room '+ socketid.room===socket.room);					
+						logger.info('Check room of socket :' + socketid + 'where phone No is :'+socketid.phoneNo + 'and room : ' +socketid.room);	
+						logger.info('Check room of socket :' + socket + 'where phone No is :'+socket.phoneNo + 'and room : ' +socket.room);					
 					//check if socket is in connected socket list and has joined same room
 						if ((io.sockets.connected[socketid])&&(socketid.room===socket.room)) {							
 							io.sockets.connected[socketid].emit('receiveMessage', msg);	
