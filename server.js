@@ -303,6 +303,7 @@ io.sockets.on('connection', function(socket) {
       socket.on('sendMessage', function (data) {
 		  try {
          
+		 
 		  logger.info('Data Object : '+data);
 		  data=JSON.parse(data);
           logger.info("listening sendMessage event on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageFromMobile+"**"+data._messageToMobile);
@@ -329,6 +330,12 @@ io.sockets.on('connection', function(socket) {
 		 _messageFromMobile:data._messageFromMobile
 	 }
 	 
+			//check if room disconnected join again 
+			if (!(socket.room)){
+			socket.room = data._conversationId;
+			socket.join(data._conversationId);
+			}
+			
 			if (data._messageToMobile){
 			// individual Chat
 						logger.info('Individual Chat - SendMessage');
