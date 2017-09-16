@@ -389,7 +389,8 @@ io.sockets.on('connection', function(socket) {
 	 
 			if (data._messageToMobile){
 			// individual Chat
-						var socketid= userHashMaps.get (members[i]._userMobile);								
+						logger.info('Individual Chat - SendMessage Notification');
+						var socketid= userHashMaps.get (data._messageToMobile);								
 						logger.info('sending a notification to socket: '+ socketid);
 									//if connected on socket send to socket 
 						if (io.sockets.connected[socketid]) {
@@ -418,6 +419,7 @@ io.sockets.on('connection', function(socket) {
 							}
 		   }else{
 			   //group Chat
+			   logger.info('Group Chat - SendMessage Notification');
 			   console.log ("Pushing to room : "+socket.room);
            socket.to(socket.room).emit('receiveMessage', msg);
 		   
