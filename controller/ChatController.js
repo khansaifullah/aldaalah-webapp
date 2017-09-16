@@ -104,11 +104,9 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 	
     try{
          //Returns Conversation id if exists else undefined
-    logger.info('ChatController.chkPreviousConversation called - toMobileNo : ' 
-                  + toMobileNo + "- fromMobileNo :"  +fromMobileNo);
-    
-	
-      ConversationUser.aggregate([
+		logger.info('ChatController.chkPreviousConversation called - toMobileNo : ' + toMobileNo + "- fromMobileNo :"  +fromMobileNo);
+    	
+		ConversationUser.aggregate([
           {
               $match:{$or: [{ _userMobile: toMobileNo }, { _userMobile: fromMobileNo }]}
           },
@@ -118,53 +116,57 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 				count: { $sum: 1 }				  
 			  }                                    
           }
-      ],function (err, ConversationIdsList) {
-	 
-		let promiseArr = [];
-		var sendBackConversation;
-		 
-		 function chkIndvidualConversation(conversation){
-			 
-				return new Promise((resolve,reject) => {    
-				   if (conversation.count===2){
-							Conversation.findOne({_id:(conversation._id)})
-									.exec(function(err, conversation){
-										
+		],function (err, ConversationIdsList) {
+			
+		if (err){
+			 logger.info('Error While getting aggregate of converation users'+err);  
+		}	
+		if (ConversationIdsList){
+				let promiseArr = [];
+				var sendBackConversation;
+				 
+				function chkIndvidualConversation(conversation){
+					 
+					return new Promise((resolve,reject) => {    
+						 if (conversation.count===2){
+								Conversation.findOne({_id:(conversation._id)})
+								.exec(function(err, conversation){
+													
 										if (err){
-											console.log ( 'An Error Occured before returning Promise' );
-											reject(error);
+										console.log ( 'An Error Occured before returning Promise' );
+										reject(error);
 										}																	
 										if (conversation){
 											if (!conversation.isGroupConversation){
-												conversation=conversation.toObject({getters: false});												
-												logger.info( conversation._id + " - indivdual Conversation found")
-												sendBackConversation=conversation._id;
-												resolve();
-												
+											conversation=conversation.toObject({getters: false});												
+											logger.info( conversation._id + " - indivdual Conversation found")
+											sendBackConversation=conversation._id;
+											resolve();														
 											}
-									
+												
 										}
-								
+										
 									});
-					}	
-					else{
-						resolve();
-					} 
-								   
-				});
-			}
-									 
-			 ConversationIdsList.forEach(function(conversation) { 		
-					 promiseArr.push(chkIndvidualConversation(conversation));        
-			 });
-			
-			 Promise.all(promiseArr)
-				 .then((result)=> {
-						//console.log ('printing before Resolve Function response : ' + result);
-						callback(sendBackConversation);
-						
-						})
-				 .catch(error => { logger.error ('An Error Has Occured : ' + err); });
+							}	
+							else{
+								resolve();
+							} 
+										   
+						});
+					}
+											 
+					 ConversationIdsList.forEach(function(conversation) { 		
+							 promiseArr.push(chkIndvidualConversation(conversation));        
+					 });
+					
+					 Promise.all(promiseArr)
+						 .then((result)=> {
+								//console.log ('printing before Resolve Function response : ' + result);
+								callback(sendBackConversation);
+								
+								})
+						 .catch(error => { logger.error ('An Error Has Occured : ' + err); });
+		}
 				 
 						  
      });	 	   

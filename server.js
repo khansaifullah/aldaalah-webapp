@@ -35,19 +35,14 @@ var userMobileList = [];
 var userHashMaps = new HashMap();
 
 // Connection Event of SocketIO
-io.sockets.on('connection', function(socket) {
-    
-    console.log ("Socket id :"+socket.id);
-   
-    socket.on('', function () {
-
-  });
-    
+io.sockets.on('connection', function(socket) {	    
+    console.log ("Socket Connected with id :"+socket.id);
+      
 	// to add user mobile no. and socketID in hashmap
-       socket.on('onConnect', function (phoneNo) {
+    socket.on('onConnect', function (phoneNo) {
 		   try{
 		   //removing spaces bw phone no if any
-			   phoneNo = phoneNo.replace(/ +/g, "");
+			 phoneNo = phoneNo.replace(/ +/g, "");
 			 logger.info('onConnect Event  Called for Phone Num:' + phoneNo);
 			 userHashMaps.set(phoneNo,socket.id);
 			 socket.phoneNo=phoneNo;
@@ -57,65 +52,60 @@ io.sockets.on('connection', function(socket) {
 			logger.info('An Exception Has occured in onConnect event ' + err);
 		}
 		 
-	   });
+	}); //end of onConnect Event
                   
-    //new user Event for user info
-       socket.on('verifyUser', function (phoneNo, callback) {
+	//To verify If user is registerd on app or not
+    socket.on('verifyUser', function (phoneNo, callback) {
 		   try{
-		    //removing spaces bw phone no if any
-		    phoneNo = phoneNo.replace(/ +/g, "");
-         logger.info('verifyUser Event  Called for Phone Num:' + phoneNo);
-           
-           var query = { phone : phoneNo };
-              User.findOne(query).exec(function(err, user){
-                  if (err){
-                      logger.error('Some Error occured while finding user' + err );
-                      callback(false);
-                  }
-                  if (user){
-                      logger.info('User Found For Phone No: ' + phoneNo );
-                      userHashMaps.set(phoneNo,socket.id);
-                      socket.phoneNo=phoneNo;                     
-                      callback(true);
-                      
-                  }
-                  else {
-                      logger.info('User not Found For Phone No: ' + phoneNo );                 
-                      callback(false);
-                  }
-                  
-                  
-                  
-     });
-           logger.info(' Exit verifyUser Event'); 
+				//removing spaces bw phone no if any
+				phoneNo = phoneNo.replace(/ +/g, "");
+				logger.info('verifyUser Event  Called for Phone Num:' + phoneNo);
+			   
+				var query = { phone : phoneNo };
+				User.findOne(query).exec(function(err, user){
+					  if (err){
+						  logger.error('Some Error occured while finding user' + err );
+						  callback(false);
+					  }
+					  if (user){
+						  logger.info('User Found For Phone No: ' + phoneNo );
+						  userHashMaps.set(phoneNo,socket.id);
+						  socket.phoneNo=phoneNo;                     
+						  callback(true);
+						  
+					  }
+					  else {
+						  logger.info('User not Found For Phone No: ' + phoneNo );                 
+						  callback(false);
+					  }					  
+				});
+				logger.info(' Exit verifyUser Event'); 
 		      } catch (err){
 			logger.info('An Exception Has occured in verifyUser event' + err);
 		}
-  });
+	});  //end of verifyUser Event
     
     
-    //Creating room by concating both users mobile numbers.
-  socket.on('createRoom', function ( userMobileNumberFrom, userMobileNumberTo,callback) {
-      
+    //Creating room event called when individual chat is initiated
+	socket.on('createRoom', function ( userMobileNumberFrom, userMobileNumberTo,callback) {      
 	  try{
-	 //removing spaces bw phone no if any
-	 userMobileNumberFrom = userMobileNumberFrom.replace(/ +/g, "");
-	 userMobileNumberTo = userMobileNumberTo.replace(/ +/g, "");
-	 
-       logger.info('createRoom Event  Called for userMobileNumberFrom : '+userMobileNumberFrom + ' & userMobileNumberTo ' + userMobileNumberTo);
-       var newconversation;
-	  var conversationId;
-      // check if conversation between These Two users ever occured before, send conversationId / roomId in response
-      
-      
+		 //removing spaces bw phone no if any
+		userMobileNumberFrom = userMobileNumberFrom.replace(/ +/g, "");
+		userMobileNumberTo = userMobileNumberTo.replace(/ +/g, "");
+		 
+		logger.info('createRoom Event  Called for userMobileNumberFrom : '+userMobileNumberFrom + ' & userMobileNumberTo ' + userMobileNumberTo);
+		var newconversation;
+		var conversationId;
+		// check if conversation between These Two users ever occured before, send conversationId / roomId in response
+         
         ChatController.chkPreviousIndividualConversation(userMobileNumberFrom,userMobileNumberTo,function(data){
           
             logger.info ("chkPreviousIndividualConversation response :"+data);
             if (data==null||data===undefined)
                 {
                 
-                  newconversation= new Conversation();
-                     newconversation.save(function (err, conversation) {
+					newconversation= new Conversation();
+					newconversation.save(function (err, conversation) {
                          if (err) logger.error('Error Occured while Saving new conversation :'+ err);
                     if (conversation){
 						 logger.info ('conversation created for id :'+conversation._id );
@@ -124,7 +114,7 @@ io.sockets.on('connection', function(socket) {
                     var newConversationUser= new ConversationUser({                                          
                         _conversationId: conversationId, 
                         _userMobile: userMobileNumberFrom  
-                                          });
+                        });
                     
 					newConversationUser.save(function (err, conversationUser) {
                          if (err) logger.error('Error Occured while Saving new newConversationUser 1 :'+ err);
@@ -150,22 +140,12 @@ io.sockets.on('connection', function(socket) {
               
                 } else {
 				logger.info ('Previous Conversation Id Received :' + data );               
-				conversationId=data;
-				/*
-				ChatController.findConversation (conversationId , function(conversation){
-					
-					if (conversation){
-						logger.info ('Conversation Found for Id  : '+ conversationId);
-						newconversation=conversation;
-					}
-					
-				} );
-				*/
-                 socket.room = conversationId;
-				 socket.join(conversationId);
+				conversationId=data;				
+                socket.room = conversationId;
+				socket.join(conversationId);
 				//logger.info ('Sending room Id To client : ' + conversationId );
 				logger.info ('Sending room Id ' + conversationId  + ' TO Client : '+ userMobileNumberFrom );				 
-				 socket.emit('roomId',conversationId);
+				socket.emit('roomId',conversationId);
 				 
 				 //send an invitation
 				 var socketid= userHashMaps.get (userMobileNumberTo);
@@ -202,53 +182,44 @@ io.sockets.on('connection', function(socket) {
       } catch (err){
 			logger.info('An Exception Has occured in createRoom event' + err);
 		}
-      //console.log("listening create room on server : " + " userMobileNumberFrom : "+userMobileNumberFrom +" , userMobileNumberTo : "+userMobileNumberTo);
       logger.info(' Exit createRoom Event'); 
 	  
 	  
-  });
-  
-  
+	}); //end of createRoom Event
+   
     
        //Swithing Room 
-  socket.on('joinRoom', function (conversationId) {
-	  try{
-       logger.info('joinRoom Event  Called for room id :' + conversationId);
-      
-    //Leaving the socket's current room
-    //socket.leave(socket.room);
-   
-	//Joining New Room
-      rooms.push(conversationId);
-      socket.room = conversationId;
-      socket.join(conversationId);
-      socket.emit('roomId',conversationId);
-    
-      
-      logger.info(' Exit joinRoom Event'); 
-	   }catch(err){
-		  logger.info('An Exception Has occured in joinRoom event ' + err);		  
-	  }
-  });
+	socket.on('joinRoom', function (conversationId) {
+		try{
+		   logger.info('joinRoom Event  Called for room id :' + conversationId);
+		//Joining New Room
+		  rooms.push(conversationId);
+		  socket.room = conversationId;
+		  socket.join(conversationId);
+		  socket.emit('roomId',conversationId);          
+		  logger.info(' Exit joinRoom Event'); 
+		}catch(err){
+			  logger.info('An Exception Has occured in joinRoom event ' + err);		  
+		}
+	}); //end of joinRoom Event
     
 	// leave Room
-	  socket.on('leaveRoom', function (conversationId) {
-		  try{
-       logger.info('leaveRoom Event  Called for room id :' + conversationId);
-      
-	//Leaving the socket's current room
-	socket.room=null;
-    socket.leave(socket.room);
-	socket.emit('roomId',null);
-    logger.info(' Exit leaveRoom Event'); 
-	 }catch(err) {
-		  logger.info('An Exception Has occured in leaveRoom event' + err);		  
-	  }
-  });
+	socket.on('leaveRoom', function (conversationId) {
+		try{
+			logger.info('leaveRoom Event  Called for room id :' + conversationId);     
+			//Leaving the socket's current room
+			socket.room=null;
+			socket.leave(socket.room);
+			socket.emit('roomId',null);
+			logger.info(' Exit leaveRoom Event'); 
+		}catch(err) {
+			  logger.info('An Exception Has occured in leaveRoom event' + err);		  
+		}
+	}); //end of leaveRoom Event
   
     socket.on('groupRequest', function (conversationId) {
 		try {
-			 logger.info('groupRequest Event  Called for conversation id :' + conversationId);
+			logger.info('groupRequest Event  Called for conversation id :' + conversationId);
 			var socketid;
 			var conversation;
 			ChatController.findConversation (conversationId , function(con){
@@ -260,24 +231,42 @@ io.sockets.on('connection', function(socket) {
 						ChatController.findConversationMembers(conversationId, function(members){
 						logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
 							var conversationObj ={
-													//fromPhoneNo:userMobileNumberFrom,	
-													conversationId:conversationId, 
-													isGroupConversation:con.isGroupConversation,
-													adminMobile:con.adminMobile,
-													photoUrl:con.conversationImageUrl,
-													conversationName:con.conversationName
-											}
+									//fromPhoneNo:userMobileNumberFrom,	
+									conversationId:conversationId, 
+									isGroupConversation:con.isGroupConversation,
+									adminMobile:con.adminMobile,
+									photoUrl:con.conversationImageUrl,
+									conversationName:con.conversationName
+									}
+									
+									//Notifying All Group Members
 							for (var i=0; i < members.length ; i++){
 								logger.info('Getting Socket Id against Phone No :' + members[i]._userMobile)
 								socketid= userHashMaps.get (members[i]._userMobile);
 								
-								logger.info('sending a notification to socket: '+ socketid);
-									 
+								//Emiting on socket
+								logger.info('Emiting groupConversationRequest to socket: '+ socketid);									 
 								if (io.sockets.connected[socketid]) {
 									logger.info( socketid + ' is in connected Sockets List ');
-										io.sockets.connected[socketid].emit('groupConversationRequest', conversationObj);										
-													
-										} 
+										io.sockets.connected[socketid].emit('groupConversationRequest', conversationObj);																							
+								} 
+								
+								//Sending Push Notiifcation To Group Members								
+								logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  members[i]._userMobile  );								  
+								var query = { phone : members[i]._userMobile };
+								User.findOne(query).exec(function(err, user){
+									if (err){
+									 logger.error('Some Error occured while finding user' + err );
+									 }
+									if (user){
+									logger.info('User Found For Phone No: ' +  members[i]._userMobile );
+									logger.info('Sending Notification to player id ' + user.palyer_id );
+									NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupConversationRequest");
+									}
+									else {
+									 logger.info('User not Found For Phone No: ' +  members[i]._userMobile );                 
+									}                               
+								});								
 							}
 							
 						});
@@ -287,61 +276,55 @@ io.sockets.on('connection', function(socket) {
 						
 					}
 					
-				} );
+				});
 				if (conversation!==null && conversation !== undefined ){
-					
+					logger.info ('Conversation Not Found');
 					
 				}				
 		} catch (err){
 			logger.info('An Exception Has occured in groupRequest event ' + err);
-		}
+		}		
 	
-	
-	
-	});
+	});  //end of groupRequest Event
     
-      socket.on('sendMessage', function (data) {
-		  try {
-         
-		 
-		  logger.info('Data Object : '+data);
-		  data=JSON.parse(data);
-          logger.info("listening sendMessage event on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageFromMobile+"**"+data._messageToMobile);
-		var conversationMessage = new ConversationMessages();
-		conversationMessage.messageType = data.messageType;
-		conversationMessage.messageText = data.messageText;
-		conversationMessage._conversationId = data._conversationId;
-		conversationMessage._messageToMobile = data._messageToMobile;
-		conversationMessage._messageFromMobile = data._messageFromMobile;
-		conversationMessage.save(function (err, conMes) {
-        if (err){
-            logger.error('Eror Saving Conversation message' +err);
-        }
-      else if (conMes == null) {
-          logger.info('Issue Saving Conversation message, message is  Null ');
-      }
-    });
-  
-		var msg ={
-		 messageType:data.messageType,
-		 messageText:data.messageText,
-		 _conversationId:data._conversationId,
-		 _messageToMobile:data._messageToMobile,
-		 _messageFromMobile:data._messageFromMobile
-	 }
+    socket.on('sendMessage', function (data) {
+		try {
+			logger.info('Data Object : '+data);
+			data=JSON.parse(data);
+			logger.info("listening sendMessage event on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageFromMobile+"**"+data._messageToMobile);
+			var conversationMessage = new ConversationMessages();
+			conversationMessage.messageType = data.messageType;
+			conversationMessage.messageText = data.messageText;
+			conversationMessage._conversationId = data._conversationId;
+			conversationMessage._messageToMobile = data._messageToMobile;
+			conversationMessage._messageFromMobile = data._messageFromMobile;
+			conversationMessage.save(function (err, conMes) {
+				if (err){
+					logger.error('Eror Saving Conversation message' +err);
+				}			
+			});
+	  
+			var msg ={
+			 messageType:data.messageType,
+			 messageText:data.messageText,
+			 _conversationId:data._conversationId,
+			 _messageToMobile:data._messageToMobile,
+			 _messageFromMobile:data._messageFromMobile
+			}
 	 
 			//check if room disconnected join again 
+			var conversationId=data._conversationId;
 			if (!(socket.room)){
-			socket.room = data._conversationId;
-			socket.join(data._conversationId);
+			socket.room = conversationId;
+			socket.join(conversationId);
 			}
 			
 			if (data._messageToMobile){
-			// individual Chat
-						logger.info('Individual Chat - SendMessage');
-						var socketid= userHashMaps.get (data._messageToMobile);						
-						logger.info('sending a notification to socket: '+ socketid);
-						var sendNotifcationFlag=true;
+						// individual Chat
+					logger.info('Individual Chat - SendMessage');
+					var socketid= userHashMaps.get (data._messageToMobile);						
+					logger.info('sending a notification to socket: '+ socketid);
+					var sendNotifcationFlag=true;
 					if (socketid){
 						var recipientSocket=io.sockets.connected[socketid];
 						logger.info('Check room of Sender socket : ' + socket + 'where phone No is :'+socket.phoneNo + 'and room : ' +socket.room);		
@@ -355,50 +338,66 @@ io.sockets.on('connection', function(socket) {
 											
 					}
 					if (sendNotifcationFlag===true){			
-								logger.info('Sending Onesignal Notifcation to '+ data._messageToMobile );
-									  
-								var query = { phone :data._messageToMobile };
-								User.findOne(query).exec(function(err, user){
-								if (err){
-									  logger.error('Some Error occured while finding user' + err );
-												
-								}
-								if (user){
-												  
-									logger.info('User Found For Phone No: ' + data._messageToMobile );
-									logger.info('Sending Notification to player id ' + user.palyer_id );
-									NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
-								 }
-								else {
-									logger.info('User not Found For Phone No: ' + data._messageToMobile );                 
-												  
-								}                               
-									});
+						logger.info('Sending Onesignal Notifcation to '+ data._messageToMobile );									  
+						var query = { phone :data._messageToMobile };
+						User.findOne(query).exec(function(err, user){
+							if (err){
+								  logger.error('Some Error occured while finding user' + err );												
 							}
+							if (user){												  
+								logger.info('User Found For Phone No: ' + data._messageToMobile );
+								logger.info('Sending Notification to player id ' + user.palyer_id );
+								NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
+							}
+							else {
+								logger.info('User not Found For Phone No: ' + data._messageToMobile );                 												  
+							}                               
+						});
+						}
 		   }else{
-			   //group Chat
-			   logger.info('Group Chat - SendMessage Notification');
-			   console.log ("Pushing to room : "+socket.room);
-           socket.to(socket.room).emit('receiveMessage', msg);
-		   
-		   } 
-		   		   
-          
-		   //sending PushNotification to other User in individual Chat
-		   
-		   //var conversationId;
-		   
-		   
-		   
+				//group Chat
+				logger.info('Group Chat - SendMessage');
+				logger.info ("Emiting to room : "+socket.room);
+				socket.to(socket.room).emit('receiveMessage', msg);
+				
+				//Sending Message As push Notification to all members
+				if (conversationId){
+					ChatController.findConversationMembers(conversationId, function(members){
+							logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
+							//Notifying All Group Members
+								for (var i=0; i < members.length ; i++){
+									//Sending Push Notiifcation To Group Members								
+									logger.info('Sending Onesignal Notifcation of receiveMessage to '+  members[i]._userMobile  );								  
+									var query = { phone : members[i]._userMobile };
+									User.findOne(query).exec(function(err, user){
+										if (err){
+										 logger.error('Some Error occured while finding user' + err );
+										 }
+										if (user){
+										logger.info('User Found For Phone No: ' +  members[i]._userMobile );
+										logger.info('Sending Notification to player id ' + user.palyer_id );
+										NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
+										}
+										else {
+										 logger.info('User not Found For Phone No: ' +  members[i]._userMobile );                 
+										}                               
+									});								
+								}
+								
+							}); //end of findConversationMembers call
+						
+				}//// end of else data.
+		   }// end of else data._messageToMobile 
+		   		   		   		   
 	  }catch(err){
 		  logger.info('An Exception Has occured in sendMessage event' + err);		  
-	  }
-  });
+	  }//end of catch
+	}); //end of sendMessage Event
     
- socket.on('disconnect', function () {
-	logger.info('Disconnect Event \n ' + socket.phoneNo + ' is disconnected' );
-    userHashMaps.remove(socket.phoneNo);
-    logger.info("Connected Users Count : " + userHashMaps.count());
-  });
+	socket.on('disconnect', function () {
+		logger.info('Disconnect Event \n ' + socket.phoneNo + ' is disconnected' );
+		userHashMaps.remove(socket.phoneNo);
+		logger.info("Connected Users Count : " + userHashMaps.count());
+	});//end of disconnect Event
     
 }); //end of Connection Event
