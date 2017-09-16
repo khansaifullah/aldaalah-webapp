@@ -304,7 +304,7 @@ io.sockets.on('connection', function(socket) {
          
 		  logger.info('Data Object : '+data);
 		  data=JSON.parse(data);
-          logger.info("listening sendMessage event on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageToMobile+"**"+data._messageToMobile);
+          logger.info("listening sendMessage event on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageFromMobile+"**"+data._messageToMobile);
 		var conversationMessage = new ConversationMessages();
 		conversationMessage.messageType = data.messageType;
 		conversationMessage.messageText = data.messageText;
@@ -331,17 +331,21 @@ io.sockets.on('connection', function(socket) {
 			if (data._messageToMobile){
 			// individual Chat
 						logger.info('Individual Chat - SendMessage');
-						var socketid= userHashMaps.get (data._messageToMobile);								
+						var socketid= userHashMaps.get (data._messageToMobile);
+						
 						logger.info('sending a notification to socket: '+ socketid);
 						var sendNotifcationFlag=true;
 					if (socketid){
-						logger.info('Check room of socket :' + socketid + 'where phone No is :'+socketid.phoneNo + 'and room : ' +socketid.room);	
-						logger.info('Check room of socket :' + socket + 'where phone No is :'+socket.phoneNo + 'and room : ' +socket.room);					
-					//check if socket is in connected socket list and has joined same room
-						if ((io.sockets.connected[socketid])&&(socketid.room===socket.room)) {							
-							io.sockets.connected[socketid].emit('receiveMessage', msg);	
+						var recipientSocket=io.sockets.connected[socketId];
+						logger.info('Check room of Sender socket : ' + socket + 'where phone No is :'+socket.phoneNo + 'and room : ' +socket.room);		
+						logger.info('Check room of Recipent socket :' + socketid + 'where phone No is :'+recipientSocket.phoneNo + 'and room : ' +recipientSocket.room);	
+						if (recipientSocket){
+							if (recipientSocket.room===socket.room) {								
+							recipientSocket.emit('receiveMessage', msg);	
 							sendNotifcationFlag=false;
-						}						
+							}
+						}
+											
 					}
 					if (sendNotifcationFlag===true){			
 								logger.info('Sending Onesignal Notifcation to '+ data._messageToMobile );
