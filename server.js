@@ -121,27 +121,18 @@ io.sockets.on('connection', function(socket) {
 						 logger.info ('conversation created for id :'+conversation._id );
 						conversationId=conversation._id;
 						logger.info ('Creating Conversation Users against conversation id : '+conversation._id );
-                    var newConversationUser= new ConversationUser({
-                                          
-                        _conversationId: conversationId,
-                       // _userId: 
-                        _userMobile: userMobileNumberFrom,
-						//createdAt: new Date().getTime()
-                       // leaveConversation:
-                       
+                    var newConversationUser= new ConversationUser({                                          
+                        _conversationId: conversationId, 
+                        _userMobile: userMobileNumberFrom  
                                           });
                     
 					newConversationUser.save(function (err, conversationUser) {
                          if (err) logger.error('Error Occured while Saving new newConversationUser 1 :'+ err);
 						});
               
-                     newConversationUser= new ConversationUser({
-                                          
-                        _conversationId: conversationId,
-                       // _userId: 
-                        _userMobile: userMobileNumberTo,
-                       // leaveConversation:
-                       
+                     newConversationUser= new ConversationUser({                                          
+                        _conversationId: conversationId, 
+                        _userMobile: userMobileNumberTo   
                             });
                     
 					newConversationUser.save(function (err, conversationUser) {
@@ -153,18 +144,14 @@ io.sockets.on('connection', function(socket) {
 				 socket.room = conversationId;
 				 socket.join(conversationId);
 				 logger.info ('Sending room Id ' + conversationId  + ' TO Client : '+ userMobileNumberFrom );
-				 socket.emit('roomId',conversationId);
-				 //socket.emit('newChatRequest',conversationId);
-					
-					
+				 socket.emit('roomId',conversationId);		
                 });
                     
               
-                }
-            else {
-				logger.info ('Previous Conversation Id Received :' + data );
-                
+                } else {
+				logger.info ('Previous Conversation Id Received :' + data );               
 				conversationId=data;
+				/*
 				ChatController.findConversation (conversationId , function(conversation){
 					
 					if (conversation){
@@ -173,39 +160,13 @@ io.sockets.on('connection', function(socket) {
 					}
 					
 				} );
+				*/
                  socket.room = conversationId;
 				 socket.join(conversationId);
-				 logger.info ('Sending room Id To client : ' + conversationId );
-				 
-				 //socket.phoneNo=userMobileNumberFrom;
-				 
-				 logger.info('Sending Onesignal Notifcation to '+userMobileNumberFrom );
-				  
-				 //Chechking Push Notifications of room id
-				 /*
-				 if(userMobileNumberFrom){
-					logger.info('Sending Onesignal Notifcation to '+ userMobileNumberFrom );
-				  
-					var query = { phone :userMobileNumberFrom };
-					User.findOne(query).exec(function(err, user){
-						  if (err){
-							  logger.error('Some Error occured while finding user' + err );
-							
-						  }
-						  if (user){
-							  var object=new Object({"conversationId":conversationId});
-							  logger.info('User Found For Phone No: ' + userMobileNumberFrom );
-							  logger.info('Sending Notification to player id ' + user.palyer_id );
-							  NotificationController.sendNotifcationToPlayerId(user.palyer_id,object,"roomId");
-						  }
-						  else {
-							  logger.info('User not Found For Phone No: ' + userMobileNumberFrom );                 
-							  
-						  }                               
-				});
-			}
-	*/
+				//logger.info ('Sending room Id To client : ' + conversationId );
+				logger.info ('Sending room Id ' + conversationId  + ' TO Client : '+ userMobileNumberFrom );				 
 				 socket.emit('roomId',conversationId);
+				 
 				 //send an invitation
 				 var socketid= userHashMaps.get (userMobileNumberTo);
 				 logger.info('sending a notification to socket: '+ socketid);
@@ -214,39 +175,26 @@ io.sockets.on('connection', function(socket) {
 						conversationId:conversationId, 
 						isGroupConversation:false
 				 }
-				 if (io.sockets.connected[socketid]) {
-					
-					logger.info( socketid + ' is in connected Sockets List ');
-					io.sockets.connected[socketid].emit('conversationRequest', conversationObj);
-					
-					// paste
-							 logger.info('Sending Onesignal Notifcation to '+userMobileNumberTo );
-				  
-				 //Chechking Push Notifications
-					 if(userMobileNumberTo){
-						logger.info('Sending Onesignal Notifcation to '+ userMobileNumberTo );
-					  
+				 if(userMobileNumberTo){
+					 if (io.sockets.connected[socketid]) {						
+						logger.info( socketid + ' is in connected Sockets List ');
+						io.sockets.connected[socketid].emit('conversationRequest', conversationObj);
+					 }							
+						logger.info('Sending Onesignal Notifcation to '+ userMobileNumberTo );								  
 						var query = { phone :userMobileNumberTo };
 						User.findOne(query).exec(function(err, user){
-							  if (err){
-								  logger.error('Some Error occured while finding user' + err );
-								
-							  }
-							  if (user){
-								  //var object=new Object({"conversationId":conversationId});
-								  logger.info('User Found For Phone No: ' + userMobileNumberTo );
-								  logger.info('Sending Notification to player id ' + user.palyer_id );
-								  NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"conversationRequest");
-							  }
-							  else {
-								  logger.info('User not Found For Phone No: ' + userMobileNumberTo );                 
-								  
-							  }                               
+						if (err){
+						 logger.error('Some Error occured while finding user' + err );
+						 }
+						if (user){
+						logger.info('User Found For Phone No: ' + userMobileNumberTo );
+						logger.info('Sending Notification to player id ' + user.palyer_id );
+						NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"conversationRequest");
+						}
+						else {
+						 logger.info('User not Found For Phone No: ' + userMobileNumberTo );                 
+						}                               
 					});
-				}
-				else{
-					//cut
-			}
 				}
             }
         });
@@ -353,11 +301,10 @@ io.sockets.on('connection', function(socket) {
     
       socket.on('sendMessage', function (data) {
 		  try {
-          //IOS will send Room Name (not updated)
+         
 		  logger.info('Data Object : '+data);
 		  data=JSON.parse(data);
           logger.info("listening sendMessage event on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageToMobile+"**"+data._messageToMobile);
-		  //console.log ("message Data on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageToMobile+"**"+data._messageToMobile);
 		var conversationMessage = new ConversationMessages();
 		conversationMessage.messageType = data.messageType;
 		conversationMessage.messageText = data.messageText;
@@ -372,13 +319,7 @@ io.sockets.on('connection', function(socket) {
           logger.info('Issue Saving Conversation message, message is  Null ');
       }
     });
-          // Username is not being used in app, need to add for displaying with chat.
-          //if user  client 2 is in room 
-  //  io.sockets["in"](socket.room).emit('receiveMessage',/* socket.username, */data);
-         // sending to all clients in 'game' room except sender
- 
-          //if client 2 is ofline or in other room
-          // Push notification  
+  
 		var msg ={
 		 messageType:data.messageType,
 		 messageText:data.messageText,

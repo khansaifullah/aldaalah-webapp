@@ -120,61 +120,53 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
           }
       ],function (err, ConversationIdsList) {
 	 
-	  let promiseArr = [];
-      var sendBackConversation;
- 
- function chkIndvidualConversation(conversation){
-     
-        return new Promise((resolve,reject) => {
-       
-	   if (conversation.count===2){
-				Conversation.findOne({_id:(conversation._id)})
-						.exec(function(err, conversation){
-							
-							if (err){
-								console.log ( 'An Error Occured before returning Promise' );
-								reject(error);
-							}																	
-							if (conversation){
-								if (!conversation.isGroupConversation){
-									conversation=conversation.toObject({getters: false});
-									//console.log ('typeof conversation : ' + typeof(conversation));
-									logger.info( conversation._id + " - indivdual Conversation found")
-									//console.log( conversation + " is indivdual Conversation");
-									//console.log( conversation._id + " con id is indivdual Conversation");
-									sendBackConversation=conversation._id;
-									resolve();
-									
-								}
-						
-							}
-					
-						});
-		}	
-		else{
-			resolve();
-		} 
-					
-					
-            
-        });
-    }
-                             
-     ConversationIdsList.forEach(function(conversation) { 
-//			console.log ("*********" );
-	//		console.log (" ConversationIdsList object id : "+conversationId._id );
-		//	console.log (" ConversationIdsList object count : "+conversationId.count );			
-             promiseArr.push(chkIndvidualConversation(conversation));        
-     });
-    
-     Promise.all(promiseArr)
-         .then((result)=> {
-				console.log ('printing before Resolve Function response : ' + result);
-				callback(sendBackConversation); 
-				})
-         .catch(error => { logger.error ('An Error Has Occured : ' + err); });
+		let promiseArr = [];
+		var sendBackConversation;
 		 
-		          
+		 function chkIndvidualConversation(conversation){
+			 
+				return new Promise((resolve,reject) => {    
+				   if (conversation.count===2){
+							Conversation.findOne({_id:(conversation._id)})
+									.exec(function(err, conversation){
+										
+										if (err){
+											console.log ( 'An Error Occured before returning Promise' );
+											reject(error);
+										}																	
+										if (conversation){
+											if (!conversation.isGroupConversation){
+												conversation=conversation.toObject({getters: false});												
+												logger.info( conversation._id + " - indivdual Conversation found")
+												sendBackConversation=conversation._id;
+												resolve();
+												
+											}
+									
+										}
+								
+									});
+					}	
+					else{
+						resolve();
+					} 
+								   
+				});
+			}
+									 
+			 ConversationIdsList.forEach(function(conversation) { 		
+					 promiseArr.push(chkIndvidualConversation(conversation));        
+			 });
+			
+			 Promise.all(promiseArr)
+				 .then((result)=> {
+						//console.log ('printing before Resolve Function response : ' + result);
+						callback(sendBackConversation);
+						
+						})
+				 .catch(error => { logger.error ('An Error Has Occured : ' + err); });
+				 
+						  
      });	 	   
     logger.info(' Exit ChatController.chkPreviousConversation Method');   
 	
