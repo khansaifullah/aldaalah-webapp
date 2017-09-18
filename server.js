@@ -302,11 +302,13 @@ io.sockets.on('connection', function(socket) {
 			conversationMessage._messageToMobile = data._messageToMobile;
 			conversationMessage._messageFromMobile = data._messageFromMobile;
 			conversationMessage.save(function (err, conMes) {
+				logger.info('Conversation msg create at :' + conMes.createdAt);
 				if (err){
 					logger.error('Eror Saving Conversation message' +err);
-				}			
+				}
+				
 			});
-			logger.info('Conversat create at :' + conversationMessage.createdAt);
+			
 			var msg ={
 			 messageType:data.messageType,
 			 messageText:data.messageText,
