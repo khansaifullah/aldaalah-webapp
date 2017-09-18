@@ -306,7 +306,7 @@ io.sockets.on('connection', function(socket) {
 					logger.error('Eror Saving Conversation message' +err);
 				}			
 			});
-			logger.info('Conversat create at :' + parseInt(conversationMessage.createdAt));
+			logger.info('Conversat create at :' + conversationMessage.createdAt);
 			var msg ={
 			 messageType:data.messageType,
 			 messageText:data.messageText,
