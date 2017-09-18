@@ -133,7 +133,8 @@ io.sockets.on('connection', function(socket) {
 				
 				 socket.room = conversationId;
 				 socket.join(conversationId);
-				 logger.info ('Sending room Id ' + conversationId  + ' TO Client : '+ userMobileNumberFrom );
+				 logger.info ('Sending TO Client : '+ userMobileNumberFrom );
+				 logger.info (' Emiting room Id :' + conversationId );
 				 socket.emit('roomId',conversationId);		
                 });
                     
