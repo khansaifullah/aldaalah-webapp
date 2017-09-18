@@ -306,13 +306,15 @@ io.sockets.on('connection', function(socket) {
 					logger.error('Eror Saving Conversation message' +err);
 				}			
 			});
-	  
+			logger.info('Conversat create at :' + parseInt(conversationMessage.createdAt));
 			var msg ={
 			 messageType:data.messageType,
 			 messageText:data.messageText,
 			 _conversationId:data._conversationId,
 			 _messageToMobile:data._messageToMobile,
-			 _messageFromMobile:data._messageFromMobile
+			 _messageFromMobile:data._messageFromMobile,
+			 createdAt:conversationMessage.createdAt,
+			 updatedAt:conversationMessage.updatedAt
 			}
 	 
 			//check if room disconnected join again 
