@@ -294,6 +294,8 @@ io.sockets.on('connection', function(socket) {
 		try {
 			logger.info('Data Object : '+data);
 			data=JSON.parse(data);
+			var myDate;
+			var createdDate
 			logger.info("listening sendMessage event on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageFromMobile+"**"+data._messageToMobile);
 			var conversationMessage = new ConversationMessages();
 			conversationMessage.messageType = data.messageType;
@@ -302,9 +304,9 @@ io.sockets.on('connection', function(socket) {
 			conversationMessage._messageToMobile = data._messageToMobile;
 			conversationMessage._messageFromMobile = data._messageFromMobile;
 			conversationMessage.save(function (err, conMes) {
-				if (){
-					var myDate = new Date(conMes.createdAt);
-					var createdDate = myDate.getTime();
+				if (conMes){
+					 myDate = new Date(conMes.createdAt);
+					 createdDate = myDate.getTime();
 					logger.info('Conversation msg create at :' +createdDate );
 				}
 				
