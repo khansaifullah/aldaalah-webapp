@@ -361,27 +361,29 @@ io.sockets.on('connection', function(socket) {
 				logger.info('Group Chat - SendMessage');
 				logger.info ("Emiting to room : "+socket.room);
 				socket.to(socket.room).emit('receiveMessage', msg);
-				
+				var phoneNo;
 				//Sending Message As push Notification to all members
 				if (conversationId){
 					ChatController.findConversationMembers(conversationId, function(members){
 							logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
 							//Notifying All Group Members
 								for (var i=0; i < members.length ; i++){
+									
+									phoneNo=members[i]._userMobile;
 									//Sending Push Notiifcation To Group Members								
-									logger.info('Sending Onesignal Notifcation of receiveMessage to '+  members[i]._userMobile  );								  
-									var query = { phone : members[i]._userMobile };
+									logger.info('Sending Onesignal Notifcation of receiveMessage to '+  phoneNo  );								  
+									var query = { phone : phoneNo };
 									User.findOne(query).exec(function(err, user){
 										if (err){
 										 logger.error('Some Error occured while finding user' + err );
 										 }
 										if (user){
-										logger.info('User Found For Phone No: ' +  members[i]._userMobile );
+										logger.info('User Found For Phone No: ' + phoneNo );
 										logger.info('Sending Notification to player id ' + user.palyer_id );
 										NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
 										}
 										else {
-										 logger.info('User not Found For Phone No: ' +  members[i]._userMobile );                 
+										 logger.info('User not Found For Phone No: ' + phoneNo );                 
 										}                               
 									});								
 								}
