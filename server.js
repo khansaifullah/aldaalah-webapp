@@ -394,10 +394,8 @@ io.sockets.on('connection', function(socket) {
 					
 					if (con){
 						msg.conversationName=con.conversationName;
-						msg.conversationImageUrl=con.conversationImageUrl;						
-					}
-					});
-					ChatController.findConversationMembers(conversationId, function(members){
+						msg.conversationImageUrl=con.conversationImageUrl;	
+						ChatController.findConversationMembers(conversationId, function(members){
 							logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
 							//Notifying All Group Members
 								for (var i=0; i < members.length ; i++){
@@ -423,7 +421,13 @@ io.sockets.on('connection', function(socket) {
 								}									
 								}
 								
-							}); //end of findConversationMembers call
+							}); //end of findConversationMembers call						
+					}
+					else {
+						logger.info('Error Finding Group conversation for convesation id :'+ conversationId);
+					}
+					});
+					
 						
 				}//// end of else data.
 		   }// end of else data._messageToMobile 
