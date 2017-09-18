@@ -302,7 +302,12 @@ io.sockets.on('connection', function(socket) {
 			conversationMessage._messageToMobile = data._messageToMobile;
 			conversationMessage._messageFromMobile = data._messageFromMobile;
 			conversationMessage.save(function (err, conMes) {
-				logger.info('Conversation msg create at :' + conMes.createdAt);
+				if (){
+					var myDate = new Date(conMes.createdAt);
+					var createdDate = myDate.getTime();
+					logger.info('Conversation msg create at :' +createdDate );
+				}
+				
 				if (err){
 					logger.error('Eror Saving Conversation message' +err);
 				}
@@ -315,8 +320,8 @@ io.sockets.on('connection', function(socket) {
 			 _conversationId:data._conversationId,
 			 _messageToMobile:data._messageToMobile,
 			 _messageFromMobile:data._messageFromMobile,
-			 createdAt:conversationMessage.createdAt,
-			 updatedAt:conversationMessage.updatedAt
+			 createdAt:createdDate,
+			 //updatedAt:conversationMessage.updatedAt
 			}
 	 
 			//check if room disconnected join again 
