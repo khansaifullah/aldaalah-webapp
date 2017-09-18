@@ -413,7 +413,7 @@ io.sockets.on('connection', function(socket) {
 											 }
 											if (user){
 											logger.info('User Found For Phone No: ' + phoneNo );
-											logger.info('Sending Notification to player id ' + user.palyer_id );
+											logger.info('Sending Notification of Group :'+msg.conversationName+ 'to player id ' + user.palyer_id );
 											NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
 											}
 											else {
