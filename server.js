@@ -329,12 +329,14 @@ io.sockets.on('connection', function(socket) {
 			});
 			
 			var msg ={
-			 messageType:data.messageType,
-			 messageText:data.messageText,
-			 _conversationId:data._conversationId,
-			 _messageToMobile:data._messageToMobile,
-			 _messageFromMobile:data._messageFromMobile,
-			 createdAt:createdDate,
+			messageType:data.messageType,
+			messageText:data.messageText,
+			_conversationId:data._conversationId,
+			_messageToMobile:data._messageToMobile,
+			_messageFromMobile:data._messageFromMobile,
+			createdAt:createdDate,
+			conversationName:null,
+			conversationImageUrl:null,
 			 //updatedAt:conversationMessage.updatedAt
 			}
 	 
@@ -388,6 +390,13 @@ io.sockets.on('connection', function(socket) {
 				var phoneNo;
 				//Sending Message As push Notification to all members
 				if (conversationId){
+					ChatController.findConversation (conversationId , function(con){
+					
+					if (con){
+						msg.conversationName=con.conversationName;
+						msg.conversationImageUrl=con.conversationImageUrl;						
+					}
+					});
 					ChatController.findConversationMembers(conversationId, function(members){
 							logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
 							//Notifying All Group Members
