@@ -397,6 +397,7 @@ io.sockets.on('connection', function(socket) {
 					if (con){
 						msg.conversationName=con.conversationName;
 						msg.conversationImageUrl=con.conversationImageUrl;	
+						msg.createdAt=con.createdAt;
 						ChatController.findConversationMembers(conversationId, function(members){
 							logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
 							//Notifying All Group Members
