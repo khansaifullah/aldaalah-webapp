@@ -359,7 +359,8 @@ io.sockets.on('connection', function(socket) {
 						logger.info('Check room of Sender socket : ' + socket + 'where phone No is :'+socket.phoneNo + 'and room : ' +socket.room);		
 						logger.info('Check room of Recipent socket :' + socketid + 'where phone No is :'+recipientSocket.phoneNo + 'and room : ' +recipientSocket.room);	
 						if (recipientSocket){
-							if (recipientSocket.room===socket.room) {								
+							if (recipientSocket.room===socket.room) {	
+							logger.info('Conversation msg create at before emiting:' +msg.createdAt );							
 							recipientSocket.emit('receiveMessage', msg);	
 							sendNotifcationFlag=false;
 							}
@@ -376,7 +377,8 @@ io.sockets.on('connection', function(socket) {
 							if (user){												  
 								logger.info('User Found For Phone No: ' + data._messageToMobile );
 								logger.info('Sending Notification to player id ' + user.palyer_id );
-								logger.info('Msg Object : ' + msg);
+								//logger.info('Msg Object : ' + msg);
+								logger.info('Conversation msg create at before Push Notification:' +msg.createdAt );		
 								NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
 							}
 							else {
@@ -395,9 +397,12 @@ io.sockets.on('connection', function(socket) {
 					ChatController.findConversation (conversationId , function(con){
 					
 					if (con){
+						 myDate = new Date(con.createdAt);
+						//createdDate = myDate.getTime();
+						msg.createdAt= myDate.getTime();
 						msg.conversationName=con.conversationName;
 						msg.conversationImageUrl=con.conversationImageUrl;	
-						msg.createdAt=con.createdAt;
+						
 						ChatController.findConversationMembers(conversationId, function(members){
 							logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
 							//Notifying All Group Members
