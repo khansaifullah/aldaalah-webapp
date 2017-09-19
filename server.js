@@ -339,6 +339,7 @@ io.sockets.on('connection', function(socket) {
 			conversationImageUrl:null,
 			 //updatedAt:conversationMessage.updatedAt
 			}
+			logger.info('Conversation msg.createdAt :' +msg.createdAt  );
 	 
 			//check if room disconnected join again 
 			var conversationId=data._conversationId;
