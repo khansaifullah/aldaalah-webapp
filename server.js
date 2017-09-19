@@ -339,7 +339,7 @@ io.sockets.on('connection', function(socket) {
 			conversationImageUrl:null,
 			 //updatedAt:conversationMessage.updatedAt
 			}
-			logger.info('Conversation msg.createdAt :' +msg.createdAt  );
+			
 	 
 			//check if room disconnected join again 
 			var conversationId=data._conversationId;
@@ -412,7 +412,7 @@ io.sockets.on('connection', function(socket) {
 											 logger.error('Some Error occured while finding user' + err );
 											 }
 											if (user){
-													logger.info('Msg Object : ' + msg);
+													logger.info('Conversation msg.createdAt :' +msg.createdAt  );
 											logger.info('User Found For Phone No: ' + phoneNo );
 											logger.info('Sending Notification of Group :'+msg.conversationName+ 'to player id ' + user.palyer_id );
 											NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
