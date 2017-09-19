@@ -376,6 +376,7 @@ io.sockets.on('connection', function(socket) {
 							if (user){												  
 								logger.info('User Found For Phone No: ' + data._messageToMobile );
 								logger.info('Sending Notification to player id ' + user.palyer_id );
+								logger.info('Msg Object : ' + msg);
 								NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
 							}
 							else {
@@ -411,6 +412,7 @@ io.sockets.on('connection', function(socket) {
 											 logger.error('Some Error occured while finding user' + err );
 											 }
 											if (user){
+													logger.info('Msg Object : ' + msg);
 											logger.info('User Found For Phone No: ' + phoneNo );
 											logger.info('Sending Notification of Group :'+msg.conversationName+ 'to player id ' + user.palyer_id );
 											NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
