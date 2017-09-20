@@ -121,7 +121,7 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 		if (err){
 			 logger.info('Error While getting aggregate of converation users'+err);  
 		}	
-		if (ConversationIdsList){
+		else if (ConversationIdsList){
 				let promiseArr = [];
 				var sendBackConversation;
 				 
@@ -154,18 +154,19 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 										   
 						});
 					}
-											 
+					logger.info('Conversation List Size :' + ConversationIdsList.length );						 
 					 ConversationIdsList.forEach(function(conversation) { 		
 							 promiseArr.push(chkIndvidualConversation(conversation));        
 					 });
 					
 					 Promise.all(promiseArr)
-						 .then((result)=> {
-								//console.log ('printing before Resolve Function response : ' + result);
+						 .then((result)=> {								
 								callback(sendBackConversation);
-								
 								})
 						 .catch(error => { logger.error ('An Error Has Occured : ' + err); });
+		} else {
+			logger.info('Conversation List Not Found, Size :' + ConversationIdsList.length );
+			callback(null);
 		}
 				 
 						  

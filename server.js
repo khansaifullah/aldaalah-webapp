@@ -101,45 +101,10 @@ io.sockets.on('connection', function(socket) {
         ChatController.chkPreviousIndividualConversation(userMobileNumberFrom,userMobileNumberTo,function(data){
           
             logger.info ("chkPreviousIndividualConversation response :"+data);
-            if (data==null||data===undefined)
-                {
-                
-					newconversation= new Conversation();
-					newconversation.save(function (err, conversation) {
-                         if (err) logger.error('Error Occured while Saving new conversation :'+ err);
-                    if (conversation){
-						 logger.info ('conversation created for id :'+conversation._id );
-						conversationId=conversation._id;
-						logger.info ('Creating Conversation Users against conversation id : '+conversation._id );
-                    var newConversationUser= new ConversationUser({                                          
-                        _conversationId: conversationId, 
-                        _userMobile: userMobileNumberFrom  
-                        });
-                    
-					newConversationUser.save(function (err, conversationUser) {
-                         if (err) logger.error('Error Occured while Saving new newConversationUser 1 :'+ err);
-						});
-              
-                     newConversationUser= new ConversationUser({                                          
-                        _conversationId: conversationId, 
-                        _userMobile: userMobileNumberTo   
-                            });
-                    
-					newConversationUser.save(function (err, conversationUser) {
-                         if (err) logger.error('Error Occured while Saving new newConversationUser 2:'+ err);
-					});
-					}
-				
-				
-				 socket.room = conversationId;
-				 socket.join(conversationId);
-				 logger.info ('Sending TO Client : '+ userMobileNumberFrom );
-				 logger.info (' Emiting room Id :' + conversationId );
-				 socket.emit('roomId',conversationId);		
-                });
-                    
-              
-                } else {
+			
+			
+			if (data){
+				// Previous Conversation Found
 				logger.info ('Previous Conversation Id Received :' + data );               
 				conversationId=data;				
                 socket.room = conversationId;
@@ -177,13 +142,52 @@ io.sockets.on('connection', function(socket) {
 						}                               
 					});
 				}
-            }
-        });
+            }   
+			else{
+                //Creating New Conversation
+					newconversation= new Conversation();
+					newconversation.save(function (err, conversation) {
+                         if (err) logger.error('Error Occured while Saving new conversation :'+ err);
+                    if (conversation){
+						 logger.info ('conversation created for id :'+conversation._id );
+						conversationId=conversation._id;
+						logger.info ('Creating Conversation Users against conversation id : '+conversation._id );
+                    var newConversationUser= new ConversationUser({                                          
+                        _conversationId: conversationId, 
+                        _userMobile: userMobileNumberFrom  
+                        });
+                    
+					newConversationUser.save(function (err, conversationUser) {
+                         if (err) logger.error('Error Occured while Saving new newConversationUser 1 :'+ err);
+						});
+              
+                     newConversationUser= new ConversationUser({                                          
+                        _conversationId: conversationId, 
+                        _userMobile: userMobileNumberTo   
+                            });
+                    
+					newConversationUser.save(function (err, conversationUser) {
+                         if (err) logger.error('Error Occured while Saving new newConversationUser 2:'+ err);
+					});
+					}
+				
+				
+				 socket.room = conversationId;
+				 socket.join(conversationId);
+				 logger.info ('Sending TO Client : '+ userMobileNumberFrom );
+				 logger.info (' Emiting room Id :' + conversationId );
+				 socket.emit('roomId',conversationId);		
+                });
+                    
+              
+                } 
+        logger.info(' Exit createRoom Event'); 
+		});
     
       } catch (err){
 			logger.info('An Exception Has occured in createRoom event' + err);
 		}
-      logger.info(' Exit createRoom Event'); 
+      
 	  
 	  
 	}); //end of createRoom Event
