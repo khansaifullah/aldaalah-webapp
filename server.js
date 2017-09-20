@@ -360,7 +360,7 @@ io.sockets.on('connection', function(socket) {
 						logger.info('Check room of Recipent socket :' + socketid + 'where phone No is :'+recipientSocket.phoneNo + 'and room : ' +recipientSocket.room);	
 						if (recipientSocket){
 							if (recipientSocket.room===socket.room) {	
-							logger.info('Conversation msg create at before emiting:' +msg.createdAt );							
+							//logger.info('Conversation msg create at before emiting:' +msg.createdAt );							
 							recipientSocket.emit('receiveMessage', msg);	
 							sendNotifcationFlag=false;
 							}
@@ -378,7 +378,7 @@ io.sockets.on('connection', function(socket) {
 								logger.info('User Found For Phone No: ' + data._messageToMobile );
 								logger.info('Sending Notification to player id ' + user.palyer_id );
 								//logger.info('Msg Object : ' + msg);
-								logger.info('Conversation msg create at before Push Notification:' +msg.createdAt );		
+								logger.info('Individual Conversation msg createAt before Push Notification:' +msg.createdAt );		
 								NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
 							}
 							else {
@@ -390,6 +390,7 @@ io.sockets.on('connection', function(socket) {
 					//group Chat
 					logger.info('Group Chat - SendMessage');
 					logger.info ("Emiting to room : "+socket.room);
+					logger.info('Group Conversation msg createAt before Emiting :' +msg.createdAt );	
 					socket.to(socket.room).emit('receiveMessage', msg);
 					var phoneNo;
 					//Sending Message As push Notification to all members
@@ -397,9 +398,9 @@ io.sockets.on('connection', function(socket) {
 						ChatController.findConversation (conversationId , function(con){
 						
 						if (con){
-							 myDate = new Date(con.createdAt);
+							 //myDate = new Date(con.createdAt);
 							//createdDate = myDate.getTime();
-							msg.createdAt= myDate.getTime();
+							//msg.createdAt= myDate.getTime();
 							msg.conversationName=con.conversationName;
 							msg.conversationImageUrl=con.conversationImageUrl;	
 							
@@ -418,9 +419,10 @@ io.sockets.on('connection', function(socket) {
 												 logger.error('Some Error occured while finding user' + err );
 												 }
 												if (user){
-														logger.info('Conversation msg.createdAt :' +msg.createdAt  );
+														
 												logger.info('User Found For Phone No: ' + phoneNo );
-												logger.info('Sending Notification of Group :'+msg.conversationName+ 'to player id ' + user.palyer_id );
+												logger.info('Group Conversation msg createAt before Push Notiifcation :' +msg.createdAt );	
+												logger.info('Sending Notification of Group :'+msg.conversationName+ 'Phone No: ' + phoneNo +'& to player id ' + user.palyer_id );
 												NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
 												}
 												else {
