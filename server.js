@@ -94,96 +94,102 @@ io.sockets.on('connection', function(socket) {
 		userMobileNumberTo = userMobileNumberTo.replace(/ +/g, "");
 		 
 		logger.info('createRoom Event  Called for userMobileNumberFrom : '+userMobileNumberFrom + ' & userMobileNumberTo ' + userMobileNumberTo);
+		
 		var newconversation;
 		var conversationId;
-		// check if conversation between These Two users ever occured before, send conversationId / roomId in response
-         
-        ChatController.chkPreviousIndividualConversation(userMobileNumberFrom,userMobileNumberTo,function(data){
-          
-            logger.info ("chkPreviousIndividualConversation response :"+data);
-			
-			
-			if (data){
-				// Previous Conversation Found
-				logger.info ('Previous Conversation Id Received :' + data );               
-				conversationId=data;				
-                socket.room = conversationId;
-				socket.join(conversationId);
-				//logger.info ('Sending room Id To client : ' + conversationId );
-				logger.info ('Sending room Id ' + conversationId  + ' TO Client : '+ userMobileNumberFrom );				 
-				socket.emit('roomId',conversationId);
-				 
-				 //send an invitation
-				 var socketid= userHashMaps.get (userMobileNumberTo);
-				 logger.info('sending a notification to socket: '+ socketid);
-				  	var conversationObj ={
-						fromPhoneNo:userMobileNumberFrom,	
-						conversationId:conversationId, 
-						isGroupConversation:false
-				 }
-				 if(userMobileNumberTo){
-					 if (io.sockets.connected[socketid]) {						
-						logger.info( socketid + ' is in connected Sockets List ');
-						io.sockets.connected[socketid].emit('conversationRequest', conversationObj);
-					 }							
-						logger.info('Sending Onesignal Notifcation to '+ userMobileNumberTo );								  
-						var query = { phone :userMobileNumberTo };
-						User.findOne(query).exec(function(err, user){
-						if (err){
-						 logger.error('Some Error occured while finding user' + err );
-						 }
-						if (user){
-						logger.info('User Found For Phone No: ' + userMobileNumberTo );
-						logger.info('Sending Notification to player id ' + user.palyer_id );
-						NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"conversationRequest");
-						}
-						else {
-						 logger.info('User not Found For Phone No: ' + userMobileNumberTo );                 
-						}                               
-					});
-				}
-            }   
-			else{
-                //Creating New Conversation
-					newconversation= new Conversation();
-					newconversation.save(function (err, conversation) {
-                         if (err) logger.error('Error Occured while Saving new conversation :'+ err);
-                    if (conversation){
-						 logger.info ('conversation created for id :'+conversation._id );
-						conversationId=conversation._id;
-						logger.info ('Creating Conversation Users against conversation id : '+conversation._id );
-                    var newConversationUser= new ConversationUser({                                          
-                        _conversationId: conversationId, 
-                        _userMobile: userMobileNumberFrom  
-                        });
-                    
-					newConversationUser.save(function (err, conversationUser) {
-                         if (err) logger.error('Error Occured while Saving new newConversationUser 1 :'+ err);
+		
+		if (userMobileNumberFrom===userMobileNumberTo){
+			logger.info ('Sender and Recipient are same' );   
+			 socket.emit('roomId',null);
+		 }
+		 else{
+			// check if conversation between These Two users ever occured before, send conversationId / roomId in response         
+			ChatController.chkPreviousIndividualConversation(userMobileNumberFrom,userMobileNumberTo,function(data){
+			  
+				logger.info ("chkPreviousIndividualConversation response :"+data);
+				
+				
+				if (data){
+					// Previous Conversation Found
+					logger.info ('Previous Conversation Id Received :' + data );               
+					conversationId=data;				
+					socket.room = conversationId;
+					socket.join(conversationId);
+					//logger.info ('Sending room Id To client : ' + conversationId );
+					logger.info ('Sending room Id ' + conversationId  + ' TO Client : '+ userMobileNumberFrom );				 
+					socket.emit('roomId',conversationId);
+					 
+					 //send an invitation
+					 var socketid= userHashMaps.get (userMobileNumberTo);
+					 logger.info('sending a notification to socket: '+ socketid);
+						var conversationObj ={
+							fromPhoneNo:userMobileNumberFrom,	
+							conversationId:conversationId, 
+							isGroupConversation:false
+					 }
+					 if(userMobileNumberTo){
+						 if (io.sockets.connected[socketid]) {						
+							logger.info( socketid + ' is in connected Sockets List ');
+							io.sockets.connected[socketid].emit('conversationRequest', conversationObj);
+						 }							
+							logger.info('Sending Onesignal Notifcation to '+ userMobileNumberTo );								  
+							var query = { phone :userMobileNumberTo };
+							User.findOne(query).exec(function(err, user){
+							if (err){
+							 logger.error('Some Error occured while finding user' + err );
+							 }
+							if (user){
+							logger.info('User Found For Phone No: ' + userMobileNumberTo );
+							logger.info('Sending Notification to player id ' + user.palyer_id );
+							NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"conversationRequest");
+							}
+							else {
+							 logger.info('User not Found For Phone No: ' + userMobileNumberTo );                 
+							}                               
 						});
-              
-                     newConversationUser= new ConversationUser({                                          
-                        _conversationId: conversationId, 
-                        _userMobile: userMobileNumberTo   
-                            });
-                    
-					newConversationUser.save(function (err, conversationUser) {
-                         if (err) logger.error('Error Occured while Saving new newConversationUser 2:'+ err);
-					});
 					}
-				
-				
-				 socket.room = conversationId;
-				 socket.join(conversationId);
-				 logger.info ('Sending TO Client : '+ userMobileNumberFrom );
-				 logger.info (' Emiting room Id :' + conversationId );
-				 socket.emit('roomId',conversationId);		
-                });
-                    
-              
-                } 
-        logger.info(' Exit createRoom Event'); 
-		});
-    
+				}   
+				else{
+					//Creating New Conversation
+						newconversation= new Conversation();
+						newconversation.save(function (err, conversation) {
+							 if (err) logger.error('Error Occured while Saving new conversation :'+ err);
+						if (conversation){
+							 logger.info ('conversation created for id :'+conversation._id );
+							conversationId=conversation._id;
+							logger.info ('Creating Conversation Users against conversation id : '+conversation._id );
+						var newConversationUser= new ConversationUser({                                          
+							_conversationId: conversationId, 
+							_userMobile: userMobileNumberFrom  
+							});
+						
+						newConversationUser.save(function (err, conversationUser) {
+							 if (err) logger.error('Error Occured while Saving new newConversationUser 1 :'+ err);
+							});
+				  
+						 newConversationUser= new ConversationUser({                                          
+							_conversationId: conversationId, 
+							_userMobile: userMobileNumberTo   
+								});
+						
+						newConversationUser.save(function (err, conversationUser) {
+							 if (err) logger.error('Error Occured while Saving new newConversationUser 2:'+ err);
+						});
+						}
+					
+					
+					 socket.room = conversationId;
+					 socket.join(conversationId);
+					 logger.info ('Sending TO Client : '+ userMobileNumberFrom );
+					 logger.info (' Emiting room Id :' + conversationId );
+					 socket.emit('roomId',conversationId);		
+					});
+						
+				  
+					} 
+				logger.info(' Exit createRoom Event'); 
+			});
+	  }
       } catch (err){
 			logger.info('An Exception Has occured in createRoom event' + err);
 		}
