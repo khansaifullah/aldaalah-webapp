@@ -97,9 +97,9 @@ io.sockets.on('connection', function(socket) {
 		
 		var newconversation;
 		var conversationId;
-		
-		if (userMobileNumberFrom===userMobileNumberTo){
-			logger.info ('Sender and Recipient are same' );   
+		//if (userMobileNumberFrom && userMobileNumberTo)
+		if ((userMobileNumberFrom===userMobileNumberTo)||(!(userMobileNumberFrom && userMobileNumberTo))){
+			logger.info ('Sender and Recipient are same or Either one is empty' );   
 			 socket.emit('roomId',null);
 		 }
 		 else{
@@ -107,8 +107,7 @@ io.sockets.on('connection', function(socket) {
 			ChatController.chkPreviousIndividualConversation(userMobileNumberFrom,userMobileNumberTo,function(data){
 			  
 				logger.info ("chkPreviousIndividualConversation response :"+data);
-				
-				
+			
 				if (data){
 					// Previous Conversation Found
 					logger.info ('Previous Conversation Id Received :' + data );               
@@ -153,7 +152,7 @@ io.sockets.on('connection', function(socket) {
 					//Creating New Conversation
 						newconversation= new Conversation();
 						newconversation.save(function (err, conversation) {
-							 if (err) logger.error('Error Occured while Saving new conversation :'+ err);
+						if (err) logger.error('Error Occured while Saving new conversation :'+ err);
 						if (conversation){
 							 logger.info ('conversation created for id :'+conversation._id );
 							conversationId=conversation._id;
@@ -193,9 +192,7 @@ io.sockets.on('connection', function(socket) {
       } catch (err){
 			logger.info('An Exception Has occured in createRoom event' + err);
 		}
-      
-	  
-	  
+      	  	  
 	}); //end of createRoom Event
    
     
