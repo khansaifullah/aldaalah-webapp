@@ -312,10 +312,17 @@ io.sockets.on('connection', function(socket) {
     socket.on('sendMessage', function (data) {
 		try {
 			logger.info('Data Object : '+data);
-			data=JSON.parse(data);
+			data=JSON.parse(data);						
 			var myDate;
-			var createdDate
+			var createdDate;
 			logger.info("listening sendMessage event on server : \n "+data.messageText +"**"+  data.messageType +"**"+ data._conversationId + "**"+data._messageFromMobile+"**"+data._messageToMobile);
+			
+			//check if room disconnected join again 
+			var conversationId=data._conversationId;
+			if (!(socket.room)){
+			socket.room = conversationId;
+			socket.join(conversationId);
+			}
 			var conversationMessage = new ConversationMessages();
 			conversationMessage.messageType = data.messageType;
 			conversationMessage.messageText = data.messageText;
@@ -324,38 +331,24 @@ io.sockets.on('connection', function(socket) {
 			conversationMessage._messageFromMobile = data._messageFromMobile;
 			conversationMessage.save(function (err, conMes) {
 				if (conMes){
-					 myDate = new Date(conMes.createdAt);
-					 createdDate = myDate.getTime();
+					myDate = new Date(conMes.createdAt);
+					createdDate = myDate.getTime();
 					logger.info('Conversation msg create at :' +createdDate );
-				}
-				
-				if (err){
-					logger.error('Eror Saving Conversation message' +err);
-				}
-				
-			});
-			
-			var msg ={
-			messageType:data.messageType,
-			messageText:data.messageText,
-			_conversationId:data._conversationId,
-			_messageToMobile:data._messageToMobile,
-			_messageFromMobile:data._messageFromMobile,
-			createdAt:createdDate,
-			conversationName:null,
-			conversationImageUrl:null,
-			 //updatedAt:conversationMessage.updatedAt
-			}
+					var msg ={
+						messageType:data.messageType,
+						messageText:data.messageText,
+						_conversationId:data._conversationId,
+						_messageToMobile:data._messageToMobile,
+						_messageFromMobile:data._messageFromMobile,
+						createdAt:createdDate,
+						conversationName:null,
+						conversationImageUrl:null,
+						 //updatedAt:conversationMessage.updatedAt
+					}
 			
 	 
-			//check if room disconnected join again 
-			var conversationId=data._conversationId;
-			if (!(socket.room)){
-			socket.room = conversationId;
-			socket.join(conversationId);
-			}
-			
-			if (data._messageToMobile){
+
+					if (data._messageToMobile){
 						// individual Chat
 					logger.info('Individual Chat - SendMessage');
 					var socketid= userHashMaps.get (data._messageToMobile);						
@@ -393,61 +386,69 @@ io.sockets.on('connection', function(socket) {
 							}                               
 						});
 						}
-		   }else{
-				//group Chat
-				logger.info('Group Chat - SendMessage');
-				logger.info ("Emiting to room : "+socket.room);
-				socket.to(socket.room).emit('receiveMessage', msg);
-				var phoneNo;
-				//Sending Message As push Notification to all members
-				if (conversationId){
-					ChatController.findConversation (conversationId , function(con){
-					
-					if (con){
-						 myDate = new Date(con.createdAt);
-						//createdDate = myDate.getTime();
-						msg.createdAt= myDate.getTime();
-						msg.conversationName=con.conversationName;
-						msg.conversationImageUrl=con.conversationImageUrl;	
+					}else{
+					//group Chat
+					logger.info('Group Chat - SendMessage');
+					logger.info ("Emiting to room : "+socket.room);
+					socket.to(socket.room).emit('receiveMessage', msg);
+					var phoneNo;
+					//Sending Message As push Notification to all members
+					if (conversationId){
+						ChatController.findConversation (conversationId , function(con){
 						
-						ChatController.findConversationMembers(conversationId, function(members){
-							logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
-							//Notifying All Group Members
-								for (var i=0; i < members.length ; i++){
+						if (con){
+							 myDate = new Date(con.createdAt);
+							//createdDate = myDate.getTime();
+							msg.createdAt= myDate.getTime();
+							msg.conversationName=con.conversationName;
+							msg.conversationImageUrl=con.conversationImageUrl;	
+							
+							ChatController.findConversationMembers(conversationId, function(members){
+								logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
+								//Notifying All Group Members
+									for (var i=0; i < members.length ; i++){
+										
+										phoneNo=members[i]._userMobile;
+										if (phoneNo!==(data._messageFromMobile)){
+											//Sending Push Notiifcation To Group Members								
+											logger.info('Sending Onesignal Notifcation of receiveMessage to '+  phoneNo  );								  
+											var query = { phone : phoneNo };
+											User.findOne(query).exec(function(err, user){
+												if (err){
+												 logger.error('Some Error occured while finding user' + err );
+												 }
+												if (user){
+														logger.info('Conversation msg.createdAt :' +msg.createdAt  );
+												logger.info('User Found For Phone No: ' + phoneNo );
+												logger.info('Sending Notification of Group :'+msg.conversationName+ 'to player id ' + user.palyer_id );
+												NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
+												}
+												else {
+												 logger.info('User not Found For Phone No: ' + phoneNo );                 
+												}                               
+											});	
+									}									
+									}
 									
-									phoneNo=members[i]._userMobile;
-									if (phoneNo!==(data._messageFromMobile)){
-										//Sending Push Notiifcation To Group Members								
-										logger.info('Sending Onesignal Notifcation of receiveMessage to '+  phoneNo  );								  
-										var query = { phone : phoneNo };
-										User.findOne(query).exec(function(err, user){
-											if (err){
-											 logger.error('Some Error occured while finding user' + err );
-											 }
-											if (user){
-													logger.info('Conversation msg.createdAt :' +msg.createdAt  );
-											logger.info('User Found For Phone No: ' + phoneNo );
-											logger.info('Sending Notification of Group :'+msg.conversationName+ 'to player id ' + user.palyer_id );
-											NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
-											}
-											else {
-											 logger.info('User not Found For Phone No: ' + phoneNo );                 
-											}                               
-										});	
-								}									
-								}
-								
-							}); //end of findConversationMembers call						
-					}
-					else {
-						logger.info('Error Finding Group conversation for convesation id :'+ conversationId);
-					}
-					});
-					
-						
-				}//// end of else data.
-		   }// end of else data._messageToMobile 
+								}); //end of findConversationMembers call						
+						}
+						else {
+							logger.info('Error Finding Group conversation for convesation id :'+ conversationId);
+						}
+						});
+												
+					}//// end if conversationID
+			}// end of else data._messageToMobile 
 		   		   		   		   
+			}
+				
+			if (err){
+				logger.error('Eror Saving Conversation message' +err);
+			}
+				
+			});
+			
+
 	  }catch(err){
 		  logger.info('An Exception Has occured in sendMessage event' + err);		  
 	  }//end of catch
