@@ -103,6 +103,7 @@ exports.getGroupUserLocations=function(conversationId,res){
 											tempObject.longitude=user.loc[0];
 											tempObject.latitude=user.loc[1];
 										}else{
+											logger.info ('Null locations for :' +user.phone);
 											tempObject.longitude=null;
 											tempObject.latitude=null;
 										}
