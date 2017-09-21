@@ -316,6 +316,16 @@ module.exports = function(app) {
 		LocController.getGroupUserLocations(conversationId,res);
 	});
 	
+	  app.post('/shareLocation',function(req,res){
+		
+	   if(req.body === undefined||req.body === null) {
+        res.end("Empty Body"); 
+        }
+		console.log("in routes /shareLocation");
+		var reqData=req.body;
+        
+		LocController.updateShareLocationFlag(reqData,res);
+	});
 	
 	/******* Push Notification Apis *****/
 	

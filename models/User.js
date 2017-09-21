@@ -23,6 +23,7 @@ var userSchema = new Schema({
 	 // updated_at: { type: Date, default: Date.now },
       verification_code:String,
       palyer_id:String,
+	  share_location:{ type: Boolean, default: true },
       loc: {
 		type: [Number],  // [<longitude>, <latitude>]
 		index: '2d'      // create the geospatial index

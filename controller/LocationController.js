@@ -99,7 +99,7 @@ exports.getGroupUserLocations=function(conversationId,res){
 											full_name: user.full_name,
 											profile_photo_url:user.profile_photo_url
 										});
-										if (user.loc){
+										if ((user.loc)&&(user.share_location)){
 											tempObject.longitude=user.loc[0];
 											tempObject.latitude=user.loc[1];
 										}else{
@@ -139,4 +139,46 @@ exports.getGroupUserLocations=function(conversationId,res){
 		logger.info('An Exception Has occured in getGruoupUserLocations method' + err);
 	}
 	
+}
+
+                         
+exports.updateShareLocationFlag=function(reqData,res){
+	try{
+			var phoneNo=reqData.phoneNo;
+			var shareLocationFlag=reqData.shareLocationFlag;
+						
+			logger.info('LocationController.updateShareLocationFlag called  :' 
+						  + phoneNo+ '**'+ shareLocationFlag );
+		
+			AppController.userExists(phoneNo, function(user){
+				if (user){
+					user.share_location=shareLocationFlag;
+					user.save(function (err, user){
+						if(err){
+								logger.error('Some Error while updating user' + err );
+								 
+							}
+						else{
+							logger.info('User Location With Phone Num ' + phoneNo );
+										  
+							res.jsonp({status:"success",
+							message:"Share Location Flag Updated!",
+							 object:[]}); 
+							 }
+							 
+						  
+					  });
+						
+					logger.info(phoneNo + 'location flag : '+user.share_location );
+				}
+				else{
+					res.jsonp({status:"failure",
+					message:"Failed To update Share Location Flag !",
+					object:[]}); 
+				}
+				
+			});
+	}catch (err){
+		logger.info('An Exception Has occured in updateShareLocationFlag method' + err);
+	}
 }
