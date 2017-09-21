@@ -136,13 +136,8 @@ module.exports = function(app) {
                         object:[]});
         }
         else{
-           // console.log("File Is uploaded");
-           logger.info ("File Is uploaded");
-         //console.log(req.body.phone);
-         //console.log(req.body.profilePhoto);
-		 //geneterate a url 
-		 //sending dummy pefile url
-		 var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
+        logger.info ("File Is uploaded");
+		var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
         regCtrl.completeProfile(req.body,profilePhotoUrl,res);
             
             
@@ -185,8 +180,7 @@ module.exports = function(app) {
 		 //sending dummy pefile url
 		 var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
 	
-        regCtrl.updateProfilePhoto(req.body.phone,profilePhotoUrl,res);
-            
+        regCtrl.updateProfilePhoto(req.body.phone,profilePhotoUrl,res);            
             
         }
 		
@@ -194,7 +188,15 @@ module.exports = function(app) {
 		
 	});
 
-
+	app.post('/fullName',function(req,res){
+		
+	   if(req.body === undefined||req.body === null) {
+        res.end("Empty Body"); 
+        }
+		console.log("in routes /fullName");
+		regCtrl.updateName(req,res);
+	});
+	
     app.post('/contacts',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
@@ -227,13 +229,9 @@ module.exports = function(app) {
 //          });
         
 		console.log("in routes get country");
-       // console.log (db.url);
-		//var reqData=req.body;
-         //console.log(reqData);
 		AppController.findAllCountries(function (countries) {
-            console.log("Response Of findAllCountries Method");
-			//console.log(found);
-			 res.jsonp({status:"success",
+			console.log("Response Of findAllCountries Method");
+			res.jsonp({status:"success",
                         message:"List Of countries",
                         object:countries});
                              
@@ -268,18 +266,11 @@ module.exports = function(app) {
                         message:"Error Uploading File",
                         object:[]});
         }
-        else{
-           // console.log("File Is uploaded");
-           logger.info ("Photo Is uploaded");
-        // console.log(req.body.phone);
-		 //geneterate a url 
-		 //sending dummy pefile url
-		 var profilePhotoUrl ="https://cdn0.iconfinder.com/data/icons/education-59/128/communication_discussion_workshop-256.png";
-		 
-		 
-		ChatController.createGroup(req.body,profilePhotoUrl,res);		
-		
-		  }
+        else{           
+        logger.info ("Photo Is uploaded");
+		var profilePhotoUrl ="https://cdn0.iconfinder.com/data/icons/education-59/128/communication_discussion_workshop-256.png"; 
+		ChatController.createGroup(req.body,profilePhotoUrl,res);				
+		}
 		
 	});
 	});
@@ -288,9 +279,7 @@ module.exports = function(app) {
 	/***** Location Apis ********/ 
 	//get location From Client
 	
-	
-	
-	
+
     app.post('/location',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
@@ -316,7 +305,7 @@ module.exports = function(app) {
 		LocController.getGroupUserLocations(conversationId,res);
 	});
 	
-	  app.post('/shareLocation',function(req,res){
+	app.post('/shareLocation',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -329,7 +318,7 @@ module.exports = function(app) {
 	
 	/******* Push Notification Apis *****/
 	
-	    app.post('/playerId',function(req,res){
+	app.post('/playerId',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 

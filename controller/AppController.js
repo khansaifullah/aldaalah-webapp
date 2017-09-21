@@ -19,7 +19,7 @@ var mongoose = require('mongoose');
 
 
 exports.findAllUser=function(callback){
-    
+     
     try{
 			User.find({}, function(err, users) {
 			if (err){

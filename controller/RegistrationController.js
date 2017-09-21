@@ -68,18 +68,16 @@ exports.sendVerificationCode=function(reqData,res){
     //find user by phone no.
     userExists(phoneNo,function(user){
 		logger.info('User Exists Response : ' + user );
-       // console.log("in side user exiss call"+user);
         if (!user){
              console.log (" User do not exist,  Creating user");
             if (resend==="true"||resend==1){
-               // logger.info('User Do not Exist and resend ' );
             res.jsonp({status:"failure",
                             message:"Please Create User First",
                             object:[]}); 
             
             }
             else{
-               // phoneNo.trim();
+            
                      var newuser = new User({  
 
                     phone: phoneNo,
@@ -110,7 +108,7 @@ exports.sendVerificationCode=function(reqData,res){
                    
         }
         else{
-           // if (resend==="true"||resend==1){
+  
                 console.log (" User Exists  sending verification code again");
                  // send verification code logic
                  //generate a code and set to user.verification_code
@@ -183,23 +181,17 @@ exports.completeProfile = function(user,profilePhotoUrl,res) {
 	try{
 console.log("In Controller completeProfile Method");
     
-    logger.info('RegistrationController.completeProfile called for user  :' 
-                  + user.phone  );
-       // var userName =user.userName;
+    logger.info('RegistrationController.completeProfile called for user  :'  + user.phone  );
+
 		var phoneNo = user.phone;
-       // var photoUrl= user.profilePhotoUrl;
         var fullName=user.fullName;
-        var os=user.os;
-  
-    
-    // update profile
-    
+        var os=user.os;      
+    // update profile    
     
      //find user by phone no.
     userExists(phoneNo,function(user){
         if (user){            
             //update user model
-              //user.user_name=userName;
               user.full_name=fullName,
               user.profile_photo_url=profilePhotoUrl,
               user.active=false, 
@@ -208,18 +200,17 @@ console.log("In Controller completeProfile Method");
               user.verified_user=true,      
                 
               user.save(function (err, user){
-                 if(err){
-                        logger.error('Some Error while updating user' + err );
+                if(err){
+                    logger.error('Some Error while updating user' + err );
                          
-                    }
-                         else{
-                            
-                                 logger.info('User updated With Phone Num ' + phoneNo );
+                }
+                else{
+                     logger.info('User updated With Phone Num ' + phoneNo );
                                   
-                             res.jsonp({status:"success",
-                     message:"Profile Updated!",
+                    res.jsonp({status:"success",
+                    message:"Profile Updated!",
                      object:user}); 
-                         }
+                    }
                      
                   
               });
@@ -228,7 +219,7 @@ console.log("In Controller completeProfile Method");
                               
         }
         else{
-            logger.info('UNo User Found to Update With Phone Num ' + phoneNo );
+            logger.info('User Not Found to Update With Phone Num ' + phoneNo );
             res.jsonp({status:"failure",
                             message:"No User Found to Update!",
                             object:[]}); 
@@ -243,6 +234,45 @@ console.log("In Controller completeProfile Method");
 }
 
 
+
+exports.updateName = function(req,res) {
+	try{
+ 	
+	var phoneNo = req.body.phoneNo;
+    var fullName=req.body.fullName;
+	console.log("In Controller updateName Method");    
+    logger.info('RegistrationController.updateName called for user  :'  + phoneNo  );
+     //find user by phone no.
+    userExists(phoneNo,function(user){
+        if (user){            
+              user.full_name=fullName, 
+              user.save(function (err, user){
+                if(err){
+                    logger.error('Some Error while updating user' + err );                         
+                }
+                else{
+                    logger.info('User Name updated With Phone Num ' + phoneNo );
+                    res.jsonp({status:"success",
+					message:"User Name Updated!",
+							object:user}); 
+                }
+              });
+                
+        }
+        else{
+            logger.info('No User Found to Update With Phone Num ' + phoneNo );
+            res.jsonp({status:"failure",
+                            message:"No User Found to Update!",
+                            object:[]}); 
+        }
+    });
+    
+    logger.info(' Exit RegistrationController.updateName Method');
+	}catch (err){
+		logger.info('An Exception Has occured in updateName method' + err);
+	}
+	
+}
 
 exports.updateProfilePhoto = function(phoneNo,profilePhotoUrl,res) {
 	try{

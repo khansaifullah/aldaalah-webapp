@@ -58,3 +58,15 @@
 {"level":"info","message":"user found with phone no +923005162731","timestamp":"15:38:15"}
 {"level":"info","message":"+923005162731location flag : true","timestamp":"15:38:15"}
 {"level":"info","message":"User Location With Phone Num +923005162731","timestamp":"15:38:15"}
+{"level":"info","message":"RegistrationController.updateName called for user  :undefined","timestamp":"19:36:54"}
+{"level":"info","message":"UserExists Method Called","timestamp":"19:36:54"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"19:36:54"}
+{"level":"info","message":" Exit RegistrationController.updateName Method","timestamp":"19:36:54"}
+{"level":"info","message":"User Not Found with Phone Num. :undefined","timestamp":"19:36:57"}
+{"level":"info","message":"No User Found to Update With Phone Num undefined","timestamp":"19:36:57"}
+{"level":"info","message":"RegistrationController.updateName called for user  :+923345022570","timestamp":"19:38:35"}
+{"level":"info","message":"UserExists Method Called","timestamp":"19:38:35"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"19:38:35"}
+{"level":"info","message":" Exit RegistrationController.updateName Method","timestamp":"19:38:35"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"19:38:35"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"19:38:35"}
