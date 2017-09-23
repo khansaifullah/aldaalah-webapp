@@ -1,4 +1,5 @@
-var app = require('express')();
+var express = require('express'),
+	app = express();
 var http = require('http').Server(app);
  require('./routes/routes.js')(app);
  var db = require('./config/db');
@@ -24,6 +25,8 @@ var port = process.env.PORT || 3000;
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
+app.use(express.static('public'))
+//app.use(express.static(__dirname + '/public'));
 
 http.listen(port, function(){
   console.log('listening on *:'+port);
