@@ -12,49 +12,23 @@ require('datejs');
 var mongoose = require('mongoose');
 var path = require('path');
 var multer = require('multer');
+var tempFileName;
 var storage = multer.diskStorage({
 	destination: function(req, file, callback) {
 		callback(null, './public/images/profileImages')
 	},
 	filename: function(req, file, callback) {
-		console.log(file)
-		callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+		tempFileName="";
+		console.log("Printing in File Name Field :" + 'file.fieldname : ' + file.fieldname + ' file.originalname :' + file.originalname );
+		tempFileName=file.fieldname + '-' + Date.now() + path.extname(file.originalname);
+		console.log("File NEW Name  :" +tempFileName );
+		callback(null,tempFileName );
 	}
 });
 
-//mongoose.Promise = global.Promise;
 
-//mongoose.createConnection(db.url);
-//mongoose.connect(db.url);
-//var exp = require('express');
-//Get the default connection
-//var dbCon = mongoose.connection;
-//Bind connection to error event (to get notification of connection errors)
-//dbCon.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-var path = require('path');
-module.exports = function(app) {
-	
-	
-//app.use(exp.static(__dirname, 'public'))
-   // app.use('/', exp.static(__dirname + '/public'));
-	//app.use('/images', exp.static(__dirname + '/public/images/profileImages'));
-	//app.use('/images',exp.directory(__dirname + '/public/images/profileImages'));
-	
-	//app.use(exp.static('public'));
-	
-	//app.use('/public', exp.static(__dirname + '/public'));
-	//app.use('/public',exp.directory(__dirname + '/public'));
-	
-	
-	
-	
-    //app.use(express.directory('/public/images/profileImages'));
-    //app.use(express.static('/public/images/profileImages'));
-    
-    //var directory = require('serve-index');
-    //app.use(directory(__dirname +'/public'));
-    
+module.exports = function(app) {	
+	 
     app.use(bodyParser.urlencoded({
         extended: true
     }));
@@ -118,10 +92,11 @@ module.exports = function(app) {
         }
     
 		console.log("in routes - Req Body : " + req.body.phone);
-        
+        console.log("in routes - File : " + req.file);
+		//console.log('file Name : ' + storage.filename);
 	 var upload = multer({
 		storage: storage,
-		fileFilter: function(req, file, callback) {
+		fileFilter: function(req, file, callback) {			
 			var ext = path.extname(file.originalname)
 			if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
 				return callback(res.end('Only images are allowed'), null)
@@ -137,7 +112,10 @@ module.exports = function(app) {
         }
         else{
         logger.info ("File Is uploaded");
-		var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
+		//logger.info ("Printing  Storage ");
+		var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
+		logger.info("profilePhotoUrl" + profilePhotoUrl);
+		//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
         regCtrl.completeProfile(req.body,profilePhotoUrl,res);
             
             
@@ -172,13 +150,12 @@ module.exports = function(app) {
                         message:"Error Uploading File",
                         object:[]});
         }
-        else{
-           // console.log("File Is uploaded");
-           logger.info ("Photo Is uploaded");
-         console.log(req.body.phone);
+        else{        
+			logger.info ("Photo Is uploaded");
+			console.log(req.body.phone);
 		 //geneterate a url 
-		 //sending dummy pefile url
-		 var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
+		var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
+		//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
 	
         regCtrl.updateProfilePhoto(req.body.phone,profilePhotoUrl,res);            
             
@@ -268,7 +245,8 @@ module.exports = function(app) {
         }
         else{           
         logger.info ("Photo Is uploaded");
-		var profilePhotoUrl ="https://cdn0.iconfinder.com/data/icons/education-59/128/communication_discussion_workshop-256.png"; 
+		var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
+		//var profilePhotoUrl ="https://cdn0.iconfinder.com/data/icons/education-59/128/communication_discussion_workshop-256.png"; 
 		ChatController.createGroup(req.body,profilePhotoUrl,res);				
 		}
 		
