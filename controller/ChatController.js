@@ -101,7 +101,6 @@ exports.findConversation =function(conversationId,callback){
 
 
 exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callback){
-	return new Promise((resolve,reject) => {
 	
     try{
          //Returns Conversation id if exists else undefined
@@ -162,15 +161,12 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 					
 					 Promise.all(promiseArr)
 						 .then((result)=> {								
-								resolve(sendBackConversation);
+								callback(sendBackConversation);
 								})
-						 .catch(error => { logger.error ('An Error Has Occured : ' + error); 
-						 reject (error);
-						 });
+						 .catch(error => { logger.error ('An Error Has Occured : ' + err); });
 		} else {
 			logger.info('Conversation List Not Found, Size :' + ConversationIdsList.length );
-			//callback(null);
-			resolve(sendBackConversation);
+			callback(null);
 		}
 				 
 						  
@@ -180,7 +176,7 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 	}catch(err){
 		  logger.info('An Exception Has occured in findConversation method' + err);		  
 	  }
-});
+	
 }
 
 

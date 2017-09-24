@@ -107,7 +107,7 @@ io.sockets.on('connection', function(socket) {
 		 }
 		 else{
 			// check if conversation between These Two users ever occured before, send conversationId / roomId in response         
-			ChatController.chkPreviousIndividualConversation(userMobileNumberFrom,userMobileNumberTo).then (function(data){
+			ChatController.chkPreviousIndividualConversation(userMobileNumberFrom,userMobileNumberTo,function(data){
 			  
 				logger.info ("chkPreviousIndividualConversation response :"+data);
 			
