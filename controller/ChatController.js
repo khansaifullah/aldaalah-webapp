@@ -160,7 +160,7 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 					 });
 					
 					 Promise.all(promiseArr)
-						 .then( function (result){
+						 .then( function (){
 								logger.info('Sending call back after Promise success' + ConversationIdsList.length );		
 								callback(sendBackConversation);
 								})
