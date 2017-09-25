@@ -127,7 +127,8 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 				 
 				function chkIndvidualConversation(conversation){
 					 
-					return new Promise((resolve,reject) => {    
+					return new Promise((resolve,reject) => {
+						logger.info(  ' checking conversation._id : '+conversation._id	);					
 						 if (conversation.count===2){
 								Conversation.findOne({_id:(conversation._id)})
 								.exec(function(err, conversation){
@@ -137,6 +138,7 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 										reject(error);
 										}																	
 										if (conversation){
+											logger.info(  conversation._id	+ ' found ');	
 											if (!conversation.isGroupConversation){
 											conversation=conversation.toObject({getters: false});												
 											logger.info( conversation._id + " - indivdual Conversation found")
@@ -146,12 +148,14 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 												
 										}
 										else {
+											logger.info(  conversation._id	+ ' is null  ');	
 											resolve(1);
 										}
 										
 									});
 							}	
 							else{
+								logger.info(  conversation._id	+ ' count != 2  ');
 								resolve(1);
 							} 
 										   
