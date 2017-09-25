@@ -38,8 +38,10 @@ exports.sendNotifcationToPlayerId = function (playerId,obj,eventName){
   headings:{"en":eventName},
   include_player_ids: [playerId],
   data:obj,
-  priority:10
-  //event_name:eventName
+  priority:10,
+  
+  //will need to change for ios
+  android_group:eventName
 };
 	
   var req = https.request(options, function(res) {  
