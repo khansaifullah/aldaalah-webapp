@@ -117,7 +117,7 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 			  }                                    
           }
 		],function (err, ConversationIdsList) {
-			
+			logger.info ('Inside function of model.aggregate');
 		if (err){
 			 logger.info('Error While getting aggregate of converation users'+err);  
 		}	
@@ -168,10 +168,9 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 			logger.info('Conversation List Not Found, Size :' + ConversationIdsList.length );
 			callback(null);
 		}
-				 
-						  
+    logger.info(' Exit ChatController.chkPreviousConversation Method');					  
      });	 	   
-    logger.info(' Exit ChatController.chkPreviousConversation Method');   
+   
 	
 	}catch(err){
 		  logger.info('An Exception Has occured in findConversation method' + err);		  
