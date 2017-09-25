@@ -279,6 +279,86 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 	
 }
 
+//Add group Members
+
+exports.addGroupMember=function(req,res){
+    try {
+		logger.info('addGroupMember Method Called');
+		var conversationId=req.body.conversationId;
+		var arrayOfNumbers =req.body.groupMembersList;
+		var newConversationUser;
+        var arrayToSend = [];
+		let promiseArr = [];
+  
+    function addMember(num){
+           
+        return new Promise((resolve,reject) => {
+
+				newConversationUser= new ConversationUser({                                          
+								_conversationId: conversationId, 
+								_userMobile: num  
+								});
+							
+				newConversationUser.save(function (err, conversationUser) {
+						if (err){
+							logger.error('Error Occured while Saving new newConversationUser 1 :'+ err);
+							reject(err);
+						} 
+						if (conversationUser){
+							logger.info('Conversation user saved with phoneNo :' +num);
+							arrayToSend.push(num);
+							resolve();
+						}
+						else {
+							logger.info('Null conversation user found:' +num);
+							resolve();
+						}
+					});                                        
+        });
+    }                                   
+  
+
+		var query = { _id : conversationId };
+		Conversation.findOne(query).exec(function(err,conversation){
+			if (err){
+				logger.error('Some Error while finding conversation' + err );
+				res.status(400).send({status:"failure",
+									  message:err,
+									  object:[]
+				});
+			}
+			else
+			if (conversation){                
+				logger.info('conversation Found with Phone Num. :' +conversationId);				
+				arrayOfNumbers.forEach(function(number) {              
+					promiseArr.push(addMember(number));        
+				 });
+				
+				 Promise.all(promiseArr)
+					 .then((result)=> res.jsonp({status:"success",
+									   message:"New Members added to Group",
+									  object:arrayToSend}))
+					 .catch((err)=>res.send({status:"failure",
+									   message:"Error Occured while syncing contacts",
+									  object:[]}));
+				
+				}
+			else{               
+					logger.info('conversation with conversationId : ' +conversationId + ' is not created or deleted');
+						res.jsonp({ status:"failure",
+									message:"Converation Not found",
+									object:arrayToSend});	 
+				}
+		   
+		 });
+    
+	}catch  (err){
+		logger.info ('An Exception occured ChatController.createGroup ' + err);
+	}	
+	
+}
+
+
 // List of All Groups
 exports.findAllGroups=function(callback){
 	try{
@@ -316,12 +396,6 @@ exports.findConversationMembers=function(conversationId,callback){
 							 //query with mongoose
 			   ConversationUser.find({'_conversationId': conversationId}, function(err, members) {
 				if (err){
-						/*
-					res.status(400).send({status:"failure",
-											  message:err,
-											  object:[]
-											});
-											*/
 					callback(null);
 					logger.info(' Error Occured While Getting conversation Uses : ' + err);
 				}

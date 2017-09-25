@@ -254,6 +254,26 @@ module.exports = function(app) {
 	});
 	
 	
+	 app.post('/groupMember',function(req,res){
+		
+	   if(req.body === undefined||req.body === null) {
+        res.end("Empty Body"); 
+        }
+		console.log("in routes POST /groupMember");
+		//var reqData=req.body;
+        // console.log(reqData);
+		ChatController.addGroupMember(req,res);
+	});
+	 app.delete('/groupMember',function(req,res){
+		
+	   if(req.body === undefined||req.body === null) {
+        res.end("Empty Body"); 
+        }
+		console.log("in routes /location");
+		var reqData=req.body;
+        // console.log(reqData);
+		LocController.updateUserLocation(reqData,res);
+	});
 	/***** Location Apis ********/ 
 	//get location From Client
 	
