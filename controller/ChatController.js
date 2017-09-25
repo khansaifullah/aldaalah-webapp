@@ -155,13 +155,14 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 						});
 					}
 					logger.info('Conversation List Size :' + ConversationIdsList.length );						 
-					 
-					
-					 Promise.all(
 					 ConversationIdsList.forEach(function(conversation) { 		
-					 chkIndvidualConversation(conversation);        
-					 })
-					 )
+							 promiseArr.push(chkIndvidualConversation(conversation));        
+					 });
+					 logger.info('promiseArr List Size :' + promiseArr.length );
+					 promiseArr.forEach(function(conversation) {
+					logger.info(conversation);
+					});
+					 Promise.all(promiseArr)
 						 .then((result)=> {
 								logger.info('Sending call back after Promise success' + ConversationIdsList.length );		
 								callback(sendBackConversation);
