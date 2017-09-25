@@ -141,18 +141,18 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 											conversation=conversation.toObject({getters: false});												
 											logger.info( conversation._id + " - indivdual Conversation found")
 											sendBackConversation=conversation._id;
-											resolve();														
+											resolve(1);														
 											}
 												
 										}
 										else {
-											resolve();
+											resolve(1);
 										}
 										
 									});
 							}	
 							else{
-								resolve();
+								resolve(1);
 							} 
 										   
 						});
