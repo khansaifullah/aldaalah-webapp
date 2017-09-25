@@ -135,8 +135,8 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 													
 										if (err){
 										console.log ( 'An Error Occured before returning Promise' + err);
-										//reject(error);
-										resolve(1);
+										reject(error);
+										//resolve(1);
 										}																	
 										if (conversation){
 											logger.info(  conversation._id	+ ' found ');	
@@ -145,6 +145,9 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 											logger.info( conversation._id + " - indivdual Conversation found")
 											sendBackConversation=conversation._id;
 											resolve(1);														
+											}
+											else {
+											resolve(1);	
 											}
 												
 										}
