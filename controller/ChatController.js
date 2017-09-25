@@ -145,6 +145,9 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 											}
 												
 										}
+										else {
+											resolve();
+										}
 										
 									});
 							}	
