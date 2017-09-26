@@ -312,6 +312,95 @@ io.sockets.on('connection', function(socket) {
 	
 	});  //end of groupRequest Event
     
+	
+	
+	socket.on('groupRequestToNewMembers', function (conversationId) {
+		try {
+			logger.info('groupRequest Event  Called for conversation id :' + conversationId);
+			var socketid;
+			var conversation;
+			var createdDate;
+			var myDate;
+			ChatController.findConversation (conversationId , function(con){
+					
+					if (con){
+						logger.info ('Conversation Found for Id  : '+ conversationId);
+						conversation=con;
+						
+						ChatController.findConversationMembers(conversationId, function(members){
+						if (members){
+								logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
+								myDate = new Date(members[0].createdAt);
+								createdDate = myDate.getTime();
+								
+								var conversationObj ={
+										//fromPhoneNo:userMobileNumberFrom,	
+										conversationId:conversationId, 
+										isGroupConversation:con.isGroupConversation,
+										adminMobile:con.adminMobile,
+										photoUrl:con.conversationImageUrl,
+										conversationName:con.conversationName,
+										createdAt:createdDate,
+										
+										}
+										logger.info (' Conversation createdAt :' + conversationObj.createdAt);
+										
+										//Notifying All Group Members
+								for (var i=0; i < members.length ; i++){
+									var phoneNo=members[i]._userMobile;
+									if (phoneNo!==(conversationObj.adminMobile)){
+										logger.info('Getting Socket Id against Phone No :' +phoneNo)
+										socketid= userHashMaps.get (phoneNo);
+										
+										//Emiting on socket
+										logger.info('Emiting groupConversationRequest to socket: '+ socketid);									 
+										if (io.sockets.connected[socketid]) {
+											logger.info( socketid + ' is in connected Sockets List ');
+												io.sockets.connected[socketid].emit('groupConversationRequest', conversationObj);																							
+										} 
+										
+										//Sending Push Notiifcation To Group Members								
+										logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
+										//var phoneNo=members[i]._userMobile;
+										var query = { phone : phoneNo };
+										
+										User.findOne(query).exec(function(err, user){
+											if (err){
+											 logger.error('Some Error occured while finding user' + err );
+											 }
+											if (user){
+											logger.info('User Found For Phone No: ' + phoneNo );
+											logger.info('Sending Notification to player id ' + user.palyer_id );
+											NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupConversationRequest");
+											}
+											else {
+											 logger.info('User not Found For Phone No: ' + phoneNo );                 
+											}                               
+										});
+									}								
+								}
+						}
+						});
+					}
+					if (con==null){
+						logger.info ('Conversation with conversationId : '+ conversationId + 'is either deleted or not created yet');
+						
+					}
+					
+				});
+				if (conversation!==null && conversation !== undefined ){
+					logger.info ('Conversation Not Found');
+					
+				}				
+		} catch (err){
+			logger.info('An Exception Has occured in groupRequest event ' + err);
+		}		
+	
+	});  //end of groupRequestToNewMembers Event
+    
+	
+	
+	
     socket.on('sendMessage', function (data) {
 		try {
 			logger.info('Data Object : '+data);

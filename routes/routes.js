@@ -92,7 +92,7 @@ module.exports = function(app) {
         }
     
 		console.log("in routes - Req Body : " + req.body.phone);
-        console.log("in routes - File : " + req.file);
+        console.log("in routes - File : " + req.file.profilePhoto);
 		//console.log('file Name : ' + storage.filename);
 	 var upload = multer({
 		storage: storage,
