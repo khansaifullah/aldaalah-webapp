@@ -192,12 +192,12 @@ console.log("In Controller completeProfile Method");
     userExists(phoneNo,function(user){
         if (user){            
             //update user model
-              user.full_name=fullName,
-              user.profile_photo_url=profilePhotoUrl,
-              user.active=false, 
-              user.OS=os,
-
-              user.verified_user=true,      
+			if (fullName)
+              user.full_name=fullName;
+              user.profile_photo_url=profilePhotoUrl;
+              user.active=false;
+              user.OS=os;
+              user.verified_user=true;     
                 
               user.save(function (err, user){
                 if(err){
@@ -235,7 +235,7 @@ console.log("In Controller completeProfile Method");
 
 
 
-exports.updateName = function(req,res) {
+exports.updateName = function(req,callback) {
 	try{
  	
 	var phoneNo = req.body.phoneNo;
@@ -248,22 +248,19 @@ exports.updateName = function(req,res) {
               user.full_name=fullName, 
               user.save(function (err, user){
                 if(err){
-                    logger.error('Some Error while updating user' + err );                         
+                    logger.error('Some Error while updating user' + err ); 
+					callback();
                 }
                 else{
                     logger.info('User Name updated With Phone Num ' + phoneNo );
-                    res.jsonp({status:"success",
-					message:"User Name Updated!",
-							object:user}); 
+                   callback(user);
                 }
               });
                 
         }
         else{
             logger.info('No User Found to Update With Phone Num ' + phoneNo );
-            res.jsonp({status:"failure",
-                            message:"No User Found to Update!",
-                            object:[]}); 
+            callback();
         }
     });
     
@@ -274,7 +271,7 @@ exports.updateName = function(req,res) {
 	
 }
 
-exports.updateProfilePhoto = function(phoneNo,profilePhotoUrl,res) {
+exports.updateProfilePhoto = function(phoneNo,profilePhotoUrl,callback) {
 	try{
 console.log("In Controller updateProfilePhoto Method");
     
@@ -285,25 +282,20 @@ console.log("In Controller updateProfilePhoto Method");
         if (user){            
               user.profile_photo_url=profilePhotoUrl, 
               user.save(function (err, user){
-                 if(err){
+                if(err){
                         logger.error('Some Error while updating user' + err );
-                         
-                    }
-                         else{
-                            
+                         callback();
+                }
+                else{                            
                             logger.info('User Profile Photo updated With Phone Num ' + phoneNo );
-                            res.jsonp({status:"success",
-							message:"Profile Photo Updated!",
-							object:user}); 
-                         }
+							callback(user);
+                }
               });
                 
         }
         else{
             logger.info('No User Found to Update With Phone Num ' + phoneNo );
-            res.jsonp({status:"failure",
-                            message:"No User Found to Update!",
-                            object:[]}); 
+            callback(); 
         }
     });
     

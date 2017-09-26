@@ -19,9 +19,9 @@ var storage = multer.diskStorage({
 	},
 	filename: function(req, file, callback) {
 		tempFileName="";
-		console.log("Printing in File Name Field :" + 'file.fieldname : ' + file.fieldname + ' file.originalname :' + file.originalname );
+		//console.log("Printing in File Name Field :" + 'file.fieldname : ' + file.fieldname + ' file.originalname :' + file.originalname );
 		tempFileName=file.fieldname + '-' + Date.now() + path.extname(file.originalname);
-		console.log("File NEW Name  :" +tempFileName );
+		//console.log("File NEW Name  :" +tempFileName );
 		callback(null,tempFileName );
 	}
 });
@@ -91,37 +91,34 @@ module.exports = function(app) {
         res.end("Empty Body"); 
         }
     
-		console.log("in routes - Req Body : " + req.body.phone);
-        console.log("in routes - File : " + req.file.profilePhoto);
-		//console.log('file Name : ' + storage.filename);
-	 var upload = multer({
-		storage: storage,
-		fileFilter: function(req, file, callback) {			
-			var ext = path.extname(file.originalname)
-			if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
-				return callback(res.end('Only images are allowed'), null)
+		console.log("in routes - profile : " + req.body.phone);
+		var upload = multer({
+			storage: storage,
+			fileFilter: function(req, file, callback) {			
+				var ext = path.extname(file.originalname)
+				if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+					return callback(res.end('Only images are allowed'), null)
+				}
+				callback(null, true)
 			}
-			callback(null, true)
-		}
-	}).single('profilePhoto');
-	upload(req, res, function(err) {
-        if (err){
-            res.jsonp({status:"Failure",
-                        message:"Error Uploading File",
-                        object:[]});
-        }
-        else{
-        logger.info ("File Is uploaded");
-		//logger.info ("Printing  Storage ");
-		var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
-		logger.info("profilePhotoUrl" + profilePhotoUrl);
-		//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
-        regCtrl.completeProfile(req.body,profilePhotoUrl,res);
-            
-            
-        }
-		
-	})
+		}).single('profilePhoto');
+		upload(req, res, function(err) {
+			if (err){
+				res.jsonp({status:"Failure",
+							message:"Error Uploading File",
+							object:[]});
+			}
+			else{
+			logger.info ("File Is uploaded");
+			var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
+			logger.info("profilePhotoUrl" + profilePhotoUrl);
+			//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
+			regCtrl.completeProfile(req.body,profilePhotoUrl,res);
+				
+				
+			}
+			
+		})
 		
 	});
     
@@ -131,57 +128,163 @@ module.exports = function(app) {
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
-    
+		
 		console.log("in routes");
         
-	 var upload = multer({
-		storage: storage,
-		fileFilter: function(req, file, callback) {
-			var ext = path.extname(file.originalname)
-			if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
-				return callback(res.end('Only images are allowed'), null)
+		var upload = multer({
+			storage: storage,
+			fileFilter: function(req, file, callback) {
+				var ext = path.extname(file.originalname)
+				if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+					return callback(res.end('Only images are allowed'), null)
+				}
+				callback(null, true)
 			}
-			callback(null, true)
-		}
-	}).single('profilePhoto');
-	upload(req, res, function(err) {
-        if (err){
-            res.jsonp({status:"Failure",
-                        message:"Error Uploading File",
-                        object:[]});
-        }
-        else{        
-			logger.info ("Photo Is uploaded");
-			console.log(req.body.phone);
-		 //geneterate a url 
-		var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
-		//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
-	
-        regCtrl.updateProfilePhoto(req.body.phone,profilePhotoUrl,res);            
-            
-        }
+		}).single('profilePhoto');
+		upload(req, res, function(err) {
+			if (err){
+				res.jsonp({status:"Failure",
+							message:"Error Uploading File",
+							object:[]});
+			}
+			else{        
+				logger.info ("Photo Is uploaded");
+				console.log(req.body.phone);
+			 //geneterate a url 
+			var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
+			//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
 		
-	})
+			regCtrl.updateProfilePhoto(req.body.phone,profilePhotoUrl,function(data){
+				
+			});            
+				
+			}
+		
+		})
 		
 	});
 
-	app.post('/fullName',function(req,res){
+	app.post('/updateProfile',function(req,res){
 		
-	   if(req.body === undefined||req.body === null) {
+		console.log("in routes fullName");
+		
+		if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
-		console.log("in routes /fullName");
-		regCtrl.updateName(req,res);
+		
+		var upload = multer({
+			storage: storage,
+			fileFilter: function(req, file, callback) {
+				var ext = path.extname(file.originalname)
+				if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+					return callback(res.end('Only images are allowed'), null)
+				}
+				callback(null, true)
+			}
+		}).single('profilePhoto');
+		upload(req, res, function(err) {
+			if (err){
+				res.jsonp({status:"Failure",
+							message:"Error Uploading File",
+							object:[]});
+			}
+			else{      
+			
+				logger.info ("Photo Is uploaded");
+				console.log(req.body.phoneNo);
+				//geneterate a url 
+				var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
+				//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
+		
+				if (req.body.updateProfilePhoto){
+					regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
+					if (data){
+						 
+					}
+					});
+				}
+						//Updating Name
+				if (req.body.updateName){
+					regCtrl.updateName(req,function (data){
+					
+					});
+				}
+					res.jsonp({ status:"success",
+					message:"Profile has been Updated!",
+					object:[]});
+			}
+			});            
 	});
-	
+		
+		/*
+		
+		//}
+		else{
+			if (req.body.updateName){
+				console.log('updateName flag: '+req.body.updateName);
+				regCtrl.updateName(req,function(data){
+				if (data){
+					res.jsonp({ status:"success",
+					message:"Name has been Updated!",
+					object:data});
+				}
+				
+				});
+					
+			}
+			else
+			if (req.body.updateProfilePhoto){
+				console.log('updateProfilePhoto flag: '+req.body.updateProfilePhoto);
+				//uploading profile Photo First
+				var upload = multer({
+					storage: storage,
+					fileFilter: function(req, file, callback) {
+						var ext = path.extname(file.originalname)
+						if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+							return callback(res.end('Only images are allowed'), null)
+						}
+						callback(null, true)
+					}
+				}).single('profilePhoto');
+				upload(req, res, function(err) {
+					if (err){
+						res.jsonp({status:"Failure",
+									message:"Error Uploading File",
+									object:[]});
+					}
+					else{        
+						logger.info ("Photo Is uploaded");
+						console.log(req.body.phoneNo);
+						 //geneterate a url 
+						var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
+						//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
+					
+						regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function(data){
+						if (data){
+							res.jsonp({ status:"success",
+							message:"Profile Photo has been Updated!",
+							object:data});
+						}
+						});            
+						
+					}
+				
+				});
+			}
+			
+			else {
+				res.jsonp({ status:"failure",
+							message:"Please Provide Valid parameters",
+							object:[]});
+			}
+			*/
+
     app.post('/contacts',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
 		console.log("in routes /contacts");
-		//var reqData=req.body;
-        // console.log(reqData);
 		regCtrl.syncContacts(req,res);
 	});
   
