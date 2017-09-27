@@ -167,7 +167,7 @@ module.exports = function(app) {
 	app.post('/updateProfile',function(req,res){
 		
 		console.log("in routes fullName");
-		
+		var user;
 		if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
@@ -196,89 +196,60 @@ module.exports = function(app) {
 				var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
 				//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
 		
-				if (req.body.updateProfilePhoto){
+				if ((req.body.updateProfilePhoto)&&(req.body.updateName)){
+					//update picture
 					regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
 					if (data){
-						 
+						 logger.info ('data received after updating profile picture');
+						 //update Name
+						regCtrl.updateName(req,function (user){
+						 if (user){
+							logger.info ('data received after updating profile picture');
+							res.jsonp({ status:"success",
+							message:"Profile has been Updated!",
+							object:user});
+						 }
+						 else{
+							 
+						 }
+						});
+					}
+					else{
+						
 					}
 					});
-				}
-						//Updating Name
-				if (req.body.updateName){
-					regCtrl.updateName(req,function (data){
 					
-					});
+					
 				}
-					res.jsonp({ status:"success",
-					message:"Profile has been Updated!",
-					object:[]});
+				else {
+					if (req.body.updateProfilePhoto){
+						regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
+						if (data){
+							 user=data;
+							 res.jsonp({ status:"success",
+							message:"Profile Photo has been Updated!",
+							object:user});
+						}
+						});
+					}
+					//Updating Name
+					if (req.body.updateName){
+						regCtrl.updateName(req,function (data){
+						if (data){
+							 user=data;
+							 res.jsonp({ status:"success",
+							message:"Name has been Updated!",
+							object:user});
+						}
+						});
+					}
+				}
+					
 			}
 			});            
 	});
 		
-		/*
 		
-		//}
-		else{
-			if (req.body.updateName){
-				console.log('updateName flag: '+req.body.updateName);
-				regCtrl.updateName(req,function(data){
-				if (data){
-					res.jsonp({ status:"success",
-					message:"Name has been Updated!",
-					object:data});
-				}
-				
-				});
-					
-			}
-			else
-			if (req.body.updateProfilePhoto){
-				console.log('updateProfilePhoto flag: '+req.body.updateProfilePhoto);
-				//uploading profile Photo First
-				var upload = multer({
-					storage: storage,
-					fileFilter: function(req, file, callback) {
-						var ext = path.extname(file.originalname)
-						if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
-							return callback(res.end('Only images are allowed'), null)
-						}
-						callback(null, true)
-					}
-				}).single('profilePhoto');
-				upload(req, res, function(err) {
-					if (err){
-						res.jsonp({status:"Failure",
-									message:"Error Uploading File",
-									object:[]});
-					}
-					else{        
-						logger.info ("Photo Is uploaded");
-						console.log(req.body.phoneNo);
-						 //geneterate a url 
-						var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
-						//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
-					
-						regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function(data){
-						if (data){
-							res.jsonp({ status:"success",
-							message:"Profile Photo has been Updated!",
-							object:data});
-						}
-						});            
-						
-					}
-				
-				});
-			}
-			
-			else {
-				res.jsonp({ status:"failure",
-							message:"Please Provide Valid parameters",
-							object:[]});
-			}
-			*/
-
     app.post('/contacts',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
