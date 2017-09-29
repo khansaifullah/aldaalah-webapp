@@ -277,7 +277,7 @@ exports.addGroupMember=function(req,res){
 		var conversationId=req.body.conversationId;
 		var groupMembersList =req.body.groupMembersList;
 		var arrayOfNumbers;
-		if (arrayOfNumbers){
+		if (groupMembersList){
 			arrayOfNumbers=groupMembersList.values;
 		}
 			
@@ -377,7 +377,7 @@ exports.addGroupMember=function(req,res){
 				  }
 				  else {
 					              
-					logger.info('No meber found to add in conversation : '+conversationId);
+					logger.info('No member found to add in conversation : '+conversationId);
 						res.jsonp({ status:"failure",
 									message:"No members found to add",
 									object:arrayToSend});
