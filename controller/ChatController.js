@@ -1,5 +1,4 @@
-
-//var AppController= require('../controller/AppController.js');
+var NotificationController= require('../controller/PushNotificationController.js');
 var User = require('../models/User.js');
 var db = require('../config/db');
 var ConversationMessages = require('../models/ConversationMessages.js');
@@ -94,12 +93,6 @@ exports.findConversation =function(conversationId,callback){
 }
 
 
-
-
-
-
-
-
 exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callback){
 	
     try{
@@ -169,10 +162,7 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 					 ConversationIdsList.forEach(function(conversation) { 		
 							 promiseArr.push(chkIndvidualConversation(conversation));        
 					 });
-					 logger.info('promiseArr List Size :' + promiseArr.length );
-					 promiseArr.forEach(function(conversation) {
-					logger.info(conversation);
-					});
+					
 					 Promise.all(promiseArr)
 						 .then((result)=> {
 								logger.info('Sending call back after Promise success' + ConversationIdsList.length );		
@@ -315,8 +305,7 @@ exports.addGroupMember=function(req,res){
 						}
 					});                                        
         });
-    }                                   
-  
+    }                 
 
 		var query = { _id : conversationId };
 		Conversation.findOne(query).exec(function(err,conversation){
@@ -328,8 +317,47 @@ exports.addGroupMember=function(req,res){
 				});
 			}
 			else
-			if (conversation){                
-				logger.info('conversation Found with Phone Num. :' +conversationId);				
+			if (conversation){ 
+				logger.info('conversation Found with Phone Num. :' +conversationId);
+				var conversationObj ={
+										//fromPhoneNo:userMobileNumberFrom,	
+										conversationId:conversation._id, 
+										isGroupConversation:conversation.isGroupConversation,
+										adminMobile:conversation.adminMobile,
+										photoUrl:conversation.conversationImageUrl,
+										conversationName:conversation.conversationName,
+										createdAt:conversation.createdAt
+										
+										}
+				// send notification of joining group
+					var phoneNo;
+					var query; 	
+				  if (arrayOfNumbers){
+					  arrayOfNumbers=arrayOfNumbers.values;
+					for (var i=0; i < arrayOfNumbers.length ; i++){
+						 phoneNo=arrayOfNumbers[i];	
+						//Sending Push Notiifcation To New Group Members								
+						logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
+						
+						query = { phone : phoneNo };
+						
+						User.findOne(query).exec(function(err, user){
+							if (err){
+							 logger.error('Some Error occured while finding user' + err );
+							 }
+							if (user){
+							logger.info('User Found For Phone No: ' + phoneNo );
+							logger.info('Sending Notification to player id ' + user.palyer_id );
+							NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupConversationRequest");
+							}
+							else {
+							 logger.info('User not Found For Phone No: ' + phoneNo );                 
+							}                               
+						});
+														
+					}
+							
+								
 				arrayOfNumbers.forEach(function(number) {              
 					promiseArr.push(addMember(number));        
 				 });
@@ -341,7 +369,14 @@ exports.addGroupMember=function(req,res){
 					 .catch((err)=>res.send({status:"failure",
 									   message:"Error Occured while syncing contacts",
 									  object:[]}));
-				
+				  }
+				  else {
+					              
+					logger.info('No meber found to add in conversation : '+conversationId);
+						res.jsonp({ status:"failure",
+									message:"No members found to add",
+									object:arrayToSend});
+				  }
 				}
 			else{               
 					logger.info('conversation with conversationId : ' +conversationId + ' is not created or deleted');
