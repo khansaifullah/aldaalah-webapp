@@ -275,7 +275,12 @@ exports.addGroupMember=function(req,res){
     try {
 		logger.info('addGroupMember Method Called');
 		var conversationId=req.body.conversationId;
-		var arrayOfNumbers =req.body.groupMembersList;
+		var groupMembersList =req.body.groupMembersList;
+		var arrayOfNumbers;
+		if (arrayOfNumbers){
+			groupMembersList.values;
+		}
+			
 		var newConversationUser;
         var arrayToSend = [];
 		let promiseArr = [];
@@ -333,7 +338,7 @@ exports.addGroupMember=function(req,res){
 					var phoneNo;
 					var query; 	
 				  if (arrayOfNumbers){
-					  arrayOfNumbers=arrayOfNumbers.values;
+					  //arrayOfNumbers=arrayOfNumbers.values;
 					for (var i=0; i < arrayOfNumbers.length ; i++){
 						 phoneNo=arrayOfNumbers[i];	
 						//Sending Push Notiifcation To New Group Members								
