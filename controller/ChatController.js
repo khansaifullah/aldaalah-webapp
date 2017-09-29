@@ -278,7 +278,7 @@ exports.addGroupMember=function(req,res){
 		var groupMembersList =req.body.groupMembersList;
 		var arrayOfNumbers;
 		if (arrayOfNumbers){
-			groupMembersList.values;
+			arrayOfNumbers=groupMembersList.values;
 		}
 			
 		var newConversationUser;
