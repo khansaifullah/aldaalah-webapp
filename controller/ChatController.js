@@ -309,13 +309,15 @@ exports.addGroupMember=function(req,res){
 		logger.info('addGroupMember Method Called');
 		var conversationId=req.body.conversationId;
 		var groupMembersList =req.body.groupMembersList;
+		groupMembersList=JSON.parse(groupMembersList);
 		console.log ('Conversation id  : '+conversationId);
 		console.log ('groupMembersList : '+groupMembersList);
-		console.log ('arrayOfNumbers : '+groupMembersList.values);
+		
 		
 		var arrayOfNumbers;
 		if (groupMembersList){
 			arrayOfNumbers=groupMembersList.values;
+			console.log ('arrayOfNumbers : '+ arrayOfNumbers);
 		}
 			
 		var newConversationUser;
@@ -381,8 +383,7 @@ exports.addGroupMember=function(req,res){
 						//Sending Push Notiifcation To New Group Members								
 						logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
 						
-						query = { phone : phoneNo };
-						
+						query = { phone : phoneNo };						
 						User.findOne(query).exec(function(err, user){
 							if (err){
 							 logger.error('Some Error occured while finding user' + err );
@@ -398,7 +399,6 @@ exports.addGroupMember=function(req,res){
 						});
 														
 					}
-							
 								
 				arrayOfNumbers.forEach(function(number) {              
 					promiseArr.push(addMember(number));        
