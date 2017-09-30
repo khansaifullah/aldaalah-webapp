@@ -327,11 +327,11 @@ module.exports = function(app) {
 	});
 	});
 	
-	/*
+	
 	app.post('/updateGroup',function(req,res){
 		
 		console.log("in routes updateGroup");
-		var user;
+		var conversation;
 		if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
@@ -355,23 +355,23 @@ module.exports = function(app) {
 			else{      
 			
 				logger.info ("Photo Is uploaded");
-				console.log(req.body.conversationId);
+				console.log("Conversation id : "+req.body.conversationId);
 				//geneterate a url 
 				var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
 				//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
 		
 				if ((req.body.updateProfilePhoto)&&(req.body.updateName)){
 					//update picture
-					regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
+					ChatController.updateGroupProfilePhoto(req.body.conversationId,profilePhotoUrl,function (data){
 					if (data){
-						 logger.info ('data received after updating profile picture');
+						 logger.info ('data received after updating Group profile picture');
 						 //update Name
-						regCtrl.updateName(req,function (user){
-						 if (user){
+						ChatController.updateGroupName(req,function (group){
+						 if (group){
 							logger.info ('data received after updating profile picture');
 							res.jsonp({ status:"success",
-							message:"Profile has been Updated!",
-							object:user});
+							message:"Group has been Updated!",
+							object:group});
 						 }
 						 else{
 							 
@@ -382,28 +382,27 @@ module.exports = function(app) {
 						
 					}
 					});
-					
-					
+				
 				}
 				else {
 					if (req.body.updateProfilePhoto){
-						regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
+						ChatController.updateGroupProfilePhoto(req.body.conversationId,profilePhotoUrl,function (data){
 						if (data){
-							 user=data;
+							 conversation=data;
 							 res.jsonp({ status:"success",
-							message:"Profile Photo has been Updated!",
-							object:user});
+							message:"Group Profile Photo has been Updated!",
+							object:conversation});
 						}
 						});
 					}
 					//Updating Name
 					if (req.body.updateName){
-						regCtrl.updateName(req,function (data){
+						ChatController.updateGroupName(req,function (data){
 						if (data){
-							 user=data;
+							 conversation=data;
 							 res.jsonp({ status:"success",
-							message:"Name has been Updated!",
-							object:user});
+							message:"Group Name has been Updated!",
+							object:conversation});
 						}
 						});
 					}
@@ -414,7 +413,6 @@ module.exports = function(app) {
 	});
 	
     	
-	*/
 	
 	 app.post('/groupMember',function(req,res){
 		

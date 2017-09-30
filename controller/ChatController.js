@@ -269,8 +269,53 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 	
 }
 
-//Update Group
-/*
+//Update Group Name
+
+exports.updateGroupName = function(req,callback) {
+	try{
+ 	
+	var conversationId = req.body.conversationId;
+    var conversationName=req.body.conversationName;
+	console.log("In Controller updateGroupName Method");    
+    logger.info('ChatController.updateGroupName called for user  :'  + conversationId  );
+ 
+		Conversation.findOne({_id: conversationId})
+								.exec(function(err, conversation){
+													
+										if (err){
+										console.log ( 'An Error Occured before returning Promise' + err);
+										callback();
+										}																	
+										if (conversation){
+											
+											conversation.conversationName=conversationName, 
+											conversation.save(function (err, user){
+												if(err){
+														logger.error('Some Error while updating user' + err );
+														 callback();
+												}
+												else{                            
+															logger.info('Group Name updated With ConversationId ' + conversationId );
+															callback(conversation);
+												}
+											});
+																		
+										}											
+										else {
+										//logger.info( );	
+										callback();
+										}
+										
+									});
+ 
+    logger.info(' Exit ChatController.updateGroupName Method');
+	}catch (err){
+		logger.info('An Exception Has occured in updateGroupName method' + err);
+	}
+	
+}
+
+//update Profile Photo
 exports.updateGroupProfilePhoto=function(conversationId,profilePhotoUrl,callback){
 		
 	try{
@@ -284,24 +329,36 @@ exports.updateGroupProfilePhoto=function(conversationId,profilePhotoUrl,callback
 										console.log ( 'An Error Occured before returning Promise' + err);
 										callback();
 										}																	
-																					
+										if (conversation){
+											
+											conversation.conversationImageUrl=profilePhotoUrl, 
+											conversation.save(function (err, user){
+												if(err){
+														logger.error('Some Error while updating user' + err );
+														 callback();
+												}
+												else{                            
+															logger.info('Group Profile Photo updated With conversationId' + conversationId );
+															callback(conversation);
+												}
+											});
+																		
+										}											
 										else {
 										//logger.info( );	
-										callback(conversation);
+										callback();
 										}
 										
 									});
-									
-	 
-    
-    logger.info(' Exit RegistrationController.updateProfilePhoto Method');
+
+    logger.info(' Exit ChatController.updateGroupProfilePhoto Method');
 	}catch (err){
-		logger.info('An Exception Has occured in updateProfilePhoto method' + err);
+		logger.info('An Exception Has occured in updateGroupProfilePhoto method' + err);
 	}
 
 }
 
-*/
+
 //Add group Members
 
 exports.addGroupMember=function(req,res){
