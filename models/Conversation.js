@@ -8,12 +8,10 @@ var ConversationSchema   = new mongoose.Schema({
     conversationName:String,
     adminMobile:String,
 	conversationImageUrl:String,
-    //createdOnUTC:  { type: Date, default: Date.now },
-    //updatedOnUTC:  { type: Date, default: Date.now },
     deletedByUserMobile: String,
-    isGroupConversation:{type:Boolean,default:false }
+    isGroupConversation:{type:Boolean,default:false },
+	//isClosed:{type:Boolean,default:false }
 }, {timestamps: true});
-
 
 
 ConversationSchema.index({_adminId:1,adminMobile:1})

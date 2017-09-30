@@ -411,6 +411,53 @@ exports.updatePlayerId = function(req,res) {
 	}
 	
 }
+
+exports.deactivateAccount=function(reqData,res){
+    
+    try{
+    logger.info('RegistrationController.deactivateAccount called  :'  + reqData.phoneNo );
+    
+    var phoneNo = reqData.phoneNo;   
+    //find user by phone no.
+    userExists(phoneNo,function(user){
+		logger.info('User Exists Response : ' + user );
+        if (user){
+			user.deactivate_user=true;
+         
+                     user.save(function (err, user) {
+                    if(err){
+                        logger.error('Some Error while saving user' + err );
+                        res.jsonp({status:"failure",
+                            message:"Some Error while saving user",
+                            object:[]}); 
+                    }
+                    else{                            
+                        logger.info('User Deactivated With Phone Num ' + phoneNo );
+                        res.jsonp({status:"success",
+                        message:"User Profile successfully deactivated!",
+                        object:[]});
+                             
+                     }
+                   
+                     });
+            
+                         
+        }
+        else{
+  
+                console.log (" No user Exist With Phone No" + phoneNo);                             
+                 res.jsonp({status:"failure",
+				message:"User does not exist",
+				object:[]});
+        }
+            
+    });
+    
+    logger.info(' Exit RegistrationController.deactivateAccount Method');
+    }catch (err){
+		logger.info('An Exception Has occured in deactivateAccount method' + err);
+	}
+}
             /**********  Above Code is Working*****/
     
 

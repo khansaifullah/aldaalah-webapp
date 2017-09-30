@@ -73,6 +73,22 @@ module.exports = function(app) {
 	});
     
     
+	   app.post('/deactivateAccount',function(req,res){                         
+		
+	   if(req.body === undefined||req.body === null) {
+        res.end("Empty Body");  
+        }
+            
+        logger.info('deactivateAccount-POST called ');
+            
+        var reqData=req.body;
+        console.log("Phone No : "+ reqData.phoneNo);
+		console.log("in routes /deactivateAccount ");
+         
+        regCtrl.deactivateAccount(reqData,res);	
+	
+		});
+	
 	app.post('/login',function(req,res){
 		var email = req.body.email;
         var password = req.body.password;
