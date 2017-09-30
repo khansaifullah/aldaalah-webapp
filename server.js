@@ -257,7 +257,7 @@ io.sockets.on('connection', function(socket) {
 										createdAt:createdDate,
 										
 										}
-										logger.info (' Conversation createdAt :' + conversationObj.createdAt);
+									
 										
 										//Notifying All Group Members
 								for (var i=0; i < members.length ; i++){

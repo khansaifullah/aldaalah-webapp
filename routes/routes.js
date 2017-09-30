@@ -166,7 +166,7 @@ module.exports = function(app) {
 
 	app.post('/updateProfile',function(req,res){
 		
-		console.log("in routes fullName");
+		console.log("in routes updateProfile");
 		var user;
 		if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -327,6 +327,94 @@ module.exports = function(app) {
 	});
 	});
 	
+	/*
+	app.post('/updateGroup',function(req,res){
+		
+		console.log("in routes updateGroup");
+		var user;
+		if(req.body === undefined||req.body === null) {
+        res.end("Empty Body"); 
+        }
+		
+		var upload = multer({
+			storage: storage,
+			fileFilter: function(req, file, callback) {
+				var ext = path.extname(file.originalname)
+				if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+					return callback(res.end('Only images are allowed'), null)
+				}
+				callback(null, true)
+			}
+		}).single('profilePhoto');
+		upload(req, res, function(err) {
+			if (err){
+				res.jsonp({status:"Failure",
+							message:"Error Uploading File",
+							object:[]});
+			}
+			else{      
+			
+				logger.info ("Photo Is uploaded");
+				console.log(req.body.conversationId);
+				//geneterate a url 
+				var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
+				//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
+		
+				if ((req.body.updateProfilePhoto)&&(req.body.updateName)){
+					//update picture
+					regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
+					if (data){
+						 logger.info ('data received after updating profile picture');
+						 //update Name
+						regCtrl.updateName(req,function (user){
+						 if (user){
+							logger.info ('data received after updating profile picture');
+							res.jsonp({ status:"success",
+							message:"Profile has been Updated!",
+							object:user});
+						 }
+						 else{
+							 
+						 }
+						});
+					}
+					else{
+						
+					}
+					});
+					
+					
+				}
+				else {
+					if (req.body.updateProfilePhoto){
+						regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
+						if (data){
+							 user=data;
+							 res.jsonp({ status:"success",
+							message:"Profile Photo has been Updated!",
+							object:user});
+						}
+						});
+					}
+					//Updating Name
+					if (req.body.updateName){
+						regCtrl.updateName(req,function (data){
+						if (data){
+							 user=data;
+							 res.jsonp({ status:"success",
+							message:"Name has been Updated!",
+							object:user});
+						}
+						});
+					}
+				}
+					
+			}
+			});            
+	});
+	
+    	
+	*/
 	
 	 app.post('/groupMember',function(req,res){
 		

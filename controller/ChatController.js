@@ -269,6 +269,39 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 	
 }
 
+//Update Group
+/*
+exports.updateGroupProfilePhoto=function(conversationId,profilePhotoUrl,callback){
+		
+	try{
+	console.log("In Controller updateGroupProfilePhoto Method");
+    
+    logger.info('ChatController.updateGroupProfilePhoto called for converation  :'   + conversationId  );
+     	Conversation.findOne({_id: conversationId})
+								.exec(function(err, conversation){
+													
+										if (err){
+										console.log ( 'An Error Occured before returning Promise' + err);
+										callback();
+										}																	
+																					
+										else {
+										//logger.info( );	
+										callback(conversation);
+										}
+										
+									});
+									
+	 
+    
+    logger.info(' Exit RegistrationController.updateProfilePhoto Method');
+	}catch (err){
+		logger.info('An Exception Has occured in updateProfilePhoto method' + err);
+	}
+
+}
+
+*/
 //Add group Members
 
 exports.addGroupMember=function(req,res){
@@ -276,6 +309,10 @@ exports.addGroupMember=function(req,res){
 		logger.info('addGroupMember Method Called');
 		var conversationId=req.body.conversationId;
 		var groupMembersList =req.body.groupMembersList;
+		console.log ('Conversation id  : '+conversationId);
+		console.log ('groupMembersList : '+groupMembersList);
+		console.log ('arrayOfNumbers : '+groupMembersList.values);
+		
 		var arrayOfNumbers;
 		if (groupMembersList){
 			arrayOfNumbers=groupMembersList.values;
