@@ -311,7 +311,7 @@ module.exports = function(app) {
         res.end("Empty Body"); 
         }
 		
-		console.log("in routes - Req Body : " + req.body);
+		console.log("in routes - group" );
 		var reqData=req.body;
          logger.info("reqData  :"+reqData.groupName);
 		 
@@ -333,8 +333,10 @@ module.exports = function(app) {
                         message:"Error Uploading File",
                         object:[]});
         }
-        else{           
+        else{  
+		
         logger.info ("Photo Is uploaded");
+		console.log (profilePhoto);
 		var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
 		//var profilePhotoUrl ="https://cdn0.iconfinder.com/data/icons/education-59/128/communication_discussion_workshop-256.png"; 
 		ChatController.createGroup(req.body,profilePhotoUrl,res);				
