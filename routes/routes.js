@@ -320,6 +320,13 @@ module.exports = function(app) {
 	 var upload = multer({
 		storage: storage,
 		fileFilter: function(req, file, callback) {
+			if (file){
+				console.log('File Found : ' + file);
+			}
+			else {
+				console.log('File Not Found : ' + file);
+			}
+				
 			var ext = path.extname(file.originalname)
 			if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
 				return callback(res.end('Only images are allowed'), null)
