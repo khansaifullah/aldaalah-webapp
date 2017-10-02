@@ -13,7 +13,7 @@ var userSchema = new Schema({
       user_name: String, 
       phone: { type: String, required: true, unique: true },
       full_name: String,
-      profile_photo_url:String,
+      profile_photo_url:{type:String,default:null },
       active:Boolean, 
       OS:String,
       email_address:String,

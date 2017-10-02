@@ -436,8 +436,7 @@ module.exports = function(app) {
         res.end("Empty Body"); 
         }
 		console.log("in routes POST /groupMember");
-		//var reqData=req.body;
-        // console.log(reqData);
+
 		ChatController.addGroupMember(req,res);
 	});
 	 app.delete('/groupMember',function(req,res){
@@ -445,10 +444,8 @@ module.exports = function(app) {
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
-		console.log("in routes /location");
-		var reqData=req.body;
-        // console.log(reqData);
-		LocController.updateUserLocation(reqData,res);
+		console.log("in routes delete /groupMember");
+		ChatController.removeGroupMember(req,res);
 	});
 	/***** Location Apis ********/ 
 	//get location From Client

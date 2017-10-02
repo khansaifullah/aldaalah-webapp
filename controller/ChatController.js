@@ -466,7 +466,7 @@ exports.addGroupMember=function(req,res){
 									   message:"New Members added to Group",
 									  object:arrayToSend}))
 					 .catch((err)=>res.send({status:"failure",
-									   message:"Error Occured while syncing contacts",
+									   message:"Error Occured while Adding new member",
 									  object:[]}));
 				  }
 				  else {
@@ -487,11 +487,67 @@ exports.addGroupMember=function(req,res){
 		 });
     
 	}catch  (err){
-		logger.info ('An Exception occured ChatController.createGroup ' + err);
+		logger.info ('An Exception occured ChatController.addGroupMember ' + err);
 	}	
 	
 }
 
+
+//Delete group Members
+
+exports.removeGroupMember=function(req,res){
+    try {
+		logger.info('removeGroupMember Method Called');
+		var conversationId=req.body.conversationId;
+		var groupMembersList =req.body.groupMembersList;
+		groupMembersList=JSON.parse(groupMembersList);
+		console.log ('Conversation id  : '+conversationId);
+		console.log ('groupMembersList : '+groupMembersList);	
+		
+		var arrayOfNumbers;
+		if (groupMembersList){
+			arrayOfNumbers=groupMembersList.values;
+			console.log ('arrayOfNumbers : '+ arrayOfNumbers);
+		}
+		let promiseArr = [];
+  
+    function removeMember(num){
+           
+        return new Promise((resolve,reject) => {
+
+						ConversationUser.remove({ _userMobile: num, _conversationId:conversationId }, function (err) {
+							  if (err){
+								  logger.error('Error Occured while Removing newConversationUser 1 :'+ err);
+									reject(err);
+							  } 
+							  else{
+								  logger.info('Conversation user with phoneNo ' +num + ' suuccessfully Removed' );
+									resolve();
+							  }
+							  // removed!
+							});	
+			                                        
+        });
+    }                 
+
+								
+		arrayOfNumbers.forEach(function(number) {              
+			promiseArr.push(removeMember(number));        
+		 });
+		
+		 Promise.all(promiseArr)
+			 .then((result)=> res.jsonp({status:"success",
+							   message:"Members Removed from Group Successfully",
+							  object:[]}))
+			 .catch((err)=>res.send({status:"failure",
+							   message:"Error Occured while Removing members from group",
+							  object:[]}));
+    
+	}catch  (err){
+		logger.info ('An Exception occured ChatController.removeGroupMember ' + err);
+	}	
+	
+}
 
 // List of All Groups
 exports.findAllGroups=function(callback){

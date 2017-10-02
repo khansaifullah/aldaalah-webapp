@@ -7,7 +7,7 @@ var ConversationSchema   = new mongoose.Schema({
     _adminId : { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     conversationName:String,
     adminMobile:String,
-	conversationImageUrl:String,
+	conversationImageUrl:{type:String,default:null },
     deletedByUserMobile: String,
     isGroupConversation:{type:Boolean,default:false },
 	//isClosed:{type:Boolean,default:false }
