@@ -626,11 +626,12 @@ exports.addGroupMember=function(req,res){
 exports.removeGroupMember=function(req,res){
     try {
 		logger.info('removeGroupMember Method Called');
+		console.log ('Conversation id  : '+req.body.conversationId);
+		console.log ('groupMembersList : '+ req.body.groupMembersList);
 		var conversationId=req.body.conversationId;
-		var groupMembersList =req.body.groupMembersList;
-		groupMembersList=JSON.parse(groupMembersList);
-		console.log ('Conversation id  : '+conversationId);
-		console.log ('groupMembersList : '+groupMembersList);	
+		var groupMembersList =req.body.groupMembersList;		
+		//groupMembersList=JSON.parse(groupMembersList);
+		console.log ('groupMembersList  q222: '+groupMembersList);	
 		
 		var arrayOfNumbers;
 		if (groupMembersList){
