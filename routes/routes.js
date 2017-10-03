@@ -446,7 +446,7 @@ module.exports = function(app) {
 			});            
 	});
 	
-     app.delete('/group',function(req,res){
+     app.post('/deleteGroup',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -464,7 +464,7 @@ module.exports = function(app) {
 
 		ChatController.addGroupMember(req,res);
 	});
-	 app.delete('/groupMember',function(req,res){
+	 app.post('/deleteMember',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
