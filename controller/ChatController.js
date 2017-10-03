@@ -430,7 +430,7 @@ exports.closeGroup=function(req,res){
 				} 
 				});
 			res.jsonp({status:"success",
-			message:"Members Removed from Group Successfully",
+			message:"Group Closed Successfully",
 			object:[]})
 						
 /*		
