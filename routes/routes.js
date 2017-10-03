@@ -451,7 +451,7 @@ module.exports = function(app) {
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
-		console.log("in routes delete /group");
+		console.log("in routes post /group");
 		ChatController.closeGroup(req,res);
 	});
 	
@@ -469,7 +469,7 @@ module.exports = function(app) {
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
-		console.log("in routes delete /groupMember");
+		console.log("in routes post /groupMember");
 		ChatController.removeGroupMember(req,res);
 	});
 	/***** Location Apis ********/ 

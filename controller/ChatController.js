@@ -630,7 +630,7 @@ exports.removeGroupMember=function(req,res){
 		console.log ('groupMembersList : '+ req.body.groupMembersList);
 		var conversationId=req.body.conversationId;
 		var groupMembersList =req.body.groupMembersList;		
-		//groupMembersList=JSON.parse(groupMembersList);
+		groupMembersList=JSON.parse(groupMembersList);
 		console.log ('groupMembersList  q222: '+groupMembersList);	
 		
 		var arrayOfNumbers;
@@ -659,7 +659,7 @@ exports.removeGroupMember=function(req,res){
         });
     }                 
 
-								
+				if (arrayOfNumbers)		{}		
 		arrayOfNumbers.forEach(function(number) {              
 			promiseArr.push(removeMember(number));        
 		 });
