@@ -18,6 +18,15 @@ var storage = multer.diskStorage({
 		callback(null, './public/images/profileImages')
 	},
 	filename: function(req, file, callback) {
+		/*
+		if (file){
+				console.log('File Found : ' + file);
+			}
+			else {
+				console.log('File Not Found : ' + file);
+			}
+			*/
+			
 		tempFileName="";
 		//console.log("Printing in File Name Field :" + 'file.fieldname : ' + file.fieldname + ' file.originalname :' + file.originalname );
 		tempFileName=file.fieldname + '-' + Date.now() + path.extname(file.originalname);
@@ -320,12 +329,6 @@ module.exports = function(app) {
 	 var upload = multer({
 		storage: storage,
 		fileFilter: function(req, file, callback) {
-			if (file){
-				console.log('File Found : ' + file);
-			}
-			else {
-				console.log('File Not Found : ' + file);
-			}
 				
 			var ext = path.extname(file.originalname)
 			if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
@@ -334,6 +337,10 @@ module.exports = function(app) {
 			callback(null, true)
 		}
 	}).single('profilePhoto');
+
+	//var file=upload.single('profilePhoto');
+	//console.log ('logging file : '+file);
+	console.log ('logging upload : '+upload);
 	upload(req, res, function(err) {
         if (err){
             res.jsonp({status:"Failure",
@@ -344,7 +351,7 @@ module.exports = function(app) {
 		
         logger.info ("Photo Is uploaded");
 		//if ()
-			
+			//.single(fieldname
 		console.log (req.files);
 		var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
 		//var profilePhotoUrl ="https://cdn0.iconfinder.com/data/icons/education-59/128/communication_discussion_workshop-256.png"; 
@@ -439,7 +446,14 @@ module.exports = function(app) {
 			});            
 	});
 	
-    	
+     app.delete('/group',function(req,res){
+		
+	   if(req.body === undefined||req.body === null) {
+        res.end("Empty Body"); 
+        }
+		console.log("in routes delete /group");
+		ChatController.closeGroup(req,res);
+	});
 	
 	 app.post('/groupMember',function(req,res){
 		

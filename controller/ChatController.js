@@ -2,7 +2,7 @@ var NotificationController= require('../controller/PushNotificationController.js
 var User = require('../models/User.js');
 var db = require('../config/db');
 var ConversationMessages = require('../models/ConversationMessages.js');
-var Conversation = require('../models/Conversation.js');ConversationUser
+var Conversation = require('../models/Conversation.js');
 var ConversationUser = require('../models/ConversationUser.js');
 var logger = require('../config/lib/logger.js');
 require('datejs');
@@ -269,6 +269,8 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 	
 }
 
+
+
 //Update Group Name
 
 exports.updateGroupName = function(req,callback) {
@@ -315,7 +317,7 @@ exports.updateGroupName = function(req,callback) {
 	
 }
 
-//update Profile Photo
+//update  Group Photo
 exports.updateGroupProfilePhoto=function(conversationId,profilePhotoUrl,callback){
 		
 	try{
@@ -358,6 +360,132 @@ exports.updateGroupProfilePhoto=function(conversationId,profilePhotoUrl,callback
 
 }
 
+
+// close Group
+
+exports.closeGroup=function(req,res){
+    try {
+		logger.info('closeGroup Method Called ');
+		var conversationId=req.body.conversationId;
+		console.log ('Conversation id  : '+conversationId);
+		
+		var arrayOfMembers;		
+		let promiseArr = [];
+		var query;
+		
+		//Find Group Members
+		 ConversationUser.find({'_conversationId': conversationId}, {_userMobile : true}, function(err, members) {
+				if (err){
+					logger.info(' Error Occured While Getting conversation Uses : ' + err);
+				}				
+				else{ 
+					logger.info(members.length + ' members Found');
+					arrayOfMembers=members;
+					if(arrayOfMembers){ 					
+					arrayOfMembers.forEach(function(number) {              
+						console.log (number._userMobile);
+
+						//sending closed group Notification to all group members
+						query = { phone : number._userMobile };						
+						User.findOne(query).exec(function(err, user){
+							if (err){
+							 logger.error('Some Error occured while finding user' + err );
+							 }
+							if (user){
+								logger.info('User Found For Phone No: ' + number._userMobile );
+								var conversationObj ={
+										//fromPhoneNo:userMobileNumberFrom,	
+										conversationId:conversationId 
+										//isGroupConversation:conversation.isGroupConversation,
+										//adminMobile:conversation.adminMobile,
+										//photoUrl:conversation.conversationImageUrl,
+										//conversationName:conversation.conversationName,
+										//createdAt:conversation.createdAt
+										
+								}
+								logger.info('Sending Notification of closed Group to player id ' + user.palyer_id );
+								NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"closedGroup");
+							}
+							else {
+							 logger.info('User not Found For Phone No: ' + number._userMobile );                 
+							}                               
+						});
+							
+
+						//Delete all Conversation Users of closed Group							
+						ConversationUser.remove({  _conversationId:conversationId }, function (err) {
+							  if (err){
+								  logger.error('Error Occured while deleting group members :'+ err);
+									
+							  } 
+							  else{
+								  logger.info('Conversation user suuccessfully Removed' );
+									
+							  }
+							  // removed!
+							});	
+					
+					});
+				}
+				} 
+				});
+			res.jsonp({status:"success",
+			message:"Members Removed from Group Successfully",
+			object:[]})
+						
+/*		
+  		Conversation.findOne({_id: conversationId})
+								.exec(function(err, conversation){
+													
+						if (err){
+						console.log ( 'An Error Occured before returning Promise' + err);
+						
+						}																	
+						if (conversation){
+				
+						}											
+						else {
+						
+						}
+										
+					});
+    function removeMember(num){
+           
+        return new Promise((resolve,reject) => {
+
+						ConversationUser.remove({ _userMobile: num, _conversationId:conversationId }, function (err) {
+							  if (err){
+								  logger.error('Error Occured while Removing newConversationUser 1 :'+ err);
+									reject(err);
+							  } 
+							  else{
+								  logger.info('Conversation user with phoneNo ' +num + ' suuccessfully Removed' );
+									resolve();
+							  }
+							  // removed!
+							});	
+			                                        
+        });
+    }                 
+								
+		arrayOfMembers.forEach(function(number) {              
+			promiseArr.push(removeMember(number));        
+		 });
+		
+		 Promise.all(promiseArr)
+			 .then((result)=> res.jsonp({status:"success",
+							   message:"Members Removed from Group Successfully",
+							  object:[]}))
+			 .catch((err)=>res.send({status:"failure",
+							   message:"Error Occured while Removing members from group",
+							  object:[]}));
+    
+	*/
+	}catch  (err){
+		logger.info ('An Exception occured ChatController.removeGroupMember ' + err);
+	}	
+	
+}
 
 //Add group Members
 
