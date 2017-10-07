@@ -152,7 +152,7 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 									});
 							}	
 							else{
-								logger.info(  conversation._id	+ ' count != 2  ');
+								//logger.info(  conversation._id	+ ' count != 2  ');
 								resolve(1);
 							} 
 										   

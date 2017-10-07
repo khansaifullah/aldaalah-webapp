@@ -316,7 +316,7 @@ console.log("In Controller syncContacts Method");
         //var phoneNo=req.body.userPhoneNo;
         var arrayToSend = [];
         var query ;
-		let promiseArr = [];
+		var promiseArr = [];
 		var tempObject;
     
     function compare(num){

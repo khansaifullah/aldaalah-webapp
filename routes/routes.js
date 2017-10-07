@@ -340,7 +340,7 @@ module.exports = function(app) {
 
 	//var file=upload.single('profilePhoto');
 	//console.log ('logging file : '+file);
-	console.log ('logging upload : '+upload);
+	//console.log ('logging upload : '+upload);
 	upload(req, res, function(err) {
         if (err){
             res.jsonp({status:"Failure",
@@ -575,6 +575,78 @@ module.exports = function(app) {
                         object:groups});
                              
 	});		
+	});
+	
+	 // getting groupMembers Details
+    app.get('/groupMembers',function(req,res){
+      	
+		logger.info("in routes get groupMembers");
+		var conversationId = req.query.conversationId;
+		var arrayToSend = [];
+		let promiseArr = [];
+		var tempObject;
+		function add(member){									
+			return new Promise((resolve,reject) => {
+				phoneNo=member._userMobile;	
+				logger.info ("Member Phone No : "+phoneNo);
+				query = { phone : phoneNo };
+				AppController.userExists(phoneNo,function (user) {
+					logger.info("Response Of userExists Method : " + user);
+					
+					
+					if (user){
+					logger.info('User Found For Phone No: ' + phoneNo );
+					tempObject=new Object ();
+					tempObject.phoneNo=user.phone;
+					tempObject.profileUrl=user.profile_photo_url;
+					arrayToSend.push(tempObject);
+					 resolve();
+					}
+					else{
+					logger.info('User not Found For Phone No: ' + phoneNo ); 
+					resolve();
+						
+					}
+                             
+				});	
+			
+				
+			});
+		}
+		ChatController.findConversationMembers(conversationId, function(members){
+			
+			if (members){
+				logger.info ("Group members list size " + members.length);
+				var phoneNo;
+				var query;
+				logger.info ('findConversationMembers Response, Members List Size : ' + members.length);											
+						//Add all members in a list to send All Group Members								
+	                                   
+				 members.forEach(function(member) {              
+						 promiseArr.push(add(member));        
+				 });
+				
+				 Promise.all(promiseArr)
+					 .then((result)=> res.jsonp({status:"success",
+									   message:"Group Members List",
+									  object:arrayToSend}))
+					 .catch((err)=>res.send({status:"failure",
+									   message:"Error Occured while finding Members" + err,
+									  object:[]}));
+				
+			}
+			else {
+				//Send Response no members Found
+				logger.info ("members : " + members);
+				res.send({status:"failure",
+						  message:"No Members Found In Group",
+						  object:[]})
+				
+			}
+		});
+						
+						
+
 	});
 	
 };
