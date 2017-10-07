@@ -451,7 +451,7 @@ module.exports = function(app) {
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
-		console.log("in routes post /group");
+		console.log("in routes post /deleteGroup");
 		ChatController.closeGroup(req,res);
 	});
 	
