@@ -438,16 +438,17 @@ io.sockets.on('connection', function(socket) {
 						 //updatedAt:conversationMessage.updatedAt
 					}
 			
-	 
-
+					var socketid;
+					var sendNotifcationFlag;
+					var recipientSocket;
 					if (data._messageToMobile){
 						// individual Chat
 					logger.info('Individual Chat - SendMessage');
-					var socketid= userHashMaps.get (data._messageToMobile);						
+					socketid= userHashMaps.get (data._messageToMobile);						
 					logger.info('sending a notification to socket: '+ socketid);
-					var sendNotifcationFlag=true;
+					sendNotifcationFlag=true;
 					if (socketid){
-						var recipientSocket=io.sockets.connected[socketid];
+						recipientSocket=io.sockets.connected[socketid];
 						logger.info('Check room of Sender socket : ' + socket + 'where phone No is :'+socket.phoneNo + 'and room : ' +socket.room);		
 						logger.info('Check room of Recipent socket :' + socketid + 'where phone No is :'+recipientSocket.phoneNo + 'and room : ' +recipientSocket.room);	
 						if (recipientSocket){
@@ -481,8 +482,8 @@ io.sockets.on('connection', function(socket) {
 					}else{
 					//group Chat
 					logger.info('Group Chat - SendMessage');
-					logger.info ("Emiting to room : "+socket.room);
-					logger.info('Group Conversation msg createAt before Emiting :' +msg.createdAt );	
+					logger.info ("Emiting to Group room : "+socket.room);
+					//logger.info('Group Conversation msg createAt before Emiting :' +msg.createdAt );	
 					socket.to(socket.room).emit('receiveMessage', msg);
 					var phoneNo;
 					//Sending Message As push Notification to all members
@@ -490,9 +491,7 @@ io.sockets.on('connection', function(socket) {
 						ChatController.findConversation (conversationId , function(con){
 						
 						if (con){
-							 //myDate = new Date(con.createdAt);
-							//createdDate = myDate.getTime();
-							//msg.createdAt= myDate.getTime();
+						
 							msg.conversationName=con.conversationName;
 							msg.conversationImageUrl=con.conversationImageUrl;	
 							
@@ -515,7 +514,14 @@ io.sockets.on('connection', function(socket) {
 												logger.info('User Found For Phone No: ' + phoneNo );
 												logger.info('Group Conversation msg createAt before Push Notiifcation :' +msg.createdAt );	
 												logger.info('Sending Notification of Group :'+msg.conversationName+ 'Phone No: ' + phoneNo +'& to player id ' + user.palyer_id );
+												
+												socketid= userHashMaps.get (phoneNo);
+												recipientSocket=io.sockets.connected[socketid];
+												
+												if (recipientSocket.room!==conversationId) {	
 												NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
+												}
+												
 												}
 												else {
 												 logger.info('User not Found For Phone No: ' + phoneNo );                 
