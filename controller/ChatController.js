@@ -607,15 +607,16 @@ exports.removeGroupMember=function(req,res){
 
 		if (arrayOfNumbers){		
 			arrayOfNumbers.forEach(function(number) {
-						//sending closed group Notification to all group members
-						phoneNo=number._userMobile;
-						query = { phone : phoneNo };						
+						//sending closed group Notification to group members
+
+						logger.info('Group member to delet with PhoneNO : ' + number );
+						query = { phone : number };						
 						User.findOne(query).exec(function(err, user){
 							if (err){
 							 logger.error('Some Error occured while finding user' + err );
 							 }
 							if (user){
-								logger.info('User Found For Phone No: ' + phoneNo );
+								logger.info('User Found For Phone No: ' + number );
 								var conversationObj ={										
 										conversationId:conversationId	
 								}
@@ -623,7 +624,7 @@ exports.removeGroupMember=function(req,res){
 								NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"closedGroup");
 							}
 							else {
-							 logger.info('User not Found For Phone No: ' + phoneNo );                 
+							 logger.info('User not Found For Phone No: ' + number );                 
 							}                               
 						});	
 
