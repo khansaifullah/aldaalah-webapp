@@ -368,8 +368,7 @@ module.exports = function(app) {
 		var conversation;
 		if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
-        }
-		
+        }		
 		var upload = multer({
 			storage: storage,
 			fileFilter: function(req, file, callback) {
@@ -402,6 +401,7 @@ module.exports = function(app) {
 						 //update Name
 						ChatController.updateGroupName(req,function (group){
 						 if (group){
+							 conversation=group;
 							logger.info ('data received after updating profile picture');
 							res.jsonp({ status:"success",
 							message:"Group has been Updated!",
@@ -442,6 +442,53 @@ module.exports = function(app) {
 					}
 				}
 					
+					//Sending update group Notifcation
+						ChatController.findConversationMembers(req.body.conversationId, function(members){
+						if (members){
+								logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
+								myDate = new Date(members[0].createdAt);
+								createdDate = myDate.getTime();
+								
+								var conversationObj ={
+										//fromPhoneNo:userMobileNumberFrom,	
+										conversationId:conversation._id, 
+										isGroupConversation:conversation.isGroupConversation,
+										adminMobile:conversation.adminMobile,
+										photoUrl:conversation.conversationImageUrl,
+										conversationName:conversation.conversationName,
+										createdAt:conversation.createdDate,
+										
+										}
+									
+										
+										//Notifying All Group Members
+								for (var i=0; i < members.length ; i++){
+									var phoneNo=members[i]._userMobile;
+									if (phoneNo!==(conversationObj.adminMobile)){
+										
+										
+										//Sending Push Notiifcation To Group Members								
+										logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
+										//var phoneNo=members[i]._userMobile;
+										var query = { phone : phoneNo };
+										
+										User.findOne(query).exec(function(err, user){
+											if (err){
+											 logger.error('Some Error occured while finding user' + err );
+											 }
+											if (user){
+											logger.info('User Found For Phone No: ' + phoneNo );
+											logger.info('Sending Notification to player id ' + user.palyer_id );
+											NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupUpdateRequest");
+											}
+											else {
+											 logger.info('User not Found For Phone No: ' + phoneNo );                 
+											}                               
+										});
+									}								
+								}
+						}
+						});
 			}
 			});            
 	});
