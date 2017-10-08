@@ -366,6 +366,7 @@ module.exports = function(app) {
 		
 		console.log("in routes updateGroup");
 		var conversation;
+		var conversationId
 		if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }		
@@ -386,16 +387,16 @@ module.exports = function(app) {
 							object:[]});
 			}
 			else{      
-			
+			conversationId = req.body.conversationId;
 				logger.info ("Photo Is uploaded");
-				console.log("Conversation id : "+req.body.conversationId);
+				console.log("Conversation id : "+conversationId);
 				//geneterate a url 
 				var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
 				//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
 		
 				if ((req.body.updateProfilePhoto)&&(req.body.updateName)){
 					//update picture
-					ChatController.updateGroupProfilePhoto(req.body.conversationId,profilePhotoUrl,function (data){
+					ChatController.updateGroupProfilePhoto(conversationId,profilePhotoUrl,function (data){
 					if (data){
 						 logger.info ('data received after updating Group profile picture');
 						 //update Name
@@ -420,7 +421,7 @@ module.exports = function(app) {
 				}
 				else {
 					if (req.body.updateProfilePhoto){
-						ChatController.updateGroupProfilePhoto(req.body.conversationId,profilePhotoUrl,function (data){
+						ChatController.updateGroupProfilePhoto(conversationId,profilePhotoUrl,function (data){
 						if (data){
 							 conversation=data;
 							 res.jsonp({ status:"success",
@@ -451,7 +452,7 @@ module.exports = function(app) {
 								
 								var conversationObj ={
 										//fromPhoneNo:userMobileNumberFrom,	
-										conversationId:conversation._id, 
+										conversationId:conversationId, 
 										isGroupConversation:conversation.isGroupConversation,
 										adminMobile:conversation.adminMobile,
 										photoUrl:conversation.conversationImageUrl,
