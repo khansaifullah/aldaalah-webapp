@@ -6,6 +6,7 @@ var LocController = require('../controller/LocationController.js');
 var NotificationController = require('../controller/PushNotificationController.js');
 var bodyParser = require('body-parser');
 var Country = require('../models/Country.js');
+var User = require('../models/User.js');
 var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
 require('datejs');
