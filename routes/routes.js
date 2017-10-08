@@ -420,7 +420,7 @@ module.exports = function(app) {
 										adminMobile:conversation.adminMobile,
 										photoUrl:conversation.conversationImageUrl,
 										conversationName:conversation.conversationName,
-										createdAt:conversation.createdDate,
+										createdAt:conversation.createdAt,
 										
 										}
 									
@@ -489,7 +489,7 @@ module.exports = function(app) {
 										adminMobile:conversation.adminMobile,
 										photoUrl:conversation.conversationImageUrl,
 										conversationName:conversation.conversationName,
-										createdAt:conversation.createdDate,
+										createdAt:conversation.createdAt,
 										
 										}
 									
@@ -548,7 +548,7 @@ module.exports = function(app) {
 										adminMobile:conversation.adminMobile,
 										photoUrl:conversation.conversationImageUrl,
 										conversationName:conversation.conversationName,
-										createdAt:conversation.createdDate,
+										createdAt:conversation.createdAt,
 										
 										}
 									
