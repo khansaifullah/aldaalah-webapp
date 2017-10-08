@@ -386,8 +386,9 @@ module.exports = function(app) {
 							message:"Error Uploading File",
 							object:[]});
 			}
-			else{      
-			conversationId = req.body.conversationId;
+			else{
+					try{}
+				conversationId = req.body.conversationId;
 				logger.info ("Photo Is uploaded");
 				console.log("Conversation id : "+conversationId);
 				//geneterate a url 
@@ -403,48 +404,9 @@ module.exports = function(app) {
 						ChatController.updateGroupName(req,function (group){
 						 if (group){
 							 conversation=group;
-							logger.info ('data received after updating profile picture');
-							res.jsonp({ status:"success",
-							message:"Group has been Updated!",
-							object:group});
-						 }
-						 else{
 							 
-						 }
-						});
-					}
-					else{
-						
-					}
-					});
-				
-				}
-				else {
-					if (req.body.updateProfilePhoto){
-						ChatController.updateGroupProfilePhoto(conversationId,profilePhotoUrl,function (data){
-						if (data){
-							 conversation=data;
-							 res.jsonp({ status:"success",
-							message:"Group Profile Photo has been Updated!",
-							object:conversation});
-						}
-						});
-					}
-					//Updating Name
-					if (req.body.updateName){
-						ChatController.updateGroupName(req,function (data){
-						if (data){
-							 conversation=data;
-							 res.jsonp({ status:"success",
-							message:"Group Name has been Updated!",
-							object:conversation});
-						}
-						});
-					}
-				}
-					
 					//Sending update group Notifcation
-						ChatController.findConversationMembers(req.body.conversationId, function(members){
+						ChatController.findConversationMembers(conversationId, function(members){
 						if (members){
 								logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
 								myDate = new Date(members[0].createdAt);
@@ -490,6 +452,142 @@ module.exports = function(app) {
 								}
 						}
 						});
+							logger.info ('data received after updating profile picture');
+							res.jsonp({ status:"success",
+							message:"Group has been Updated!",
+							object:group});
+						 }
+						 else{
+							 
+						 }
+						});
+					}
+					else{
+						
+					}
+					});
+				
+				}
+				else {
+					if (req.body.updateProfilePhoto){
+						ChatController.updateGroupProfilePhoto(conversationId,profilePhotoUrl,function (data){
+						if (data){
+							 conversation=data;
+							  
+					//Sending update group Notifcation
+						ChatController.findConversationMembers(conversationId, function(members){
+						if (members){
+								logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
+								myDate = new Date(members[0].createdAt);
+								createdDate = myDate.getTime();
+								
+								var conversationObj ={
+										//fromPhoneNo:userMobileNumberFrom,	
+										conversationId:conversationId, 
+										isGroupConversation:conversation.isGroupConversation,
+										adminMobile:conversation.adminMobile,
+										photoUrl:conversation.conversationImageUrl,
+										conversationName:conversation.conversationName,
+										createdAt:conversation.createdDate,
+										
+										}
+									
+										
+										//Notifying All Group Members
+								for (var i=0; i < members.length ; i++){
+									var phoneNo=members[i]._userMobile;
+									if (phoneNo!==(conversationObj.adminMobile)){
+										
+										
+										//Sending Push Notiifcation To Group Members								
+										logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
+										//var phoneNo=members[i]._userMobile;
+										var query = { phone : phoneNo };
+										
+										User.findOne(query).exec(function(err, user){
+											if (err){
+											 logger.error('Some Error occured while finding user' + err );
+											 }
+											if (user){
+											logger.info('User Found For Phone No: ' + phoneNo );
+											logger.info('Sending Notification to player id ' + user.palyer_id );
+											NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupUpdateRequest");
+											}
+											else {
+											 logger.info('User not Found For Phone No: ' + phoneNo );                 
+											}                               
+										});
+									}								
+								}
+						}
+						});
+							 res.jsonp({ status:"success",
+							message:"Group Profile Photo has been Updated!",
+							object:conversation});
+						}
+						});
+					}
+					//Updating Name
+					if (req.body.updateName){
+						ChatController.updateGroupName(req,function (data){
+						if (data){
+							 conversation=data;
+							  
+					//Sending update group Notifcation
+						ChatController.findConversationMembers(conversationId, function(members){
+						if (members){
+								logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
+								myDate = new Date(members[0].createdAt);
+								createdDate = myDate.getTime();
+								
+								var conversationObj ={
+										//fromPhoneNo:userMobileNumberFrom,	
+										conversationId:conversationId, 
+										isGroupConversation:conversation.isGroupConversation,
+										adminMobile:conversation.adminMobile,
+										photoUrl:conversation.conversationImageUrl,
+										conversationName:conversation.conversationName,
+										createdAt:conversation.createdDate,
+										
+										}
+									
+										
+										//Notifying All Group Members
+								for (var i=0; i < members.length ; i++){
+									var phoneNo=members[i]._userMobile;
+									if (phoneNo!==(conversationObj.adminMobile)){
+										
+										
+										//Sending Push Notiifcation To Group Members								
+										logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
+										//var phoneNo=members[i]._userMobile;
+										var query = { phone : phoneNo };
+										
+										User.findOne(query).exec(function(err, user){
+											if (err){
+											 logger.error('Some Error occured while finding user' + err );
+											 }
+											if (user){
+											logger.info('User Found For Phone No: ' + phoneNo );
+											logger.info('Sending Notification to player id ' + user.palyer_id );
+											NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupUpdateRequest");
+											}
+											else {
+											 logger.info('User not Found For Phone No: ' + phoneNo );                 
+											}                               
+										});
+									}								
+								}
+						}
+						});
+							 res.jsonp({ status:"success",
+							message:"Group Name has been Updated!",
+							object:conversation});
+						}
+						});
+					}
+				}
+					
 			}
 			});            
 	});
