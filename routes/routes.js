@@ -389,6 +389,8 @@ module.exports = function(app) {
 			}
 			else{
 				try{
+					var myDate;
+					var createdDate;
 				conversationId = req.body.conversationId;
 				logger.info ("Photo Is uploaded");
 				console.log("Conversation id : "+conversationId);
@@ -410,7 +412,7 @@ module.exports = function(app) {
 						ChatController.findConversationMembers(conversationId, function(members){
 						if (members){
 								logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
-								myDate = new Date(members[0].createdAt);
+								myDate = new Date(conversation.createdAt);
 								createdDate = myDate.getTime();
 								
 								var conversationObj ={
@@ -420,7 +422,7 @@ module.exports = function(app) {
 										adminMobile:conversation.adminMobile,
 										photoUrl:conversation.conversationImageUrl,
 										conversationName:conversation.conversationName,
-										createdAt:conversation.createdAt,
+										createdAt:createdDate,
 										
 										}
 									
@@ -479,7 +481,7 @@ module.exports = function(app) {
 						ChatController.findConversationMembers(conversationId, function(members){
 						if (members){
 								logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
-								myDate = new Date(members[0].createdAt);
+								myDate = new Date(conversation.createdAt);
 								createdDate = myDate.getTime();
 								
 								var conversationObj ={
@@ -489,7 +491,7 @@ module.exports = function(app) {
 										adminMobile:conversation.adminMobile,
 										photoUrl:conversation.conversationImageUrl,
 										conversationName:conversation.conversationName,
-										createdAt:conversation.createdAt,
+										createdAt:createdDate,
 										
 										}
 									
@@ -538,7 +540,7 @@ module.exports = function(app) {
 						ChatController.findConversationMembers(conversationId, function(members){
 						if (members){
 								logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
-								myDate = new Date(members[0].createdAt);
+								myDate = new Date(conversation.createdAt);
 								createdDate = myDate.getTime();
 								
 								var conversationObj ={
@@ -548,7 +550,7 @@ module.exports = function(app) {
 										adminMobile:conversation.adminMobile,
 										photoUrl:conversation.conversationImageUrl,
 										conversationName:conversation.conversationName,
-										createdAt:conversation.createdAt,
+										createdAt:createdDate,
 										
 										}
 									
