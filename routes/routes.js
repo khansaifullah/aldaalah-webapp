@@ -387,7 +387,7 @@ module.exports = function(app) {
 							object:[]});
 			}
 			else{
-					try{}
+				try{
 				conversationId = req.body.conversationId;
 				logger.info ("Photo Is uploaded");
 				console.log("Conversation id : "+conversationId);
@@ -587,7 +587,9 @@ module.exports = function(app) {
 						});
 					}
 				}
-					
+			}catch (err){
+				logger.info('An Exception Has occured in updateGroupName method' + err);
+				}		
 			}
 			});            
 	});
