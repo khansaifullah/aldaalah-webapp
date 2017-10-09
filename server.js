@@ -455,7 +455,7 @@ io.sockets.on('connection', function(socket) {
 							if (recipientSocket.room===socket.room) {	
 							//logger.info('Conversation msg create at before emiting:' +msg.createdAt );							
 							recipientSocket.emit('receiveMessage', msg);	
-							sendNotifcationFlag=false;
+							sendNotifcationFlag=false; 
 							}
 						}
 											
@@ -511,11 +511,11 @@ io.sockets.on('connection', function(socket) {
 												 }
 												if (user){
 														
-												logger.info('User Found For Phone No: ' + phoneNo );
+												logger.info('User Found For Phone No: ' + user.phone );
 												logger.info('Group Conversation msg createAt before Push Notiifcation :' +msg.createdAt );	
-												logger.info('Sending Notification of Group :'+msg.conversationName+ 'Phone No: ' + phoneNo +'& to player id ' + user.palyer_id );
+												logger.info('Sending Notification of Group :'+msg.conversationName+ 'Phone No: ' +  user.phone +'& to player id ' + user.palyer_id );
 												
-												socketid= userHashMaps.get (phoneNo);
+												socketid= userHashMaps.get ( user.phone);
 												recipientSocket=io.sockets.connected[socketid];
 												
 												if (recipientSocket.room!==conversationId) {	
@@ -524,7 +524,7 @@ io.sockets.on('connection', function(socket) {
 												
 												}
 												else {
-												 logger.info('User not Found For Phone No: ' + phoneNo );                 
+												 logger.info('User not Found For Phone No: ' +  user.phone );                 
 												}                               
 											});	
 									}									

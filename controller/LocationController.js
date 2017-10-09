@@ -1,6 +1,7 @@
 var AppController= require('../controller/AppController.js');
 var ChatController = require('../controller/ChatController.js');
 var User = require('../models/User.js');
+var Marker = require('../models/Marker.js');
 var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
 //require('datejs');
@@ -10,6 +11,10 @@ var multer  = require('multer')
 var upload = multer({ dest: './public/images/profileImages' })
 //mongoose.createConnection(db.url);
 
+
+function checkIfInRadius(){
+	
+}
                              
 exports.updateUserLocation=function(reqData,res){
 	try{
@@ -181,5 +186,46 @@ exports.updateShareLocationFlag=function(reqData,res){
 			});
 	}catch (err){
 		logger.info('An Exception Has occured in updateShareLocationFlag method' + err);
+	}
+}
+
+// Marker Methods
+                  
+exports.setMarker=function(reqData,res){
+	try{
+			
+			var title=reqData.title;
+			var description=reqData.description;
+			var longitude=reqData.longitude;
+			var latitude=reqData.latitude;
+			//photo
+			//Check valid Location -180 to 180
+			logger.info('LocationController.setMarker called  :' 
+						  + title + '**'+ longitude +'**'+ latitude);
+	
+			var newmarker = new Marker({  
+                    title: title,
+                    description:description     
+             });
+			 newmarker.loc=[longitude,latitude];
+			 
+			 newmarker.save(function (err, user) {
+			if(err){
+				logger.error('Some Error while saving marker' + err );
+				res.jsonp({status:"failure",
+				message:"Some Error while saving marker",
+				object:[]}); 
+			}
+			else{
+				logger.info('Marker Created : ' + title );
+				res.jsonp({status:"success",
+				message:"Marker Created",
+				object:[]});
+				 
+			 }
+		   
+			 });
+	}catch (err){
+		logger.info('An Exception Has occured in updateUserLocation method' + err);
 	}
 }
