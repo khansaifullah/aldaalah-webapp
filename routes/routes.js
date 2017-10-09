@@ -140,7 +140,7 @@ module.exports = function(app) {
 			logger.info("profilePhotoUrl" + profilePhotoUrl);
 			//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
 			regCtrl.completeProfile(req.body,profilePhotoUrl,res);
-				
+				tempFileName="";
 				
 			}
 			
@@ -181,7 +181,7 @@ module.exports = function(app) {
 			//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
 		
 			regCtrl.updateProfilePhoto(req.body.phone,profilePhotoUrl,function(data){
-				
+				tempFileName="";
 			});            
 				
 			}
@@ -225,6 +225,7 @@ module.exports = function(app) {
 				if ((req.body.updateProfilePhoto)&&(req.body.updateName)){
 					//update picture
 					regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
+						tempFileName="";
 					if (data){
 						 logger.info ('data received after updating profile picture');
 						 //update Name
@@ -250,6 +251,7 @@ module.exports = function(app) {
 				else {
 					if (req.body.updateProfilePhoto){
 						regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
+							tempFileName="";
 						if (data){
 							 user=data;
 							 res.jsonp({ status:"success",
@@ -257,6 +259,7 @@ module.exports = function(app) {
 							object:user});
 						}
 						});
+						
 					}
 					//Updating Name
 					if (req.body.updateName){
@@ -268,6 +271,7 @@ module.exports = function(app) {
 							object:user});
 						}
 						});
+					
 					}
 				}
 					
@@ -356,7 +360,8 @@ module.exports = function(app) {
 		console.log (req.files);
 		var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
 		//var profilePhotoUrl ="https://cdn0.iconfinder.com/data/icons/education-59/128/communication_discussion_workshop-256.png"; 
-		ChatController.createGroup(req.body,profilePhotoUrl,res);				
+		ChatController.createGroup(req.body,profilePhotoUrl,res);	
+		tempFileName="";		
 		}
 		
 	});
@@ -401,6 +406,7 @@ module.exports = function(app) {
 				if ((req.body.updateProfilePhoto)&&(req.body.updateName)){
 					//update picture
 					ChatController.updateGroupProfilePhoto(conversationId,profilePhotoUrl,function (data){
+						tempFileName="";
 					if (data){
 						 logger.info ('data received after updating Group profile picture');
 						 //update Name
@@ -474,6 +480,7 @@ module.exports = function(app) {
 				else {
 					if (req.body.updateProfilePhoto){
 						ChatController.updateGroupProfilePhoto(conversationId,profilePhotoUrl,function (data){
+							tempFileName="";
 						if (data){
 							 conversation=data;
 							  
@@ -637,8 +644,7 @@ module.exports = function(app) {
         // console.log(reqData);
 		LocController.updateUserLocation(reqData,res);
 	});
-	
-	
+		
 	
 	  app.get('/groupLocation',function(req,res){
 		
@@ -661,6 +667,17 @@ module.exports = function(app) {
 		var reqData=req.body;
         
 		LocController.updateShareLocationFlag(reqData,res);
+	});
+	
+	 app.post('/marker',function(req,res){
+		
+	   if(req.body === undefined||req.body === null) {
+        res.end("Empty Body"); 
+        }
+		console.log("in routes /marker");
+		var reqData=req.body;
+        // console.log(reqData);
+		LocController.setMarker(reqData,res);
 	});
 	
 	/******* Push Notification Apis *****/
