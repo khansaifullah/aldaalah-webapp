@@ -501,7 +501,7 @@ io.sockets.on('connection', function(socket) {
 									for (var i=0; i < members.length ; i++){
 										
 										phoneNo=members[i]._userMobile;
-										if (phoneNo!==(data._messageFromMobile)){
+										if (phoneNo!==(data._messageFromMobile)){  
 											//Sending Push Notiifcation To Group Members								
 											logger.info('Sending Onesignal Notifcation of receiveMessage to '+  phoneNo  );								  
 											var query = { phone : phoneNo };
@@ -513,14 +513,15 @@ io.sockets.on('connection', function(socket) {
 														
 												logger.info('User Found For Phone No: ' + user.phone );
 												logger.info('Group Conversation msg createAt before Push Notiifcation :' +msg.createdAt );	
-												logger.info('Sending Notification of Group :'+msg.conversationName+ 'Phone No: ' +  user.phone +'& to player id ' + user.palyer_id );
+												logger.info('Sending Notification of Group : '+msg.conversationName+ 'Phone No: ' +  user.phone +' & to player id  : ' + user.palyer_id );
 												
-												//socketid= userHashMaps.get ( user.phone);
-												//recipientSocket=io.sockets.connected[socketid];
-												
-												//if (recipientSocket.room!==conversationId) {	
+												socketid= userHashMaps.get ( user.phone);
+												logger.info ('socketid : '+ socketid);
+												recipientSocket=io.sockets.connected[socketid];
+												logger.info ('recipientSocket : '+ recipientSocket);
+												if (recipientSocket.room!==conversationId) {	
 												NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
-												//}
+												}
 												
 												}
 												else {
