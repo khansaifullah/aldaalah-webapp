@@ -515,12 +515,12 @@ io.sockets.on('connection', function(socket) {
 												logger.info('Group Conversation msg createAt before Push Notiifcation :' +msg.createdAt );	
 												logger.info('Sending Notification of Group :'+msg.conversationName+ 'Phone No: ' +  user.phone +'& to player id ' + user.palyer_id );
 												
-												socketid= userHashMaps.get ( user.phone);
-												recipientSocket=io.sockets.connected[socketid];
+												//socketid= userHashMaps.get ( user.phone);
+												//recipientSocket=io.sockets.connected[socketid];
 												
-												if (recipientSocket.room!==conversationId) {	
+												//if (recipientSocket.room!==conversationId) {	
 												NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
-												}
+												//}
 												
 												}
 												else {
