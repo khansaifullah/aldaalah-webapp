@@ -514,23 +514,23 @@ io.sockets.on('connection', function(socket) {
 													logger.info('User Found For Phone No: ' + user.phone );
 													logger.info('Group Conversation msg createAt before Push Notiifcation :' +msg.createdAt );	
 													logger.info('Sending Notification of Group : '+msg.conversationName+ 'Phone No: ' +  user.phone +' & to player id  : ' + user.palyer_id );
+													NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
+													//socketid= userHashMaps.get ( user.phone);
+													//logger.info ('socketid : '+ socketid);
 													
-													socketid= userHashMaps.get ( user.phone);
-													logger.info ('socketid : '+ socketid);
-													
-													recipientSocket=io.sockets.connected[socketid];
-													logger.info ('recipientSocket : '+ recipientSocket);
-													if (recipientSocket){
-														if (recipientSocket.room===conversationId) {	
+													//recipientSocket=io.sockets.connected[socketid];
+													//logger.info ('recipientSocket : '+ recipientSocket);
+													//if (recipientSocket){
+														//if (recipientSocket.room===conversationId) {	
 														//do not send notification
 														//NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
-														}
-														else {
-															NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
-														}
-													}else{
-															NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
-													}
+														//}
+														//else {
+															//NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
+														//}
+													//}else{
+															
+													//}
 												}
 												else {
 													logger.info('User not Found For Phone No: ' +  user.phone );                 
