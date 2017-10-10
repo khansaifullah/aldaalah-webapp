@@ -46,8 +46,9 @@ exports.sendNotifcationToPlayerId = function (playerId,obj,eventName){
 	
   var req = https.request(options, function(res) {  
     res.on('data', function(data) {
-      console.log("Response:");
-      console.log(JSON.parse(data));
+      console.log("Response: 1 : " + data);
+	  
+      console.log("Response: 1 : " + JSON.parse(data));
     });
   });
   
