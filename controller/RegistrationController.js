@@ -70,10 +70,12 @@ exports.sendVerificationCode=function(reqData,res){
 	var code;
 	var verificationMsg;
 	var requestUrl;
+	//var host;
 	//generate a code and set to user.verification_code
 	code=randomize('0', 4);
 	verificationMsg="Verification code for Aldaalah Application : " + code;
-						
+	//host="http://sendpk.com/api/sms.php?username=923345022570&password=2375&mobile=";
+	
     //find user by phone no.
     userExists(phoneNo,function(user){
 		logger.info('User Exists Response : ' + user );
@@ -104,7 +106,7 @@ exports.sendVerificationCode=function(reqData,res){
 					else{
 						 //Http Request to send message
 						
-						requestUrl="http://sendpk.com/api/sms.php?username=923124999213&password=4857&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
+						requestUrl="http://sendpk.com/api/sms.php?username=923345022570&password=2375&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
 						request.get(requestUrl,
 									function(error,response,body){
 										   if(error){
@@ -137,7 +139,8 @@ exports.sendVerificationCode=function(reqData,res){
 						 logger.info ('Error While Updating verification_code ');
 					 }
 				 });
-				requestUrl="http://sendpk.com/api/sms.php?username=923124999213&password=4857&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
+				 //"http://sendpk.com/api/sms.php?username=923124999213&password=4857&mobile=
+				requestUrl="http://sendpk.com/api/sms.php?username=923345022570&password=2375&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
 				request.get(requestUrl,
 							function(error,response,body){
 								   if(error){
