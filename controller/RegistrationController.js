@@ -7,8 +7,11 @@ var logger = require('../config/lib/logger.js');
 var mongoose = require('mongoose');
 //mongoose.Promise = global.Promise;
 var multer  = require('multer')
-var upload = multer({ dest: './public/images/profileImages' })
-
+var upload = multer({ dest: './public/images/profileImages' });
+//package for making HTTP Request
+var request=require("request");
+//package to generate a random number
+var randomize = require('randomatic');
 //mongoose.createConnection(db.url);
 
 //mongoose.connect(db.url);
@@ -64,7 +67,13 @@ exports.sendVerificationCode=function(reqData,res){
     var phoneNo = reqData.phoneNo;
     var countryCode = reqData.countryCode;
     var resend =reqData.resend
-   
+	var code;
+	var verificationMsg;
+	var requestUrl;
+	//generate a code and set to user.verification_code
+	code=randomize('0', 4);
+	verificationMsg="Verification code for Aldaalah Application : " + code;
+						
     //find user by phone no.
     userExists(phoneNo,function(user){
 		logger.info('User Exists Response : ' + user );
@@ -72,8 +81,8 @@ exports.sendVerificationCode=function(reqData,res){
              console.log (" User do not exist,  Creating user");
             if (resend==="true"||resend==1){
             res.jsonp({status:"failure",
-                            message:"Please Create User First",
-                            object:[]}); 
+            message:"Please Create User First",
+            object:[]}); 
             
             }
             else{
@@ -83,7 +92,7 @@ exports.sendVerificationCode=function(reqData,res){
                     phone: phoneNo,
                     country_code:countryCode,
                     verified_user:false,                            
-                    
+                    verification_code:code
                      });
                      newuser.save(function (err, user) {
                     if(err){
@@ -92,15 +101,25 @@ exports.sendVerificationCode=function(reqData,res){
                             message:"Some Error while saving user",
                             object:[]}); 
                     }
-                         else{
-                             // send verification code logic
-                             //generate a code and set to user.verification_code
-                                 logger.info('User Created With Phone Num ' + phoneNo );
-                              res.jsonp({status:"success",
-                        message:"Verification code Sent!",
-                        object:[]});
-                             
-                         }
+					else{
+						 //Http Request to send message
+						
+						requestUrl="http://sendpk.com/api/sms.php?username=923124999213&password=4857&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
+						request.get(requestUrl,
+									function(error,response,body){
+										   if(error){
+												 console.log(error);
+										   }else{
+												 console.log(response);
+										 }
+						});
+
+							logger.info('User Created With Phone Num ' + phoneNo );
+							res.jsonp({status:"success",
+							message:"Verification code Sent!",
+							object:[]});
+						 
+					 }
                    
                      });
             }
@@ -112,8 +131,22 @@ exports.sendVerificationCode=function(reqData,res){
                 console.log (" User Exists  sending verification code again");
                  // send verification code logic
                  //generate a code and set to user.verification_code
-                             
-                              res.jsonp({status:"success",
+                 user.verification_code=code;
+				 user.save(function (err, user) {
+					 if (err){
+						 logger.info ('Error While Updating verification_code ');
+					 }
+				 });
+				requestUrl="http://sendpk.com/api/sms.php?username=923124999213&password=4857&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
+				request.get(requestUrl,
+							function(error,response,body){
+								   if(error){
+										 console.log(error);
+								   }else{
+										 console.log(response);
+								 }
+				});
+                        res.jsonp({status:"success",
                         message:"Verification code Sent Again!",
                         object:[]});
                 
@@ -143,7 +176,8 @@ exports.verifyCode=function(data,res){
      //find user by phone no.
     userExists(phoneNo,function(user){
         if (user){
-            
+			
+          // logger.info(' verification_code : '+ user.verification_code);
             if ((code==="1234")||(code===user.verification_code)){
                  
                 res.jsonp({status:"success",
