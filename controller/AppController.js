@@ -36,7 +36,7 @@ exports.findAllUser=function(callback){
 			} 
 			});
 		}catch (err){
-		logger.info('An Exception Has occured in getUserLocation method' + err);
+		logger.info('An Exception Has occured in findAllUser method' + err);
 	}
 }
 

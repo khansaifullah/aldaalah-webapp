@@ -470,10 +470,10 @@ io.sockets.on('connection', function(socket) {
 							if (user){												  
 								logger.info('User Found For Phone No: ' + data._messageToMobile );
 								logger.info('Sending Notification to player id ' + user.palyer_id );
-								//logger.info('Msg Object : ' + msg);
-								logger.info('Individual Conversation msg createAt before Push Notification:' +msg.createdAt );		
+								logger.info('Msg Object : ' + msg);
+								//logger.info('Individual Conversation msg  before Push Notification:'  );		
 								NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
-								msg=null;
+								//msg=null;
 							}
 							else {
 								logger.info('User not Found For Phone No: ' + data._messageToMobile );                 												  
@@ -516,7 +516,7 @@ io.sockets.on('connection', function(socket) {
 													logger.info('Group Conversation msg createAt before Push Notiifcation :' +msg.createdAt );	
 													logger.info('Sending Notification of Group : '+msg.conversationName+ 'Phone No: ' +  user.phone +' & to player id  : ' + user.palyer_id );
 													NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
-													msg=null;
+													//msg=null;
 													//socketid= userHashMaps.get ( user.phone);
 													//logger.info ('socketid : '+ socketid);
 													

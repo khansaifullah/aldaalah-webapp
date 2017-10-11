@@ -15,7 +15,28 @@ var upload = multer({ dest: './public/images/profileImages' })
 function checkIfInRadius(){
 	
 }
-                             
+ 
+function getMarkersList(){
+	
+	   
+    try{
+			Marker.find({}, function(err, markers) {
+			if (err){
+				 res.status(400).send({status:"failure",
+										message:err,
+										object:[]
+										});
+			}			
+			else{ 
+				logger.info(markers.length + ' Marker Found');
+				callback(markers);				
+			} 
+			});
+		}catch (err){
+		logger.info('An Exception Has occured in getMarkersList method' + err);
+	}
+}
+ 
 exports.updateUserLocation=function(reqData,res){
 	try{
 			var phoneNo=reqData.phoneNo;
