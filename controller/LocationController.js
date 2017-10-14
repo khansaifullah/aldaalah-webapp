@@ -1,5 +1,6 @@
 var AppController= require('../controller/AppController.js');
 var ChatController = require('../controller/ChatController.js');
+var NotificationController = require('../controller/PushNotificationController.js');
 var User = require('../models/User.js');
 var Marker = require('../models/Marker.js');
 var db = require('../config/db');
@@ -7,28 +8,69 @@ var logger = require('../config/lib/logger.js');
 //require('datejs');
 var mongoose = require('mongoose');
 //mongoose.Promise = global.Promise; 
-var multer  = require('multer')
+var geolib = require('geolib');
+var multer  = require('multer');
+
 var upload = multer({ dest: './public/images/profileImages' })
 //mongoose.createConnection(db.url);
 
 
-function checkIfInRadius(){
+function inRadiusNotification(phoneNo,userLoc,marker){
+	logger.info ('marker.loc : ' +marker.loc );
+	logger.info ('userLoc : ' +userLoc );
+	var query;
+	var distance = geolib.getDistance(
+    userLoc,
+    marker.loc
+	);
+	logger.info ('distance: ' + distance);
+	
+	//Check if distance is less then defined radius
+	
+	if (distance<marker.radius)
+	{
+		var markerObj ={
+				
+				title:marker.title,
+				description:marker.description,
+				marker_photo_url:marker.marker_photo_url
+				
+		}
+		//inside Radius, Send Push Notification
+		logger.info ('inside Radius, Send Push Notification');
+		query = { phone :phoneNo };
+		User.findOne(query).exec(function(err, user){
+					if (err){
+						  logger.error('Some Error occured while finding user' + err );												
+					}
+					if (user){												  
+						logger.info('User Found For Phone No: ' + phoneNo );
+						logger.info('Sending Notification to player id ' + user.palyer_id );
+						logger.info('marker Object : ' + markerObj);
+						//logger.info('Individual Conversation msg  before Push Notification:'  );		
+						NotificationController.sendNotifcationToPlayerId(user.palyer_id,markerObj,"reachedMarker");
+						//msg=null;
+					}
+					else {
+						logger.info('User not Found For Phone No: ' + phoneNo);                 												  
+					}                               
+				});
+		
+	}
+	
 	
 }
  
-function getMarkersList(){
+function getMarkersList(callback){
 	
 	   
     try{
 			Marker.find({}, function(err, markers) {
 			if (err){
-				 res.status(400).send({status:"failure",
-										message:err,
-										object:[]
-										});
+				logger.info('An Error Occured While Finding Markers '  + err);
 			}			
 			else{ 
-				logger.info(markers.length + ' Marker Found');
+				//logger.info(markers.length + ' Marker Found');
 				callback(markers);				
 			} 
 			});
@@ -42,9 +84,26 @@ exports.updateUserLocation=function(reqData,res){
 			var phoneNo=reqData.phoneNo;
 			var longitude=reqData.longitude;
 			var latitude=reqData.latitude;
+			var userLoc = new Object({latitude: latitude, longitude: longitude});
+			
 			//Check valid Location -180 to 180
 			logger.info('LocationController.updateUserLocation called  :' 
 						  + phoneNo+ '**'+ longitude +'**'+ latitude);
+			
+			//Check if user have reached in radius of any marker set by admin
+			var markersList=getMarkersList(function (markers){
+				if (markers){
+					logger.info('Marker Length : ' + markers.length );
+					for (var i=0 ; i < markers.length; i++)
+					{
+						inRadiusNotification(phoneNo,userLoc, markers[i]);
+						
+					}
+				}
+				else {
+					logger.info('An Error Occured While Finding Markers '  );
+				}
+			});
 			
 			AppController.userExists(phoneNo, function(user){
 				if (user){
@@ -119,7 +178,7 @@ exports.getGroupUserLocations=function(conversationId,res){
 					return new Promise((resolve,reject) => {
 						   AppController.userExists(num , function(user){
 									if (user){
-										logger.info ('Adding User in list :' +user.phone);
+										logger.info ('  :' +user.phone);
 										tempObject=new Object({
 											phone:user.phone,
 											full_name: user.full_name,
@@ -219,6 +278,7 @@ exports.setMarker=function(reqData,res){
 			var description=reqData.description;
 			var longitude=reqData.longitude;
 			var latitude=reqData.latitude;
+			var radius=reqData.radius;
 			//photo
 			//Check valid Location -180 to 180
 			logger.info('LocationController.setMarker called  :' 
@@ -226,7 +286,8 @@ exports.setMarker=function(reqData,res){
 	
 			var newmarker = new Marker({  
                     title: title,
-                    description:description     
+                    description:description ,
+					radius:radius
              });
 			 newmarker.loc=[longitude,latitude];
 			 

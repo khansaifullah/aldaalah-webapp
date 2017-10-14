@@ -639,6 +639,25 @@ module.exports = function(app) {
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
+		/*
+		  console.log("start"); 
+	      var country = new Country({ 
+                    _id:"4",
+                    country_id:4,
+                    name: "India", 
+                    code:"021",
+                    shortForm:"ind"
+                     });
+          country.save(function (err, country) {
+               console.log("in save"); 
+                    if(err){
+                       console.log(err); 
+                    }
+              else
+                  console.log("Country Saved"+country); 
+                    
+          });
+*/
 		console.log("in routes /location");
 		var reqData=req.body;
         // console.log(reqData);
