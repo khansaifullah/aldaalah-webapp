@@ -419,21 +419,21 @@ exports.updatePlayerId = function(req,res) {
              User.findOne(query).exec(function(err, user){
 
                  if(user) {
-                    logger.info('Updating player Id for :' + phoneNo );
+                    logger.info('Updating player Id: '+ playerId +' for :' + phoneNo );
 					user.palyer_id=playerId;
 					  user.save(function (err, user) {
-						  if (user){
+						if (user){
 							res.jsonp({status:"success",
                             message:"Player Id Updated!",
                             object:[]});
-						  }
+						}
                     
-						 else{
+						else{
 							logger.info('Error in Updating player Id for :' + phoneNo );
 							res.jsonp({status:"failure",
 									message:"Failed updating Player Id !",
 									object:[]});
-						 }
+						}
 					  });
 				 }
 				 else {
