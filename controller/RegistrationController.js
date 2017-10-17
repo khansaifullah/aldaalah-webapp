@@ -106,7 +106,7 @@ exports.sendVerificationCode=function(reqData,res){
 					else{
 						 //Http Request to send message
 						
-						requestUrl="http://sendpk.com/api/sms.php?username=923345022570&password=2375&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
+						requestUrl="http://sendpk.com/api/sms.php?username=923365558912&password=1823&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
 						request.get(requestUrl,
 									function(error,response,body){
 										   if(error){
@@ -140,7 +140,7 @@ exports.sendVerificationCode=function(reqData,res){
 					 }
 				 });
 				 //"http://sendpk.com/api/sms.php?username=923124999213&password=4857&mobile=
-				requestUrl="http://sendpk.com/api/sms.php?username=923345022570&password=2375&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
+				requestUrl="http://sendpk.com/api/sms.php?username=923365558912&password=1823&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
 				request.get(requestUrl,
 							function(error,response,body){
 								   if(error){
