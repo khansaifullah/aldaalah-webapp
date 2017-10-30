@@ -6,6 +6,7 @@ var LocController = require('../controller/LocationController.js');
 var NotificationController = require('../controller/PushNotificationController.js');
 var bodyParser = require('body-parser');
 var Country = require('../models/Country.js');
+var Conversation = require('../models/Conversation.js');
 var User = require('../models/User.js');
 var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
@@ -772,10 +773,13 @@ module.exports = function(app) {
 		var arrayToSend = [];
 		let promiseArr = [];
 		var tempObject;
+		var adminMobile;
 		function add(member){									
 			return new Promise((resolve,reject) => {
+				
 				phoneNo=member._userMobile;	
-				logger.info ("Member Phone No : "+phoneNo);
+				logger.info ("Member Phone No  before : "+phoneNo);
+				logger.info ("Admin Phone No before : "+adminMobile);
 				query = { phone : phoneNo };
 				AppController.userExists(phoneNo,function (user) {
 					logger.info("Response Of userExists Method : " + user);
@@ -783,9 +787,22 @@ module.exports = function(app) {
 					
 					if (user){
 					logger.info('User Found For Phone No: ' + phoneNo );
+					phoneNo=user.phone;
 					tempObject=new Object ();
 					tempObject.phoneNo=user.phone;
 					tempObject.profileUrl=user.profile_photo_url;
+					if (adminMobile===phoneNo){
+						logger.info('Its Admin' );
+						logger.info ("Member Phone No : "+phoneNo);
+						logger.info ("Admin Phone No : "+adminMobile);
+						tempObject.type="admin";
+					}
+					else {
+						logger.info('Its Non  Admin');
+						logger.info ("Member Phone No  in chk : "+phoneNo);
+						logger.info ("Admin Phone No in chk : "+adminMobile);
+						tempObject.type="member";
+					}
 					arrayToSend.push(tempObject);
 					 resolve();
 					}
@@ -800,37 +817,55 @@ module.exports = function(app) {
 				
 			});
 		}
-		ChatController.findConversationMembers(conversationId, function(members){
+		var query = { _id : conversationId };
+		Conversation.findOne(query).exec(function(err,conversation){
+			if (conversation){
+				
+				adminMobile=conversation.adminMobile;
+				
+				ChatController.findConversationMembers(conversationId, function(members){
 			
-			if (members){
-				logger.info ("Group members list size " + members.length);
-				var phoneNo;
-				var query;
-				logger.info ('findConversationMembers Response, Members List Size : ' + members.length);											
-						//Add all members in a list to send All Group Members								
-	                                   
-				 members.forEach(function(member) {              
-						 promiseArr.push(add(member));        
-				 });
-				
-				 Promise.all(promiseArr)
-					 .then((result)=> res.jsonp({status:"success",
-									   message:"Group Members List",
-									  object:arrayToSend}))
-					 .catch((err)=>res.send({status:"failure",
-									   message:"Error Occured while finding Members" + err,
-									  object:[]}));
-				
+					if (members){
+						logger.info ("Group members list size " + members.length);
+						var phoneNo;
+						var query;
+						logger.info ('findConversationMembers Response, Members List Size : ' + members.length);											
+								//Add all members in a list to send All Group Members								
+											   
+						 members.forEach(function(member) {								
+									 promiseArr.push(add(member));
+														        
+						 });
+						
+						 Promise.all(promiseArr)
+							 .then((result)=> res.jsonp({status:"success",
+											   message:"Group Members List",
+											  object:arrayToSend}))
+							 .catch((err)=>res.send({status:"failure",
+											   message:"Error Occured while finding Members" + err,
+											  object:[]}));
+						
+					}
+					else {
+						//Send Response no members Found
+						logger.info ("members : " + members);
+						res.send({status:"failure",
+								  message:"No Members Found In Group",
+								  object:[]})
+						
+					}
+				});
 			}
-			else {
-				//Send Response no members Found
-				logger.info ("members : " + members);
+			else{
+				
+				
 				res.send({status:"failure",
-						  message:"No Members Found In Group",
+						  message:"No Such Conversation Found",
 						  object:[]})
-				
 			}
+			
 		});
+		
 						
 						
 
