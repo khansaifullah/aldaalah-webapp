@@ -522,7 +522,13 @@ module.exports = function(app) {
 											if (user){
 											logger.info('User Found For Phone No: ' + phoneNo );
 											logger.info('Sending Notification to player id ' + user.palyer_id );
-											NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupUpdateRequest");
+											if (!user.deactivate_user){
+											NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupUpdateRequest");	
+											}else{
+												logger.info('Can not send notification to deactivated user :  ' +phoneNo  );    
+												
+											}
+											
 											}
 											else {
 											 logger.info('User not Found For Phone No: ' + phoneNo );                 

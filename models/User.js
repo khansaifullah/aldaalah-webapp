@@ -18,7 +18,7 @@ var userSchema = new Schema({
       OS:String,
       email_address:String,
       verified_user:Boolean,
-	  deactivate_user:Boolean,
+	  deactivate_user:{ type: Boolean, default: false },
       country_code:String,
 	 // created_at: { type: Date, default: Date.now },
 	 // updated_at: { type: Date, default: Date.now },

@@ -230,24 +230,25 @@ console.log("In Controller completeProfile Method");
         if (user){            
             //update user model
 			if (fullName)
-              user.full_name=fullName;
-              user.profile_photo_url=profilePhotoUrl;
-              user.active=false;
-              user.OS=os;
-              user.verified_user=true;     
+				user.full_name=fullName;
+				user.profile_photo_url=profilePhotoUrl;
+				user.active=false;
+				user.OS=os;
+				user.verified_user=true;  
+				user.deactivate_user=false;
                 
-              user.save(function (err, user){
-                if(err){
-                    logger.error('Some Error while updating user' + err );
-                         
-                }
-                else{
-                     logger.info('User updated With Phone Num ' + phoneNo );
-                                  
-                    res.jsonp({status:"success",
-                    message:"Profile Updated!",
-                     object:user}); 
-                    }
+				user.save(function (err, user){
+					if(err){
+						logger.error('Some Error while updating user' + err );
+							 
+					}
+					else{
+						 logger.info('User updated With Phone Num ' + phoneNo );
+									  
+						res.jsonp({status:"success",
+						message:"Profile Updated!",
+						 object:user}); 
+					}
                      
                   
               });

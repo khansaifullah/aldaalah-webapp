@@ -33,7 +33,11 @@ function inRadiusNotification(phoneNo,userLoc,marker){
 				
 				title:marker.title,
 				description:marker.description,
-				marker_photo_url:marker.marker_photo_url
+				marker_photo_url:marker.marker_photo_url,
+				latitude:marker.loc[0],
+				longitude:marker.loc[1],
+				radius:marker.radius
+				
 				
 		}
 		//inside Radius, Send Push Notification
@@ -46,7 +50,7 @@ function inRadiusNotification(phoneNo,userLoc,marker){
 					if (user){												  
 						logger.info('User Found For Phone No: ' + phoneNo );
 						logger.info('Sending Notification to player id ' + user.palyer_id );
-						logger.info('marker Object : ' + markerObj);
+						logger.info('marker Object : ' + markerObj.latitude + "**" + markerObj.longitude + "**" + markerObj.radius);
 						//logger.info('Individual Conversation msg  before Push Notification:'  );		
 						NotificationController.sendNotifcationToPlayerId(user.palyer_id,markerObj,"reachedMarker");
 						//msg=null;
