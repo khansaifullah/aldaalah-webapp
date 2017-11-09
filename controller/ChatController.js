@@ -222,22 +222,22 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 				
 				function createConversationUser(userMobile){	
 					return new Promise((resolve,reject) => {
-					logger.info ('Creating Conversation User for Phone No' +  userMobile );
-											newConversationUser= new ConversationUser({                                          
-											_conversationId: conversationId,
-											_userMobile: userMobile       
-															  });
+							logger.info ('Creating Conversation User for Phone No' +  userMobile );
+							newConversationUser= new ConversationUser({                                          
+							_conversationId: conversationId,
+							_userMobile: userMobile       
+											  });
 															
-										newConversationUser.save(function (err, conversationUser) {
-											 if (err){
-												 logger.error('Error Occured while Saving new newConversationUser 1 :'+ err);
-												 reject(err);
-											 } 
-											 if (conversationUser){
-												 logger.info ('Conversation User Created for Phone No' +  userMobile );
-											 resolve();
-											 }
-											});
+							newConversationUser.save(function (err, conversationUser) {
+								 if (err){
+									 logger.error('Error Occured while Saving new newConversationUser  :'+ err);
+									 reject(err);
+								 } 
+								 if (conversationUser){
+									 logger.info ('Conversation User Created for Phone No' +  userMobile );
+								 resolve();
+								 }
+								});
 					});
 				}                                   
 				 conversationUsers.forEach(function(userMobile) {              
@@ -251,12 +251,8 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 					 .catch((err)=>res.send({status:"failure",
 									   message:"Error Occured while creating Group" + err,
 									  object:[]}));
-										  
-										
-							
 
 						}
-					
 					//logger.info ('Sending room Id To client : ' + conversationId );					
                 });
                    
@@ -308,7 +304,7 @@ exports.updateGroupName = function(req,callback) {
 										callback();
 										}
 										
-									});
+								});
  
     logger.info(' Exit ChatController.updateGroupName Method');
 	}catch (err){

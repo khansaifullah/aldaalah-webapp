@@ -208,7 +208,7 @@ io.sockets.on('connection', function(socket) {
 		  socket.room = conversationId;
 		  socket.join(conversationId);
 		  socket.emit('roomId',conversationId);          
-		  logger.info(' Exit joinRoom Event'); 
+		  logger.info('JoinRoom Event Exit'); 
 		}catch(err){
 			  logger.info('An Exception Has occured in joinRoom event ' + err);		  
 		}
@@ -222,7 +222,7 @@ io.sockets.on('connection', function(socket) {
 			socket.room=null;
 			socket.leave(socket.room);
 			socket.emit('roomId',null);
-			logger.info(' Exit leaveRoom Event'); 
+			logger.info('LeaveRoom Event Exit'); 
 		}catch(err) {
 			  logger.info('An Exception Has occured in leaveRoom event' + err);		  
 		}
