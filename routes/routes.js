@@ -47,7 +47,7 @@ module.exports = function(app) {
 	app.use(bodyParser.json())
 	
 	app.get('/', function(req, res) {
-		//var object =new Object({"Field1":"Value1","Field2":"Value2"});
+	//var object =new Object({"Field1":"Value1","Field2":"Value2"});
 	//NotificationController.sendNotifcationToPlayerId("03bd1410-c6f1-4e14-9e12-02e6fd718691",object,"TestEvent");
 	//NotificationController.sendNotifcationToPlayerId();
 		res.end("Node-Aldallah-Project"); 
@@ -222,7 +222,9 @@ module.exports = function(app) {
 				//geneterate a url 
 				var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
 				//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
-		
+				console.log ("updateProfilePhotoFlag Without Parsing: " + req.body.updateProfilePhoto);
+				var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
+				console.log ("updateProfilePhotoFlag with parsing : " + updateProfilePhotoFlag);
 				if ((req.body.updateProfilePhoto)&&(req.body.updateName)){
 					//update picture
 					regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
