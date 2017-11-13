@@ -405,7 +405,9 @@ module.exports = function(app) {
 				//geneterate a url 
 				var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
 				//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
-		
+				console.log ("updateProfilePhotoFlag Without Parsing: " + req.body.updateProfilePhoto);
+				var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
+				console.log ("updateProfilePhotoFlag with parsing : " + updateProfilePhotoFlag);
 				if ((req.body.updateProfilePhoto)&&(req.body.updateName)){
 					//update picture
 					ChatController.updateGroupProfilePhoto(conversationId,profilePhotoUrl,function (data){
