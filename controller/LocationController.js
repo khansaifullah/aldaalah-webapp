@@ -16,6 +16,7 @@ var upload = multer({ dest: './public/images/profileImages' })
 
 
 function inRadiusNotification(phoneNo,userLoc,marker){
+	logger.info ('marker.title : ' +marker.title ); 
 	logger.info ('marker.loc : ' +marker.loc );
 	logger.info ('userLoc : ' +userLoc );
 	var query;

@@ -165,7 +165,7 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 					
 					 Promise.all(promiseArr)
 						 .then((result)=> {
-								logger.info('Sending call back after Promise success' + ConversationIdsList.length );		
+								logger.info('Sending call back after Promise success, Conversation ID : ' + sendBackConversation );		
 								callback(sendBackConversation);
 								})
 						 .catch(error => {
@@ -226,7 +226,7 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 							newConversationUser= new ConversationUser({                                          
 							_conversationId: conversationId,
 							_userMobile: userMobile       
-											  });
+							});
 															
 							newConversationUser.save(function (err, conversationUser) {
 								 if (err){
@@ -237,7 +237,7 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 									 logger.info ('Conversation User Created for Phone No' +  userMobile );
 								 resolve();
 								 }
-								});
+							});
 					});
 				}                                   
 				 conversationUsers.forEach(function(userMobile) {              
