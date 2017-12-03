@@ -11,6 +11,7 @@ var User = require('../models/User.js');
 var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
 require('datejs');
+cors = require('cors');
 var mongoose = require('mongoose');
 var path = require('path');
 var multer = require('multer');
@@ -40,6 +41,10 @@ var storage = multer.diskStorage({
 
 module.exports = function(app) {	
 	 
+	 
+	 //Enable All CORS Requests
+	app.use(cors());
+
     app.use(bodyParser.urlencoded({
         extended: true
     }));
