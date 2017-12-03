@@ -4,6 +4,7 @@
   "description": "aldaalah reg module",
   "dependencies": {
     "body-parser": "^1.18.0",
+    "cors": "^2.8.4",
     "datejs": "^1.0.0-rc3",
     "express": "^3.21.2",
     "geolib": "^2.0.23",

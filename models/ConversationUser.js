@@ -10,8 +10,7 @@ var ConversationUserSchema   = new mongoose.Schema({
     _userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     _userMobile: String,
     leaveConversation:{ type: Boolean, default: false },
-    //createdOnUTC: { type: Date, default: Date.now },
-    //updatedOnUTC: { type: Date, default: Date.now },
+  
     
 } , {timestamps: true});
 ConversationUserSchema.index({ _conversationId:1,_userMobile: 1,createdOnUTC:1})

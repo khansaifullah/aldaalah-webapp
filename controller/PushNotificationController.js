@@ -33,16 +33,16 @@ exports.sendNotifcationToPlayerId = function (playerId,obj,eventName){
 	headers.EventName=eventName;
 	console.log ('playerId : '+playerId);
 	var data = { 
-  app_id:oneSignalConfig.androidAppiId,
-  contents: {"en": "Aldaalah"},
-  headings:{"en":eventName},
-  include_player_ids: [playerId],
-  data:obj,
-  priority:10,
+	  app_id:oneSignalConfig.androidAppiId,
+	  contents: {"en": "Aldaalah"},
+	  headings:{"en":eventName},
+	  include_player_ids: [playerId],
+	  data:obj,
+	  priority:10,
   
-  //will need to change for ios
-  android_group:eventName
-};
+	//will need to change for ios
+	android_group:eventName
+	};
 	
   var req = https.request(options, function(res) {  
     res.on('data', function(data) {

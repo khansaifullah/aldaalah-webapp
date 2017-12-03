@@ -1,4 +1,5 @@
 var express = require('express'),
+ cors = require('cors'),
 	app = express();
 var http = require('http').Server(app);
  require('./routes/routes.js')(app);
@@ -22,6 +23,8 @@ mongoose.connect(db.url);
 // Heroku assigns a port if port = process.env.PORT  
 var port = process.env.PORT || 3000;
 
+//Enable All CORS Requests
+app.use(cors());
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
