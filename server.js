@@ -1,5 +1,5 @@
 var express = require('express'),
- cors = require('cors'),
+ //cors = require('cors'),
 	app = express();
 var http = require('http').Server(app);
  require('./routes/routes.js')(app);
@@ -24,7 +24,14 @@ mongoose.connect(db.url);
 var port = process.env.PORT || 3000;
 
 //Enable All CORS Requests
-app.use(cors());
+//app.use(cors());
+
+// Another Way to Enable CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
