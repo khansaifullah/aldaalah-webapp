@@ -1,6 +1,6 @@
 var express = require('express'),
- //cors = require('cors'),
-	app = express();
+
+app = express();
 var http = require('http').Server(app);
  require('./routes/routes.js')(app);
  var db = require('./config/db');
@@ -23,16 +23,14 @@ mongoose.connect(db.url);
 // Heroku assigns a port if port = process.env.PORT  
 var port = process.env.PORT || 3000;
 
-//Enable All CORS Requests
-//app.use(cors());
 
 // Another Way to Enable CORS
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+//app.use(function(req, res, next) {
+  //res.header("Access-Control-Allow-Origin", "*");
   //res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+  //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  //next();
+//});
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
