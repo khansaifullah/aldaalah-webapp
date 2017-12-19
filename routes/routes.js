@@ -887,6 +887,18 @@ module.exports = function(app) {
 
 	});
 	
+	 // getting List of Locations
+    app.get('/locations',function(req,res){ 
+      	
+		logger.info("in routes get Locations");
+		AppController.findAllLocations(function (locations) {
+            logger.info("Response Of findAllLocations Method");
+			res.jsonp({status:"success",
+                        message:"List Of locations",
+                        object:locations});
+                             
+	});		
+	});
 };
 
 
