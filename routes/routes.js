@@ -4,6 +4,7 @@ var AppController= require('../controller/AppController.js');
 var ChatController = require('../controller/ChatController.js');
 var LocController = require('../controller/LocationController.js');
 var NotificationController = require('../controller/PushNotificationController.js');
+var AdminController = require('../controller/AdminController.js');
 var bodyParser = require('body-parser');
 var Country = require('../models/Country.js');
 var Conversation = require('../models/Conversation.js');
@@ -898,6 +899,35 @@ module.exports = function(app) {
                         object:locations});
                              
 	});		
+	});
+	
+	
+		// Admin Login
+	app.post('/adminlogin',function(req,res){
+		
+		 if(req.body === undefined||req.body === null) {
+        res.end("Empty Body"); 
+        }
+		console.log("in routes /adminlogin");
+		//var reqData=req.body;
+		var userName = req.body.username;
+        var password = req.body.password;
+
+		AdminController.login(userName,password,function (admin) {
+			
+          if (admin){
+			res.setHeader("Auth-Token", "test111");
+			res.jsonp({status:"success",
+                        message:"Successful Login",
+                        object:admin});
+			}
+			else{
+			res.jsonp({status:"Failure",
+                        message:"Wrong username or Password",
+                        object:[]});
+				
+			}
+	});
 	});
 };
 
