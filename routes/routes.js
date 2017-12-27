@@ -916,7 +916,7 @@ module.exports = function(app) {
 		AdminController.login(userName,password,function (admin) {
 			
           if (admin){
-			res.setHeader("'app-awt-token", "test111");
+			res.setHeader("app-awt-token", "xhbqabsbasa17ascxxkk");
 			res.jsonp({status:"success",
                         message:"Successful Login",
                         object:admin});
