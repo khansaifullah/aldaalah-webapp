@@ -3,6 +3,7 @@ var ChatController = require('../controller/ChatController.js');
 var NotificationController = require('../controller/PushNotificationController.js');
 var User = require('../models/User.js');
 var Marker = require('../models/Marker.js');
+var MarkerCategory = require('../models/MarkerCategory.js');
 var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
 //require('datejs');
@@ -13,6 +14,44 @@ var multer  = require('multer');
 
 var upload = multer({ dest: './public/images/profileImages' })
 //mongoose.createConnection(db.url);
+
+
+
+
+var markerExists=function(id,callback){
+    
+    logger.info('markerExists Method Called');
+     var query = { _id : id };
+     Marker.findOne(query).exec(function(err, marker){
+        if (err){
+            logger.error('Some Error while finding Marker' + err );
+            res.status(400).send({status:"failure",
+                                  message:err,
+                                  object:[]
+            });
+        }
+        else{
+            if (marker){
+                
+                  logger.info('Marker Found  :' );
+                
+                console.log("Marker found ");
+                callback (marker);
+            }
+            else{
+                
+                 logger.info('Marker Not Found ' 
+                  +phoneNo);
+                console.log("Marker not found  ");
+                callback( marker);
+                
+            }
+       }
+     });
+    
+    logger.info(' Exit MarkerExists Method');
+	
+}
 
 
 function inRadiusNotification(phoneNo,userLoc,marker){
@@ -114,6 +153,7 @@ exports.updateUserLocation=function(reqData,res){
 			AppController.userExists(phoneNo, function(user){
 				if (user){
 					user.loc=[longitude,latitude];
+					user.last_shared_loc_time=new Date ();
 					user.save(function (err, user){
 						if(err){
 								logger.error('Some Error while updating user' + err );
@@ -237,28 +277,26 @@ exports.getGroupUserLocations=function(conversationId,res){
 exports.updateShareLocationFlag=function(reqData,res){
 	try{
 			var phoneNo=reqData.phoneNo;
-			var shareLocationFlag=reqData.shareLocationFlag;
-						
+			var shareLocationFlag=reqData.shareLocationFlag;						
 			logger.info('LocationController.updateShareLocationFlag called  :' 
 						  + phoneNo+ '**'+ shareLocationFlag );
 		
 			AppController.userExists(phoneNo, function(user){
 				if (user){
 					user.share_location=shareLocationFlag;
+					user.share_loc_flag_time=new Date();
 					user.save(function (err, user){
 						if(err){
-								logger.error('Some Error while updating user' + err );
+							logger.error('Some Error while updating user' + err );
 								 
-							}
+						}
 						else{
-							logger.info('User Location With Phone Num ' + phoneNo );
-										  
-							res.jsonp({status:"success",
-							message:"Share Location Flag Updated!",
-							 object:[]}); 
-							 }
-							 
-						  
+							logger.info('User Share Location Flag updated With Phone Num ' +
+							phoneNo +' at  :' + new Date());										  
+							res.jsonp({ status:"success",
+										message:"Share Location Flag Updated!",
+										object:[]}); 
+						}						  
 					  });
 						
 					logger.info(phoneNo + 'location flag : '+user.share_location );
@@ -276,7 +314,8 @@ exports.updateShareLocationFlag=function(reqData,res){
 }
 
 // Marker Methods
-                  
+
+//add Marker           
 exports.setMarker=function(reqData,res){
 	try{
 			
@@ -285,6 +324,11 @@ exports.setMarker=function(reqData,res){
 			var longitude=reqData.longitude;
 			var latitude=reqData.latitude;
 			var radius=reqData.radius;
+			var categoryId=reqData.categoryId;
+			var engDescription=reqData.engDescription;
+			var arbDescription=reqData.arbDescription;
+			var sortOrder=reqData.sortOrder;
+			
 			//photo
 			//Check valid Location -180 to 180
 			logger.info('LocationController.setMarker called  :' 
@@ -293,7 +337,11 @@ exports.setMarker=function(reqData,res){
 			var newmarker = new Marker({  
                     title: title,
                     description:description ,
-					radius:radius
+					radius:radius,
+					_categoryId:categoryId,
+					description_arb:arbDescription,
+					description_eng:engDescription,
+					sort_order:sortOrder
              });
 			 newmarker.loc=[longitude,latitude];
 			 
@@ -317,3 +365,224 @@ exports.setMarker=function(reqData,res){
 		logger.info('An Exception Has occured in updateUserLocation method' + err);
 	}
 }
+
+
+
+//Update Marker
+
+exports.updateMarker=function(reqData,res){
+	try{
+			var markerId=reqData.id;
+			var title=reqData.title;
+			var description=reqData.description;
+			var longitude=reqData.longitude;
+			var latitude=reqData.latitude;
+			var radius=reqData.radius;
+			var categoryId=reqData.categoryId;
+			var engDescription=reqData.engDescription;
+			var arbDescription=reqData.arbDescription;
+			var sortOrder=reqData.sortOrder;	
+			//Check valid Location -180 to 180
+			logger.info('LocationController.updateMarker called  :' 
+						  + title + '**'+ longitude +'**'+ latitude);
+	
+	 //find Marker by markerId	 
+
+	 markerExists(markerId,function(marker){
+        if (marker){            
+			//update marker model
+			if (title)
+			marker.title=title;
+			if (description)
+			marker.description=description;
+			//if (title)
+			marker.marker_photo_url=null;
+			if (radius)
+			marker.radius=radius;	
+			if (categoryId)
+			marker._categoryId=categoryId;
+			if (longitude&&latitude)
+			marker.loc=[longitude,latitude];
+			if (arbDescription)
+			marker.description_arb=arbDescription;
+			if (engDescription)
+			marker.description_eng=engDescription; 
+			if (sortOrder)
+			marker.sort_order=sortOrder; 
+			marker.save(function (err, marker){
+				if(err){
+					logger.error('Some Error while updating marker' + err );
+					res.jsonp({status:"failure",
+					message:"Error Occured while Updating Marker ",
+						object:[]}); 	
+				}
+				else{
+					logger.info('marker updated  '  );
+									
+					res.jsonp({status:"success",
+					message:"Marker Updated!",
+						object:marker}); 
+				}
+                     
+                  
+              });                          
+        }
+        else{
+            logger.info('Marker Not Found to Update  ');
+            res.jsonp({status:"failure",
+                            message:"No Marker Found to Update!",
+                            object:[]}); 
+        }
+            
+    });
+
+	}catch (err){
+		logger.info('An Exception Has occured in updateMarker method' + err);
+	}
+}
+
+
+//Delete Marker
+
+exports.deleteMarker=function(markerId,res){
+    try {
+		
+		logger.info('deleteMarker Method Called for id : '+markerId);		
+		Marker.remove({ _id: markerId}, function (err) {
+				if (err){
+					logger.error('Error Occured while Removing  Marker :'+ err);
+					res.jsonp({status:"failure",
+                            message:"Error Occured while removing Marker",
+                            object:[]}); 
+				} 
+				else{
+					logger.info('Marker with id ' +markerId + ' successfully Removed' );
+					res.jsonp({status:"success",
+								message:"Marker successfully Removed!",
+								object:[]}); 
+				}
+				// removed!
+		});				                                        
+        
+	}catch  (err){
+		logger.info ('An Exception occured LocController.deleteMarker ' + err);
+	}	
+	
+}
+
+
+
+// Marker Category  Method
+				
+//add Market Category
+exports.addMarkerCategory=function(reqData,res){
+	try{
+			
+			var title=reqData.title;						
+			logger.info('LocationController.addMarkerCategory called  :'+ title );
+	
+			var newMarkerCategory = new MarkerCategory({  
+                    title: title                    
+             });
+			 			 
+			 newMarkerCategory.save(function (err, user) {
+			if(err){
+				logger.error('Some Error while saving MarkerCategory' + err );
+				res.jsonp({status:"failure",
+				message:"Some Error while saving MarkerCategory",
+				object:[]}); 
+			}
+			else{
+				logger.info('MarkerCategory Created : ' + title );
+				res.jsonp({status:"success",
+				message:"MarkerCategory Created",
+				object:[]});
+				 
+			 }
+		   
+			 });
+	}catch (err){
+		logger.info('An Exception Has occured in addMarkerCategory method' + err);
+	}
+}
+
+
+
+//Update Marker Category
+
+exports.updateCategoryMarker=function(reqData,res){
+	try{
+			var markerCategoryId=reqData.categoryId;
+			var title=reqData.title;			
+			logger.info('LocationController.updateCategoryMarker called  :' + title );						  
+			var query = { _id : markerCategoryId };
+			// find Marker category by categoryId	 
+			MarkerCategory.findOne(query).exec(function(err, markerCategory){
+				if (err){
+					logger.error('Some Error while finding Marker Category' + err );
+					res.status(400).send({status:"failure",
+										message:err,
+										object:[]
+					});
+				}
+				else{
+					if (markerCategory){
+						if (title)
+						markerCategory.title=title;
+						markerCategory.save(function (err, markerCategory){
+							if(err){
+								logger.error('Some Error while updating markerCategory' + err );
+								res.jsonp({status:"failure",
+								message:"Error Occured while Updating markerCategory ",
+									object:[]}); 	
+							}
+							else{
+								logger.info('Marker Category updated  '  );												
+								res.jsonp({status:"success",
+								message:"Marker Category Updated!",
+									object:markerCategory}); 
+							}								 							  
+						  });
+					}
+					else {
+						logger.error('No  Such Category found to update ' + err );
+						res.status(400).send({status:"failure",
+											message:'No  Such Category found to update ' +err,
+											object:[]
+										});
+					}
+				}
+			});
+	}catch (err){
+		logger.info('An Exception Has occured in updateCategoryMarker method' + err);
+	}
+}
+
+
+//Delete Marker Category
+
+exports.deleteMarkerCategory=function(categoryId,res){
+    try {
+		
+		logger.info('deleteMarkerCategory Method Called for id : '+categoryId);		
+		MarkerCategory.remove({ _id: categoryId}, function (err) {
+				if (err){
+					logger.error('Error Occured while Removing  Marker category :'+ err);
+					res.jsonp({status:"failure",
+                            message:"Error Occured while removing Marker category",
+                            object:[]}); 
+				}
+				else{
+					logger.info('Marker category with id ' +categoryId + ' successfully Removed' );
+					res.jsonp({status:"success",
+								message:"Marker category successfully Removed!",
+								object:[]}); 
+				}
+				// removed!
+		});				                                                
+	}catch  (err){
+		logger.info ('An Exception occured LocController.deleteCategoryMarker ' + err);
+	}	
+	
+}
+

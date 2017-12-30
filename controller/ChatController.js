@@ -563,6 +563,147 @@ exports.addGroupMember=function(req,res){
 }
 
 
+
+
+
+//Add group Members from ios Device
+// Remove JSON.parse ()
+
+exports.addGroupMemberFromIOS=function(req,res){
+    try {
+		logger.info('addGroupMember Method Called');
+		var conversationId=req.body.conversationId;
+		var groupMembersList =req.body.groupMembersList;
+		//groupMembersList=JSON.parse(groupMembersList);
+		console.log ('Conversation id  : '+conversationId);
+		console.log ('groupMembersList : '+groupMembersList);
+		
+		
+		var arrayOfNumbers;
+		if (groupMembersList){
+			arrayOfNumbers=groupMembersList.values;
+			console.log ('arrayOfNumbers : '+ arrayOfNumbers);
+		}
+			
+		var newConversationUser;
+        var arrayToSend = [];
+		let promiseArr = [];
+  
+    function addMember(num){
+           
+        return new Promise((resolve,reject) => {
+
+				newConversationUser= new ConversationUser({                                          
+								_conversationId: conversationId, 
+								_userMobile: num  
+								});
+							
+				newConversationUser.save(function (err, conversationUser) {
+						if (err){
+							logger.error('Error Occured while Saving new newConversationUser 1 :'+ err);
+							reject(err);
+						} 
+						if (conversationUser){
+							logger.info('Conversation user saved with phoneNo :' +num);
+							arrayToSend.push(num);
+							resolve();
+						}
+						else {
+							logger.info('Null conversation user found:' +num);
+							resolve();
+						}
+					});                                        
+        });
+    }                 
+
+		var query = { _id : conversationId };
+		Conversation.findOne(query).exec(function(err,conversation){
+			if (err){
+				logger.error('Some Error while finding conversation' + err );
+				res.status(400).send({status:"failure",
+									  message:err,
+									  object:[]
+				});
+			}
+			else
+			if (conversation){ 
+				logger.info('conversation Found with Phone Num. :' +conversationId);
+				var conversationObj ={
+										//fromPhoneNo:userMobileNumberFrom,	
+										conversationId:conversation._id, 
+										isGroupConversation:conversation.isGroupConversation,
+										adminMobile:conversation.adminMobile,
+										photoUrl:conversation.conversationImageUrl,
+										conversationName:conversation.conversationName,
+										createdAt:conversation.createdAt
+										
+										}
+				// send notification of joining group
+					var phoneNo;
+					var query; 	
+				  if (arrayOfNumbers){
+					  //arrayOfNumbers=arrayOfNumbers.values;
+					for (var i=0; i < arrayOfNumbers.length ; i++){
+						 phoneNo=arrayOfNumbers[i];	
+						//Sending Push Notiifcation To New Group Members								
+						logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
+						
+						query = { phone : phoneNo };						
+						User.findOne(query).exec(function(err, user){
+							if (err){
+							 logger.error('Some Error occured while finding user' + err );
+							 }
+							if (user){
+							logger.info('User Found For Phone No: ' + phoneNo );
+							logger.info('Sending Notification to player id ' + user.palyer_id );
+							NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupConversationRequest");
+							}
+							else {
+							 logger.info('User not Found For Phone No: ' + phoneNo );                 
+							}                               
+						});
+														
+					}
+								
+				arrayOfNumbers.forEach(function(number) {              
+					promiseArr.push(addMember(number));        
+				 });
+				
+				 Promise.all(promiseArr)
+					 .then((result)=> res.jsonp({status:"success",
+									   message:"New Members added to Group",
+									  object:arrayToSend}))
+					 .catch((err)=>res.send({status:"failure",
+									   message:"Error Occured while Adding new member",
+									  object:[]}));
+				  }
+				  else {
+					              
+					logger.info('No member found to add in conversation : '+conversationId);
+						res.jsonp({ status:"failure",
+									message:"No members found to add",
+									object:arrayToSend});
+				  }
+				}
+			else{               
+					logger.info('conversation with conversationId : ' +conversationId + ' is not created or deleted');
+						res.jsonp({ status:"failure",
+									message:"Converation Not found",
+									object:arrayToSend});	 
+				}
+		   
+		 });
+    
+	}catch  (err){
+		logger.info ('An Exception occured ChatController.addGroupMember ' + err);
+	}	
+	
+}
+
+
+
+
+
 //Delete group Members
 
 exports.removeGroupMember=function(req,res){

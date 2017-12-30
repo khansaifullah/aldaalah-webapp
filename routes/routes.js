@@ -648,6 +648,8 @@ module.exports = function(app) {
 		console.log("in routes post /groupMember");
 		ChatController.removeGroupMember(req,res);
 	});
+
+
 	/***** Location Apis ********/ 
 	//get location From Client
 	
@@ -706,6 +708,8 @@ module.exports = function(app) {
 		LocController.updateShareLocationFlag(reqData,res);
 	});
 	
+
+	/*  Marker API's */
 	 app.post('/marker',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
@@ -717,6 +721,10 @@ module.exports = function(app) {
 		LocController.setMarker(reqData,res);
 	});
 	
+
+	
+
+
 	/******* Push Notification Apis *****/
 	
 	app.post('/playerId',function(req,res){
@@ -736,10 +744,10 @@ module.exports = function(app) {
 	 // getting List of users
     app.get('/users',function(req,res){ 
       	
-		logger.info("in routes get users");
+		logger.info("In routes get users");
 		AppController.findAllUser(function (users) {
             logger.info("Response Of findAllUser Method");
-			 res.jsonp({status:"success",
+			res.jsonp({ status:"success",
                         message:"List Of users",
                         object:users});
                              
@@ -888,15 +896,15 @@ module.exports = function(app) {
 
 	});
 	
-	 // getting List of Locations
-    app.get('/locations',function(req,res){ 
+	 // getting List of Markers
+    app.get('/markers',function(req,res){ 
       	
-		logger.info("in routes get Locations");
-		AppController.findAllLocations(function (locations) {
-            logger.info("Response Of findAllLocations Method");
+		logger.info("in routes get markers");
+		AppController.findAllMarkers(function (markers) {
+            logger.info("Response Of findAllMarkers Method");
 			res.jsonp({status:"success",
-                        message:"List Of locations",
-                        object:locations});
+                        message:"List Of Markers",
+                        object:markers});
                              
 	});		
 	});
@@ -929,6 +937,106 @@ module.exports = function(app) {
 			}
 	});
 	});
+
+
+
+
+
+	/* ALDAALAH V2 APIS */
+
+
+	/*  Marker  API's */
+
+
+	app.post('/v2.0/marker',function(req,res){
+		
+		if(req.body === undefined||req.body === null) {
+		 res.end("Empty Body"); 
+		 }
+		 console.log("in routes post /marker");
+		 var reqData=req.body;
+		 // console.log(reqData);
+		 LocController.setMarker(reqData,res);
+	 });
+
+	 app.post('/v2.0/updateMarker',function(req,res){				
+		if(req.body === undefined||req.body === null) {
+        res.end("Empty Body"); 
+        }
+			 
+		console.log("in routes /updateMarker");
+		var reqData=req.body;
+        // console.log(reqData);
+		LocController.updateMarker(reqData,res);
+	});
+
+
+	 app.delete('/v2.0/marker',function(req,res){
+		
+		if(req.body === undefined||req.body === null) {
+		 res.end("Empty Body"); 
+		 }
+		 var markerId = req.query.markerId;
+		 console.log("in routes delete /marker");
+		 
+		 // console.log(reqData);
+		 LocController.deleteMarker(markerId,res);
+	 });
+
+
+	
+
+		
+	/*  Marker Category API's */
+
+	//Add new Catogory
+		app.post('/v2.0/markerCategory',function(req,res){
+		
+			if(req.body === undefined||req.body === null) {
+			 res.end("Empty Body"); 
+			 }
+			 console.log("in routes POST:  /markerCategory");
+			 var reqData=req.body;
+			 LocController.addMarkerCategory(reqData,res);
+		 });
+
+	//update Marker Category
+		 app.put('/v2.0/markerCategory',function(req,res){
+		
+			if(req.body === undefined||req.body === null) {
+			 res.end("Empty Body"); 
+			 }
+			 console.log("in routes PUT : /markerCategory");
+			 var reqData=req.body;
+			 LocController.updateCategoryMarker(reqData,res);
+		 });
+
+
+	// delete Marker Category
+		 app.delete('/v2.0/markerCategory',function(req,res){
+		
+			if(req.body === undefined||req.body === null) {
+			 res.end("Empty Body"); 
+			 }
+			 var categoryId = req.query.categoryId;
+			 console.log("in routes delete /markerCategory");
+			 
+			 // console.log(reqData);
+			 LocController.deleteMarkerCategory(categoryId,res);
+		 });
+
+
+		 // Add new Group member from IOS device
+		 app.post('/v2.0/groupMember',function(req,res){
+		
+			if(req.body === undefined||req.body === null) {
+			 res.end("Empty Body"); 
+			 }
+			 console.log("in routes POST /v2.0/groupMember");
+	 
+			 ChatController.addGroupMemberFromIOS(req,res);
+		 });
+		 
 };
 
 

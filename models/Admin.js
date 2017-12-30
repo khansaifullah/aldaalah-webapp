@@ -6,17 +6,15 @@ var Schema = mongoose.Schema;
 // create a schema
 
 var adminSchema = new Schema({
-  
-   
+
       user_name: { type: String, required: true, unique: true }, 
-	  password: String,
+	password: String,
       phone: String,
       full_name: String,
       profile_photo_url:{type:String,default:null },
       email_address:String
     
 }, {timestamps: true});
-
 
 // the schema is useless so far
 // we need to create a model using it

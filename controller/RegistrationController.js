@@ -37,16 +37,13 @@ var userExists=function(phoneNo,callback){
         else{
             if (user){
                 
-                  logger.info('User Found with Phone Num. :' 
-                  +phoneNo);
-                
+                logger.info('User Found with Phone Num. :'+phoneNo);                
                 console.log("user found with phone no "+phoneNo);
                 callback (user);
             }
             else{
                 
-                 logger.info('User Not Found with Phone Num. :' 
-                  +phoneNo);
+                logger.info('User Not Found with Phone Num. :'+phoneNo);
                 console.log("user not found with phone no "+phoneNo);
                 callback( user);
                 
@@ -216,8 +213,7 @@ exports.verifyCode=function(data,res){
 
 exports.completeProfile = function(user,profilePhotoUrl,res) {
 	try{
-console.log("In Controller completeProfile Method");
-    
+    console.log("In Controller completeProfile Method");    
     logger.info('RegistrationController.completeProfile called for user  :'  + user.phone  );
 
 		var phoneNo = user.phone;

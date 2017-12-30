@@ -2,7 +2,7 @@ var User = require('../models/User.js');
 var Marker = require('../models/Marker.js');
 var Country = require('../models/Country.js');
 var ConversationMessages = require('../models/ConversationMessages.js');
-var Conversation = require('../models/Conversation.js');ConversationUser
+var Conversation = require('../models/Conversation.js');
 var ConversationUser = require('../models/ConversationUser.js');
 var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
@@ -141,7 +141,7 @@ exports.findAllPhoneNo=function(callback){
 
 
 
-exports.findAllLocations=function(callback){
+exports.findAllMarkers=function(callback){
      
     try{
 			Marker.find({}, function(err, markers) {
@@ -159,7 +159,7 @@ exports.findAllLocations=function(callback){
 			} 
 			});
 		}catch (err){
-		logger.info('An Exception Has occured in findAllLocations method' + err);
+		logger.info('An Exception Has occured in findAllMarkers method' + err);
 	}
 }
 

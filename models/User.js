@@ -20,15 +20,16 @@ var userSchema = new Schema({
       verified_user:Boolean,
 	  deactivate_user:{ type: Boolean, default: false },
       country_code:String,
-	 // created_at: { type: Date, default: Date.now },
-	 // updated_at: { type: Date, default: Date.now },
       verification_code:String,
       palyer_id:String,
-	  share_location:{ type: Boolean, default: true },
+      share_location:{ type: Boolean, default: true },
+      share_loc_flag_time:{ type: Date, default: Date.now },
       loc: {
 		type: [Number],  // [<longitude>, <latitude>]
 		index: '2d'      // create the geospatial index
-		}
+        },
+      last_shared_loc_time: { type: Date, default: Date.now }
+         
 }, {timestamps: true});
 
 userSchema.index({phone:1});
