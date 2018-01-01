@@ -146,3 +146,5 @@
 {"level":"info","message":"User not Found For Phone No: 1222121","timestamp":"15:40:05"}
 {"level":"info","message":"Conversation user saved with phoneNo :1222121","timestamp":"15:40:05"}
 {"level":"info","message":"Conversation user saved with phoneNo :5212","timestamp":"15:40:05"}
+{"level":"info","message":"LocationController.setMarker called  :New marker with sort order**72.089316**31.520145","timestamp":"15:53:16"}
+{"level":"info","message":"Marker Created : New marker with sort order","timestamp":"15:53:16"}

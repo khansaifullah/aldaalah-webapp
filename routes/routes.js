@@ -1036,7 +1036,16 @@ module.exports = function(app) {
 	 
 			 ChatController.addGroupMemberFromIOS(req,res);
 		 });
-		 
+
+		 // Delete  Group member from IOS device
+		 app.post('/v2.0/deleteMember',function(req,res){
+		
+			if(req.body === undefined||req.body === null) {
+			 res.end("Empty Body"); 
+			 }
+			 console.log("in routes post /v2.0/deleteMember");
+			 ChatController.removeGroupMemberFromIOS(req,res);
+		 });
 };
 
 

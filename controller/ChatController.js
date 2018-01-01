@@ -783,6 +783,89 @@ exports.removeGroupMember=function(req,res){
 	
 }
 
+
+
+//Delete group Members for IOS device
+// Remove JSON.parse ()
+
+exports.removeGroupMemberFromIOS=function(req,res){
+    try {
+		logger.info('removeGroupMember Method Called');
+		console.log ('Conversation id  : '+req.body.conversationId);
+		console.log ('groupMembersList : '+ req.body.groupMembersList);
+		var conversationId=req.body.conversationId;
+		var groupMembersList =req.body.groupMembersList;		
+		//groupMembersList=JSON.parse(groupMembersList);
+		console.log ('groupMembersList  q222: '+groupMembersList);	
+		
+		var arrayOfNumbers;
+		if (groupMembersList){
+			arrayOfNumbers=groupMembersList.values;
+			console.log ('arrayOfNumbers : '+ arrayOfNumbers);
+		}
+		let promiseArr = [];
+		var phoneNo;
+    function removeMember(num){
+           
+        return new Promise((resolve,reject) => {
+
+						ConversationUser.remove({ _userMobile: num, _conversationId:conversationId }, function (err) {
+							  if (err){
+								  logger.error('Error Occured while Removing newConversationUser 1 :'+ err);
+									reject(err);
+							  } 
+							  else{
+								  logger.info('Conversation user with phoneNo ' +num + ' suuccessfully Removed' );
+									resolve();
+							  }
+							  // removed!
+							});	
+			                                        
+        });
+    }                 
+
+		if (arrayOfNumbers){		
+			arrayOfNumbers.forEach(function(number) {
+						//sending closed group Notification to group members
+
+						logger.info('Group member to delet with PhoneNO : ' + number );
+						query = { phone : number };						
+						User.findOne(query).exec(function(err, user){
+							if (err){
+							 logger.error('Some Error occured while finding user' + err );
+							 }
+							if (user){
+								logger.info('User Found For Phone No: ' + number );
+								var conversationObj ={										
+										conversationId:conversationId	
+								}
+								logger.info('Sending Notification of closed Group to player id ' + user.palyer_id );
+								NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"closedGroup");
+							}
+							else {
+							 logger.info('User not Found For Phone No: ' + number );                 
+							}                               
+						});	
+
+				//Promisify				
+				promiseArr.push(removeMember(number));        
+			});
+		}
+		 Promise.all(promiseArr)
+			 .then((result)=> res.jsonp({status:"success",
+							   message:"Members Removed from Group Successfully",
+							  object:[]}))
+			 .catch((err)=>res.send({status:"failure",
+							   message:"Error Occured while Removing members from group",
+							  object:[]}));
+    
+	}catch  (err){
+		logger.info ('An Exception occured ChatController.removeGroupMember ' + err);
+	}	
+	
+}
+
+
 // List of All Groups
 exports.findAllGroups=function(callback){
 	try{
