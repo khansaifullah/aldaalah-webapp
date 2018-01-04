@@ -21,16 +21,10 @@ mongoose.Promise = global.Promise;
 mongoose.connect(db.url);
 
 // Heroku assigns a port if port = process.env.PORT  
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3100;
 
 
-// Another Way to Enable CORS
-//app.use(function(req, res, next) {
-  //res.header("Access-Control-Allow-Origin", "*");
-  //res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  //next();
-//});
+
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');

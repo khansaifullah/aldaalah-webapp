@@ -45,7 +45,11 @@ module.exports = function(app) {
 	 
 	 //Enable All CORS Requests
 	app.use(cors());
-
+	app.use(function(req, res, next) {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,App-Awt-Token, Content-Type, Accept");
+		next();
+	  });
     app.use(bodyParser.urlencoded({
         extended: true
     }));
@@ -56,7 +60,7 @@ module.exports = function(app) {
 	//var object =new Object({"Field1":"Value1","Field2":"Value2"});
 	//NotificationController.sendNotifcationToPlayerId("03bd1410-c6f1-4e14-9e12-02e6fd718691",object,"TestEvent");
 	//NotificationController.sendNotifcationToPlayerId();
-		res.end("Node-Aldallah-Project"); 
+		res.end("Aldallah-WebServices"); 
 	});
 
     app.post('/verificationcode',function(req,res){                         
@@ -924,7 +928,7 @@ module.exports = function(app) {
 		AdminController.login(userName,password,function (admin) {
 			
           if (admin){
-			res.setHeader("app-awt-token", "xhbqabsbasa17ascxxkk");
+			res.setHeader("App-Awt-Token", "xhbqabsbasa17ascxxkk");
 			res.jsonp({status:"success",
                         message:"Successful Login",
                         object:admin});
