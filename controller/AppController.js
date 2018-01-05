@@ -1,5 +1,6 @@
 var User = require('../models/User.js');
 var Marker = require('../models/Marker.js');
+var MarkerCategory = require('../models/MarkerCategory.js');
 var Country = require('../models/Country.js');
 var ConversationMessages = require('../models/ConversationMessages.js');
 var Conversation = require('../models/Conversation.js');
@@ -163,4 +164,25 @@ exports.findAllMarkers=function(callback){
 	}
 }
 
+exports.findAllMarkerCategories=function(callback){
+     
+    try{
+		MarkerCategory.find({}, function(err, markerCategory) {
+			if (err){
+				 res.status(400).send({status:"failure",
+										  message:err,
+										  object:[]
+										});
+			}
+			
+			else{ 
+				logger.info(markerCategory.length + ' MarkerCategory Found');
+				callback(markerCategory);
+			
+			} 
+			});
+		}catch (err){
+		logger.info('An Exception Has occured in MarkerCategory method' + err);
+	}
+}
               

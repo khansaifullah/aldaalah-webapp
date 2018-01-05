@@ -46,8 +46,8 @@ module.exports = function(app) {
 	 //Enable All CORS Requests
 	app.use(cors());
 	app.use(function(req, res, next) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,App-Awt-Token, Content-Type, Accept");
+		//res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "*");
 		next();
 	  });
     app.use(bodyParser.urlencoded({
@@ -928,6 +928,7 @@ module.exports = function(app) {
 		AdminController.login(userName,password,function (admin) {
 			
           if (admin){
+			res.header("Access-Control-Allow-Headers", "*");
 			res.setHeader("App-Awt-Token", "xhbqabsbasa17ascxxkk");
 			res.jsonp({status:"success",
                         message:"Successful Login",
@@ -1029,6 +1030,19 @@ module.exports = function(app) {
 			 LocController.deleteMarkerCategory(categoryId,res);
 		 });
 
+
+			// getting List of Markers
+		app.get('/v2.0/markerCategory',function(req,res){ 
+
+			logger.info("in routes get markers");
+			AppController.findAllMarkerCategories(function (markerCategories) {
+				logger.info("Response Of findAllMarkerCategories Method");
+				res.jsonp({status:"success",
+							message:"List Of Markers Categories",
+							object:markerCategories});
+									
+		});		
+		});
 
 		 // Add new Group member from IOS device
 		 app.post('/v2.0/groupMember',function(req,res){
