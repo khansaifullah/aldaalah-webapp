@@ -964,15 +964,34 @@ module.exports = function(app) {
 		 LocController.setMarker(reqData,res);
 	 });
 
-	 app.post('/v2.0/updateMarker',function(req,res){				
-		if(req.body === undefined||req.body === null) {
-        res.end("Empty Body"); 
-        }
+	//  app.post('/v2.0/updateMarker',function(req,res){				
+	// 	if(req.body === undefined||req.body === null) {
+    //     res.end("Empty Body"); 
+    //     }
 			 
-		console.log("in routes /updateMarker");
-		var reqData=req.body;
-        // console.log(reqData);
-		LocController.updateMarker(reqData,res);
+	// 	console.log("in routes /updateMarker");
+	// 	var reqData=req.body;
+    //     // console.log(reqData);
+	// 	LocController.updateMarker(reqData,res);
+	// });
+
+	app.post('/v2.0/updateMarker',function(req,res){				
+	
+		if(req.body === undefined||req.body === null) {
+			res.jsonp({status:"Failure",
+                        message:"Empty Body",
+                        object:[]});
+			}
+				 
+			console.log("in routes /updateMarker");
+			var reqData=req.body;
+			// console.log(reqData);
+			LocController.updateMarker(reqData,res);
+
+		// res.jsonp({status:"success",
+        //                 message:"Successful Login",
+        //                 object:[]});
+		
 	});
 
 

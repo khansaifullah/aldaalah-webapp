@@ -31,20 +31,13 @@ var markerExists=function(id,callback){
             });
         }
         else{
-            if (marker){
-                
-                  logger.info('Marker Found  :' );
-                
-                console.log("Marker found ");
+            if (marker){                
+                logger.info('Marker Found with id :'+id);
                 callback (marker);
             }
-            else{
-                
-                 logger.info('Marker Not Found ' 
-                  +phoneNo);
-                console.log("Marker not found  ");
-                callback( marker);
-                
+            else{                
+                 logger.info('Marker Not Found with id :'+id);
+                callback( marker);                
             }
        }
      });
@@ -372,7 +365,7 @@ exports.setMarker=function(reqData,res){
 
 exports.updateMarker=function(reqData,res){
 	try{
-			var markerId=reqData.id;
+			var markerId=reqData._id;
 			var title=reqData.title;
 			var description=reqData.description;
 			var longitude=reqData.longitude;
