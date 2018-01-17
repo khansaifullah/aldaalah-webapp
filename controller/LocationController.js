@@ -505,7 +505,7 @@ exports.addMarkerCategory=function(reqData,res){
 
 exports.updateCategoryMarker=function(reqData,res){
 	try{
-			var markerCategoryId=reqData.categoryId;
+			var markerCategoryId=reqData._id;
 			var title=reqData.title;			
 			logger.info('LocationController.updateCategoryMarker called  :' + title );						  
 			var query = { _id : markerCategoryId };
