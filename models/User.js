@@ -16,17 +16,18 @@ var userSchema = new Schema({
       profile_photo_url:{type:String,default:null },
       active:Boolean, 
       OS:String,
-      email_address:String,
+      email:String,
+      password:String,
       verified_user:Boolean,
-	  deactivate_user:{ type: Boolean, default: false },
+	    deactivate_user:{ type: Boolean, default: false },
       country_code:String,
       verification_code:String,
       palyer_id:String,
       share_location:{ type: Boolean, default: true },
       share_loc_flag_time:{ type: Date, default: Date.now },
       loc: {
-		type: [Number],  // [<longitude>, <latitude>]
-		index: '2d'      // create the geospatial index
+        type: [Number],  // [<longitude>, <latitude>]
+        index: '2d'      // create the geospatial index
         },
       last_shared_loc_time: { type: Date, default: Date.now }
          

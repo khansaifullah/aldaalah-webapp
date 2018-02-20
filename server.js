@@ -455,11 +455,20 @@ io.sockets.on('connection', function(socket) {
 						logger.info('Check room of Sender socket : ' + socket + 'where phone No is :'+socket.phoneNo + 'and room : ' +socket.room);		
 						logger.info('Check room of Recipent socket :' + socketid + 'where phone No is :'+recipientSocket.phoneNo + 'and room : ' +recipientSocket.room);	
 						if (recipientSocket){
+							logger.info('Receipient Socket Found' );	
 							if (recipientSocket.room===socket.room) {	
+							logger.info('Rooms Matched' );
 							//logger.info('Conversation msg create at before emiting:' +msg.createdAt );							
 							recipientSocket.emit('receiveMessage', msg);	
 							sendNotifcationFlag=false; 
 							}
+							else {
+								logger.info('Rooms Not Matched recipientSocket.room : ' +recipientSocket.room + 'SenderSocket.room : ' +socket.room );
+								
+							}
+						}
+						else {
+							logger.info('Receipient Socket Not Found , recipientSocket : ' + recipientSocket);	
 						}
 											
 					}
