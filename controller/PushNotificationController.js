@@ -41,7 +41,11 @@ exports.sendNotifcationToPlayerId = function (playerId,obj,eventName){
 	  priority:10,
   
 	//will need to change for ios
-	android_group:eventName
+	android_group:eventName,
+	
+	// for IOS
+	content_available:true,
+	mutable_content:true
 	};
 	
   var req = https.request(options, function(res) {  
