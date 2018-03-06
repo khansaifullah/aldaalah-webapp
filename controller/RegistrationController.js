@@ -10,6 +10,9 @@ var multer  = require('multer')
 var upload = multer({ dest: './public/images/profileImages' });
 //package for making HTTP Request
 var request=require("request");
+var http = require("http");
+// We need this to build our post string
+var querystring = require('querystring');
 //package to generate a random number
 var randomize = require('randomatic');
 //mongoose.createConnection(db.url);
@@ -103,15 +106,110 @@ exports.sendVerificationCode=function(reqData,res){
 					else{
 						 //Http Request to send message
 						
-						requestUrl="http://sendpk.com/api/sms.php?username=923370768876&password=5823&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
-						request.get(requestUrl,
-									function(error,response,body){
-										   if(error){
-												 console.log(error);
-										   }else{
-												 console.log(response);
-										 }
-						});
+						// requestUrl="http://sendpk.com/api/sms.php?username=923370768876&password=5823&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
+						// request.get(requestUrl,
+						// 			function(error,response,body){
+						// 				   if(error){
+						// 						 console.log(error);
+						// 				   }else{
+						// 						 console.log(response);
+						// 				 }
+						// });
+
+                        //Testing Another API 
+                        // Set the headers
+
+                        // requestUrl="http://sendpk.com/api/sms.php?username=923370768876&password=5823&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
+
+                            // var headers = {
+
+                            //     'Authorization':       'Basic ZmFsY29uLmV5ZTowMzM1NDc3OTU0NA==',
+                            //     'Content-Type':     'application/json',
+                            //     'Accept':       'application/json'
+                            // }
+
+                            // // Configure the request
+                            // var options = {
+                            //     url: 'http://107.20.199.106/sms/1/text/single',
+                            //     method: 'POST',
+                            //     headers: headers,
+                            //     form: {'from': 'ALDAALAH', 'to': user.phone,'text':verificationMsg}
+                               
+                            // }
+
+                            // // Start the request
+                            // request(options, function (error, response, body) {
+                            //     if (!error ) {
+                            //         // Print out the response body
+                            //         console.log(body)
+                            //         logger.info('Sucessful Response of SMS API : ' + body );
+                            //     }
+                            //     else{
+                            //         logger.info('Response/Error of SMS API : ' + error );
+                            //     }
+                            // // })
+
+
+                            // var options = {
+                            //     hostname: 'http://107.20.199.106',
+                            //     //port: 80,
+                            //     path: '/sms/1/text/single',
+                            //     method: 'POST',
+                            //     headers: {
+                                    
+                            //     'Authorization':       'Basic ZmFsY29uLmV5ZTowMzM1NDc3OTU0NA==',
+                            //     'Content-Type':     'application/json',
+                            //     'Accept':       'application/json'
+                            //     }
+                            //   };
+                            //   var req = http.request(options, function(res) {
+                            //     console.log('Status: ' + res.statusCode);
+                            //     console.log('Headers: ' + JSON.stringify(res.headers));
+                            //     res.setEncoding('utf8');
+                            //     res.on('data', function (body) {
+                            //       console.log('Body: ' + body);
+                            //     });
+                            //   });
+                            //   req.on('error', function(e) {
+                            //     console.log('problem with request: ' + e.message);
+                            //   });
+                            //   // write data to request body
+                            //   req.write('{"string": "Hello, World"}');
+                            //   req.end();
+
+                            
+
+                var headers = {
+
+                    'Authorization':       'Basic ZmFsY29uLmV5ZTowMzM1NDc3OTU0NA==',
+                    'Content-Type':     'application/json',
+                    'Accept':       'application/json'
+                }
+
+                // Configure the request
+                var options = {
+                    url: 'http://107.20.199.106/sms/1/text/single',
+                    method: 'POST',
+                    headers: headers,
+                    //form: {'from': 'ALDAALAH', 'to': user.phone,'text':verificationMsg}
+                    json: {
+                        'from': 'ALDAALAH',
+                         'to': user.phone,
+                         'text':verificationMsg
+                      }
+                }
+
+                // Start the request
+                request(options, function (error, response, body) {
+                    if (!error ) {
+                        // Print out the response body
+                        console.log(body)
+                        logger.info('Sucessful Response of SMS API : ' + body );
+                    }
+                    else{
+                        logger.info('Response/Error of SMS API : ' + error );
+                    }
+                })
 
 							logger.info('User Created With Phone Num ' + phoneNo );
 							res.jsonp({status:"success",
@@ -137,15 +235,90 @@ exports.sendVerificationCode=function(reqData,res){
 					 }
 				 });
 				 //"http://sendpk.com/api/sms.php?username=923124999213&password=4857&mobile=
-				requestUrl="http://sendpk.com/api/sms.php?username=923370768876&password=5823&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
-				request.get(requestUrl,
-							function(error,response,body){
-								   if(error){
-										 console.log(error);
-								   }else{
-										 console.log(response);
-								 }
-				});
+				// requestUrl="http://sendpk.com/api/sms.php?username=923370768876&password=5823&mobile="+user.phone+"&sender=umer%22&message="+verificationMsg;
+				// request.get(requestUrl,
+				// 			function(error,response,body){
+				// 				   if(error){
+				// 						 console.log(error);
+				// 				   }else{
+				// 						 console.log(response);
+				// 				 }
+                // });
+                
+                
+
+           // var post_req  = null,
+           // post_data = '{"from":"ALDAALAH","to":"'+user.phone+'","text":"'+verificationMsg+'"}';
+            //post_data = '"from":"ALDAALAH","to":"+923345022570","text":"dcsdfsdafsadfas"';
+            
+            // post_data =  querystring.stringify({"from":"ALDAALAH",
+            // "to":user.phone,
+            // "text":verificationMsg
+            // }); 
+
+            //   var post_options = {
+            //       hostname: '107.20.199.106',
+            //      // port    : '8080',
+            //      path: '/sms/1/text/single',
+            //       method  : 'POST',
+            //       headers : {
+            //           'Content-Type': 'application/x-www-form-urlencoded',
+            //           'Authorization': 'Basic ZmFsY29uLmV5ZTowMzM1NDc3OTU0NA==',
+            //           'Accept':       'application/json'
+            //       }
+            //   };
+              
+            //   post_req = http.request(post_options, function (res) {
+            //       console.log('STATUS: ' + res.statusCode);
+            //       console.log('HEADERS: ' + JSON.stringify(res.headers));
+            //       res.setEncoding('utf8');
+            //       res.on('data', function (chunk) {
+            //           console.log('Response: ', chunk);
+            //       });
+            //   });
+              
+            //   post_req.on('error', function(e) {
+            //       console.log('problem with request: ' + e.message);
+            //   });
+            //   console.log('post_data: ' + post_data);
+            //   post_req.write(post_data);
+         
+            //   post_req.end();
+
+
+
+                var headers = {
+
+                    'Authorization':       'Basic ZmFsY29uLmV5ZTowMzM1NDc3OTU0NA==',
+                    'Content-Type':     'application/json',
+                    'Accept':       'application/json'
+                }
+
+                // Configure the request
+                var options = {
+                    url: 'http://107.20.199.106/sms/1/text/single',
+                    method: 'POST',
+                    headers: headers,
+                    //form: {'from': 'ALDAALAH', 'to': user.phone,'text':verificationMsg}
+                    json: {
+                        'from': 'ALDAALAH',
+                         'to': user.phone,
+                         'text':verificationMsg
+                      }
+                }
+
+                // Start the request
+                request(options, function (error, response, body) {
+                    if (!error ) {
+                        // Print out the response body
+                        console.log(body)
+                        logger.info('Sucessful Response of SMS API : ' + body );
+                    }
+                    else{
+                        logger.info('Response/Error of SMS API : ' + error );
+                    }
+                })
+
                         res.jsonp({status:"success",
                         message:"Verification code Sent Again!",
                         object:[]});
