@@ -10,6 +10,7 @@ var HashMap = require('hashmap');
 var User = require('./models/User.js');
 var ChatController = require('./controller/ChatController.js');
 var NotificationController = require('./controller/PushNotificationController.js');
+var EncryptionController = require('./controller/EncryptionController.js');
 var ConversationMessages = require('./models/ConversationMessages.js');
 var Conversation = require('./models/Conversation.js');ConversationUser
 var ConversationUser = require('./models/ConversationUser.js');
@@ -418,9 +419,10 @@ io.sockets.on('connection', function(socket) {
 			socket.room = conversationId;
 			socket.join(conversationId);
 			}
+			
 			var conversationMessage = new ConversationMessages();
 			conversationMessage.messageType = data.messageType;
-			conversationMessage.messageText = data.messageText;
+			conversationMessage.messageText = EncryptionController.encrypt(data.messageText);
 			conversationMessage._conversationId = data._conversationId;
 			conversationMessage._messageToMobile = data._messageToMobile;
 			conversationMessage._messageFromMobile = data._messageFromMobile;
