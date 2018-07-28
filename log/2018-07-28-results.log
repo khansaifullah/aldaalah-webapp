@@ -74,3 +74,15 @@
 {"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"13:04:48"}
 {"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"13:04:48"}
 {"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"13:04:48"}
+{"level":"info","message":"in routes get preference","timestamp":"14:53:55"}
+{"level":"info","message":"1 MarkerCategory Found","timestamp":"14:53:55"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"14:53:55"}
+{"level":"info","message":"user not found with phone no +92334502257","timestamp":"15:43:56"}
+{"level":"info","message":"Response Of userExists Method : null","timestamp":"15:43:56"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"15:44:05"}
+{"level":"info","message":"Response Of userExists Method : { _id: 5b5c38cba7a91400141faf24,\n  updatedAt: 2018-07-28T09:41:07.793Z,\n  createdAt: 2018-07-28T09:35:07.401Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  verification_code: '3111',\n  __v: 0,\n  OS: 'ios',\n  active: false,\n  full_name: 'New Name 1',\n  status: 'Second Status 22',\n  last_shared_loc_time: 2018-07-28T09:35:07.393Z,\n  share_loc_flag_time: 2018-07-28T09:35:07.393Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'https://aldaalah.herokuapp.com/images/profileImages/profilePhoto-1532770863278.jpg' }","timestamp":"15:44:05"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"15:45:15"}
+{"level":"info","message":"Response Of userExists Method : { _id: 5b5c38cba7a91400141faf24,\n  updatedAt: 2018-07-28T09:41:07.793Z,\n  createdAt: 2018-07-28T09:35:07.401Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  verification_code: '3111',\n  __v: 0,\n  OS: 'ios',\n  active: false,\n  full_name: 'New Name 1',\n  status: 'Second Status 22',\n  last_shared_loc_time: 2018-07-28T09:35:07.393Z,\n  share_loc_flag_time: 2018-07-28T09:35:07.393Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'https://aldaalah.herokuapp.com/images/profileImages/profilePhoto-1532770863278.jpg' }","timestamp":"15:45:15"}
+{"level":"info","message":"in routes get preference","timestamp":"15:52:08"}
+{"level":"info","message":"1 MarkerCategory Found","timestamp":"15:52:09"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"15:52:09"}

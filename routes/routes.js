@@ -292,10 +292,10 @@ module.exports = function(app) {
 		
 		
 	
-	app.post('/v1.1/updateProfile',  function(req,res){
+	app.post('/updateProfile',  function(req,res){
 		try {
 
-		console.log("in routes /v1.1/updateProfile");
+		console.log("in routes /updateProfile");
 		if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
@@ -366,7 +366,7 @@ module.exports = function(app) {
 			}
 			});
 		}catch(err){
-			logger.info ("Exception Occured in /v1.1/updateProfile : "+ err);
+			logger.info ("Exception Occured in /updateProfile : "+ err);
 		}
 		            
 	});
@@ -820,6 +820,58 @@ module.exports = function(app) {
 		regCtrl.updatePlayerId(req,res);
 	});
 	
+		/******* User preference Apis *****/
+
+		// getting List of PREFERENCES / Markers Category
+		app.get('/preference',function(req,res){ 
+
+			logger.info("in routes get preference");
+			AppController.findAllMarkerCategories(function (markerCategories) {
+				logger.info("Response Of findAllMarkerCategories Method");
+				res.jsonp({status:"success",
+							message:"List Of Preferences",
+							object:markerCategories});
+									
+		});		
+		});
+
+		//Set User Preference
+		app.post('/preference',function(req,res){
+		
+			if(req.body === undefined||req.body === null) {
+			 res.end("Empty Body"); 
+			 }
+			 console.log("in routes POST:  /markerCategory");
+			 var preferenceId=req.body.preferenceId;
+			 var phoneNo=req.body.phoneNo;
+
+			 AppController.userExists(phoneNo,function (user) {
+				logger.info("Response Of userExists Method : " + user);
+				if (user){
+					user._preferenceId=preferenceId;
+					
+					user.save(function (err, savedUser) {
+					
+						if(err){
+							logger.error('Some Error occured while saving user' + err );
+							res.jsonp({status:"Failure",
+							message:"Unable to Set Prefernce!",
+							object:[]});
+						}
+					else{
+						res.jsonp({status:"success",
+							message:"User Preference is Successfully updated!",
+							object:savedUser});
+					}								
+					});				
+				}
+				else{
+				res.jsonp({status:"Failure",
+							message:"User Not Found",
+							object:[]});
+				}						 
+		});	
+		 });
 	
 	/********  Admin Panel Apis********/
 	
@@ -1128,10 +1180,10 @@ module.exports = function(app) {
 		 });
 
 
-			// getting List of Markers
+			// getting List of Markers Category
 		app.get('/v2.0/markerCategory',function(req,res){ 
 
-			logger.info("in routes get markers");
+			logger.info("in routes get markerCategory");
 			AppController.findAllMarkerCategories(function (markerCategories) {
 				logger.info("Response Of findAllMarkerCategories Method");
 				res.jsonp({status:"success",
@@ -1140,6 +1192,7 @@ module.exports = function(app) {
 									
 		});		
 		});
+
 
 		 // Add new Group member from IOS device
 		 app.post('/v2.0/groupMember',function(req,res){
