@@ -60,7 +60,7 @@ module.exports = function(app) {
 	//var object =new Object({"Field1":"Value1","Field2":"Value2"});
 	//NotificationController.sendNotifcationToPlayerId("03bd1410-c6f1-4e14-9e12-02e6fd718691",object,"TestEvent");
 	//NotificationController.sendNotifcationToPlayerId();
-		res.end("Aldallah-WebServices"); 
+		res.end("Aldallah-WebServices V1.1 "); 
 	});
 
     app.post('/verificationcode',function(req,res){                         
