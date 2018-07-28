@@ -34,6 +34,7 @@ app.use(express.static('public'))
 
 http.listen(port, function(){
   console.log('listening on *:'+port);
+  
 });
 
 

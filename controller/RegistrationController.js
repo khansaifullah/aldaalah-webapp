@@ -392,6 +392,7 @@ exports.completeProfile = function(user,profilePhotoUrl,res) {
 		var phoneNo = user.phone;
         var fullName=user.fullName;
         var os=user.os;      
+        var status= user.status;
     // update profile    
     
      //find user by phone no.
@@ -404,7 +405,9 @@ exports.completeProfile = function(user,profilePhotoUrl,res) {
 				user.active=false;
 				user.OS=os;
 				user.verified_user=true;  
-				user.deactivate_user=false;
+                user.deactivate_user=false;
+                if (status)
+                user.status=status;
                 
 				user.save(function (err, user){
 					if(err){
@@ -440,78 +443,93 @@ exports.completeProfile = function(user,profilePhotoUrl,res) {
 	}
 }
 
-
-
-exports.updateName = function(req,callback) {
-	try{
- 	
-	var phoneNo = req.body.phoneNo;
-    var fullName=req.body.fullName;
-	console.log("In Controller updateName Method");    
-    logger.info('RegistrationController.updateName called for user  :'  + phoneNo  );
-     //find user by phone no.
-    userExists(phoneNo,function(user){
-        if (user){            
-              user.full_name=fullName, 
-              user.save(function (err, user){
-                if(err){
-                    logger.error('Some Error while updating user' + err ); 
-					callback();
-                }
-                else{
-                    logger.info('User Name updated With Phone Num ' + phoneNo );
-                   callback(user);
-                }
-              });
-                
-        }
-        else{
-            logger.info('No User Found to Update With Phone Num ' + phoneNo );
-            callback();
-        }
+exports.updateName = async function(user, name) {
+	try{ 	
+    return new Promise(function (resolve, reject) { 
+        console.log("In Controller updateName Method");           
+            if (user){ 
+                logger.info('RegistrationController.updateName called for user  :'  + user.phone  );           
+                user.full_name=name, 
+                user.save(function (err, user){
+                    if(err){
+                    logger.error('Some Error while updating user name' + err ); 
+                    return reject(err); 
+                    }
+                    else{
+                    logger.info('User Name updated With Phone Num ' + user.phone );
+                    resolve(user); 
+                    }
+                });         
+            }
+            else{
+                logger.info('No User Found to Update ');
+                resolve(); 
+            }
+        logger.info(' Exit RegistrationController.updateName Method');
     });
-    
-    logger.info(' Exit RegistrationController.updateName Method');
 	}catch (err){
 		logger.info('An Exception Has occured in updateName method' + err);
-	}
-	
+	}	
 }
 
-exports.updateProfilePhoto = function(phoneNo,profilePhotoUrl,callback) {
-	try{
-console.log("In Controller updateProfilePhoto Method");
-    
-    logger.info('RegistrationController.updateProfilePhoto called for user  :' 
-                  + phoneNo  );
-     //find user by phone no.
-    userExists(phoneNo,function(user){
-        if (user){            
-              user.profile_photo_url=profilePhotoUrl, 
-              user.save(function (err, user){
-                if(err){
-                        logger.error('Some Error while updating user' + err );
-                         callback();
-                }
-                else{                            
-                            logger.info('User Profile Photo updated With Phone Num ' + phoneNo );
-							callback(user);
-                }
-              });
-                
-        }
-        else{
-            logger.info('No User Found to Update With Phone Num ' + phoneNo );
-            callback(); 
-        }
+exports.updateStatus = async function(user, status) {
+	try{ 	
+    return new Promise(function (resolve, reject) { 
+        console.log("In Controller updateStatus Method");           
+            if (user){ 
+                logger.info('RegistrationController.updateStatus called for user  :'  + user.phone  );           
+                user.status=status, 
+                user.save(function (err, user){
+                    if(err){
+                    logger.error('Some Error while updating user status' + err ); 
+                    return reject(err); 
+                    }
+                    else{
+                    logger.info('User Name updated With Phone Num ' + user.phone );
+                    resolve(user); 
+                    }
+                });         
+            }
+            else{
+                logger.info('No User Found to Update ');
+                resolve(); 
+            }
+        logger.info(' Exit RegistrationController.updateStatus Method');
     });
-    
-    logger.info(' Exit RegistrationController.updateProfilePhoto Method');
+	}catch (err){
+		logger.info('An Exception Has occured in updateStatus method' + err);
+	}	
+}
+
+exports.updateProfilePhoto = async function(user, profilePhotoUrl) {
+	try{ 	
+    return new Promise(function (resolve, reject) { 
+        console.log("In Controller updateProfilePhoto Method");           
+            if (user){ 
+                logger.info('RegistrationController.updateProfilePhoto called for user  :'  + user.phone  );           
+                user.profile_photo_url=profilePhotoUrl,  
+                user.save(function (err, user){
+                    if(err){
+                    logger.error('Some Error while updating user profilePhotoUrl' + err ); 
+                    return reject(err); 
+                    }
+                    else{
+                    logger.info('User Name updated With Phone Num ' + user.phone );
+                    resolve(user); 
+                    }
+                });         
+            }
+            else{
+                logger.info('No User Found to Update ');
+                resolve(); 
+            }
+        logger.info(' Exit RegistrationController.updateProfilePhoto Method');
+    });
 	}catch (err){
 		logger.info('An Exception Has occured in updateProfilePhoto method' + err);
-	}
-	
+	}	
 }
+
 
 exports.syncContacts = function(req,res) {
     	try{

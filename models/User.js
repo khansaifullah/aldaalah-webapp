@@ -29,7 +29,9 @@ var userSchema = new Schema({
         type: [Number],  // [<longitude>, <latitude>]
         index: '2d'      // create the geospatial index
         },
-      last_shared_loc_time: { type: Date, default: Date.now }
+      last_shared_loc_time: { type: Date, default: Date.now },
+      status: {type:String, default:null },
+      _preferenceId: { type: mongoose.Schema.Types.ObjectId, ref: 'MarkerCategory' },
          
 }, {timestamps: true});
 

@@ -201,10 +201,101 @@ module.exports = function(app) {
 		
 	});
 
-	app.post('/updateProfile',function(req,res){
+	// app.post('/updateProfile',function(req,res){
 		
-		console.log("in routes updateProfile");
-		var user;
+	// 	console.log("in routes updateProfile");
+	// 	var user;
+	// 	if(req.body === undefined||req.body === null) {
+    //     res.end("Empty Body"); 
+    //     }
+		
+	// 	var upload = multer({
+	// 		storage: storage,
+	// 		fileFilter: function(req, file, callback) {
+	// 			var ext = path.extname(file.originalname)
+	// 			if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+	// 				return callback(res.end('Only images are allowed'), null)
+	// 			}
+	// 			callback(null, true)
+	// 		}
+	// 	}).single('profilePhoto');
+	// 	upload(req, res, function(err) {
+	// 		if (err){
+	// 			res.jsonp({status:"Failure",
+	// 						message:"Error Uploading File",
+	// 						object:[]});
+	// 		}
+	// 		else{      
+			
+	// 			logger.info ("Photo Is uploaded");
+	// 			console.log(req.body.phoneNo);
+	// 			//geneterate a url 
+	// 			var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
+	// 			//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
+	// 			console.log ("updateProfilePhotoFlag Without Parsing: " + req.body.updateProfilePhoto);
+	// 			var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
+	// 			console.log ("updateProfilePhotoFlag with parsing : " + updateProfilePhotoFlag);
+	// 			if ((req.body.updateProfilePhoto)&&(req.body.updateName)){
+	// 				//update picture
+	// 				regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
+	// 					tempFileName="";
+	// 				if (data){
+	// 					 logger.info ('data received after updating profile picture');
+	// 					 //update Name
+	// 					regCtrl.updateName(req,function (user){
+	// 					 if (user){
+	// 						logger.info ('data received after updating profile picture');
+	// 						res.jsonp({ status:"success",
+	// 						message:"Profile has been Updated!",
+	// 						object:user});
+	// 					 }
+	// 					 else{
+	// 						logger.info ('Some Issue In updating Name.');
+	// 					 }
+	// 					});
+	// 				}
+	// 				else{
+	// 					logger.info ('Some Issue In updating Profile Picture.');
+	// 				}
+	// 				});
+						
+	// 			}
+	// 			else {
+	// 				if (req.body.updateProfilePhoto){
+	// 					regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
+	// 						tempFileName="";
+	// 					if (data){
+	// 						 user=data;
+	// 						 res.jsonp({ status:"success",
+	// 						message:"Profile Photo has been Updated!",
+	// 						object:user});
+	// 					}
+	// 					});
+	// 				}
+					
+	// 				//Updating Name
+	// 				if (req.body.updateName){
+	// 					regCtrl.updateName(req,function (data){
+	// 					if (data){
+	// 						 user=data;
+	// 						 res.jsonp({ status:"success",
+	// 						message:"Name has been Updated!",
+	// 						object:user});
+	// 					}
+	// 					});
+	// 				}
+	// 			}
+					
+	// 		}
+	// 		});            
+	// });
+		
+		
+	
+	app.post('/v1.1/updateProfile',  function(req,res){
+		try {
+
+		console.log("in routes /v1.1/updateProfile");
 		if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
@@ -219,8 +310,9 @@ module.exports = function(app) {
 				callback(null, true)
 			}
 		}).single('profilePhoto');
-		upload(req, res, function(err) {
+		upload(req, res, async function(err) {
 			if (err){
+				logger.info ("Error Uploading File : "+ err);
 				res.jsonp({status:"Failure",
 							message:"Error Uploading File",
 							object:[]});
@@ -229,70 +321,56 @@ module.exports = function(app) {
 			
 				logger.info ("Photo Is uploaded");
 				console.log(req.body.phoneNo);
-				//geneterate a url 
-				var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
-				//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
-				console.log ("updateProfilePhotoFlag Without Parsing: " + req.body.updateProfilePhoto);
-				var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
-				console.log ("updateProfilePhotoFlag with parsing : " + updateProfilePhotoFlag);
-				if ((req.body.updateProfilePhoto)&&(req.body.updateName)){
-					//update picture
-					regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
-						tempFileName="";
-					if (data){
-						 logger.info ('data received after updating profile picture');
-						 //update Name
-						regCtrl.updateName(req,function (user){
-						 if (user){
-							logger.info ('data received after updating profile picture');
-							res.jsonp({ status:"success",
-							message:"Profile has been Updated!",
-							object:user});
-						 }
-						 else{
-							 
-						 }
-						});
+
+				AppController.userExists(req.body.phoneNo,async function (user) {
+					logger.info("Response Of userExists Method : " + user);
+	
+					if (user){
+						//geneterate a url 
+						var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
+						//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
+						var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
+						var updateStatusFlag = JSON.parse(req.body.updateStatus);
+						var updateNameFlag = JSON.parse(req.body.updateName);
+
+						console.log ("updateStatusFlag After parsing : " + updateStatusFlag);
+						if (updateStatusFlag){
+							var userAfterUpdateStatus = await regCtrl.updateStatus(user,req.body.status);
+							user=userAfterUpdateStatus;
+						}
+						
+						console.log ("updateNameFlag After parsing : " + updateNameFlag);
+						if (updateNameFlag){
+							var userAfterUpdateName = await regCtrl.updateName(user,req.body.fullName);
+							user=userAfterUpdateName;
+						}
+						
+						console.log ("updateProfilePhotoFlag After parsing : " + updateProfilePhotoFlag);
+						if (updateProfilePhotoFlag){
+							var userAfterUpdatePhoto = await regCtrl.updateProfilePhoto(user,profilePhotoUrl);
+							user=userAfterUpdatePhoto;
+						}
+						
+						res.jsonp({ status:"success",
+						message:"Profile has been Updated!",
+						object:user});
 					}
 					else{
+					res.jsonp({status:"Failure",
+								message:"User Not Found",
+								object:[]});
 						
 					}
-					});
-					
-					
-				}
-				else {
-					if (req.body.updateProfilePhoto){
-						regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
-							tempFileName="";
-						if (data){
-							 user=data;
-							 res.jsonp({ status:"success",
-							message:"Profile Photo has been Updated!",
-							object:user});
-						}
-						});
-						
-					}
-					//Updating Name
-					if (req.body.updateName){
-						regCtrl.updateName(req,function (data){
-						if (data){
-							 user=data;
-							 res.jsonp({ status:"success",
-							message:"Name has been Updated!",
-							object:user});
-						}
-						});
-					
-					}
-				}
-					
+									 
+			});
 			}
-			});            
+			});
+		}catch(err){
+			logger.info ("Exception Occured in /v1.1/updateProfile : "+ err);
+		}
+		            
 	});
-		
-		
+
     app.post('/contacts',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {

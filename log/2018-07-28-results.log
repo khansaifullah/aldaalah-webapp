@@ -1,0 +1,76 @@
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:15:26"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:16:16"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:16:30"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:17:23"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:17:35"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:18:29"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:18:49"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:19:03"}
+{"level":"info","message":"Error Uploading File : Error: Multipart: Boundary not found","timestamp":"12:22:59"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:23:14"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:25:14"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:25:16"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :undefined","timestamp":"12:25:16"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:25:16"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:25:16"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"12:25:16"}
+{"level":"info","message":"User Not Found with Phone Num. :undefined","timestamp":"12:25:17"}
+{"level":"info","message":"No User Found to Update With Phone Num undefined","timestamp":"12:25:17"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:27:04"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"12:27:04"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:27:04"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:27:04"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"12:27:04"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"12:27:04"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"12:27:05"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:35:31"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:35:32"}
+{"level":"info","message":"Response Of userExists Method : { _id: 59af97049d57ac10ece4b6b1,\n  updatedAt: 2018-07-28T07:27:04.841Z,\n  createdAt: 2017-09-06T06:34:44.109Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  __v: 2130,\n  OS: 'ios',\n  active: false,\n  full_name: 'Exagic',\n  loc: [ 73.1860338, 33.5063452 ],\n  palyer_id: '27c3ed26-a9f5-4f10-927d-ca8ee7877414',\n  verification_code: '8995',\n  share_location_flag_time: 2017-12-30T07:46:34.336Z,\n  status: 'Second Status',\n  last_shared_loc_time: 2018-05-23T06:54:36.273Z,\n  share_loc_flag_time: 2018-03-05T07:41:11.194Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'https://aldaalah.herokuapp.com/images/profileImages/profilePhoto-1531897667675.jpg' }","timestamp":"12:35:32"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"12:35:32"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"12:35:32"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"12:35:32"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:36:21"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:36:21"}
+{"level":"info","message":"Response Of userExists Method : { _id: 59af97049d57ac10ece4b6b1,\n  updatedAt: 2018-07-28T07:27:04.841Z,\n  createdAt: 2017-09-06T06:34:44.109Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  __v: 2130,\n  OS: 'ios',\n  active: false,\n  full_name: 'Exagic',\n  loc: [ 73.1860338, 33.5063452 ],\n  palyer_id: '27c3ed26-a9f5-4f10-927d-ca8ee7877414',\n  verification_code: '8995',\n  share_location_flag_time: 2017-12-30T07:46:34.336Z,\n  status: 'Second Status',\n  last_shared_loc_time: 2018-05-23T06:54:36.273Z,\n  share_loc_flag_time: 2018-03-05T07:41:11.194Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'https://aldaalah.herokuapp.com/images/profileImages/profilePhoto-1531897667675.jpg' }","timestamp":"12:36:21"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"12:36:21"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"12:36:21"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"12:36:21"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:36:39"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:36:39"}
+{"level":"info","message":"Response Of userExists Method : { _id: 59af97049d57ac10ece4b6b1,\n  updatedAt: 2018-07-28T07:36:21.741Z,\n  createdAt: 2017-09-06T06:34:44.109Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  __v: 2130,\n  OS: 'ios',\n  active: false,\n  full_name: 'Exagic',\n  loc: [ 73.1860338, 33.5063452 ],\n  palyer_id: '27c3ed26-a9f5-4f10-927d-ca8ee7877414',\n  verification_code: '8995',\n  share_location_flag_time: 2017-12-30T07:46:34.336Z,\n  status: 'Second Status 1',\n  last_shared_loc_time: 2018-05-23T06:54:36.273Z,\n  share_loc_flag_time: 2018-03-05T07:41:11.194Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'https://aldaalah.herokuapp.com/images/profileImages/profilePhoto-1531897667675.jpg' }","timestamp":"12:36:39"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"12:36:39"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"12:36:39"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"12:36:40"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"13:02:21"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"13:02:21"}
+{"level":"info","message":"Response Of userExists Method : { _id: 59af97049d57ac10ece4b6b1,\n  updatedAt: 2018-07-28T07:36:39.846Z,\n  createdAt: 2017-09-06T06:34:44.109Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  __v: 2130,\n  OS: 'ios',\n  active: false,\n  full_name: 'Exagic',\n  loc: [ 73.1860338, 33.5063452 ],\n  palyer_id: '27c3ed26-a9f5-4f10-927d-ca8ee7877414',\n  verification_code: '8995',\n  share_location_flag_time: 2017-12-30T07:46:34.336Z,\n  status: 'Second Status 11',\n  last_shared_loc_time: 2018-05-23T06:54:36.273Z,\n  share_loc_flag_time: 2018-03-05T07:41:11.194Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'https://aldaalah.herokuapp.com/images/profileImages/profilePhoto-1531897667675.jpg' }","timestamp":"13:02:21"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"13:02:21"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"13:02:21"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"13:02:21"}
+{"level":"info","message":"RegistrationController.updateName called for user  :+923345022570","timestamp":"13:02:21"}
+{"level":"info","message":" Exit RegistrationController.updateName Method","timestamp":"13:02:21"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"13:02:21"}
+{"level":"info","message":"RegistrationController.updateProfilePhoto called for user  :+923345022570","timestamp":"13:02:21"}
+{"level":"info","message":" Exit RegistrationController.updateProfilePhoto Method","timestamp":"13:02:21"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"13:02:21"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"13:02:54"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"13:02:54"}
+{"level":"info","message":"Response Of userExists Method : { _id: 59af97049d57ac10ece4b6b1,\n  updatedAt: 2018-07-28T08:02:21.665Z,\n  createdAt: 2017-09-06T06:34:44.109Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  __v: 2130,\n  OS: 'ios',\n  active: false,\n  full_name: 'New Name',\n  loc: [ 73.1860338, 33.5063452 ],\n  palyer_id: '27c3ed26-a9f5-4f10-927d-ca8ee7877414',\n  verification_code: '8995',\n  share_location_flag_time: 2017-12-30T07:46:34.336Z,\n  status: 'Second Status 11',\n  last_shared_loc_time: 2018-05-23T06:54:36.273Z,\n  share_loc_flag_time: 2018-03-05T07:41:11.194Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'https://aldaalah.herokuapp.com/images/profileImages/profilePhoto-1532764941089.jpg' }","timestamp":"13:02:54"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"13:02:54"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"13:02:54"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"13:02:54"}
+{"level":"info","message":"RegistrationController.updateProfilePhoto called for user  :+923345022570","timestamp":"13:02:54"}
+{"level":"info","message":" Exit RegistrationController.updateProfilePhoto Method","timestamp":"13:02:54"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"13:02:54"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"13:03:28"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"13:03:28"}
+{"level":"info","message":"Response Of userExists Method : { _id: 59af97049d57ac10ece4b6b1,\n  updatedAt: 2018-07-28T08:02:54.364Z,\n  createdAt: 2017-09-06T06:34:44.109Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  __v: 2130,\n  OS: 'ios',\n  active: false,\n  full_name: 'New Name',\n  loc: [ 73.1860338, 33.5063452 ],\n  palyer_id: '27c3ed26-a9f5-4f10-927d-ca8ee7877414',\n  verification_code: '8995',\n  share_location_flag_time: 2017-12-30T07:46:34.336Z,\n  status: 'Second Status 11',\n  last_shared_loc_time: 2018-05-23T06:54:36.273Z,\n  share_loc_flag_time: 2018-03-05T07:41:11.194Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'https://aldaalah.herokuapp.com/images/profileImages/profilePhoto-1532764974099.jpg' }","timestamp":"13:03:28"}
+{"level":"info","message":"RegistrationController.updateProfilePhoto called for user  :+923345022570","timestamp":"13:03:28"}
+{"level":"info","message":" Exit RegistrationController.updateProfilePhoto Method","timestamp":"13:03:28"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"13:03:29"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"13:04:48"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"13:04:48"}
+{"level":"info","message":"Response Of userExists Method : { _id: 59af97049d57ac10ece4b6b1,\n  updatedAt: 2018-07-28T08:03:28.920Z,\n  createdAt: 2017-09-06T06:34:44.109Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  __v: 2130,\n  OS: 'ios',\n  active: false,\n  full_name: 'New Name',\n  loc: [ 73.1860338, 33.5063452 ],\n  palyer_id: '27c3ed26-a9f5-4f10-927d-ca8ee7877414',\n  verification_code: '8995',\n  share_location_flag_time: 2017-12-30T07:46:34.336Z,\n  status: 'Second Status 11',\n  last_shared_loc_time: 2018-05-23T06:54:36.273Z,\n  share_loc_flag_time: 2018-03-05T07:41:11.194Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'https://aldaalah.herokuapp.com/images/profileImages/profilePhoto-1532765008652.jpg' }","timestamp":"13:04:48"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"13:04:48"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"13:04:48"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"13:04:48"}
