@@ -16,25 +16,19 @@ cors = require('cors');
 var mongoose = require('mongoose');
 var path = require('path');
 var multer = require('multer');
+var FormData = require('form-data');
+var fs = require('fs');
 var tempFileName;
 var storage = multer.diskStorage({
 	destination: function(req, file, callback) {
-		callback(null, './public/images/profileImages')
+		callback(null, './public/images')
 	},
 	filename: function(req, file, callback) {
-		/*
-		if (file){
-				console.log('File Found : ' + file);
-			}
-			else {
-				console.log('File Not Found : ' + file);
-			}
-			*/
-			
+	
 		tempFileName="";
-		//console.log("Printing in File Name Field :" + 'file.fieldname : ' + file.fieldname + ' file.originalname :' + file.originalname );
 		tempFileName=file.fieldname + '-' + Date.now() + path.extname(file.originalname);
-		//console.log("File NEW Name  :" +tempFileName );
+
+		logger.info("File NEW Name  :" +tempFileName );
 		callback(null,tempFileName );
 	}
 });
@@ -141,18 +135,36 @@ module.exports = function(app) {
 		}).single('profilePhoto');
 		upload(req, res, function(err) {
 			if (err){
+				
+				logger.info("Error Uploading File : " + err);
 				res.jsonp({status:"Failure",
 							message:"Error Uploading File",
 							object:[]});
 			}
 			else{
-			logger.info ("File Is uploaded");
-			var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
-			logger.info("profilePhotoUrl" + profilePhotoUrl);
-			//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
-			regCtrl.completeProfile(req.body,profilePhotoUrl,res);
-				tempFileName="";
-				
+				logger.info ("File Is uploaded");
+				var form = new FormData();
+				form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
+				form.submit('http://postvideo.exaride.com', function(err, resp) {
+				 if (err) {
+					 logger.info("Error : "+ err);
+					 res.jsonp({status:"Failure",
+					 message:"Error Uploading File",
+					 object:[]});
+				 }else {
+					var body = '';
+					resp.on('data', function(chunk) {
+					  body += chunk;
+					});
+					resp.on('end', function() {
+					  var urls = JSON.parse(body);
+					  console.log("File Url : "+urls.url);
+					  var fileUrl=urls.url;
+					  regCtrl.completeProfile(req.body,fileUrl,res);
+					  tempFileName="";
+				   });
+				 }
+			 });
 			}
 			
 		})
@@ -180,117 +192,44 @@ module.exports = function(app) {
 		}).single('profilePhoto');
 		upload(req, res, function(err) {
 			if (err){
+				logger.info("Error Uploading File : " + err);
 				res.jsonp({status:"Failure",
 							message:"Error Uploading File",
 							object:[]});
 			}
 			else{        
-				logger.info ("Photo Is uploaded");
-				console.log(req.body.phone);
-			 //geneterate a url 
-			var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
-			//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
-		
-			regCtrl.updateProfilePhoto(req.body.phone,profilePhotoUrl,function(data){
-				tempFileName="";
-			});            
+			logger.info ("Photo Is uploaded");
+			console.log(req.body.phone);
+			var form = new FormData();
+			form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
+			form.submit('http://postvideo.exaride.com', function(err, resp) {
+			 if (err) {
+				 logger.info("Error : "+ err);
+				 res.jsonp({status:"Failure",
+				 message:"Error Uploading File",
+				 object:[]});
+			 }else {
+				var body = '';
+				resp.on('data', function(chunk) {
+				  body += chunk;
+				});
+				resp.on('end', function() {
+				  var urls = JSON.parse(body);
+				  console.log("File Url : "+urls.url);
+				  var fileUrl=urls.url;
+
+				regCtrl.updateProfilePhoto(req.body.phone,fileUrl,function(data){
+					tempFileName="";
+					});
+			   });
+			 }
+		 });         
 				
 			}
 		
-		})
+		});
 		
 	});
-
-	// app.post('/updateProfile',function(req,res){
-		
-	// 	console.log("in routes updateProfile");
-	// 	var user;
-	// 	if(req.body === undefined||req.body === null) {
-    //     res.end("Empty Body"); 
-    //     }
-		
-	// 	var upload = multer({
-	// 		storage: storage,
-	// 		fileFilter: function(req, file, callback) {
-	// 			var ext = path.extname(file.originalname)
-	// 			if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
-	// 				return callback(res.end('Only images are allowed'), null)
-	// 			}
-	// 			callback(null, true)
-	// 		}
-	// 	}).single('profilePhoto');
-	// 	upload(req, res, function(err) {
-	// 		if (err){
-	// 			res.jsonp({status:"Failure",
-	// 						message:"Error Uploading File",
-	// 						object:[]});
-	// 		}
-	// 		else{      
-			
-	// 			logger.info ("Photo Is uploaded");
-	// 			console.log(req.body.phoneNo);
-	// 			//geneterate a url 
-	// 			var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
-	// 			//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
-	// 			console.log ("updateProfilePhotoFlag Without Parsing: " + req.body.updateProfilePhoto);
-	// 			var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
-	// 			console.log ("updateProfilePhotoFlag with parsing : " + updateProfilePhotoFlag);
-	// 			if ((req.body.updateProfilePhoto)&&(req.body.updateName)){
-	// 				//update picture
-	// 				regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
-	// 					tempFileName="";
-	// 				if (data){
-	// 					 logger.info ('data received after updating profile picture');
-	// 					 //update Name
-	// 					regCtrl.updateName(req,function (user){
-	// 					 if (user){
-	// 						logger.info ('data received after updating profile picture');
-	// 						res.jsonp({ status:"success",
-	// 						message:"Profile has been Updated!",
-	// 						object:user});
-	// 					 }
-	// 					 else{
-	// 						logger.info ('Some Issue In updating Name.');
-	// 					 }
-	// 					});
-	// 				}
-	// 				else{
-	// 					logger.info ('Some Issue In updating Profile Picture.');
-	// 				}
-	// 				});
-						
-	// 			}
-	// 			else {
-	// 				if (req.body.updateProfilePhoto){
-	// 					regCtrl.updateProfilePhoto(req.body.phoneNo,profilePhotoUrl,function (data){
-	// 						tempFileName="";
-	// 					if (data){
-	// 						 user=data;
-	// 						 res.jsonp({ status:"success",
-	// 						message:"Profile Photo has been Updated!",
-	// 						object:user});
-	// 					}
-	// 					});
-	// 				}
-					
-	// 				//Updating Name
-	// 				if (req.body.updateName){
-	// 					regCtrl.updateName(req,function (data){
-	// 					if (data){
-	// 						 user=data;
-	// 						 res.jsonp({ status:"success",
-	// 						message:"Name has been Updated!",
-	// 						object:user});
-	// 					}
-	// 					});
-	// 				}
-	// 			}
-					
-	// 		}
-	// 		});            
-	// });
-		
-		
 	
 	app.post('/updateProfile',  function(req,res){
 		try {
@@ -312,6 +251,7 @@ module.exports = function(app) {
 		}).single('profilePhoto');
 		upload(req, res, async function(err) {
 			if (err){
+			
 				logger.info ("Error Uploading File : "+ err);
 				res.jsonp({status:"Failure",
 							message:"Error Uploading File",
@@ -322,47 +262,69 @@ module.exports = function(app) {
 				logger.info ("Photo Is uploaded");
 				console.log(req.body.phoneNo);
 
-				AppController.userExists(req.body.phoneNo,async function (user) {
-					logger.info("Response Of userExists Method : " + user);
+				var form = new FormData();
+				form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
+				form.submit('http://postvideo.exaride.com', function(err, resp) {
+				 if (err) {
+					 logger.info("Error : "+ err);
+					 res.jsonp({status:"Failure",
+					 message:"Error Uploading File",
+					 object:[]});
+				 }else {
+					var body = '';
+					resp.on('data', function(chunk) {
+					  body += chunk;
+					});
+					resp.on('end', function() {
+					  var urls = JSON.parse(body);
+					  console.log("File Url : "+urls.url);
+					  var fileUrl=urls.url;
 	
-					if (user){
-						//geneterate a url 
-						var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
-						//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
-						var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
-						var updateStatusFlag = JSON.parse(req.body.updateStatus);
-						var updateNameFlag = JSON.parse(req.body.updateName);
+					AppController.userExists(req.body.phoneNo,async function (user) {
+						logger.info("Response Of userExists Method : " + user);
+		
+						if (user){
+							//geneterate a url 
+							var profilePhotoUrl=fileUrl;
+						
+							var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
+							var updateStatusFlag = JSON.parse(req.body.updateStatus);
+							var updateNameFlag = JSON.parse(req.body.updateName);
 
-						console.log ("updateStatusFlag After parsing : " + updateStatusFlag);
-						if (updateStatusFlag){
-							var userAfterUpdateStatus = await regCtrl.updateStatus(user,req.body.status);
-							user=userAfterUpdateStatus;
+							console.log ("updateStatusFlag After parsing : " + updateStatusFlag);
+							if (updateStatusFlag){
+								var userAfterUpdateStatus = await regCtrl.updateStatus(user,req.body.status);
+								user=userAfterUpdateStatus;
+							}
+							
+							console.log ("updateNameFlag After parsing : " + updateNameFlag);
+							if (updateNameFlag){
+								var userAfterUpdateName = await regCtrl.updateName(user,req.body.fullName);
+								user=userAfterUpdateName;
+							}
+							
+							console.log ("updateProfilePhotoFlag After parsing : " + updateProfilePhotoFlag);
+							if (updateProfilePhotoFlag){
+								var userAfterUpdatePhoto = await regCtrl.updateProfilePhoto(user,profilePhotoUrl);
+								user=userAfterUpdatePhoto;
+							}
+							
+							res.jsonp({ status:"success",
+							message:"Profile has been Updated!",
+							object:user});
 						}
-						
-						console.log ("updateNameFlag After parsing : " + updateNameFlag);
-						if (updateNameFlag){
-							var userAfterUpdateName = await regCtrl.updateName(user,req.body.fullName);
-							user=userAfterUpdateName;
+						else{
+							res.jsonp({status:"Failure",
+									message:"User Not Found",
+									object:[]});
+							
 						}
-						
-						console.log ("updateProfilePhotoFlag After parsing : " + updateProfilePhotoFlag);
-						if (updateProfilePhotoFlag){
-							var userAfterUpdatePhoto = await regCtrl.updateProfilePhoto(user,profilePhotoUrl);
-							user=userAfterUpdatePhoto;
-						}
-						
-						res.jsonp({ status:"success",
-						message:"Profile has been Updated!",
-						object:user});
-					}
-					else{
-					res.jsonp({status:"Failure",
-								message:"User Not Found",
-								object:[]});
-						
-					}
-									 
-			});
+										
+						});
+				   });
+				 }
+			 });
+
 			}
 			});
 		}catch(err){
@@ -410,7 +372,7 @@ module.exports = function(app) {
 	});		
 	});
 
-    	app.post('/group',function(req,res){
+	app.post('/group',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -422,37 +384,53 @@ module.exports = function(app) {
 		 
 		 
 		 
-	 var upload = multer({
-		storage: storage,
-		fileFilter: function(req, file, callback) {
-				
-			var ext = path.extname(file.originalname)
-			if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
-				return callback(res.end('Only images are allowed'), null)
+		var upload = multer({
+			storage: storage,
+			fileFilter: function(req, file, callback) {
+					
+				var ext = path.extname(file.originalname)
+				if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+					return callback(res.end('Only images are allowed'), null)
+				}
+				callback(null, true)
 			}
-			callback(null, true)
-		}
-	}).single('profilePhoto');
+		}).single('profilePhoto');
 
-	//var file=upload.single('profilePhoto');
-	//console.log ('logging file : '+file);
-	//console.log ('logging upload : '+upload);
 	upload(req, res, function(err) {
         if (err){
+			logger.info("Error Uploading File : " + err);
             res.jsonp({status:"Failure",
                         message:"Error Uploading File",
                         object:[]});
-        }
-        else{  
-		
+        }else{  
         logger.info ("Photo Is uploaded");
-		//if ()
-			//.single(fieldname
 		console.log (req.files);
-		var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
-		//var profilePhotoUrl ="https://cdn0.iconfinder.com/data/icons/education-59/128/communication_discussion_workshop-256.png"; 
-		ChatController.createGroup(req.body,profilePhotoUrl,res);	
-		tempFileName="";		
+
+		var form = new FormData();
+		form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
+		form.submit('http://postvideo.exaride.com', function(err, resp) {
+			if (err) {
+				logger.info("Error : "+ err);
+				res.jsonp({status:"Failure",
+				message:"Error Uploading File",
+				object:[]});
+			}else {
+				var body = '';
+				resp.on('data', function(chunk) {
+				body += chunk;
+				});
+				resp.on('end', function() {
+				var urls = JSON.parse(body);
+				console.log("File Url : "+urls.url);
+				var fileUrl=urls.url;
+		
+				ChatController.createGroup(req.body,fileUrl,res);	
+				tempFileName="";
+
+			});
+			}
+		 });
+			
 		}
 		
 	});
@@ -479,6 +457,7 @@ module.exports = function(app) {
 		}).single('profilePhoto');
 		upload(req, res, function(err) {
 			if (err){
+				logger.info("Error Uploading File : " + err);
 				res.jsonp({status:"Failure",
 							message:"Error Uploading File",
 							object:[]});
@@ -494,209 +473,236 @@ module.exports = function(app) {
 				var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
 				//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
 				console.log ("updateProfilePhotoFlag Without Parsing: " + req.body.updateProfilePhoto);
-				var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
-				var updateNameFlag = JSON.parse(req.body.updateName);
-				console.log ("updateProfilePhotoFlag with parsing : " + updateProfilePhotoFlag);
-				if ((updateProfilePhotoFlag)&&(updateNameFlag)){
-					//update picture
-					ChatController.updateGroupProfilePhoto(conversationId,profilePhotoUrl,function (data){
-						tempFileName="";
-					if (data){
-						 logger.info ('data received after updating Group profile picture');
-						 //update Name
-						ChatController.updateGroupName(req,function (group){
-						 if (group){
-							 conversation=group;
-							 
-					//Sending update group Notifcation
-						ChatController.findConversationMembers(conversationId, function(members){
-						if (members){
-								logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
-								myDate = new Date(conversation.createdAt);
-								createdDate = myDate.getTime();
-								
-								var conversationObj ={
-										//fromPhoneNo:userMobileNumberFrom,	
-										conversationId:conversationId, 
-										isGroupConversation:conversation.isGroupConversation,
-										adminMobile:conversation.adminMobile,
-										photoUrl:conversation.conversationImageUrl,
-										conversationName:conversation.conversationName,
-										createdAt:createdDate,
-										
-										}
-									
-										
-										//Notifying All Group Members
-								for (var i=0; i < members.length ; i++){
-									var phoneNo=members[i]._userMobile;
-									if (phoneNo!==(conversationObj.adminMobile)){
-										
-										
-										//Sending Push Notiifcation To Group Members								
-										logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
-										//var phoneNo=members[i]._userMobile;
-										var query = { phone : phoneNo };
-										
-										User.findOne(query).exec(function(err, user){
-											if (err){
-											 logger.error('Some Error occured while finding user' + err );
-											 }
-											if (user){
-											logger.info('User Found For Phone No: ' + phoneNo );
-											logger.info('Sending Notification to player id ' + user.palyer_id );
-											NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupUpdateRequest");
-											}
-											else {
-											 logger.info('User not Found For Phone No: ' + phoneNo );                 
-											}                               
-										});
-									}								
-								}
-						}
-						});
-							logger.info ('data received after updating profile picture');
-							res.jsonp({ status:"success",
-							message:"Group has been Updated!",
-							object:group});
-						 }
-						 else{
-							 
-						 }
-						});
-					}
-					else{
-						
-					}
+
+
+				var form = new FormData();
+				form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
+				form.submit('http://postvideo.exaride.com', function(err, resp) {
+				 if (err) {
+					 logger.info("Error : "+ err);
+					 res.jsonp({status:"Failure",
+					 message:"Error in uploading File",
+					 object:[]});
+				 }else {
+					var body = '';
+					resp.on('data', function(chunk) {
+					  body += chunk;
 					});
+					resp.on('end', function() {
+					  var urls = JSON.parse(body);
+					  console.log("File Url : "+urls.url);
+					  var fileUrl=urls.url;
+					  profilePhotoUrl=fileUrl;
+					  var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
+					  var updateNameFlag = JSON.parse(req.body.updateName);
+					  console.log ("updateProfilePhotoFlag with parsing : " + updateProfilePhotoFlag);
+					  if ((updateProfilePhotoFlag)&&(updateNameFlag)){
+						  //update picture
+						  ChatController.updateGroupProfilePhoto(conversationId,profilePhotoUrl,function (data){
+							  tempFileName="";
+						  if (data){
+							   logger.info ('data received after updating Group profile picture');
+							   //update Name
+							  ChatController.updateGroupName(req,function (group){
+							   if (group){
+								   conversation=group;
+								   
+						  //Sending update group Notifcation
+							  ChatController.findConversationMembers(conversationId, function(members){
+							  if (members){
+									  logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
+									  myDate = new Date(conversation.createdAt);
+									  createdDate = myDate.getTime();
+									  
+									  var conversationObj ={
+											  //fromPhoneNo:userMobileNumberFrom,	
+											  conversationId:conversationId, 
+											  isGroupConversation:conversation.isGroupConversation,
+											  adminMobile:conversation.adminMobile,
+											  photoUrl:conversation.conversationImageUrl,
+											  conversationName:conversation.conversationName,
+											  createdAt:createdDate,
+											  
+											  }
+										  
+											  
+											  //Notifying All Group Members
+									  for (var i=0; i < members.length ; i++){
+										  var phoneNo=members[i]._userMobile;
+										  if (phoneNo!==(conversationObj.adminMobile)){
+											  
+											  
+											  //Sending Push Notiifcation To Group Members								
+											  logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
+											  //var phoneNo=members[i]._userMobile;
+											  var query = { phone : phoneNo };
+											  
+											  User.findOne(query).exec(function(err, user){
+												  if (err){
+												   logger.error('Some Error occured while finding user' + err );
+												   }
+												  if (user){
+												  logger.info('User Found For Phone No: ' + phoneNo );
+												  logger.info('Sending Notification to player id ' + user.palyer_id );
+												  NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupUpdateRequest");
+												  }
+												  else {
+												   logger.info('User not Found For Phone No: ' + phoneNo );                 
+												  }                               
+											  });
+										  }								
+									  }
+							  }
+							  });
+								  logger.info ('data received after updating profile picture');
+								  res.jsonp({ status:"success",
+								  message:"Group has been Updated!",
+								  object:group});
+							   }
+							   else{
+								   
+							   }
+							  });
+						  }
+						  else{
+							  
+						  }
+						  });
+					  
+					  }
+					  else {
+						  if (updateProfilePhotoFlag){
+							  ChatController.updateGroupProfilePhoto(conversationId,profilePhotoUrl,function (data){
+								  tempFileName="";
+							  if (data){
+								   conversation=data;
+									
+						  //Sending update group Notifcation
+							  ChatController.findConversationMembers(conversationId, function(members){
+							  if (members){
+									  logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
+									  myDate = new Date(conversation.createdAt);
+									  createdDate = myDate.getTime();
+									  
+									  var conversationObj ={
+											  //fromPhoneNo:userMobileNumberFrom,	
+											  conversationId:conversationId, 
+											  isGroupConversation:conversation.isGroupConversation,
+											  adminMobile:conversation.adminMobile,
+											  photoUrl:conversation.conversationImageUrl,
+											  conversationName:conversation.conversationName,
+											  createdAt:createdDate,
+											  
+											  }
+										  
+											  
+											  //Notifying All Group Members
+									  for (var i=0; i < members.length ; i++){
+										  var phoneNo=members[i]._userMobile;
+										  if (phoneNo!==(conversationObj.adminMobile)){
+											  
+											  
+											  //Sending Push Notiifcation To Group Members								
+											  logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
+											  //var phoneNo=members[i]._userMobile;
+											  var query = { phone : phoneNo };
+											  
+											  User.findOne(query).exec(function(err, user){
+												  if (err){
+												   logger.error('Some Error occured while finding user' + err );
+												   }
+												  if (user){
+												  logger.info('User Found For Phone No: ' + phoneNo );
+												  logger.info('Sending Notification to player id ' + user.palyer_id );
+												  if (!user.deactivate_user){
+												  NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupUpdateRequest");	
+												  }else{
+													  logger.info('Can not send notification to deactivated user :  ' +phoneNo  );    
+													  
+												  }
+												  
+												  }
+												  else {
+												   logger.info('User not Found For Phone No: ' + phoneNo );                 
+												  }                               
+											  });
+										  }								
+									  }
+							  }
+							  });
+								   res.jsonp({ status:"success",
+								  message:"Group Profile Photo has been Updated!",
+								  object:conversation});
+							  }
+							  });
+						  }
+						  //Updating Name
+						  if (updateNameFlag){
+							  ChatController.updateGroupName(req,function (data){
+							  if (data){
+								   conversation=data;
+									
+						  //Sending update group Notifcation
+							  ChatController.findConversationMembers(conversationId, function(members){
+							  if (members){
+									  logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
+									  myDate = new Date(conversation.createdAt);
+									  createdDate = myDate.getTime();
+									  
+									  var conversationObj ={
+											  //fromPhoneNo:userMobileNumberFrom,	
+											  conversationId:conversationId, 
+											  isGroupConversation:conversation.isGroupConversation,
+											  adminMobile:conversation.adminMobile,
+											  photoUrl:conversation.conversationImageUrl,
+											  conversationName:conversation.conversationName,
+											  createdAt:createdDate,
+											  
+											  }
+										  
+											  
+											  //Notifying All Group Members
+									  for (var i=0; i < members.length ; i++){
+										  var phoneNo=members[i]._userMobile;
+										  if (phoneNo!==(conversationObj.adminMobile)){
+											  
+											  
+											  //Sending Push Notiifcation To Group Members								
+											  logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
+											  //var phoneNo=members[i]._userMobile;
+											  var query = { phone : phoneNo };
+											  
+											  User.findOne(query).exec(function(err, user){
+												  if (err){
+												   logger.error('Some Error occured while finding user' + err );
+												   }
+												  if (user){
+												  logger.info('User Found For Phone No: ' + phoneNo );
+												  logger.info('Sending Notification to player id ' + user.palyer_id );
+												  NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupUpdateRequest");
+												  }
+												  else {
+												   logger.info('User not Found For Phone No: ' + phoneNo );                 
+												  }                               
+											  });
+										  }								
+									  }
+							  }
+							  });
+								   res.jsonp({ status:"success",
+								  message:"Group Name has been Updated!",
+								  object:conversation});
+							  }
+							  });
+						  }
+					  }
+						tempFileName="";
+				 
+				   });
+				 }
+			 });
 				
-				}
-				else {
-					if (updateProfilePhotoFlag){
-						ChatController.updateGroupProfilePhoto(conversationId,profilePhotoUrl,function (data){
-							tempFileName="";
-						if (data){
-							 conversation=data;
-							  
-					//Sending update group Notifcation
-						ChatController.findConversationMembers(conversationId, function(members){
-						if (members){
-								logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
-								myDate = new Date(conversation.createdAt);
-								createdDate = myDate.getTime();
-								
-								var conversationObj ={
-										//fromPhoneNo:userMobileNumberFrom,	
-										conversationId:conversationId, 
-										isGroupConversation:conversation.isGroupConversation,
-										adminMobile:conversation.adminMobile,
-										photoUrl:conversation.conversationImageUrl,
-										conversationName:conversation.conversationName,
-										createdAt:createdDate,
-										
-										}
-									
-										
-										//Notifying All Group Members
-								for (var i=0; i < members.length ; i++){
-									var phoneNo=members[i]._userMobile;
-									if (phoneNo!==(conversationObj.adminMobile)){
-										
-										
-										//Sending Push Notiifcation To Group Members								
-										logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
-										//var phoneNo=members[i]._userMobile;
-										var query = { phone : phoneNo };
-										
-										User.findOne(query).exec(function(err, user){
-											if (err){
-											 logger.error('Some Error occured while finding user' + err );
-											 }
-											if (user){
-											logger.info('User Found For Phone No: ' + phoneNo );
-											logger.info('Sending Notification to player id ' + user.palyer_id );
-											if (!user.deactivate_user){
-											NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupUpdateRequest");	
-											}else{
-												logger.info('Can not send notification to deactivated user :  ' +phoneNo  );    
-												
-											}
-											
-											}
-											else {
-											 logger.info('User not Found For Phone No: ' + phoneNo );                 
-											}                               
-										});
-									}								
-								}
-						}
-						});
-							 res.jsonp({ status:"success",
-							message:"Group Profile Photo has been Updated!",
-							object:conversation});
-						}
-						});
-					}
-					//Updating Name
-					if (updateNameFlag){
-						ChatController.updateGroupName(req,function (data){
-						if (data){
-							 conversation=data;
-							  
-					//Sending update group Notifcation
-						ChatController.findConversationMembers(conversationId, function(members){
-						if (members){
-								logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
-								myDate = new Date(conversation.createdAt);
-								createdDate = myDate.getTime();
-								
-								var conversationObj ={
-										//fromPhoneNo:userMobileNumberFrom,	
-										conversationId:conversationId, 
-										isGroupConversation:conversation.isGroupConversation,
-										adminMobile:conversation.adminMobile,
-										photoUrl:conversation.conversationImageUrl,
-										conversationName:conversation.conversationName,
-										createdAt:createdDate,
-										
-										}
-									
-										
-										//Notifying All Group Members
-								for (var i=0; i < members.length ; i++){
-									var phoneNo=members[i]._userMobile;
-									if (phoneNo!==(conversationObj.adminMobile)){
-										
-										
-										//Sending Push Notiifcation To Group Members								
-										logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
-										//var phoneNo=members[i]._userMobile;
-										var query = { phone : phoneNo };
-										
-										User.findOne(query).exec(function(err, user){
-											if (err){
-											 logger.error('Some Error occured while finding user' + err );
-											 }
-											if (user){
-											logger.info('User Found For Phone No: ' + phoneNo );
-											logger.info('Sending Notification to player id ' + user.palyer_id );
-											NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupUpdateRequest");
-											}
-											else {
-											 logger.info('User not Found For Phone No: ' + phoneNo );                 
-											}                               
-										});
-									}								
-								}
-						}
-						});
-							 res.jsonp({ status:"success",
-							message:"Group Name has been Updated!",
-							object:conversation});
-						}
-						});
-					}
-				}
+			
 			}catch (err){
 				logger.info('An Exception Has occured in updateGroupName method' + err);
 				}		
@@ -774,8 +780,6 @@ module.exports = function(app) {
         }
 		var conversationId = req.query.conversationId;
 		console.log("in routes /location for group : "+conversationId );
-		//var reqData=req.body;
-        // console.log(reqData);
 		LocController.getGroupUserLocations(conversationId,res);
 	});
 	
@@ -785,8 +789,7 @@ module.exports = function(app) {
         res.end("Empty Body"); 
         }
 		console.log("in routes /shareLocation");
-		var reqData=req.body;
-        
+		var reqData=req.body;      
 		LocController.updateShareLocationFlag(reqData,res);
 	});
 	
@@ -802,9 +805,6 @@ module.exports = function(app) {
         // console.log(reqData);
 		LocController.setMarker(reqData,res);
 	});
-	
-
-	
 
 
 	/******* Push Notification Apis *****/
@@ -1015,9 +1015,7 @@ module.exports = function(app) {
 					}
 				});
 			}
-			else{
-				
-				
+			else{	
 				res.send({status:"failure",
 						  message:"No Such Conversation Found",
 						  object:[]})
@@ -1047,11 +1045,10 @@ module.exports = function(app) {
 		// Admin Login
 	app.post('/adminlogin',function(req,res){
 		
-		 if(req.body === undefined||req.body === null) {
-        res.end("Empty Body"); 
+		if(req.body === undefined||req.body === null) {
+       	 res.end("Empty Body"); 
         }
 		console.log("in routes /adminlogin");
-		//var reqData=req.body;
 		var userName = req.body.username;
         var password = req.body.password;
 
@@ -1075,8 +1072,6 @@ module.exports = function(app) {
 
 
 
-
-
 	/* ALDAALAH V2 APIS */
 
 
@@ -1094,34 +1089,16 @@ module.exports = function(app) {
 		 LocController.setMarker(reqData,res);
 	 });
 
-	//  app.post('/v2.0/updateMarker',function(req,res){				
-	// 	if(req.body === undefined||req.body === null) {
-    //     res.end("Empty Body"); 
-    //     }
-			 
-	// 	console.log("in routes /updateMarker");
-	// 	var reqData=req.body;
-    //     // console.log(reqData);
-	// 	LocController.updateMarker(reqData,res);
-	// });
-
 	app.post('/v2.0/updateMarker',function(req,res){				
 	
 		if(req.body === undefined||req.body === null) {
 			res.jsonp({status:"Failure",
                         message:"Empty Body",
                         object:[]});
-			}
-				 
+			}	 
 			console.log("in routes /updateMarker");
 			var reqData=req.body;
-			// console.log(reqData);
-			LocController.updateMarker(reqData,res);
-
-		// res.jsonp({status:"success",
-        //                 message:"Successful Login",
-        //                 object:[]});
-		
+			LocController.updateMarker(reqData,res);	
 	});
 
 
@@ -1214,6 +1191,141 @@ module.exports = function(app) {
 			 console.log("in routes post /v2.0/deleteMember");
 			 ChatController.removeGroupMemberFromIOS(req,res);
 		 });
+
+		 //Add New Wallpaper
+		 app.post('/wallpaper',function(req,res){
+		
+			if(req.body === undefined||req.body === null) {
+			 res.end("Empty Body "); 
+			 }
+			 
+			 console.log("in routes  /wallpaper");
+			 
+			 var upload = multer({
+				 storage: storage,
+				 fileFilter: function(req, file, callback) {
+					 var ext = path.extname(file.originalname)
+					 if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+						 return callback(res.end('Only images are allowed'), null)
+					 }
+					 callback(null, true)
+				 }
+			 }).single('file');
+			 upload(req, res, function(err) {
+				 if (err){
+					logger.info("Error Uploading File : " + err);
+					res.jsonp({status:"Failure",
+								message:"Error Uploading File",
+								object:[]});
+				 }else{        
+					logger.info ("Photo Is uploaded");
+					console.log(req.body.title);
+					var form = new FormData();
+					form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
+					form.submit('http://postvideo.exaride.com', function(err, resp) {
+					 if (err) {
+						 logger.info("Error : "+ err);
+						 res.jsonp({status:"Failure",
+						 message:"Error Uploading File",
+						 object:[]});
+					 }else {
+						var body = '';
+						resp.on('data', function(chunk) {
+						  body += chunk;
+						});
+						resp.on('end', function() {
+						  var urls = JSON.parse(body);
+						  console.log("File Url : "+urls.url);
+						  var fileUrl=urls.url;
+						  AppController.addWallpaper(req.body.title, fileUrl, res, function(data){
+							tempFileName="";
+					   }); 
+					   });
+					 }
+				 });
+				 
+					 
+				}
+			 
+			 })
+			 
+		 });
+
+
+	// GET ALL Wallpapers
+		app.get('/wallpaper',function(req,res){
+				
+				console.log("in routes get wallpaper");
+				AppController.findAllWallpapers(function (wallpapers) {
+					console.log("Response Of findAllWallpapers Method");
+					res.jsonp({status:"success",
+								message:"List Of Wallpapers",
+								object:wallpapers});
+										
+			});		
+			});
+
+			 //Add New Attachment
+			 app.post('/attachment',function(req,res){
+		
+				if(req.body === undefined||req.body === null) {
+				 res.end("Empty Body "); 
+				 }
+				 
+				 console.log("in routes  /attachment");
+				 
+				 var upload = multer({
+					 storage: storage,
+					 fileFilter: function(req, file, callback) {
+						 //Allow Only Image Files
+						//  var ext = path.extname(file.originalname)
+						//  if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+						// 	 return callback(res.end('Only images are allowed'), null)
+						//  }
+						 callback(null, true)
+					 }
+				 }).single('file');
+				 upload(req, res, function(err) {
+					 if (err){
+						logger.info("Error Uploading File : " + err);
+						res.jsonp({status:"Failure",
+									message:"Error Uploading File",
+									object:[]});
+					 }else{        
+						logger.info ("Photo Is uploaded");
+						console.log(req.body.title);
+						var form = new FormData();
+						form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
+						form.submit('http://postvideo.exaride.com', function(err, resp) {
+						 if (err) {
+							 logger.info("Error : "+ err);
+							 res.jsonp({status:"Failure",
+							 message:"Error Uploading File",
+							 object:[]});
+						 }else {
+							var body = '';
+							resp.on('data', function(chunk) {
+							  body += chunk;
+							});
+							resp.on('end', function() {
+							  var urls = JSON.parse(body);
+							  console.log("File Url : "+urls.url);
+							  var fileUrl=urls.url;
+							  AppController.addAttachment(req, fileUrl, res, function(data){
+								tempFileName="";
+						   }); 
+						   });
+						 }
+					 });
+					 
+						 
+					}
+				 
+				 })
+				 
+			 });
+	
+			
 };
 
 

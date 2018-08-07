@@ -324,8 +324,7 @@ exports.updateShareLocationFlag=function(reqData,res){
 
 //add Marker           
 exports.setMarker=function(reqData,res){
-	try{
-			
+	try{			
 			var title=reqData.title;
 			var description=reqData.description;
 			var longitude=reqData.longitude;

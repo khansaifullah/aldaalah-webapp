@@ -1,0 +1,11 @@
+{"level":"info","message":"Photo Is uploaded","timestamp":"11:58:16"}
+{"level":"info","message":"An Exception Has occured in addWallpaper methodReferenceError: Wallpaper is not defined","timestamp":"11:58:16"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:00:52"}
+{"level":"info","message":" Exit AppController.addWallpaper Method","timestamp":"12:00:52"}
+{"level":"info","message":"Wallpaper saved succuessfully","timestamp":"12:00:53"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:07:50"}
+{"level":"info","message":" Exit AppController.addWallpaper Method","timestamp":"12:07:50"}
+{"level":"info","message":"Wallpaper saved succuessfully","timestamp":"12:07:50"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:08:28"}
+{"level":"info","message":" Exit AppController.addWallpaper Method","timestamp":"12:08:28"}
+{"level":"info","message":"Wallpaper saved succuessfully","timestamp":"12:08:28"}

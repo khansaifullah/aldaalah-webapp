@@ -2,6 +2,8 @@ var User = require('../models/User.js');
 var Marker = require('../models/Marker.js');
 var MarkerCategory = require('../models/MarkerCategory.js');
 var Country = require('../models/Country.js');
+var Wallpaper = require('../models/Wallpaper.js');
+var Attachment = require('../models/Attachment.js');
 var ConversationMessages = require('../models/ConversationMessages.js');
 var Conversation = require('../models/Conversation.js');
 var ConversationUser = require('../models/ConversationUser.js');
@@ -185,4 +187,104 @@ exports.findAllMarkerCategories=function(callback){
 		logger.info('An Exception Has occured in MarkerCategory method' + err);
 	}
 }
-              
+
+
+exports.addWallpaper = async function(title, photoUrl, res) {
+	try{ 	
+  
+        console.log("In Controller addWallpaper Method");           
+			 
+		var newWallpaper = new Wallpaper({  
+
+			title: title,
+			photoUrl: photoUrl
+			 });
+			 newWallpaper.save(function (err, wallpaper) {
+			if(err){
+				logger.error('Some Error while saving Wallpaper' + err );
+				res.jsonp({status:"failure",
+				message:"Error Uploading Wallpaper",
+				object:[]});
+			}
+			else{
+				logger.info('Wallpaper saved succuessfully');
+				res.jsonp({status:"success",
+				message:"Wallpaper Uploaded Succcesfully",
+				object:wallpaper});
+			}
+		});
+            
+        logger.info(' Exit AppController.addWallpaper Method');
+  
+	}catch (err){
+		logger.info('An Exception Has occured in addWallpaper method' + err);
+	}	
+}
+
+exports.findAllWallpapers=function(callback){
+    
+    try{
+    Wallpaper.find({}, function(err, wallpapers) {
+		if (err){
+			res.status(400).send({status:"failure",
+									message:err,
+									object:[]
+		});
+		}else{
+			callback(wallpapers);
+		// process.exit();
+		} 
+    });
+	}catch (err){
+		logger.info('An Exception Has occured in findAllWallpapers method' + err);
+	}
+}
+
+
+exports.addAttachment = async function(req, fileUrl, res) {
+	try{ 	
+  
+		console.log("In Controller addWallpaper Method");     
+		      
+		console.log("req.body.type : " +  req.body.type); 		
+		console.log("req.body.title : " +  req.body.title);   
+		console.log("fileUrl : " +  fileUrl); 
+		console.log("req.body.conversationId : " +  req.body.conversationId); 
+		console.log("req.body.toUserId : " + req.body.toUserId); 
+		console.log("req.body.fromUserPhone : " +  req.body.fromUserPhone); 
+		console.log("req.body.toUserPhone  : " +  req.body.toUserPhone ); 
+  
+
+		var newAttachment = new Attachment({  
+			attachmentType: req.body.type ,
+			attachmentTitle: req.body.title ,
+			attachmentUrl: fileUrl,
+			_conversationId: req.body.conversationId ,
+			_attachmentToUserId: req.body.toUserId ,
+			_attachmentFromUserId: req.body.fromUserId ,
+			_attachmentFromMobile: req.body.fromUserPhone ,
+			_attachmentToMobile: req.body.toUserPhone ,
+			attachmentDeliverStatus: false,
+			
+			 });
+			 newAttachment.save(function (err, attachment) {
+			if(err){
+				logger.error('Some Error while saving Attachment' + err );
+				res.jsonp({status:"failure",
+				message:"Error Uploading Attachment",
+				object:[]});
+			}
+			else{
+				logger.info('Attachment saved succuessfully');
+				res.jsonp({status:"success",
+				message:"Attachment Uploaded Succcesfully",
+				object:attachment});
+			}
+		});
+            
+        logger.info(' Exit AppController.addAttachment Method');
+  
+	}catch (err){
+		logger.info('An Exception Has occured in addAttachment method' + err);
+	}	
+}

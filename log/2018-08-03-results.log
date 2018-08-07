@@ -1,0 +1,65 @@
+{"level":"info","message":"File NEW Name  :file-1533275016540.jpg","timestamp":"10:43:37"}
+{"level":"info","message":"File NEW Name  :file-1533275177480.jpg","timestamp":"10:46:17"}
+{"level":"info","message":"Error Uploading File : Error: ENOENT: no such file or directory, open 'C:\\Users\\DELL\\Documents\\EXAGIC\\NODE\\Aldaalah-Server-Heroku\\aldaalah\\public\\videos\\file-1533275177480.jpg'","timestamp":"10:46:17"}
+{"level":"info","message":"File NEW Name  :file-1533275335183.jpg","timestamp":"10:48:55"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:48:55"}
+{"level":"info","message":"File NEW Name  :file-1533275390339.jpg","timestamp":"10:49:50"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:49:50"}
+{"level":"info","message":"File NEW Name  :file-1533275418380.jpg","timestamp":"10:50:18"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:50:18"}
+{"level":"info","message":"tempFileName 1: file-1533275418380.jpg","timestamp":"10:50:18"}
+{"level":"info","message":" Exit AppController.addWallpaper Method","timestamp":"10:52:16"}
+{"level":"info","message":"Wallpaper saved succuessfully","timestamp":"10:52:16"}
+{"level":"info","message":"File NEW Name  :file-1533275816168.jpg","timestamp":"10:56:56"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:56:56"}
+{"level":"info","message":"tempFileName 1: file-1533275816168.jpg","timestamp":"10:56:56"}
+{"level":"info","message":" Exit AppController.addWallpaper Method","timestamp":"10:59:58"}
+{"level":"info","message":"Wallpaper saved succuessfully","timestamp":"10:59:58"}
+{"level":"info","message":"File NEW Name  :file-1533276093286.jpg","timestamp":"11:01:33"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"11:01:33"}
+{"level":"info","message":"tempFileName 1: file-1533276093286.jpg","timestamp":"11:01:33"}
+{"level":"info","message":" Exit AppController.addWallpaper Method","timestamp":"11:03:48"}
+{"level":"info","message":"Wallpaper saved succuessfully","timestamp":"11:03:48"}
+{"level":"info","message":"File NEW Name  :file-1533276668759.jpg","timestamp":"11:11:08"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"11:11:08"}
+{"level":"info","message":"tempFileName 1: file-1533276668759.jpg","timestamp":"11:11:08"}
+{"level":"info","message":" Exit AppController.addWallpaper Method","timestamp":"11:11:14"}
+{"level":"info","message":"Wallpaper saved succuessfully","timestamp":"11:11:14"}
+{"level":"info","message":"Error Uploading File : true","timestamp":"11:12:39"}
+{"level":"info","message":"File NEW Name  :file-1533276789234.mp3","timestamp":"11:13:09"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"11:13:09"}
+{"level":"info","message":"tempFileName 1: file-1533276789234.mp3","timestamp":"11:13:09"}
+{"level":"info","message":" Exit AppController.addWallpaper Method","timestamp":"11:21:59"}
+{"level":"info","message":"Wallpaper saved succuessfully","timestamp":"11:21:59"}
+{"level":"info","message":"File NEW Name  :file-1533278290568.jpeg","timestamp":"11:38:10"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"11:38:10"}
+{"level":"info","message":" Exit AppController.addWallpaper Method","timestamp":"11:38:12"}
+{"level":"info","message":"Wallpaper saved succuessfully","timestamp":"11:38:13"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1533280686059.jpg","timestamp":"12:18:06"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:18:06"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:18:10"}
+{"level":"info","message":"Response Of userExists Method : { _id: 5b5c38cba7a91400141faf24,\n  updatedAt: 2018-07-28T10:45:15.916Z,\n  createdAt: 2018-07-28T09:35:07.401Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  verification_code: '3111',\n  __v: 0,\n  OS: 'ios',\n  active: false,\n  full_name: 'New Name 1',\n  _preferenceId: 5b5c3d27a7a91400141faf25,\n  status: 'Second Status 22',\n  last_shared_loc_time: 2018-07-28T09:35:07.393Z,\n  share_loc_flag_time: 2018-07-28T09:35:07.393Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'https://aldaalah.herokuapp.com/images/profileImages/profilePhoto-1532770863278.jpg' }","timestamp":"12:18:10"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"12:18:10"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"12:18:10"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"12:18:10"}
+{"level":"info","message":"RegistrationController.updateProfilePhoto called for user  :+923345022570","timestamp":"12:18:10"}
+{"level":"info","message":" Exit RegistrationController.updateProfilePhoto Method","timestamp":"12:18:10"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"12:18:11"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1533280761697.jpg","timestamp":"12:19:21"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:19:21"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:19:26"}
+{"level":"info","message":"Response Of userExists Method : { _id: 5b5c38cba7a91400141faf24,\n  updatedAt: 2018-08-03T07:18:10.799Z,\n  createdAt: 2018-07-28T09:35:07.401Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  verification_code: '3111',\n  __v: 0,\n  OS: 'ios',\n  active: false,\n  full_name: 'New Name 1',\n  _preferenceId: 5b5c3d27a7a91400141faf25,\n  status: 'Second Status 12',\n  last_shared_loc_time: 2018-07-28T09:35:07.393Z,\n  share_loc_flag_time: 2018-07-28T09:35:07.393Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'http://postvideo.exaride.com/upload/2018-08-0307-19-09-Aldaalah.jpg' }","timestamp":"12:19:26"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"12:19:26"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"12:19:26"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"12:19:26"}
+{"level":"info","message":"RegistrationController.updateName called for user  :+923345022570","timestamp":"12:19:26"}
+{"level":"info","message":" Exit RegistrationController.updateName Method","timestamp":"12:19:26"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"12:19:26"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1533281478390.jpg","timestamp":"12:31:18"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:31:18"}
+{"level":"info","message":"RegistrationController.completeProfile called for user  :+923345022570","timestamp":"12:31:49"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:31:49"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:31:49"}
+{"level":"info","message":" Exit RegistrationController.completeProfile Method","timestamp":"12:31:49"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"12:31:49"}
+{"level":"info","message":"User updated With Phone Num +923345022570","timestamp":"12:31:49"}
