@@ -8,7 +8,7 @@ var logger = require('../config/lib/logger.js');
 require('datejs');
 var mongoose = require('mongoose');
 //mongoose.Promise = global.Promise;
-ObjectId = require('mongodb').ObjectID;
+// ObjectId = require('mongodb').ObjectID;
 var multer  = require('multer')
 var upload = multer({ dest: './public/images/profileImages' })
 
