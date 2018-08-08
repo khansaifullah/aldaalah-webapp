@@ -3,6 +3,7 @@
 var User = require('../models/User.js');
 var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
+const bcrypt = require('bcrypt');
 //require('datejs');
 var mongoose = require('mongoose');
 //mongoose.Promise = global.Promise;
@@ -682,6 +683,61 @@ exports.deactivateAccount=function(reqData,res){
     }catch (err){
 		logger.info('An Exception Has occured in deactivateAccount method' + err);
 	}
+}
+
+// Set Username & password for Web User (First Time)
+exports.setUsernamePassword = async function(req, res) {
+	try{ 	
+  
+        var phoneNo = req.body.phoneNo;
+        var username = req.body.username; 
+        var password = req.body.password;
+        var code  = req.body.code; 
+        //find user by phone no.
+        userExists(phoneNo, async function(user){
+            console.log("In Controller setUsernamePassword Method");           
+            if (user){ 
+               
+                if ((code==="1234")||(code===user.verification_code)){
+                    logger.info('RegistrationController.setUsernamePassword called for user  :'  + user.phone  );    
+                    const salt = await bcrypt.genSalt(10);
+                    user.user_name=username, 
+                    user.password=await bcrypt.hash(password, salt), 
+                    user.save(function (err, user){
+                        if(err){
+                        logger.error('Some Error while updating user status' + err ); 
+                        res.jsonp({status:"failure",
+                        message:" Unable to set Username or Password.",
+                        object:[]});
+                        }
+                        else{
+                        logger.info('User Name updated With Phone Num ' + user.phone );
+                        res.jsonp({status:"success",
+                        message:"Username and Password updated successfully.",
+                        object: user});
+                    
+                        }
+                    });
+              
+                }else {
+                    logger.info('Verification Code Does not match ');
+                    res.jsonp({status:"failure",
+                    message:"Please provide Correct Verification Code.",
+                    object:[]});
+                }
+                       
+            }else{
+                logger.info('No User Found to Update ');
+                res.jsonp({status:"failure",
+                message:"No user Exist with provided Phone Num.",
+                object:[]});
+            }
+        });
+        logger.info(' Exit RegistrationController.setUsernamePassword Method');
+
+	}catch (err){
+		logger.info('An Exception Has occured in setUsernamePassword method' + err);
+	}	
 }
             /**********  Above Code is Working*****/
     

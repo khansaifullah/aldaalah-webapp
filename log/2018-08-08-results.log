@@ -1,0 +1,21 @@
+{"level":"info","message":"UserExists Method Called","timestamp":"10:54:48"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"10:54:48"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"10:54:48"}
+{"level":"info","message":"User Not Found with Phone Num. :923345022571","timestamp":"10:54:48"}
+{"level":"info","message":"No User Found to Update ","timestamp":"10:54:48"}
+{"level":"info","message":"UserExists Method Called","timestamp":"10:54:57"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"10:54:57"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"10:54:57"}
+{"level":"info","message":"User Not Found with Phone Num. :923345022570","timestamp":"10:54:58"}
+{"level":"info","message":"No User Found to Update ","timestamp":"10:54:58"}
+{"level":"info","message":"UserExists Method Called","timestamp":"10:55:20"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"10:55:20"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"10:55:20"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"10:55:20"}
+{"level":"info","message":"Verification Code Does not match ","timestamp":"10:55:20"}
+{"level":"info","message":"UserExists Method Called","timestamp":"10:55:44"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"10:55:44"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"10:55:44"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"10:55:44"}
+{"level":"info","message":"RegistrationController.setUsernamePassword called for user  :+923345022570","timestamp":"10:55:44"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"10:55:45"}

@@ -32,6 +32,11 @@ var userSchema = new Schema({
       last_shared_loc_time: { type: Date, default: Date.now },
       status: {type:String, default:null },
       _preferenceId: { type: mongoose.Schema.Types.ObjectId, ref: 'MarkerCategory' },
+      password: {
+        type: String,
+        minlength: 5,
+        maxlength: 1024
+      },
          
 }, {timestamps: true});
 

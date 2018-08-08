@@ -1325,6 +1325,22 @@ module.exports = function(app) {
 				 
 			 });
 	
+
+			 // **** API's for web User Panel 
+
+		//Set Username Password
+		app.post('/auth',function(req,res){
+
+			if(req.body === undefined||req.body === null) {
+				res.end("Empty Body "); 
+			}
+				
+			console.log("in routes  /auth");
+			regCtrl.setUsernamePassword(req, res);
+			
+		});
+	
+
 			
 };
 
