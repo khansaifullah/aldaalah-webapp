@@ -1,4 +1,5 @@
-
+const Joi = require('joi');
+const bcrypt = require('bcrypt');
 var regCtrl= require('../controller/RegistrationController.js');
 var AppController= require('../controller/AppController.js');
 var ChatController = require('../controller/ChatController.js');
@@ -1329,7 +1330,7 @@ module.exports = function(app) {
 			 // **** API's for web User Panel 
 
 		//Set Username Password
-		app.post('/auth',function(req,res){
+		app.post('/signup',function(req,res){
 
 			if(req.body === undefined||req.body === null) {
 				res.end("Empty Body "); 
@@ -1340,8 +1341,41 @@ module.exports = function(app) {
 			
 		});
 	
-
+		// login to web panel
 			
+	app.post('/auth', async (req, res) => {
+		let username = req.body.username;
+		let password = req.body.password;
+	
+		// const { error } = validate(req.body);
+		// if (error) return res.status(400).send(error.details[0].message);
+	
+		let user = await User.findOne({ user_name : username });
+		if (!user) return res.status(400).jsonp({ status: 'failure', message: 'Invalid Username.' , object: []});
+		console.log('found a user', user.user_name);
+	
+		const validPassword = await bcrypt.compare(password, user.password);
+		if (!validPassword) return res.status(400).jsonp({ status: 'failure', message: 'Invalid Password.' , object: []});
+
+		// const token = user.generateAuthToken();
+		// res.setHeader('x-auth-token', token);
+		res.jsonp({
+		status : "success",
+		message : "successfully Logged In",
+		object : user
+		}); 
+	
+	});
+
+	
+	function validate(req) {
+		const schema = {
+		email: Joi.string().min(5).max(255).required().email(),
+		password: Joi.string().min(5).max(255).required()
+		};
+		return Joi.validate(req, schema);
+	}
+		  
 };
 
 
