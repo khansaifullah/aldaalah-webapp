@@ -19,3 +19,9 @@
 {"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"10:55:44"}
 {"level":"info","message":"RegistrationController.setUsernamePassword called for user  :+923345022570","timestamp":"10:55:44"}
 {"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"10:55:45"}
+{"level":"info","message":"UserExists Method Called","timestamp":"11:10:44"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"11:10:44"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"11:10:44"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"11:10:45"}
+{"level":"info","message":"RegistrationController.setUsernamePassword called for user  :+923345022570","timestamp":"11:10:45"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"11:10:46"}
