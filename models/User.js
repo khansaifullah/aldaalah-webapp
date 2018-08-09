@@ -1,7 +1,9 @@
 // grab the things we need
+const config = require('config');
 var Country = require('./Country');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+const jwt = require('jsonwebtoken');
 //mongoose.Promise = global.Promise;
 // create a schema
 
@@ -43,7 +45,11 @@ var userSchema = new Schema({
 userSchema.index({phone:1});
 //userSchema.index({ loc: '2d' });
 
-// the schema is useless so far
+userSchema.methods.generateAuthToken = function() { 
+  const token = jwt.sign({ _id: this._id }, config.get('jwtPrivateKey'));
+  return token;
+}
+
 // we need to create a model using it
 var User = mongoose.model('User', userSchema);
 

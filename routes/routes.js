@@ -1357,8 +1357,8 @@ module.exports = function(app) {
 		const validPassword = await bcrypt.compare(password, user.password);
 		if (!validPassword) return res.status(400).jsonp({ status: 'failure', message: 'Invalid Password.' , object: []});
 
-		// const token = user.generateAuthToken();
-		// res.setHeader('x-auth-token', token);
+		const token = user.generateAuthToken();
+		res.setHeader('x-auth-token', token);
 		res.jsonp({
 		status : "success",
 		message : "successfully Logged In",
