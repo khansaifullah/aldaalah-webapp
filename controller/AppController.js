@@ -4,6 +4,7 @@ var MarkerCategory = require('../models/MarkerCategory.js');
 var Country = require('../models/Country.js');
 var Wallpaper = require('../models/Wallpaper.js');
 var Attachment = require('../models/Attachment.js');
+var Friend = require('../models/Friend.js');
 var ConversationMessages = require('../models/ConversationMessages.js');
 var Conversation = require('../models/Conversation.js');
 var ConversationUser = require('../models/ConversationUser.js');
@@ -287,4 +288,36 @@ exports.addAttachment = async function(req, fileUrl, res) {
 	}catch (err){
 		logger.info('An Exception Has occured in addAttachment method' + err);
 	}	
+}
+
+exports.findFriendsByPhoneNum=function(phoneNo, callback){
+    
+    try{
+
+		var query = { phone : phoneNo };
+		 User.findOne(query).exec(function(err, user){
+			if (user){
+
+				Friend.find({_userId:user._id}, function(err, friends) {
+					if (err){
+						res.status(400).send({status:"failure",
+												message:err,
+												object:[]
+					});
+					}else{
+						callback(friends);
+					
+					} 
+					});
+			}else {
+				logger.info('User not found');
+				callback();
+			}
+
+		});
+	
+	
+	}catch (err){
+		logger.info('An Exception Has occured in findAllWallpapers method' + err);
+	}
 }

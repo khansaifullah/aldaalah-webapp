@@ -1,6 +1,7 @@
 
 //var AppController= require('../controller/AppController.js');
 var User = require('../models/User.js');
+var Friend = require('../models/Friend.js');
 var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
 const bcrypt = require('bcrypt');
@@ -532,21 +533,20 @@ exports.updateProfilePhoto = async function(user, profilePhotoUrl) {
 }
 
 
-exports.syncContacts = function(req,res) {
+exports.syncContacts = function(req, res, me) {
     	try{
-console.log("In Controller syncContacts Method");
-    
-      logger.info('RegistrationController.syncContacts called  :');
+        console.log("In Controller syncContacts Method");
+
+        logger.info('RegistrationController.syncContacts called  :');
         var arrayOfNumbers = req.body.phoneNumberList;
 		// console.log(arrayOfNumbers);
-        //var phoneNo=req.body.userPhoneNo;
+        var phoneNo=req.body.userPhoneNo;
         var arrayToSend = [];
         var query ;
 		var promiseArr = [];
 		var tempObject;
     
     function compare(num){
-    
         
         return new Promise((resolve,reject) => {
        
@@ -558,13 +558,26 @@ console.log("In Controller syncContacts Method");
                       reject(err);
                   }
                  else if(user) {
-                     //console.lo
                      console.log(num+"found");
 					 tempObject=new Object ();
 					 tempObject.phoneNo=user.phone;
-					 tempObject.profileUrl=user.profile_photo_url;
+                     tempObject.profileUrl=user.profile_photo_url;
                      arrayToSend.push(tempObject);
-                      resolve();
+                     var query = {_userId:me._id, _friendId:user._id},
+                        update = { },
+                        options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+                     // Find the document
+                     Friend.findOneAndUpdate(query, update, options, function(error, result) {
+                        if (error) {
+                            logger.info('Error Occured while saving Friend :  '+ error);
+                            reject();
+                        }else{
+                            logger.info('Friend Id : ' + result._id);
+                            resolve();
+                        } 
+                    });   
+                   
                  }
                  else resolve();
                  

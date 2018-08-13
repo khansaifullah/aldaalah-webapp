@@ -340,7 +340,22 @@ module.exports = function(app) {
         res.end("Empty Body"); 
         }
 		console.log("in routes /contacts");
-		regCtrl.syncContacts(req,res);
+		var phoneNo=req.body.phoneNo;
+		var query = { phone : phoneNo };
+		
+		User.findOne(query).exec(function(err, me){
+			if (me){
+				regCtrl.syncContacts(req, res, me);
+				
+			}else {
+				res.jsonp({status:"Failure",
+				message:"Unable to Find User",
+			   object:[]});
+			}
+
+
+		});
+		
 	});
   
     
@@ -1365,6 +1380,22 @@ module.exports = function(app) {
 		object : user
 		}); 
 	
+	});
+
+
+	
+	 // getting List of Friends 
+	 app.post('/friends',function(req,res){
+      	
+		logger.info("in routes get friend");
+		var phoneNo= req.body.phoneNo;
+		AppController.findFriendsByPhoneNum(phoneNo,function (friends) {
+            logger.info("Response Of findFriendsByPhoneNum Method");
+			 res.jsonp({status:"success",
+                        message:"List Of Friends",
+                        object:friends});
+                             
+	});		
 	});
 
 	

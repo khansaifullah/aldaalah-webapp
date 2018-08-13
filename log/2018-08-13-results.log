@@ -1,0 +1,65 @@
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"11:25:00"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"11:25:00"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"11:28:47"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"11:28:47"}
+{"level":"info","message":"Friend Id : undefined","timestamp":"11:28:47"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"11:43:29"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"11:43:29"}
+{"level":"info","message":"Friend Id : 5b7128d555f0c2088466dc39","timestamp":"11:43:30"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"11:43:51"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"11:43:51"}
+{"level":"info","message":"Friend Id : 5b7128d555f0c2088466dc39","timestamp":"11:43:52"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"11:44:00"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"11:44:00"}
+{"level":"info","message":"Friend Id : 5b7128d555f0c2088466dc39","timestamp":"11:44:00"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"11:54:33"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"11:54:33"}
+{"level":"info","message":"Friend Id : 5b7128d555f0c2088466dc39","timestamp":"11:54:33"}
+{"level":"info","message":"Friend Id : 5b712b6c55f0c2088466e3d3","timestamp":"11:54:33"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"11:55:06"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"11:55:06"}
+{"level":"info","message":"Friend Id : 5b712b6c55f0c2088466e3d3","timestamp":"11:55:07"}
+{"level":"info","message":"Friend Id : 5b7128d555f0c2088466dc39","timestamp":"11:55:07"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"11:55:31"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"11:55:31"}
+{"level":"info","message":"Friend Id : 5b712b6c55f0c2088466e3d3","timestamp":"11:55:31"}
+{"level":"info","message":"Friend Id : 5b7128d555f0c2088466dc39","timestamp":"11:55:31"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"11:58:10"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"11:58:10"}
+{"level":"info","message":"Friend Id : 5b7128d555f0c2088466dc39","timestamp":"11:58:11"}
+{"level":"info","message":"Friend Id : 5b712b6c55f0c2088466e3d3","timestamp":"11:58:11"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"11:58:38"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"11:58:38"}
+{"level":"info","message":"Friend Id : 5b712c6155f0c2088466e6ab","timestamp":"11:58:38"}
+{"level":"info","message":"Friend Id : 5b712c6155f0c2088466e6a9","timestamp":"11:58:38"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"11:59:24"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"11:59:24"}
+{"level":"info","message":"Friend Id : 5b712c8f55f0c2088466e723","timestamp":"11:59:24"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"12:10:52"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"12:10:52"}
+{"level":"info","message":"Friend Id : 5b712b6c55f0c2088466e3d3","timestamp":"12:10:52"}
+{"level":"info","message":"Friend Id : 5b7128d555f0c2088466dc39","timestamp":"12:10:52"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"12:11:00"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"12:11:00"}
+{"level":"info","message":"Friend Id : 5b712b6c55f0c2088466e3d3","timestamp":"12:11:01"}
+{"level":"info","message":"Friend Id : 5b7128d555f0c2088466dc39","timestamp":"12:11:01"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"12:11:04"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"12:11:04"}
+{"level":"info","message":"Friend Id : 5b712b6c55f0c2088466e3d3","timestamp":"12:11:04"}
+{"level":"info","message":"Friend Id : 5b7128d555f0c2088466dc39","timestamp":"12:11:04"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"12:13:58"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"12:13:58"}
+{"level":"info","message":"Friend Id : 5b712b6c55f0c2088466e3d3","timestamp":"12:13:59"}
+{"level":"info","message":"Friend Id : 5b7128d555f0c2088466dc39","timestamp":"12:13:59"}
+{"level":"info","message":"RegistrationController.syncContacts called  :","timestamp":"12:15:02"}
+{"level":"info","message":" Exit RegistrationController.syncContacts Method","timestamp":"12:15:02"}
+{"level":"info","message":"Friend Id : 5b712c6155f0c2088466e6ab","timestamp":"12:15:03"}
+{"level":"info","message":"Friend Id : 5b712c6155f0c2088466e6a9","timestamp":"12:15:03"}
+{"level":"info","message":"in routes get friend","timestamp":"13:12:48"}
+{"level":"info","message":"An Exception Has occured in findAllWallpapers methodReferenceError: userExists is not defined","timestamp":"13:12:48"}
+{"level":"info","message":"in routes get friend","timestamp":"13:41:21"}
+{"level":"info","message":"An Exception Has occured in findAllWallpapers methodReferenceError: userExists is not defined","timestamp":"13:41:21"}
+{"level":"info","message":"in routes get friend","timestamp":"13:41:28"}
+{"level":"info","message":"Response Of findFriendsByPhoneNum Method","timestamp":"13:41:32"}
+{"level":"info","message":"in routes get friend","timestamp":"13:43:31"}
+{"level":"info","message":"Response Of findFriendsByPhoneNum Method","timestamp":"13:43:32"}
