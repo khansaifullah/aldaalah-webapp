@@ -538,7 +538,7 @@ exports.syncContacts = function(req, res, me) {
         console.log("In Controller syncContacts Method");
 
         logger.info('RegistrationController.syncContacts called  :');
-        var arrayOfNumbers = req.body.phoneNumberList;
+        var arrayOfFriends = req.body.friendList;
 		// console.log(arrayOfNumbers);
         var phoneNo=req.body.userPhoneNo;
         var arrayToSend = [];
@@ -546,11 +546,12 @@ exports.syncContacts = function(req, res, me) {
 		var promiseArr = [];
 		var tempObject;
     
-    function compare(num){
-        
+    function compare(friend){
+        logger.info ("friend Name : "+ friend.friendName);
+        logger.info ("friend Phone : "+ friend.phone);
         return new Promise((resolve,reject) => {
        
-            query = { phone : num };
+            query = { phone : friend.phone };
              User.findOne(query).exec(function(err, user){
                  
                   if (err) {
@@ -558,13 +559,13 @@ exports.syncContacts = function(req, res, me) {
                       reject(err);
                   }
                  else if(user) {
-                     console.log(num+"found");
+                     console.log("user found with num "+ user.phone);
 					 tempObject=new Object ();
 					 tempObject.phoneNo=user.phone;
                      tempObject.profileUrl=user.profile_photo_url;
                      arrayToSend.push(tempObject);
-                     var query = {_userId:me._id, _friendId:user._id},
-                        update = { },
+                     var query = {_userId:me._id, _friendId:user._id },
+                        update = {_userId:me._id, _friendId:user._id, friendName:friend.friendName },
                         options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
                      // Find the document
@@ -584,8 +585,8 @@ exports.syncContacts = function(req, res, me) {
              });
         });
     }                                   
-     arrayOfNumbers.forEach(function(number) {              
-             promiseArr.push(compare(number));        
+    arrayOfFriends.forEach(function(friend) {              
+             promiseArr.push(compare(friend));        
      });
     
      Promise.all(promiseArr)

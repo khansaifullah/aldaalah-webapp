@@ -6,6 +6,7 @@ var friendSchema = new mongoose.Schema({
  
     _userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     _friendId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    friendName: {type: String, default: null}
 
 }, {timestamps: true});
 
