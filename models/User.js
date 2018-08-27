@@ -27,6 +27,7 @@ var userSchema = new Schema({
       palyer_id:String,
       share_location:{ type: Boolean, default: true },
       share_loc_flag_time:{ type: Date, default: Date.now },
+      alert_flag:{ type: Boolean, default: true },
       loc: {
         type: [Number],  // [<longitude>, <latitude>]
         index: '2d'      // create the geospatial index

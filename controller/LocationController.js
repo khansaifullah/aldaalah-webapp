@@ -320,6 +320,49 @@ exports.updateShareLocationFlag=function(reqData,res){
 	}
 }
 
+
+//Update Get Alerts Flag
+
+                        
+exports.updateAlertFlag=function(reqData,res){
+	try{
+			var phoneNo=reqData.phoneNo;
+			var alertFlag=reqData.alertFlag;						
+			logger.info('LocationController.updateAlertFlag called  :' 
+						  + phoneNo+ '**'+ alertFlag );
+		
+			AppController.userExists(phoneNo, function(user){
+				if (user){
+					user.alert_flag=alertFlag;
+					// user.share_loc_flag_time=new Date();
+					user.save(function (err, user){
+						if(err){
+							logger.error('Some Error while updating user' + err );
+								 
+						}
+						else{
+							logger.info('User Alerts Flag updated With Phone Num ' +
+							phoneNo +' at  :' + new Date());										  
+							res.jsonp({ status:"success",
+										message:"Alerts Flag Updated!",
+										object:[]}); 
+						}						  
+					  });
+						
+					logger.info(phoneNo + 'Alerts flag : '+user.alert_flag );
+				}
+				else{
+					res.jsonp({status:"failure",
+					message:"Failed To update Alerts Flag !",
+					object:[]}); 
+				}
+				
+			});
+	}catch (err){
+		logger.info('An Exception Has occured in updateAlertFlag method' + err);
+	}
+}
+
 // Marker Methods
 
 //add Marker           

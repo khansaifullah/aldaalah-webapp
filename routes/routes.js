@@ -808,6 +808,17 @@ module.exports = function(app) {
 		var reqData=req.body;      
 		LocController.updateShareLocationFlag(reqData,res);
 	});
+
+	app.post('/alert',function(req,res){
+		
+		if(req.body === undefined||req.body === null) {
+		 res.end("Empty Body"); 
+		 }
+		 console.log("in routes /alert");
+		 var reqData=req.body;      
+		 LocController.updateAlertFlag(reqData,res);
+	 });
+	
 	
 
 	/*  Marker API's */
@@ -1397,6 +1408,8 @@ module.exports = function(app) {
                              
 	});		
 	});
+
+	
 
 	
 	function validate(req) {
