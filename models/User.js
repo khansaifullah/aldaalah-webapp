@@ -40,6 +40,11 @@ var userSchema = new Schema({
         minlength: 5,
         maxlength: 1024
       },
+      city: String,
+      country: String,
+      gender: String,
+      dob: Date
+
          
 }, {timestamps: true});
 

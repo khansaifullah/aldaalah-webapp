@@ -706,6 +706,11 @@ exports.setUsernamePassword = async function(req, res) {
         var phoneNo = req.body.phoneNo;
         var email = req.body.email; 
         var password = req.body.password;
+        var gender = req.body.gender;
+        var dob = req.body.dob;
+        var city = req.body.city;
+        var country = req.body.country;
+        
             //generate a code and set to user.verification_code
         var code=randomize('0', 4);
         var verificationMsg="Verification code for Aldaalah Application : " + code;
@@ -716,7 +721,32 @@ exports.setUsernamePassword = async function(req, res) {
             if (user){ 
                
                     logger.info('RegistrationController.setUsernamePassword called for user  :'  + user.phone  );    
-                                       
+                 
+                 const salt = await bcrypt.genSalt(10);
+                 user.email=email, 
+                 user.password=await bcrypt.hash(password, salt);
+                 user.verification_code=code;
+                 user.gender=gender;
+                 user.city=city;
+                 user.country=country;
+                 user.dob=dob;
+                 user.save(function (err, user){
+                     if(err){
+                     logger.error('Some Error while updating user status' + err ); 
+                     res.jsonp({status:"failure",
+                     message:" Unable to set Email or Password.",
+                     object:[]});
+                     }
+                     else{
+
+                     logger.info('User Name updated With Phone Num ' + user.phone );
+                     res.jsonp({status:"success",
+                     message:"Email and Password updated successfully.",
+                     object: user});
+                 
+                     }
+                 });
+
                 //sending verification Code 
                 
                 var headers = {
@@ -745,26 +775,7 @@ exports.setUsernamePassword = async function(req, res) {
                         // Print out the response body
                         console.log(body)
                         logger.info('Sucessful Response of SMS API : ' + body );
-                        const salt = await bcrypt.genSalt(10);
-                        user.email=email, 
-                        user.password=await bcrypt.hash(password, salt);
-                        user.verification_code=code;
-                        user.save(function (err, user){
-                            if(err){
-                            logger.error('Some Error while updating user status' + err ); 
-                            res.jsonp({status:"failure",
-                            message:" Unable to set Esername or Password.",
-                            object:[]});
-                            }
-                            else{
-    
-                            logger.info('User Name updated With Phone Num ' + user.phone );
-                            res.jsonp({status:"success",
-                            message:"Email and Password updated successfully.",
-                            object: user});
-                        
-                            }
-                        });
+                
                     }
                     else{
                         logger.info('Response/Error of SMS API : ' + error );

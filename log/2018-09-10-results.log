@@ -26,3 +26,10 @@
 {"level":"info","message":"RegistrationController.setUsernamePassword called for user  :+923124999213","timestamp":"16:07:41"}
 {"level":"info","message":"Sucessful Response of SMS API : [object Object]","timestamp":"16:07:42"}
 {"level":"info","message":"User Name updated With Phone Num +923124999213","timestamp":"16:07:42"}
+{"level":"info","message":"UserExists Method Called","timestamp":"16:29:46"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"16:29:46"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"16:29:46"}
+{"level":"info","message":"User Found with Phone Num. :+923124999213","timestamp":"16:29:46"}
+{"level":"info","message":"RegistrationController.setUsernamePassword called for user  :+923124999213","timestamp":"16:29:46"}
+{"level":"info","message":"User Name updated With Phone Num +923124999213","timestamp":"16:29:47"}
+{"level":"info","message":"Sucessful Response of SMS API : [object Object]","timestamp":"16:29:47"}
