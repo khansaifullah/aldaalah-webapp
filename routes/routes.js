@@ -1410,6 +1410,38 @@ module.exports = function(app) {
 	});
 
 	
+	// GET chats of a user
+	app.post('/chat',function(req,res){
+		
+		var mobileNo= req.body.phoneNo;
+		var page= req.body.page;
+	
+		console.log("in routes get chat");
+		ChatController.findChats(mobileNo, page, function (chats) {
+			console.log("Response Of findChats Method");
+			res.jsonp({status:"success",
+						message:"List Of Conversations",
+						object:chats});
+								
+	});		
+	});
+
+		
+	// GET conversations against a Cpnversation id
+	app.get('/message',function(req,res){
+		
+		var conversationId= req.query.conversationId;
+		var messageId= req.query.messageId;
+	
+		console.log("in routes get message");
+		ChatController.findMessagesByConversationId(conversationId, messageId, function (messages) {
+			console.log("Response Of findMessages Method");
+			res.jsonp({status:"success",
+						message:"List Of Conversation Messages",
+						object:messages});
+								
+	});		
+	});
 
 	
 	function validate(req) {

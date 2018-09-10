@@ -340,7 +340,7 @@ exports.updateAlertFlag=function(reqData,res){
 							logger.error('Some Error while updating user' + err );
 								 
 						}
-						else{
+					 	else{
 							logger.info('User Alerts Flag updated With Phone Num ' +
 							phoneNo +' at  :' + new Date());										  
 							res.jsonp({ status:"success",

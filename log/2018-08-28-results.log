@@ -1,0 +1,1 @@
+{"level":"info","message":"An Exception Has occured in findChats methodMongoError: unknown group operator '$First'","timestamp":"17:26:17"}

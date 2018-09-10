@@ -11,6 +11,7 @@ var mongoose = require('mongoose');
 // ObjectId = require('mongodb').ObjectID;
 var multer  = require('multer')
 var upload = multer({ dest: './public/images/profileImages' })
+var ObjectId = require('mongoose').Types.ObjectId;
 
 
 //mongoose.createConnection(db.url);
@@ -922,6 +923,113 @@ exports.findConversationMembers=function(conversationId,callback){
 
 }
 
+
+//List chats of a user
+exports.findChats= async function(mobileNo, page, callback){
+    
+    try{
+		var conversationList= [];
+		var skipItems;
+		if (!page)
+		page=0;
+		skipItems=page*10;
+		logger.info("page : "+page + "skipItems : " + skipItems);
+
+		const aggregatorOpts1 = [
+			{$match:{'_userMobile': mobileNo }},
+			{$group: {_id:"$_conversationId"}},
+			{$skip : skipItems },
+			{$limit : 10 }
+			
+		]
+	
+		const conversationUser = await ConversationUser.aggregate(aggregatorOpts1).exec(); 
+		var conversation;
+
+			if (!conversationUser){
+				res.status(400).send({status:"failure",
+										message:err,
+										object:[]});
+			}else{
+
+
+				logger.info('Conversation Length ' +conversationUser.length );
+				for (var i=0; i< conversationUser.length; i++){
+					logger.info('Conversation id at i ='+ i +" is : " +conversationUser[i]._id );
+					var query = { _id : conversationUser[i]._id };
+					conversation = await Conversation.findOne(query).exec(function(err, conversation){
+						if (err){
+						 logger.error('Some Error occured while finding conversation' + err );
+						 }
+						if (conversation){
+							logger.info('conversation Found with name : '+ conversation.conversationName);
+							logger.info('conversation is group Conversation : '+ conversation.isGroupConversation);
+							// var conversationObj ={
+									
+							// 		conversationId:conversationId	
+							// }
+							conversationList.push(conversation);
+						}
+						else {
+						 logger.info('conversation not Found For Phone No: ');                 
+						}                               
+					});
+
+
+				}
+				callback(conversationList);
+			} 
+	
+	
+
+	}catch (err){
+		logger.info('An Exception Has occured in findChats method' + err);
+	}
+}
+
+
+exports.findMessagesByConversationId=function(conversationId, messageId,callback){
+	var pageSize =5;
+ 
+    try{
+		if (ObjectId.isValid(messageId)){
+
+			logger.info("Valid Object Id");
+	
+			ConversationMessages.find({'_id': {'$lt': messageId},_conversationId : conversationId }, function(err, messages) {
+				if (err){ 
+					 res.status(400).send({status:"Failure",
+											  message:err,
+											  object:[]
+											});
+				}
+				
+				else{ 
+					logger.info(messages.length + ' messages Found');
+					callback(messages);
+				} 
+				}).sort( [['_id', -1]] ).limit(pageSize);
+		}else {
+			logger.info("In Valid Object Id");
+			ConversationMessages.find({_conversationId : conversationId}, function(err, messages) {
+				if (err){
+					 res.status(400).send({status:"Failure",
+											  message:err,
+											  object:[]
+											});
+				}
+				else{ 
+					logger.info(messages.length + ' messages Found');
+					callback(messages);
+					//process.exit();
+				} 
+				}).sort( [['_id', -1]] ).limit(pageSize);
+		}
+     
+		}catch (err){
+		logger.info('An Exception Has occured in findMessagesByConversationId method' + err);
+	}
+}
 														/*****************************/
 	
 
