@@ -615,18 +615,27 @@ exports.syncContacts = function(req, res, me) {
                  
              });
         });
-    }                                   
-    arrayOfFriends.forEach(function(friend) {              
-             promiseArr.push(compare(friend));        
-     });
-    
-     Promise.all(promiseArr)
-         .then((result)=> res.jsonp({status:"success",
-                           message:"Contacts Synced",
-                          object:arrayToSend}))
-         .catch((err)=>res.send({status:"failure",
-                           message:"Error Occured while syncing contacts",
-                          object:[]}));
+    }                
+                   
+    if (arrayOfFriends){
+
+        arrayOfFriends.forEach(function(friend) {              
+            promiseArr.push(compare(friend));        
+    });
+   
+    Promise.all(promiseArr)
+        .then((result)=> res.jsonp({status:"success",
+                          message:"Contacts Synced",
+                         object:arrayToSend}))
+        .catch((err)=>res.send({status:"failure",
+                          message:"Error Occured while syncing contacts",
+                         object:[]}));
+    }else {
+        res.jsonp({status:"failure",
+					message:"No Contact Foound In Friend List",
+					object:[]});
+    }
+ 
     
     logger.info(' Exit RegistrationController.syncContacts Method');
 	
