@@ -59,7 +59,38 @@ var userExists=function(phoneNo,callback){
     logger.info(' Exit UserExists Method');
 	
 }
-                              
+           
+
+var emailExists=function(email,callback){
+    
+    logger.info('emailExists Method Called');
+     var query = { email : email };
+     User.findOne(query).exec(function(err, user){
+        if (err){
+            logger.error('Some Error while finding user' + err );
+            res.status(400).send({status:"failure",
+                                  message:err,
+                                  object:[]
+            });
+        }
+        else{
+            if (user){
+                
+                logger.info('User Found with email :'+email);                
+                callback (user);
+            }
+            else{
+                
+                logger.info('User Not Found with email :'+email);
+                callback( user);
+                
+            }
+       }
+     });
+    
+    logger.info(' Exit emailExists Method');	
+}
+
 exports.sendVerificationCode=function(reqData,res){
     
     try{
@@ -703,7 +734,7 @@ exports.deactivateAccount=function(reqData,res){
 exports.setUsernamePassword = async function(req, res) {
 	try{ 	
   
-        var phoneNo = req.body.phoneNo;
+        var phoneNo = req.body.phone;
         var email = req.body.email; 
         var password = req.body.password;
         var gender = req.body.gender;
@@ -720,76 +751,79 @@ exports.setUsernamePassword = async function(req, res) {
             console.log("In Controller setUsernamePassword Method");           
             if (user){ 
                
-                    logger.info('RegistrationController.setUsernamePassword called for user  :'  + user.phone  );    
-                 
-                 const salt = await bcrypt.genSalt(10);
-                 user.email=email, 
-                 user.password=await bcrypt.hash(password, salt);
-                 user.verification_code=code;
-                 user.gender=gender;
-                 user.city=city;
-                 user.country=country;
-                 user.dob=dob;
-                 user.save(function (err, user){
-                     if(err){
-                     logger.error('Some Error while updating user status' + err ); 
-                     res.jsonp({status:"failure",
-                     message:" Unable to set Email or Password.",
-                     object:[]});
-                     }
-                     else{
+                logger.info('RegistrationController.setUsernamePassword called for user  :'  + user.phone  );    
+                emailExists(email, async function(userWithEmail){
 
-                     logger.info('User Name updated With Phone Num ' + user.phone );
-                     res.jsonp({status:"success",
-                     message:"Email and Password updated successfully.",
-                     object: user});
-                 
-                     }
-                 });
+                    if (userWithEmail){
 
-                //sending verification Code 
-                
-                var headers = {
+                        res.jsonp({status:"failure",
+                        message:" User exist with same Email Address, please try an other. ",
+                        object:[]});
 
-                    'Authorization':       'Basic ZmFsY29uLmV5ZTowMzM1NDc3OTU0NA==',
-                    'Content-Type':     'application/json',
-                    'Accept':       'application/json'
-                }
+                    }else {
 
-                // Configure the request
-                var options = {
-                    url: 'http://107.20.199.106/sms/1/text/single',
-                    method: 'POST',
-                    headers: headers,
-                    //form: {'from': 'ALDAALAH', 'to': user.phone,'text':verificationMsg}
-                    json: {
-                        'from': 'ALDAALAH',
-                         'to': user.phone,
-                         'text':verificationMsg
-                      }
-                }
+                        const salt = await bcrypt.genSalt(10);
+                        user.email=email, 
+                        user.password=await bcrypt.hash(password, salt);
+                        user.verification_code=code;
+                        user.gender=gender;
+                        user.city=city;
+                        user.country=country;
+                        user.dob=dob;
+                        user.save(function (err, user){
+                            if(err){
+                            logger.error('Some Error while updating user status' + err ); 
+                            res.jsonp({status:"failure",
+                            message:" Unable to set Email or Password.",
+                            object:[]});
+                            }
+                            else{
 
-                // Start the request
-                request(options, async function (error, response, body) {
-                    if (!error ) {
-                        // Print out the response body
-                        console.log(body)
-                        logger.info('Sucessful Response of SMS API : ' + body );
-                
+                            logger.info('User Name updated With Phone Num ' + user.phone );
+                            res.jsonp({status:"success",
+                            message:"Email and Password updated successfully.",
+                            object: user});
+                        
+                            }
+                        });
+
+                        //sending verification Code 
+                        var headers = {
+
+                            'Authorization':       'Basic ZmFsY29uLmV5ZTowMzM1NDc3OTU0NA==',
+                            'Content-Type':     'application/json',
+                            'Accept':       'application/json'
+                        }
+
+                        // Configure the request
+                        var options = {
+                            url: 'http://107.20.199.106/sms/1/text/single',
+                            method: 'POST',
+                            headers: headers,
+                            //form: {'from': 'ALDAALAH', 'to': user.phone,'text':verificationMsg}
+                            json: {
+                                'from': 'ALDAALAH',
+                                'to': user.phone,
+                                'text':verificationMsg
+                            }
+                        }
+
+                        // Start the request
+                        request(options, async function (error, response, body) {
+                            if (!error ) {
+                                // Print out the response body
+                                console.log(body)
+                                logger.info('Sucessful Response of SMS API : ' + body );
+                        
+                            }
+                            else{
+                                logger.info('Response/Error of SMS API : ' + error );
+                            }
+                        });
                     }
-                    else{
-                        logger.info('Response/Error of SMS API : ' + error );
-                    }
-                })
-                   
-              
-                // }else {
-                //     logger.info('Verification Code Does not match ');
-                //     res.jsonp({status:"failure",
-                //     message:"Please provide Correct Verification Code.",
-                //     object:[]});
-                // }
+                        
 
+                });                    
                        
             }else{
                 logger.info('No User Found to Update ');

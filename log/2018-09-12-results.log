@@ -1,0 +1,101 @@
+{"level":"info","message":"UserExists Method Called","timestamp":"12:13:50"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:13:50"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"12:13:50"}
+{"level":"info","message":"User Not Found with Phone Num. :undefined","timestamp":"12:13:50"}
+{"level":"info","message":"No User Found to Update ","timestamp":"12:13:50"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:15:09"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:15:09"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"12:15:09"}
+{"level":"info","message":"User Not Found with Phone Num. :undefined","timestamp":"12:15:10"}
+{"level":"info","message":"No User Found to Update ","timestamp":"12:15:10"}
+{"level":"info","message":"UserExists Method Called","timestamp":"14:13:53"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"14:13:53"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"14:13:53"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"14:13:54"}
+{"level":"info","message":"RegistrationController.setUsernamePassword called for user  :+923345022570","timestamp":"14:13:54"}
+{"level":"info","message":"emailExists Method Called","timestamp":"14:13:54"}
+{"level":"info","message":" Exit emailExists Method","timestamp":"14:13:54"}
+{"level":"info","message":"User Not Found with email :khansaifullah1993@gmail.com","timestamp":"14:13:54"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"14:13:54"}
+{"level":"info","message":"Sucessful Response of SMS API : [object Object]","timestamp":"14:13:55"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"17:01:27"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"17:01:28"}
+{"level":"info","message":"Response Of userExists Method : { _id: 5b5c38cba7a91400141faf24,\n  updatedAt: 2018-09-12T09:13:54.590Z,\n  createdAt: 2018-07-28T09:35:07.401Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  verification_code: '8076',\n  __v: 0,\n  OS: 'android',\n  active: false,\n  full_name: 'Saif1',\n  _preferenceId: 5b5c3d27a7a91400141faf25,\n  password: '$2b$10$G1tGn9497BAjFakGyj7Nye0iFpanm02.4efPe9QH3lPaWcc.3bkme',\n  user_name: 'saifkhan',\n  email: 'khansaifullah1993@gmail.com',\n  city: 'Rawalpindi',\n  dob: 1993-10-07T19:00:00.000Z,\n  gender: '2',\n  status: 'My Status 1',\n  last_shared_loc_time: 2018-07-28T09:35:07.393Z,\n  alert_flag: false,\n  share_loc_flag_time: 2018-07-28T09:35:07.393Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'http://postvideo.exaride.com/upload/2018-08-0307-32-48-Aldaalah.jpg' }","timestamp":"17:01:28"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"17:01:28"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"17:01:28"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:01:28"}
+{"level":"info","message":"RegistrationController.updateName called for user  :+923345022570","timestamp":"17:01:28"}
+{"level":"info","message":" Exit RegistrationController.updateName Method","timestamp":"17:01:28"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:01:28"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"17:02:34"}
+{"level":"info","message":"Profile Photo Not Found ","timestamp":"17:02:34"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"17:02:36"}
+{"level":"info","message":"Response Of userExists Method : { _id: 5b5c38cba7a91400141faf24,\n  updatedAt: 2018-09-12T12:01:28.544Z,\n  createdAt: 2018-07-28T09:35:07.401Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  verification_code: '8076',\n  __v: 0,\n  OS: 'android',\n  active: false,\n  full_name: 'New Name 2',\n  _preferenceId: 5b5c3d27a7a91400141faf25,\n  password: '$2b$10$G1tGn9497BAjFakGyj7Nye0iFpanm02.4efPe9QH3lPaWcc.3bkme',\n  user_name: 'saifkhan',\n  email: 'khansaifullah1993@gmail.com',\n  city: 'Rawalpindi',\n  dob: 1993-10-07T19:00:00.000Z,\n  gender: '2',\n  status: 'Second Status 123',\n  last_shared_loc_time: 2018-07-28T09:35:07.393Z,\n  alert_flag: false,\n  share_loc_flag_time: 2018-07-28T09:35:07.393Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'http://postvideo.exaride.com/upload/2018-08-0307-32-48-Aldaalah.jpg' }","timestamp":"17:02:36"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"17:02:36"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"17:02:36"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:02:36"}
+{"level":"info","message":"RegistrationController.updateName called for user  :+923345022570","timestamp":"17:02:36"}
+{"level":"info","message":" Exit RegistrationController.updateName Method","timestamp":"17:02:36"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:02:36"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"17:03:13"}
+{"level":"info","message":"Profile Photo Not Found ","timestamp":"17:03:13"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"17:03:13"}
+{"level":"info","message":"Response Of userExists Method : { _id: 5b5c38cba7a91400141faf24,\n  updatedAt: 2018-09-12T12:01:28.544Z,\n  createdAt: 2018-07-28T09:35:07.401Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  verification_code: '8076',\n  __v: 0,\n  OS: 'android',\n  active: false,\n  full_name: 'New Name 2',\n  _preferenceId: 5b5c3d27a7a91400141faf25,\n  password: '$2b$10$G1tGn9497BAjFakGyj7Nye0iFpanm02.4efPe9QH3lPaWcc.3bkme',\n  user_name: 'saifkhan',\n  email: 'khansaifullah1993@gmail.com',\n  city: 'Rawalpindi',\n  dob: 1993-10-07T19:00:00.000Z,\n  gender: '2',\n  status: 'Second Status 123',\n  last_shared_loc_time: 2018-07-28T09:35:07.393Z,\n  alert_flag: false,\n  share_loc_flag_time: 2018-07-28T09:35:07.393Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'http://postvideo.exaride.com/upload/2018-08-0307-32-48-Aldaalah.jpg' }","timestamp":"17:03:13"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"17:03:13"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"17:03:13"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:03:13"}
+{"level":"info","message":"RegistrationController.updateName called for user  :+923345022570","timestamp":"17:03:13"}
+{"level":"info","message":" Exit RegistrationController.updateName Method","timestamp":"17:03:13"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:03:13"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1536753799943.jpg","timestamp":"17:03:19"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"17:03:19"}
+{"level":"info","message":"Error : Error: write ECONNRESET","timestamp":"17:03:20"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1536753867380.jpg","timestamp":"17:04:27"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"17:04:27"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"17:04:30"}
+{"level":"info","message":"Response Of userExists Method : { _id: 5b5c38cba7a91400141faf24,\n  updatedAt: 2018-09-12T12:01:28.544Z,\n  createdAt: 2018-07-28T09:35:07.401Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  verification_code: '8076',\n  __v: 0,\n  OS: 'android',\n  active: false,\n  full_name: 'New Name 2',\n  _preferenceId: 5b5c3d27a7a91400141faf25,\n  password: '$2b$10$G1tGn9497BAjFakGyj7Nye0iFpanm02.4efPe9QH3lPaWcc.3bkme',\n  user_name: 'saifkhan',\n  email: 'khansaifullah1993@gmail.com',\n  city: 'Rawalpindi',\n  dob: 1993-10-07T19:00:00.000Z,\n  gender: '2',\n  status: 'Second Status 123',\n  last_shared_loc_time: 2018-07-28T09:35:07.393Z,\n  alert_flag: false,\n  share_loc_flag_time: 2018-07-28T09:35:07.393Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'http://postvideo.exaride.com/upload/2018-08-0307-32-48-Aldaalah.jpg' }","timestamp":"17:04:30"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"17:04:30"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"17:04:30"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:04:30"}
+{"level":"info","message":"RegistrationController.updateName called for user  :+923345022570","timestamp":"17:04:30"}
+{"level":"info","message":" Exit RegistrationController.updateName Method","timestamp":"17:04:30"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:04:30"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1536753914714.jpg","timestamp":"17:05:14"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"17:05:14"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"17:05:17"}
+{"level":"info","message":"Response Of userExists Method : { _id: 5b5c38cba7a91400141faf24,\n  updatedAt: 2018-09-12T12:01:28.544Z,\n  createdAt: 2018-07-28T09:35:07.401Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  verification_code: '8076',\n  __v: 0,\n  OS: 'android',\n  active: false,\n  full_name: 'New Name 2',\n  _preferenceId: 5b5c3d27a7a91400141faf25,\n  password: '$2b$10$G1tGn9497BAjFakGyj7Nye0iFpanm02.4efPe9QH3lPaWcc.3bkme',\n  user_name: 'saifkhan',\n  email: 'khansaifullah1993@gmail.com',\n  city: 'Rawalpindi',\n  dob: 1993-10-07T19:00:00.000Z,\n  gender: '2',\n  status: 'Second Status 123',\n  last_shared_loc_time: 2018-07-28T09:35:07.393Z,\n  alert_flag: false,\n  share_loc_flag_time: 2018-07-28T09:35:07.393Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: 'http://postvideo.exaride.com/upload/2018-08-0307-32-48-Aldaalah.jpg' }","timestamp":"17:05:17"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"17:05:17"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"17:05:17"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:05:17"}
+{"level":"info","message":"RegistrationController.updateName called for user  :+923345022570","timestamp":"17:05:17"}
+{"level":"info","message":" Exit RegistrationController.updateName Method","timestamp":"17:05:17"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:05:17"}
+{"level":"info","message":"RegistrationController.updateProfilePhoto called for user  :+923345022570","timestamp":"17:05:17"}
+{"level":"info","message":" Exit RegistrationController.updateProfilePhoto Method","timestamp":"17:05:17"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:05:17"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1536753946764.jpg","timestamp":"17:05:46"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"17:05:46"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"17:05:49"}
+{"level":"info","message":"Response Of userExists Method : { _id: 5b5c38cba7a91400141faf24,\n  updatedAt: 2018-09-12T12:05:17.198Z,\n  createdAt: 2018-07-28T09:35:07.401Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  verification_code: '8076',\n  __v: 0,\n  OS: 'android',\n  active: false,\n  full_name: 'New Name 2',\n  _preferenceId: 5b5c3d27a7a91400141faf25,\n  password: '$2b$10$G1tGn9497BAjFakGyj7Nye0iFpanm02.4efPe9QH3lPaWcc.3bkme',\n  user_name: 'saifkhan',\n  email: 'khansaifullah1993@gmail.com',\n  city: 'Rawalpindi',\n  dob: 1993-10-07T19:00:00.000Z,\n  gender: '2',\n  status: 'Second Status 123',\n  last_shared_loc_time: 2018-07-28T09:35:07.393Z,\n  alert_flag: false,\n  share_loc_flag_time: 2018-07-28T09:35:07.393Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: null }","timestamp":"17:05:49"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"17:05:49"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"17:05:49"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:05:49"}
+{"level":"info","message":"RegistrationController.updateName called for user  :+923345022570","timestamp":"17:05:49"}
+{"level":"info","message":" Exit RegistrationController.updateName Method","timestamp":"17:05:49"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:05:49"}
+{"level":"info","message":"RegistrationController.updateProfilePhoto called for user  :+923345022570","timestamp":"17:05:49"}
+{"level":"info","message":" Exit RegistrationController.updateProfilePhoto Method","timestamp":"17:05:49"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:05:49"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1536754096860.jpg","timestamp":"17:08:16"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"17:08:16"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"17:08:20"}
+{"level":"info","message":"Response Of userExists Method : { _id: 5b5c38cba7a91400141faf24,\n  updatedAt: 2018-09-12T12:05:49.595Z,\n  createdAt: 2018-07-28T09:35:07.401Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  verification_code: '8076',\n  __v: 0,\n  OS: 'android',\n  active: false,\n  full_name: 'New Name 2',\n  _preferenceId: 5b5c3d27a7a91400141faf25,\n  password: '$2b$10$G1tGn9497BAjFakGyj7Nye0iFpanm02.4efPe9QH3lPaWcc.3bkme',\n  user_name: 'saifkhan',\n  email: 'khansaifullah1993@gmail.com',\n  city: 'Rawalpindi',\n  dob: 1993-10-07T19:00:00.000Z,\n  gender: '2',\n  status: 'Second Status 123',\n  last_shared_loc_time: 2018-07-28T09:35:07.393Z,\n  alert_flag: false,\n  share_loc_flag_time: 2018-07-28T09:35:07.393Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: null }","timestamp":"17:08:20"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"17:08:20"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"17:08:20"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:08:20"}
+{"level":"info","message":"RegistrationController.updateName called for user  :+923345022570","timestamp":"17:08:20"}
+{"level":"info","message":" Exit RegistrationController.updateName Method","timestamp":"17:08:20"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:08:20"}
+{"level":"info","message":"RegistrationController.updateProfilePhoto called for user  :+923345022570","timestamp":"17:08:20"}
+{"level":"info","message":" Exit RegistrationController.updateProfilePhoto Method","timestamp":"17:08:20"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"17:08:20"}

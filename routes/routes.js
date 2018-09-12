@@ -144,28 +144,34 @@ module.exports = function(app) {
 			}
 			else{
 				logger.info ("File Is uploaded");
-				var form = new FormData();
-				form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
-				form.submit('http://postvideo.exaride.com', function(err, resp) {
-				 if (err) {
-					 logger.info("Error : "+ err);
-					 res.jsonp({status:"Failure",
-					 message:"Error Uploading File",
-					 object:[]});
-				 }else {
-					var body = '';
-					resp.on('data', function(chunk) {
-					  body += chunk;
-					});
-					resp.on('end', function() {
-					  var urls = JSON.parse(body);
-					  console.log("File Url : "+urls.url);
-					  var fileUrl=urls.url;
-					  regCtrl.completeProfile(req.body,fileUrl,res);
-					  tempFileName="";
+				if (tempFileName!==undefined){
+					var form = new FormData();
+					form.append('image', fs.createReadStream( './/public//images//'+tempFileName));
+					form.submit('http://exagic.com/postimage.php', function(err, resp) {
+					 if (err) {
+					   logger.info("Error : "+ err);
+					   res.jsonp({status:"Failure",
+					   message:"Error Uploading File",
+					   object:[]});
+					 }else {
+					  var body = '';
+					  resp.on('data', function(chunk) {
+						body += chunk;
+					  });
+					  resp.on('end', function() {
+						var urls = JSON.parse(body);
+						console.log("File Url : "+urls.imageurl);
+						var fileUrl=urls.imageurl;    
+					   
+					   regCtrl.completeProfile(req.body,fileUrl,res);
+						tempFileName="";
+					   });
+					 }
 				   });
-				 }
-			 });
+				  }else {
+					regCtrl.completeProfile(req.body,'',res);
+				  }
+				
 			}
 			
 		})
@@ -200,32 +206,36 @@ module.exports = function(app) {
 			}
 			else{        
 			logger.info ("Photo Is uploaded");
-			console.log(req.body.phone);
-			var form = new FormData();
-			form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
-			form.submit('http://postvideo.exaride.com', function(err, resp) {
-			 if (err) {
-				 logger.info("Error : "+ err);
-				 res.jsonp({status:"Failure",
-				 message:"Error Uploading File",
-				 object:[]});
-			 }else {
+			console.log(req.body.phone);         
+			if (tempFileName!==undefined){
+				var form = new FormData();
+				form.append('image', fs.createReadStream( './/public//images//'+tempFileName));
+				form.submit('http://exagic.com/postimage.php', function(err, resp) {
+				if (err) {
+				logger.info("Error : "+ err);
+				res.jsonp({status:"Failure",
+				message:"Error Uploading File",
+				object:[]});
+				}else {
 				var body = '';
 				resp.on('data', function(chunk) {
-				  body += chunk;
+					body += chunk;
 				});
 				resp.on('end', function() {
-				  var urls = JSON.parse(body);
-				  console.log("File Url : "+urls.url);
-				  var fileUrl=urls.url;
-
-				regCtrl.updateProfilePhoto(req.body.phone,fileUrl,function(data){
-					tempFileName="";
-					});
-			   });
-			 }
-		 });         
-				
+					var urls = JSON.parse(body);
+					console.log("File Url : "+urls.imageurl);
+					var fileUrl=urls.imageurl;    
+					regCtrl.updateProfilePhoto(req.body.phone,fileUrl,function(data){
+						tempFileName="";
+						});
+				});
+				}
+			});
+			}else {
+				regCtrl.updateProfilePhoto(req.body.phone,'',function(data){
+				tempFileName="";
+				});
+		  	}
 			}
 		
 		});
@@ -263,69 +273,117 @@ module.exports = function(app) {
 				logger.info ("Photo Is uploaded");
 				console.log(req.body.phoneNo);
 
-				var form = new FormData();
-				form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
-				form.submit('http://postvideo.exaride.com', function(err, resp) {
-				 if (err) {
-					 logger.info("Error : "+ err);
-					 res.jsonp({status:"Failure",
-					 message:"Error Uploading File",
-					 object:[]});
-				 }else {
-					var body = '';
-					resp.on('data', function(chunk) {
-					  body += chunk;
-					});
-					resp.on('end', function() {
-					  var urls = JSON.parse(body);
-					  console.log("File Url : "+urls.url);
-					  var fileUrl=urls.url;
-	
-					AppController.userExists(req.body.phoneNo,async function (user) {
-						logger.info("Response Of userExists Method : " + user);
-		
-						if (user){
-							//geneterate a url 
-							var profilePhotoUrl=fileUrl;
-						
-							var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
-							var updateStatusFlag = JSON.parse(req.body.updateStatus);
-							var updateNameFlag = JSON.parse(req.body.updateName);
+				if (tempFileName!==undefined){
+					var form = new FormData();
+					form.append('image', fs.createReadStream( './/public//images//'+tempFileName));
+					form.submit('http://exagic.com/postimage.php', function(err, resp) {
 
-							console.log ("updateStatusFlag After parsing : " + updateStatusFlag);
-							if (updateStatusFlag){
-								var userAfterUpdateStatus = await regCtrl.updateStatus(user,req.body.status);
-								user=userAfterUpdateStatus;
-							}
-							
-							console.log ("updateNameFlag After parsing : " + updateNameFlag);
-							if (updateNameFlag){
-								var userAfterUpdateName = await regCtrl.updateName(user,req.body.fullName);
-								user=userAfterUpdateName;
-							}
-							
-							console.log ("updateProfilePhotoFlag After parsing : " + updateProfilePhotoFlag);
-							if (updateProfilePhotoFlag){
-								var userAfterUpdatePhoto = await regCtrl.updateProfilePhoto(user,profilePhotoUrl);
-								user=userAfterUpdatePhoto;
-							}
-							
-							res.jsonp({ status:"success",
-							message:"Profile has been Updated!",
-							object:user});
-						}
-						else{
-							res.jsonp({status:"Failure",
-									message:"User Not Found",
-									object:[]});
-							
-						}
-										
+					if (err) {
+						logger.info("Error : "+ err);
+						res.jsonp({status:"Failure",
+						message:"Error Uploading File",
+						object:[]});
+					}else {
+						var body = '';
+						resp.on('data', function(chunk) {
+						body += chunk;
 						});
-				   });
-				 }
-			 });
+						resp.on('end', function() {
+						var urls = JSON.parse(body);
+						console.log("File Url : "+urls.imageurl);
+						var fileUrl=urls.imageurl;
+		
+						AppController.userExists(req.body.phoneNo,async function (user) {
+							logger.info("Response Of userExists Method : " + user);
+			
+							if (user){
+								//geneterate a url 
+								var profilePhotoUrl=fileUrl;
+							
+								var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
+								var updateStatusFlag = JSON.parse(req.body.updateStatus);
+								var updateNameFlag = JSON.parse(req.body.updateName);
 
+								console.log ("updateStatusFlag After parsing : " + updateStatusFlag);
+								if (updateStatusFlag){
+									var userAfterUpdateStatus = await regCtrl.updateStatus(user,req.body.status);
+									user=userAfterUpdateStatus;
+								}
+								
+								console.log ("updateNameFlag After parsing : " + updateNameFlag);
+								if (updateNameFlag){
+									var userAfterUpdateName = await regCtrl.updateName(user,req.body.fullName);
+									user=userAfterUpdateName;
+								}
+								
+								console.log ("updateProfilePhotoFlag After parsing : " + updateProfilePhotoFlag);
+								if (updateProfilePhotoFlag){
+									var userAfterUpdatePhoto = await regCtrl.updateProfilePhoto(user,profilePhotoUrl);
+									user=userAfterUpdatePhoto;
+								}
+								
+								res.jsonp({ status:"success",
+								message:"Profile has been Updated!",
+								object:user});
+							}
+							else{
+								res.jsonp({status:"Failure",
+										message:"User Not Found",
+										object:[]});
+								
+							}
+											
+							});
+					});
+					}
+				});
+			}else {
+				var fileUrl='';
+				logger.info("Profile Photo Not Found ");
+	
+				AppController.userExists(req.body.phoneNo,async function (user) {
+					logger.info("Response Of userExists Method : " + user);
+	
+					if (user){
+						//geneterate a url 
+						var profilePhotoUrl=fileUrl;
+					
+						var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
+						var updateStatusFlag = JSON.parse(req.body.updateStatus);
+						var updateNameFlag = JSON.parse(req.body.updateName);
+
+						console.log ("updateStatusFlag After parsing : " + updateStatusFlag);
+						if (updateStatusFlag){
+							var userAfterUpdateStatus = await regCtrl.updateStatus(user,req.body.status);
+							user=userAfterUpdateStatus;
+						}
+						
+						console.log ("updateNameFlag After parsing : " + updateNameFlag);
+						if (updateNameFlag){
+							var userAfterUpdateName = await regCtrl.updateName(user,req.body.fullName);
+							user=userAfterUpdateName;
+						}
+						
+						console.log ("updateProfilePhotoFlag After parsing : " + updateProfilePhotoFlag);
+						if (updateProfilePhotoFlag){
+							var userAfterUpdatePhoto = await regCtrl.updateProfilePhoto(user,profilePhotoUrl);
+							user=userAfterUpdatePhoto;
+						}
+						
+						res.jsonp({ status:"success",
+						message:"Profile has been Updated!",
+						object:user});
+					}
+					else{
+						res.jsonp({status:"Failure",
+								message:"User Not Found",
+								object:[]});
+						
+					}
+									
+					});
+				
+			}
 			}
 			});
 		}catch(err){
@@ -1362,7 +1420,7 @@ module.exports = function(app) {
 				res.end("Empty Body "); 
 			}
 				
-			console.log("in routes  /auth");
+			console.log("in routes  /signup : " + req.body.phone);
 			regCtrl.setUsernamePassword(req, res);
 			
 		});
@@ -1370,15 +1428,15 @@ module.exports = function(app) {
 		// login to web panel
 			
 	app.post('/auth', async (req, res) => {
-		let username = req.body.username;
+		let email = req.body.email;
 		let password = req.body.password;
 	
 		// const { error } = validate(req.body);
 		// if (error) return res.status(400).send(error.details[0].message);
 	
-		let user = await User.findOne({ user_name : username });
-		if (!user) return res.status(400).jsonp({ status: 'failure', message: 'Invalid Username.' , object: []});
-		console.log('found a user', user.user_name);
+		let user = await User.findOne({ email : email });
+		if (!user) return res.status(400).jsonp({ status: 'failure', message: 'No User Found With Provided Email, Please Register First.' , object: []});
+		console.log('found a user', user.email);
 	
 		const validPassword = await bcrypt.compare(password, user.password);
 		if (!validPassword) return res.status(400).jsonp({ status: 'failure', message: 'Invalid Password.' , object: []});
