@@ -11,6 +11,8 @@ var ConversationUser = require('../models/ConversationUser.js');
 var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
 
+var NotificationController = require('../controller/PushNotificationController.js');
+
 require('datejs');
 var mongoose = require('mongoose');
 //mongoose.Promise = global.Promise;
@@ -268,18 +270,57 @@ exports.addAttachment = async function(req, fileUrl, res) {
 			attachmentDeliverStatus: false,
 			
 			 });
+			
 			 newAttachment.save(function (err, attachment) {
 			if(err){
 				logger.error('Some Error while saving Attachment' + err );
-				res.jsonp({status:"failure",
-				message:"Error Uploading Attachment",
-				object:[]});
+			
+				//Send Failure Push Notification to User Who Sent
+				var query = { phone : req.body.fromUserPhone };
+				User.findOne(query).exec(function(errUser, user){
+				   if (errUser){
+					logger.error('Error Occured Wile Finding User' + errUser );
+			
+				   }else{
+					var errorMessageObj={message:"Attachment Upload Failed."};   
+					NotificationController.sendNotifcationToPlayerId(user.palyer_id,errorMessageObj,"attachmentUploadFailure");
+				   }
+				});
 			}
 			else{
 				logger.info('Attachment saved succuessfully');
-				res.jsonp({status:"success",
-				message:"Attachment Uploaded Succcesfully",
-				object:attachment});
+
+				//Send New Photo Upload Notification to Receiver
+			
+				
+				var convQuery = { _id : req.body.conversationId };
+				Conversation.findOne(convQuery).exec(function(err, conversation){
+				   if (err){
+				   }else {
+					   if (conversation){
+						if (conversation.isGroupConversation){
+
+							// send Push Notification to all members
+
+						}else{
+
+							// send Push Notification to Single Member
+							
+							var query = { phone : req.body.fromUserPhone };
+							User.findOne(query).exec(function(err, user){
+							if (err){
+							}else {
+								NotificationController.sendNotifcationToPlayerId(user.palyer_id,messageObj,"attachmentReceived");			
+			
+							}
+							});
+						}
+					   }
+					  
+					  
+				   }
+				});
+
 			}
 		});
             

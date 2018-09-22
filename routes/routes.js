@@ -20,6 +20,7 @@ var multer = require('multer');
 var FormData = require('form-data');
 var fs = require('fs');
 var tempFileName;
+var tempFileNamesList =[] ;
 var storage = multer.diskStorage({
 	destination: function(req, file, callback) {
 		callback(null, './public/images')
@@ -30,6 +31,7 @@ var storage = multer.diskStorage({
 		tempFileName=file.fieldname + '-' + Date.now() + path.extname(file.originalname);
 
 		logger.info("File NEW Name  :" +tempFileName );
+		tempFileNamesList.push(tempFileName);
 		callback(null,tempFileName );
 	}
 });
@@ -480,9 +482,13 @@ module.exports = function(app) {
         logger.info ("Photo Is uploaded");
 		console.log (req.files);
 
+	
+
+		console.log('tempFileName: ' +tempFileName );
+		if (tempFileName!==undefined){	
 		var form = new FormData();
-		form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
-		form.submit('http://postvideo.exaride.com', function(err, resp) {
+			form.append('image', fs.createReadStream( './/public//images//'+tempFileName));
+			form.submit('http://exagic.com/postimage.php', function(err, resp) {
 			if (err) {
 				logger.info("Error : "+ err);
 				res.jsonp({status:"Failure",
@@ -494,9 +500,9 @@ module.exports = function(app) {
 				body += chunk;
 				});
 				resp.on('end', function() {
-				var urls = JSON.parse(body);
-				console.log("File Url : "+urls.url);
-				var fileUrl=urls.url;
+					var urls = JSON.parse(body);
+					console.log("File Url : "+urls.imageurl);
+					var fileUrl=urls.imageurl; 
 		
 				ChatController.createGroup(req.body,fileUrl,res);	
 				tempFileName="";
@@ -504,6 +510,9 @@ module.exports = function(app) {
 			});
 			}
 		 });
+		}else {
+			ChatController.createGroup(req.body,'',res);	
+		  }
 			
 		}
 		
@@ -538,8 +547,8 @@ module.exports = function(app) {
 			}
 			else{
 				try{
-					var myDate;
-					var createdDate;
+				var myDate;
+				var createdDate;
 				conversationId = req.body.conversationId;
 				logger.info ("Photo Is uploaded");
 				console.log("Conversation id : "+conversationId);
@@ -549,9 +558,11 @@ module.exports = function(app) {
 				console.log ("updateProfilePhotoFlag Without Parsing: " + req.body.updateProfilePhoto);
 
 
+				if (tempFileName){
 				var form = new FormData();
-				form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
-				form.submit('http://postvideo.exaride.com', function(err, resp) {
+				form.append('image', fs.createReadStream( './/public//images//'+tempFileName));
+				form.submit('http://exagic.com/postimage.php', function(err, resp) {
+
 				 if (err) {
 					 logger.info("Error : "+ err);
 					 res.jsonp({status:"Failure",
@@ -563,12 +574,12 @@ module.exports = function(app) {
 					  body += chunk;
 					});
 					resp.on('end', function() {
-					  var urls = JSON.parse(body);
-					  console.log("File Url : "+urls.url);
-					  var fileUrl=urls.url;
-					  profilePhotoUrl=fileUrl;
-					  var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
-					  var updateNameFlag = JSON.parse(req.body.updateName);
+						var urls = JSON.parse(body);
+						console.log("File Url : "+urls.imageurl);
+						var fileUrl=urls.imageurl; 
+					 	profilePhotoUrl=fileUrl;
+					  	var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
+					  	var updateNameFlag = JSON.parse(req.body.updateName);
 					  console.log ("updateProfilePhotoFlag with parsing : " + updateProfilePhotoFlag);
 					  if ((updateProfilePhotoFlag)&&(updateNameFlag)){
 						  //update picture
@@ -776,7 +787,74 @@ module.exports = function(app) {
 				 }
 			 });
 				
-			
+			 
+				}else{
+					var updateNameFlag = JSON.parse(req.body.updateName);
+					//Updating Name
+					if (updateNameFlag){
+						ChatController.updateGroupName(req,function (data){
+						if (data){
+							 conversation=data;
+							  
+					//Sending update group Notifcation
+						ChatController.findConversationMembers(conversationId, function(members){
+						if (members){
+								logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
+								myDate = new Date(conversation.createdAt);
+								createdDate = myDate.getTime();
+								
+								var conversationObj ={
+										//fromPhoneNo:userMobileNumberFrom,	
+										conversationId:conversationId, 
+										isGroupConversation:conversation.isGroupConversation,
+										adminMobile:conversation.adminMobile,
+										photoUrl:conversation.conversationImageUrl,
+										conversationName:conversation.conversationName,
+										createdAt:createdDate,
+										
+										}
+									
+										
+										//Notifying All Group Members
+								for (var i=0; i < members.length ; i++){
+									var phoneNo=members[i]._userMobile;
+									if (phoneNo!==(conversationObj.adminMobile)){
+										
+										
+										//Sending Push Notiifcation To Group Members								
+										logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  phoneNo  );
+										//var phoneNo=members[i]._userMobile;
+										var query = { phone : phoneNo };
+										
+										User.findOne(query).exec(function(err, user){
+											if (err){
+											 logger.error('Some Error occured while finding user' + err );
+											 }
+											if (user){
+											logger.info('User Found For Phone No: ' + phoneNo );
+											logger.info('Sending Notification to player id ' + user.palyer_id );
+											NotificationController.sendNotifcationToPlayerId(user.palyer_id,conversationObj,"groupUpdateRequest");
+											}
+											else {
+											 logger.info('User not Found For Phone No: ' + phoneNo );                 
+											}                               
+										});
+									}								
+								}
+						}
+						});
+							 res.jsonp({ status:"success",
+							message:"Group Name has been Updated!",
+							object:conversation});
+						}
+						});
+					}else{
+						res.jsonp({ status:"Failure",
+						message:"Nothing To Update",
+						object:[]});
+					}
+
+				}
 			}catch (err){
 				logger.info('An Exception Has occured in updateGroupName method' + err);
 				}		
@@ -1302,36 +1380,41 @@ module.exports = function(app) {
 					res.jsonp({status:"Failure",
 								message:"Error Uploading File",
 								object:[]});
-				 }else{        
+				 }else{   
 					logger.info ("Photo Is uploaded");
-					console.log(req.body.title);
-					var form = new FormData();
-					form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
-					form.submit('http://postvideo.exaride.com', function(err, resp) {
-					 if (err) {
-						 logger.info("Error : "+ err);
-						 res.jsonp({status:"Failure",
-						 message:"Error Uploading File",
-						 object:[]});
-					 }else {
-						var body = '';
-						resp.on('data', function(chunk) {
-						  body += chunk;
-						});
-						resp.on('end', function() {
-						  var urls = JSON.parse(body);
-						  console.log("File Url : "+urls.url);
-						  var fileUrl=urls.url;
-						  AppController.addWallpaper(req.body.title, fileUrl, res, function(data){
+					console.log(req.body.title); 
+					if (tempFileName!==undefined){
+						var form = new FormData();
+						form.append('image', fs.createReadStream( './/public//images//'+tempFileName));
+						form.submit('http://exagic.com/postimage.php', function(err, resp) {
+						 if (err) {
+						   logger.info("Error : "+ err);
+						   res.jsonp({status:"Failure",
+						   message:"Error Uploading File",
+						   object:[]});
+						 }else {
+						  var body = '';
+						  resp.on('data', function(chunk) {
+							body += chunk;
+						  });
+						  resp.on('end', function() {
+							var urls = JSON.parse(body);
+							console.log("File Url : "+urls.imageurl);
+							var fileUrl=urls.imageurl;    
+						   
+							AppController.addWallpaper(req.body.title, fileUrl, res, function(data){
+								tempFileName="";
+						   }); 
+						   });
+						 }
+					   });
+					  }else {
+						AppController.addWallpaper(req.body.title, '', res, function(data){
 							tempFileName="";
 					   }); 
-					   });
-					 }
-				 });
-				 
-					 
-				}
-			 
+					  } 
+						
+				 }				 	 
 			 })
 			 
 		 });
@@ -1348,6 +1431,76 @@ module.exports = function(app) {
 								object:wallpapers});
 										
 			});		
+			});
+
+			var uploadPhotos = multer({storage: storage})
+		//app.post('/attachment/photos', uploadPhotos.fields([{ name: 'video', maxCount: 1}, { name: 'image', maxCount: 3}]), function (req, res, next) {
+		app.post('/attachment/photos', uploadPhotos.array('photos', 12),async function (req, res, next) {
+			// req.files is array of `photos` files
+			// req.body will contain the text fields, if there were any
+			console.log("in routes  /attachmentt/photos");
+			if(req.body === undefined||req.body === null) {
+				res.end("Empty Body "); 
+				}
+					
+				if (req.files){
+
+					console.log('Files Length : '+ req.files.length);
+
+					if (tempFileNamesList){
+						for(var i=0; i<tempFileNamesList.length; i++){
+							console.log('Temp File Name : '+tempFileNamesList[i] );
+
+							if(tempFileNamesList[i]){
+
+								var form = new FormData();
+								await form.append('image', fs.createReadStream( './/public//images//'+tempFileNamesList[i]));
+								await form.submit('http://exagic.com/postimage.php', function(err, resp) {
+								if (err) {
+									logger.info("Error : "+ err);
+									res.jsonp({status:"Failure",
+									message:"Error Uploading File",
+									object:[]});
+								  }else {
+								   var body = '';
+								   resp.on('data', function(chunk) {
+									 body += chunk;
+								   });
+								   resp.on('end',async function() {
+									 var urls = JSON.parse(body);
+									 
+										console.log("Url : "+urls);
+										console.log("File Url : "+urls.imageurl);
+										var fileUrl=urls.imageurl;    
+									
+										// regCtrl.completeProfile(req.body,fileUrl,res);
+										//  tempFileName="";
+										await AppController.addAttachment(req, fileUrl, res, function(data){
+											//tempFileName="";
+										}); 
+									});
+								  }
+						 		});
+							}
+							
+							
+						}
+						console.log('Clearing Temp File List');
+						tempFileNamesList=[];
+
+						res.jsonp({status:"success",
+						message:"Picture/Pictures Uploading..",
+						object:[]});
+					}
+			
+				}else{
+				res.jsonp({status:"failure",
+				message:"No Files Found To Upload",
+				object:[]});
+				}
+
+
+				
 			});
 
 			 //Add New Attachment

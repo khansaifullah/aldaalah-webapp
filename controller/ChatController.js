@@ -191,14 +191,17 @@ exports.chkPreviousIndividualConversation=function(fromMobileNo,toMobileNo,callb
 //Create User Groups
 exports.createGroup=function(groupData,profilePhotoUrl,res){
     try {
-	//var groupObj=JSON.parse(groupData);
-	var groupName=groupData.groupName;
-	var adminPhone=groupData.adminPhone;
-	var obj=JSON.parse(groupData.groupMembersList);
-	var conversationUsers=obj.values;
+		logger.info ( groupData);
+		logger.info ( "groupData.groupName: "+groupData.groupName);
+		logger.info ( "groupData.groupMembersList: "+groupData.groupMembersList );
 
-	var conversationId; 
-	var newConversationUser;
+		//var groupObj=JSON.parse(groupData);
+		var groupName=groupData.groupName;
+		var adminPhone=groupData.adminPhone;
+		var obj=JSON.parse(groupData.groupMembersList);
+		var conversationUsers=obj.values;
+		var conversationId; 
+		var newConversationUser;
 	
 	logger.info('In ChatController.createGroup \n Group Data : ' +groupName + adminPhone + conversationUsers  )
 	// Creating New Conversation and Adding Conversation Users	

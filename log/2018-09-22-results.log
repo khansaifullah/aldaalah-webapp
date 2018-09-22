@@ -1,0 +1,151 @@
+{"level":"info","message":"reqData  :undefined","timestamp":"09:56:15"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537592175519.jpg","timestamp":"09:56:15"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"09:56:15"}
+{"groupName":"\"New GroupBy saif\"","groupMembersList ":"{ \"values\" : [\"+923345022572\"]}","adminPhone":"\"+923345022570\"","level":"info","message":"","timestamp":"09:56:18"}
+{"level":"info","message":"An Exception occured ChatController.createGroup SyntaxError: Unexpected token u in JSON at position 0","timestamp":"09:56:18"}
+{"level":"info","message":"reqData  :undefined","timestamp":"09:57:07"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537592227624.jpg","timestamp":"09:57:07"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"09:57:07"}
+{"groupName":"New GroupBy saif","groupMembersList ":"{ \"values\" : [\"+923345022572\"]}","adminPhone":"+923345022570","level":"info","message":"","timestamp":"09:57:09"}
+{"level":"info","message":"An Exception occured ChatController.createGroup SyntaxError: Unexpected token u in JSON at position 0","timestamp":"09:57:09"}
+{"level":"info","message":"reqData  :undefined","timestamp":"09:58:03"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537592283572.jpg","timestamp":"09:58:03"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"09:58:03"}
+{"level":"info","message":"An Exception occured ChatController.createGroup ReferenceError: parse is not defined","timestamp":"09:58:05"}
+{"level":"info","message":"reqData  :undefined","timestamp":"09:58:28"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537592308452.jpg","timestamp":"09:58:28"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"09:58:28"}
+{"level":"info","message":"An Exception occured ChatController.createGroup SyntaxError: Unexpected token u in JSON at position 0","timestamp":"09:58:30"}
+{"level":"info","message":"reqData  :undefined","timestamp":"10:05:09"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537592709899.jpg","timestamp":"10:05:09"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:05:09"}
+{"level":"info","message":"reqData  :undefined","timestamp":"10:05:16"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537592716329.jpg","timestamp":"10:05:16"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:05:16"}
+{"groupName":"New GroupBy saif","groupMembersList ":"{ \"values\" : [\"+923345022572\"]}","adminPhone":"+923345022570","level":"info","message":"","timestamp":"10:05:19"}
+{"level":"info","message":"An Exception occured ChatController.createGroup SyntaxError: Unexpected token u in JSON at position 0","timestamp":"10:05:19"}
+{"level":"info","message":"reqData  :undefined","timestamp":"10:06:15"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537592775806.jpg","timestamp":"10:06:15"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:06:15"}
+{"groupName":"New GroupBy saif","groupMembersList ":"{ \"values\" : [\"+923345022572\"]}","adminPhone":"+923345022570","level":"info","message":"","timestamp":"10:06:19"}
+{"level":"info","message":"groupData.groupName: New GroupBy saif","timestamp":"10:06:19"}
+{"level":"info","message":"An Exception occured ChatController.createGroup TypeError: Cannot read property 'values' of undefined","timestamp":"10:06:19"}
+{"level":"info","message":"reqData  :undefined","timestamp":"10:08:29"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537592909871.jpg","timestamp":"10:08:29"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:08:29"}
+{"groupName":"New GroupBy saif","groupMembersList ":"{ \"values\" : [\"+923345022572\"]}","adminPhone":"+923345022570","level":"info","message":"","timestamp":"10:08:31"}
+{"level":"info","message":"groupData.groupName: New GroupBy saif","timestamp":"10:08:31"}
+{"level":"info","message":"An Exception occured ChatController.createGroup TypeError: Cannot read property 'values' of undefined","timestamp":"10:08:31"}
+{"level":"info","message":"reqData  :undefined","timestamp":"10:09:24"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537592964867.jpg","timestamp":"10:09:24"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:09:24"}
+{"groupName":"New GroupBy saif","groupMembersList ":"{ \"values\" : [\"+923345022572\"]}","adminPhone":"+923345022570","level":"info","message":"","timestamp":"10:09:27"}
+{"level":"info","message":"groupData.groupName: New GroupBy saif","timestamp":"10:09:27"}
+{"level":"info","message":"An Exception occured ChatController.createGroup SyntaxError: Unexpected token u in JSON at position 0","timestamp":"10:09:27"}
+{"level":"info","message":"reqData  :undefined","timestamp":"10:11:39"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537593099158.jpg","timestamp":"10:11:39"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:11:39"}
+{"groupName":"New GroupBy saif","groupMembersList ":"{ \"values\" : [\"+923345022572\"]}","adminPhone":"+923345022570","level":"info","message":"","timestamp":"10:11:41"}
+{"level":"info","message":"groupData.groupName: New GroupBy saif","timestamp":"10:11:41"}
+{"level":"info","message":"An Exception occured ChatController.createGroup SyntaxError: Unexpected token u in JSON at position 0","timestamp":"10:11:41"}
+{"level":"info","message":"reqData  :undefined","timestamp":"10:22:36"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537593756072.jpg","timestamp":"10:22:36"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:22:36"}
+{"groupName":"New GroupBy saif","groupMembersList ":"{ \"values\" : [\"+923345022572\"]}","adminPhone":"+923345022570","level":"info","message":"","timestamp":"10:22:38"}
+{"level":"info","message":"groupData.groupName: New GroupBy saif","timestamp":"10:22:38"}
+{"level":"info","message":"groupData.groupMembersList: undefined","timestamp":"10:22:38"}
+{"level":"info","message":"An Exception occured ChatController.createGroup TypeError: Cannot read property 'values' of undefined","timestamp":"10:22:38"}
+{"level":"info","message":"reqData  :undefined","timestamp":"10:23:43"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537593823205.jpg","timestamp":"10:23:43"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:23:43"}
+{"groupName":"New GroupBy saif","groupMembersList":"{ \"values\" : [\"+923345022572\"]}","adminPhone":"+923345022570","level":"info","message":"","timestamp":"10:23:45"}
+{"level":"info","message":"groupData.groupName: New GroupBy saif","timestamp":"10:23:45"}
+{"level":"info","message":"groupData.groupMembersList: { \"values\" : [\"+923345022572\"]}","timestamp":"10:23:45"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : New GroupBy saif+923345022570undefined","timestamp":"10:23:45"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"10:23:45"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 5ba5d1e1166ba528d0537180","timestamp":"10:23:46"}
+{"level":"info","message":"reqData  :undefined","timestamp":"10:25:39"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537593939492.jpg","timestamp":"10:25:39"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:25:39"}
+{"groupName":"New GroupBy saif","groupMembersList":"{ \"values\" : [\"+923345022572\"]}","adminPhone":"+923345022570","level":"info","message":"","timestamp":"10:25:41"}
+{"level":"info","message":"groupData.groupName: New GroupBy saif","timestamp":"10:25:41"}
+{"level":"info","message":"groupData.groupMembersList: { \"values\" : [\"+923345022572\"]}","timestamp":"10:25:41"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : New GroupBy saif+923345022570+923345022572","timestamp":"10:25:41"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"10:25:41"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 5ba5d2559035150dd0928fe6","timestamp":"10:25:41"}
+{"level":"info","message":"Creating Conversation User for Phone No+923345022572","timestamp":"10:25:41"}
+{"level":"info","message":"Conversation User Created for Phone No+923345022572","timestamp":"10:25:42"}
+{"level":"info","message":"reqData  :undefined","timestamp":"10:32:33"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537594353369.jpg","timestamp":"10:32:33"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:32:33"}
+{"level":"info","message":"reqData  :undefined","timestamp":"10:32:39"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537594360012.jpg","timestamp":"10:32:40"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:32:40"}
+{"groupName":"New Group 2 By saif","groupMembersList":"{ \"values\" : [\"+923345022571\"]}","adminPhone":"+923345022570","level":"info","message":"","timestamp":"10:32:42"}
+{"level":"info","message":"groupData.groupName: New Group 2 By saif","timestamp":"10:32:42"}
+{"level":"info","message":"groupData.groupMembersList: { \"values\" : [\"+923345022571\"]}","timestamp":"10:32:42"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : New Group 2 By saif+923345022570+923345022571","timestamp":"10:32:42"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"10:32:42"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 5ba5d3fa4539fe3254716da9","timestamp":"10:32:42"}
+{"level":"info","message":"Creating Conversation User for Phone No+923345022571","timestamp":"10:32:42"}
+{"level":"info","message":"Conversation User Created for Phone No+923345022571","timestamp":"10:32:42"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537594850639.jpg","timestamp":"10:40:50"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:40:50"}
+{"level":"info","message":"ChatController.updateGroupProfilePhoto called for converation  :5ba5d3fa4539fe3254716da9","timestamp":"10:40:51"}
+{"level":"info","message":" Exit ChatController.updateGroupProfilePhoto Method","timestamp":"10:40:51"}
+{"level":"info","message":"Group Profile Photo updated With conversationId5ba5d3fa4539fe3254716da9","timestamp":"10:40:52"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"10:40:52"}
+{"level":"info","message":"1 members Found","timestamp":"10:40:52"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 1","timestamp":"10:40:52"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923345022571","timestamp":"10:40:52"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"10:40:52"}
+{"level":"info","message":"Sending Notification to player id undefined","timestamp":"10:40:52"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:41:43"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:49:14"}
+{"level":"info","message":"An Exception Has occured in updateGroupName methodReferenceError: updateNameFlag is not defined","timestamp":"10:49:14"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:50:47"}
+{"level":"info","message":"ChatController.updateGroupName called for user  :5ba5d3fa4539fe3254716da9","timestamp":"10:50:47"}
+{"level":"info","message":" Exit ChatController.updateGroupName Method","timestamp":"10:50:47"}
+{"level":"info","message":"Group Name updated With ConversationId 5ba5d3fa4539fe3254716da9","timestamp":"10:50:48"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"10:50:48"}
+{"level":"info","message":"1 members Found","timestamp":"10:50:48"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 1","timestamp":"10:50:48"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923345022571","timestamp":"10:50:48"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"10:50:48"}
+{"level":"info","message":"Sending Notification to player id undefined","timestamp":"10:50:48"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:51:04"}
+{"level":"info","message":"ChatController.updateGroupName called for user  :5ba5d3fa4539fe3254716da9","timestamp":"10:51:04"}
+{"level":"info","message":" Exit ChatController.updateGroupName Method","timestamp":"10:51:04"}
+{"level":"info","message":"Group Name updated With ConversationId 5ba5d3fa4539fe3254716da9","timestamp":"10:51:05"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"10:51:05"}
+{"level":"info","message":"1 members Found","timestamp":"10:51:05"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 1","timestamp":"10:51:05"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923345022571","timestamp":"10:51:05"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"10:51:06"}
+{"level":"info","message":"Sending Notification to player id undefined","timestamp":"10:51:06"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:51:23"}
+{"level":"info","message":"ChatController.updateGroupName called for user  :5ba5d3fa4539fe3254716da9","timestamp":"10:51:23"}
+{"level":"info","message":" Exit ChatController.updateGroupName Method","timestamp":"10:51:23"}
+{"level":"info","message":"Group Name updated With ConversationId 5ba5d3fa4539fe3254716da9","timestamp":"10:51:24"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"10:51:24"}
+{"level":"info","message":"1 members Found","timestamp":"10:51:24"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 1","timestamp":"10:51:24"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923345022571","timestamp":"10:51:24"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"10:51:24"}
+{"level":"info","message":"Sending Notification to player id undefined","timestamp":"10:51:24"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537595534432.jpg","timestamp":"10:52:14"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"10:52:14"}
+{"level":"info","message":"ChatController.updateGroupProfilePhoto called for converation  :5ba5d3fa4539fe3254716da9","timestamp":"10:52:16"}
+{"level":"info","message":" Exit ChatController.updateGroupProfilePhoto Method","timestamp":"10:52:16"}
+{"level":"info","message":"Group Profile Photo updated With conversationId5ba5d3fa4539fe3254716da9","timestamp":"10:52:17"}
+{"level":"info","message":"data received after updating Group profile picture","timestamp":"10:52:17"}
+{"level":"info","message":"ChatController.updateGroupName called for user  :5ba5d3fa4539fe3254716da9","timestamp":"10:52:17"}
+{"level":"info","message":" Exit ChatController.updateGroupName Method","timestamp":"10:52:17"}
+{"level":"info","message":"Group Name updated With ConversationId 5ba5d3fa4539fe3254716da9","timestamp":"10:52:17"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"10:52:17"}
+{"level":"info","message":"data received after updating profile picture","timestamp":"10:52:17"}
+{"level":"info","message":"1 members Found","timestamp":"10:52:17"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 1","timestamp":"10:52:17"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923345022571","timestamp":"10:52:17"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"10:52:17"}
+{"level":"info","message":"Sending Notification to player id undefined","timestamp":"10:52:18"}
