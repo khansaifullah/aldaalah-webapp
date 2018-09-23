@@ -149,3 +149,156 @@
 {"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923345022571","timestamp":"10:52:17"}
 {"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"10:52:17"}
 {"level":"info","message":"Sending Notification to player id undefined","timestamp":"10:52:18"}
+{"level":"info","message":"File NEW Name  :photo-1537596829862.pdf","timestamp":"11:13:49"}
+{"level":"info","message":"File NEW Name  :photo-1537596829916.jpg","timestamp":"11:13:49"}
+{"level":"info","message":"File NEW Name  :photo-1537596829923.jpg","timestamp":"11:13:49"}
+{"level":"info","message":"File NEW Name  :photo-1537596874688.pdf","timestamp":"11:14:34"}
+{"level":"info","message":"File NEW Name  :photo-1537596874717.jpg","timestamp":"11:14:34"}
+{"level":"info","message":"File NEW Name  :photo-1537596874731.jpg","timestamp":"11:14:34"}
+{"level":"info","message":"File NEW Name  :photo-1537596884727.jpg","timestamp":"11:14:44"}
+{"level":"info","message":"File NEW Name  :photo-1537596884731.jpg","timestamp":"11:14:44"}
+{"level":"info","message":"File NEW Name  :photo-1537596884733.jpg","timestamp":"11:14:44"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"11:14:45"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"11:14:45"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"11:14:46"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"11:14:46"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"11:14:46"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"11:14:46"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"11:14:46"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"11:14:46"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"11:14:48"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"11:14:48"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"11:15:00"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"11:15:01"}
+{"level":"info","message":"File NEW Name  :photo-1537607119952.jpg","timestamp":"14:05:19"}
+{"level":"info","message":"File NEW Name  :photo-1537607119968.jpg","timestamp":"14:05:19"}
+{"level":"info","message":"File NEW Name  :photo-1537607119970.jpg","timestamp":"14:05:19"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"14:05:21"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"14:05:21"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"14:05:21"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"14:05:21"}
+{"level":"info","message":"Is A group Conversation.","timestamp":"14:05:21"}
+{"level":"info","message":"File NEW Name  :photo-1537607247152.jpg","timestamp":"14:07:27"}
+{"level":"info","message":"File NEW Name  :photo-1537607247175.jpg","timestamp":"14:07:27"}
+{"level":"info","message":"File NEW Name  :photo-1537607247179.jpg","timestamp":"14:07:27"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"14:07:28"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"14:07:28"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"14:07:28"}
+{"level":"info","message":"Is A group Conversation.","timestamp":"14:07:29"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"14:07:29"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"14:07:29"}
+{"level":"info","message":"1 members Found","timestamp":"14:07:29"}
+{"level":"info","message":"File NEW Name  :photo-1537607293164.jpg","timestamp":"14:08:13"}
+{"level":"info","message":"File NEW Name  :photo-1537607293181.jpg","timestamp":"14:08:13"}
+{"level":"info","message":"File NEW Name  :photo-1537607293183.jpg","timestamp":"14:08:13"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"14:08:14"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"14:08:14"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"14:08:14"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"14:08:15"}
+{"level":"info","message":"Is A group Conversation.","timestamp":"14:08:15"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"14:08:15"}
+{"level":"info","message":"Is A group Conversation.","timestamp":"14:08:15"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"14:08:15"}
+{"level":"info","message":"1 members Found","timestamp":"14:08:15"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 1","timestamp":"14:08:15"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923345022571","timestamp":"14:08:15"}
+{"level":"info","message":"1 members Found","timestamp":"14:08:15"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 1","timestamp":"14:08:15"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923345022571","timestamp":"14:08:15"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"14:08:15"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"14:08:15"}
+{"level":"info","message":"Sending Notification to player id undefined","timestamp":"14:08:15"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"14:08:15"}
+{"level":"info","message":"Sending Notification to player id undefined","timestamp":"14:08:15"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"14:08:15"}
+{"level":"info","message":"Is A group Conversation.","timestamp":"14:08:16"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"14:08:16"}
+{"level":"info","message":"1 members Found","timestamp":"14:08:16"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 1","timestamp":"14:08:16"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923345022571","timestamp":"14:08:16"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"14:08:16"}
+{"level":"info","message":"Sending Notification to player id undefined","timestamp":"14:08:16"}
+{"level":"info","message":"reqData  :undefined","timestamp":"14:15:35"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1537607735070.jpg","timestamp":"14:15:35"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"14:15:35"}
+{"groupName":"Group by saif 3","groupMembersList":"{ \"values\" : [\"+923345022571\", \"+923124999213\"]}","adminPhone":"+923345022570","level":"info","message":"","timestamp":"14:15:37"}
+{"level":"info","message":"groupData.groupName: Group by saif 3","timestamp":"14:15:37"}
+{"level":"info","message":"groupData.groupMembersList: { \"values\" : [\"+923345022571\", \"+923124999213\"]}","timestamp":"14:15:37"}
+{"level":"info","message":"In ChatController.createGroup \n Group Data : Group by saif 3+923345022570+923345022571,+923124999213","timestamp":"14:15:37"}
+{"level":"info","message":" Exit ChatController.createGroup Method","timestamp":"14:15:37"}
+{"level":"info","message":"Creating Conversation Users against conversation id : 5ba60839db97a70be816ada9","timestamp":"14:15:37"}
+{"level":"info","message":"Creating Conversation User for Phone No+923345022571","timestamp":"14:15:37"}
+{"level":"info","message":"Creating Conversation User for Phone No+923124999213","timestamp":"14:15:37"}
+{"level":"info","message":"Conversation User Created for Phone No+923345022571","timestamp":"14:15:38"}
+{"level":"info","message":"Conversation User Created for Phone No+923124999213","timestamp":"14:15:38"}
+{"level":"info","message":"File NEW Name  :photo-1537607761981.jpg","timestamp":"14:16:01"}
+{"level":"info","message":"File NEW Name  :photo-1537607761987.jpg","timestamp":"14:16:01"}
+{"level":"info","message":"File NEW Name  :photo-1537607761989.jpg","timestamp":"14:16:01"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"14:16:03"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"14:16:03"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"14:16:03"}
+{"level":"info","message":"Is A group Conversation.","timestamp":"14:16:03"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"14:16:03"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"14:16:03"}
+{"level":"info","message":"2 members Found","timestamp":"14:16:04"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 2","timestamp":"14:16:04"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923124999213","timestamp":"14:16:04"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923345022571","timestamp":"14:16:04"}
+{"level":"info","message":"Is A group Conversation.","timestamp":"14:16:04"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"14:16:04"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"14:16:04"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"14:16:04"}
+{"level":"info","message":"Sending Notification to player id undefined","timestamp":"14:16:04"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"14:16:04"}
+{"level":"info","message":"Sending Notification to player id 35c2c2a6-fbd7-43df-9b20-e5dcccd5263b","timestamp":"14:16:04"}
+{"level":"info","message":"2 members Found","timestamp":"14:16:04"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 2","timestamp":"14:16:04"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923124999213","timestamp":"14:16:04"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923345022571","timestamp":"14:16:04"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"14:16:04"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"14:16:04"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"14:16:04"}
+{"level":"info","message":"Sending Notification to player id undefined","timestamp":"14:16:04"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"14:16:04"}
+{"level":"info","message":"Sending Notification to player id 35c2c2a6-fbd7-43df-9b20-e5dcccd5263b","timestamp":"14:16:04"}
+{"level":"info","message":"Is A group Conversation.","timestamp":"14:16:04"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"14:16:04"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"14:16:04"}
+{"level":"info","message":"2 members Found","timestamp":"14:16:05"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 2","timestamp":"14:16:05"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923124999213","timestamp":"14:16:05"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923345022571","timestamp":"14:16:05"}
+{"level":"info","message":"Is A group Conversation.","timestamp":"14:16:05"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"14:16:05"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"14:16:05"}
+{"level":"info","message":"Sending Notification to player id 35c2c2a6-fbd7-43df-9b20-e5dcccd5263b","timestamp":"14:16:05"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"14:16:05"}
+{"level":"info","message":"Sending Notification to player id undefined","timestamp":"14:16:05"}
+{"level":"info","message":"2 members Found","timestamp":"14:16:05"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 2","timestamp":"14:16:05"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923124999213","timestamp":"14:16:05"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923345022571","timestamp":"14:16:05"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"14:16:05"}
+{"level":"info","message":"Sending Notification to player id undefined","timestamp":"14:16:05"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"14:16:05"}
+{"level":"info","message":"Sending Notification to player id 35c2c2a6-fbd7-43df-9b20-e5dcccd5263b","timestamp":"14:16:05"}
+{"level":"info","message":"File NEW Name  :photo-1537608546238.jpg","timestamp":"14:29:06"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"14:29:07"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"14:29:08"}
+{"level":"info","message":"Is A group Conversation.","timestamp":"14:29:08"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"14:29:08"}
+{"level":"info","message":"2 members Found","timestamp":"14:29:08"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 2","timestamp":"14:29:08"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923124999213","timestamp":"14:29:08"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"14:29:09"}
+{"level":"info","message":"Sending Notification to player id 35c2c2a6-fbd7-43df-9b20-e5dcccd5263b","timestamp":"14:29:09"}
+{"level":"info","message":"File NEW Name  :photo-1537609745497.jpg","timestamp":"14:49:05"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"14:49:07"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"14:49:07"}
+{"level":"info","message":"Is A group Conversation.","timestamp":"14:49:08"}
+{"level":"info","message":"In ChatController.findConversationMembers ","timestamp":"14:49:08"}
+{"level":"info","message":"2 members Found","timestamp":"14:49:08"}
+{"level":"info","message":"findConversationMembers Response, Members List Size : 2","timestamp":"14:49:08"}
+{"level":"info","message":"Sending Onesignal Notifcation of groupConversationRequest to +923124999213","timestamp":"14:49:08"}
+{"level":"info","message":"User Found For Phone No: +923345022571","timestamp":"14:49:08"}
+{"level":"info","message":"Sending Notification to player id 35c2c2a6-fbd7-43df-9b20-e5dcccd5263b","timestamp":"14:49:08"}

@@ -12,6 +12,7 @@ var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
 
 var NotificationController = require('../controller/PushNotificationController.js');
+var ChatController = require('../controller/ChatController');
 
 require('datejs');
 var mongoose = require('mongoose');
@@ -24,6 +25,50 @@ var mongoose = require('mongoose');
 //db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
+
+function notifyAllGroupMembers(conversationId, notificationObj, excludedMember, notificationTitle){
+
+	//Sending update group Notifcation
+	ChatController.findConversationMembers(conversationId, function(members){
+		if (members){
+				logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
+
+			
+				//Notifying All Group Members
+				for (var i=0; i < members.length ; i++){
+					var memberPhoneNo=members[i]._userMobile;
+					if (memberPhoneNo!==excludedMember){
+						
+						
+						//Sending Push Notiifcation To Group Members								
+						logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  memberPhoneNo  );
+						//var phoneNo=members[i]._userMobile;
+						var query = { phone : memberPhoneNo };
+						
+						User.findOne(query).exec(function(err, user){
+							if (err){
+							 logger.error('Some Error occured while finding user' + err );
+							 }
+							if (user){
+							logger.info('User Found For Phone No: ' + user.phone );
+							logger.info('Sending Notification to player id ' + user.palyer_id );
+							if (!user.deactivate_user){
+							NotificationController.sendNotifcationToPlayerId(user.palyer_id,notificationObj,notificationTitle);	
+							}else{
+								logger.info('Can not send notification to deactivated user :  ' +memberPhoneNo  );    
+								
+							}
+							
+							}
+							else {
+							 logger.info('User not Found For Phone No: ' + memberPhoneNo );                 
+							}                               
+						});
+					}								
+				}
+		}
+		});
+}
 
 exports.findAllUser=function(callback){
      
@@ -247,27 +292,30 @@ exports.findAllWallpapers=function(callback){
 exports.addAttachment = async function(req, fileUrl, res) {
 	try{ 	
   
-		console.log("In Controller addWallpaper Method");     
+		console.log("In Controller addAttachment Method");     
 		      
 		console.log("req.body.type : " +  req.body.type); 		
 		console.log("req.body.title : " +  req.body.title);   
 		console.log("fileUrl : " +  fileUrl); 
 		console.log("req.body.conversationId : " +  req.body.conversationId); 
-		console.log("req.body.toUserId : " + req.body.toUserId); 
+		// console.log("req.body.toUserId : " + req.body.toUserId); 
 		console.log("req.body.fromUserPhone : " +  req.body.fromUserPhone); 
 		console.log("req.body.toUserPhone  : " +  req.body.toUserPhone ); 
   
+		var messageObj;
+		var excludedMember;
 
 		var newAttachment = new Attachment({  
 			attachmentType: req.body.type ,
 			attachmentTitle: req.body.title ,
 			attachmentUrl: fileUrl,
 			_conversationId: req.body.conversationId ,
-			_attachmentToUserId: req.body.toUserId ,
-			_attachmentFromUserId: req.body.fromUserId ,
+			// _attachmentToUserId: req.body.toUserId ,
+			// _attachmentFromUserId: req.body.fromUserId ,
 			_attachmentFromMobile: req.body.fromUserPhone ,
 			_attachmentToMobile: req.body.toUserPhone ,
 			attachmentDeliverStatus: false,
+			attachmentGroupId:req.body.attachmentGroupId
 			
 			 });
 			
@@ -283,7 +331,7 @@ exports.addAttachment = async function(req, fileUrl, res) {
 			
 				   }else{
 					var errorMessageObj={message:"Attachment Upload Failed."};   
-					NotificationController.sendNotifcationToPlayerId(user.palyer_id,errorMessageObj,"attachmentUploadFailure");
+					NotificationController.sendNotifcationToPlayerId(user.palyer_id,errorMessageObj,"attachmentUploadFailed");
 				   }
 				});
 			}
@@ -299,22 +347,30 @@ exports.addAttachment = async function(req, fileUrl, res) {
 				   }else {
 					   if (conversation){
 						if (conversation.isGroupConversation){
-
-							// send Push Notification to all members
+							logger.info("Is A group Conversation.");	
+							// send Push Notification to all members except Sender
+							excludedMember=req.body.fromUserPhone ;
+							notifyAllGroupMembers(conversation._id,messageObj,excludedMember, "attachmentReceived");
+							
 
 						}else{
 
 							// send Push Notification to Single Member
+							logger.info("Is not a group Conversation.");
 							
 							var query = { phone : req.body.fromUserPhone };
 							User.findOne(query).exec(function(err, user){
-							if (err){
-							}else {
+							if (user){
+								logger.info("Sending Push Notification to user.palyer_id :"+ user.palyer_id);
 								NotificationController.sendNotifcationToPlayerId(user.palyer_id,messageObj,"attachmentReceived");			
 			
+							}else {
+								logger.info("Unable to Send Push Notification ");
 							}
 							});
 						}
+					   }else {
+						logger.info("No Conversation Found With conv Id:  " +req.body.conversationId);
 					   }
 					  
 					  

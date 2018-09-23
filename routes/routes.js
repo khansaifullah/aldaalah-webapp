@@ -21,6 +21,8 @@ var FormData = require('form-data');
 var fs = require('fs');
 var tempFileName;
 var tempFileNamesList =[] ;
+var notAnImageFlag=false;
+
 var storage = multer.diskStorage({
 	destination: function(req, file, callback) {
 		callback(null, './public/images')
@@ -456,10 +458,8 @@ module.exports = function(app) {
 		
 		console.log("in routes - group" );
 		var reqData=req.body;
-         logger.info("reqData  :"+reqData.groupName);
-		 
-		 
-		 
+        logger.info("reqData  :"+reqData.groupName);
+ 
 		var upload = multer({
 			storage: storage,
 			fileFilter: function(req, file, callback) {
@@ -1433,16 +1433,29 @@ module.exports = function(app) {
 			});		
 			});
 
-			var uploadPhotos = multer({storage: storage})
+			var uploadPhotos = multer({storage: storage,
+				fileFilter: function(req, file, callback) {
+					//Allow Only Image Files
+				    var ext = path.extname(file.originalname)
+				    if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+						// return callback(res.end('Only images are allowed'), null)
+						notAnImageFlag=true;
+						return callback(null, true);
+
+				    }
+					callback(null, true)
+				}
+			})
 		//app.post('/attachment/photos', uploadPhotos.fields([{ name: 'video', maxCount: 1}, { name: 'image', maxCount: 3}]), function (req, res, next) {
-		app.post('/attachment/photos', uploadPhotos.array('photos', 12),async function (req, res, next) {
+		app.post('/attachment/photo', uploadPhotos.array('photo', 12),async function (req, res, next) {
 			// req.files is array of `photos` files
 			// req.body will contain the text fields, if there were any
-			console.log("in routes  /attachmentt/photos");
+			console.log("in routes  /attachment/photo");
 			if(req.body === undefined||req.body === null) {
 				res.end("Empty Body "); 
 				}
-					
+				if (!notAnImageFlag){
+	
 				if (req.files){
 
 					console.log('Files Length : '+ req.files.length);
@@ -1489,7 +1502,7 @@ module.exports = function(app) {
 						tempFileNamesList=[];
 
 						res.jsonp({status:"success",
-						message:"Picture/Pictures Uploading..",
+						message:"Picture/Pictures are Uploading.",
 						object:[]});
 					}
 			
@@ -1500,6 +1513,13 @@ module.exports = function(app) {
 				}
 
 
+			}else{
+				//reset flag
+				notAnImageFlag=false;
+				res.jsonp({status:"failure",
+				message:"Only Images are Allowed!",
+				object:[]});
+			}
 				
 			});
 

@@ -14,6 +14,7 @@ var attachmentSchema   = new mongoose.Schema({
     _attachmentToMobile: {type : String, default :null },
     attachmentDeliverStatus: { type: Boolean, default: false },
     deletedByUserMobile: String,
+    attachmentGroupId: String,
 }, {timestamps: true});
 attachmentSchema.index({_conversationId:1, _attachmentToUserId: 1, _attachmentFromUserId: 1, _attachmentFromMobile: 1,createdOnUTC:1})
 // Export the Mongoose model
