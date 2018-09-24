@@ -289,7 +289,7 @@ exports.findAllWallpapers=function(callback){
 }
 
 
-exports.addAttachment = async function(req, fileUrl, res) {
+exports.addAttachment = async function(req, fileUrl, res, callback) {
 	try{ 	
   
 		console.log("In Controller addAttachment Method");     
@@ -373,8 +373,13 @@ exports.addAttachment = async function(req, fileUrl, res) {
 							}
 							});
 						}
+						 callback(attachment);
 					   }else {
 						logger.info("No Conversation Found With conv Id:  " +req.body.conversationId);
+						// res.jsonp({status:"failure",
+						// 			message:"No Conversation Found With conversation Id:  " +req.body.conversationId,
+						// 			object:[]});
+						callback();
 					   }
 					  
 					  

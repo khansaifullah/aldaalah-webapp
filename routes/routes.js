@@ -1576,11 +1576,25 @@ module.exports = function(app) {
 								
 									
 									AppController.addAttachment(req, fileUrl, res, function(data){
+
 										tempFileName="";
+										if (data){
+											res.jsonp({status:"success",
+											message:"Attachment is successfully Uploaded.",
+											object:data});
+										}else{
+											res.jsonp({status:"failure",
+											message:"Some Error occured while uploading attachment.",
+											object:data});
+
+										}
+										
 								   });  
 								});
-							  }
+								  
+							}
 							 });
+							 
 						}	else{
 							res.jsonp({status:"Failure",
 								message:"Unable To find a file to Upload.",

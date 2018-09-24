@@ -1,0 +1,63 @@
+{"level":"info","message":"File NEW Name  :file-1537775122782.mp3","timestamp":"12:45:23"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:45:23"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"12:45:54"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"12:45:54"}
+{"level":"info","message":"No Conversation Found With conv Id:  5b6192564b6f1307cc8e782a","timestamp":"12:45:54"}
+{"level":"info","message":"File NEW Name  :file-1537775295736.mp3","timestamp":"12:48:15"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:48:15"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"12:48:42"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"12:48:42"}
+{"level":"info","message":"No Conversation Found With conv Id:  5b6192564b6f1307cc8e782a","timestamp":"12:48:43"}
+{"level":"info","message":"File NEW Name  :file-1537775455471.mp3","timestamp":"12:50:55"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:50:55"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"12:51:26"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"12:51:27"}
+{"level":"info","message":"No Conversation Found With conv Id:  5b6192564b6f1307cc8e782a","timestamp":"12:51:27"}
+{"level":"info","message":"File NEW Name  :file-1537775558424.mp3","timestamp":"12:52:38"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:52:38"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"12:53:06"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"12:53:07"}
+{"level":"info","message":"Is not a group Conversation.","timestamp":"12:53:07"}
+{"level":"info","message":"File NEW Name  :file-1537775690490.mp3","timestamp":"12:54:50"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:54:50"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"12:55:24"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"12:55:25"}
+{"level":"info","message":"Is not a group Conversation.","timestamp":"12:55:25"}
+{"level":"info","message":"Unable to Send Push Notification ","timestamp":"12:55:25"}
+{"level":"info","message":"File NEW Name  :file-1537775806857.mp3","timestamp":"12:56:46"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:56:46"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"12:57:09"}
+{"level":"error","message":"Some Error while saving AttachmentValidationError: _conversationId: Cast to ObjectID failed for value \"5b9cb968598c1d0cc0144a5fb2\" at path \"_conversationId\"","timestamp":"12:57:09"}
+{"level":"info","message":"File NEW Name  :file-1537776142265.mp3","timestamp":"13:02:22"}
+{"level":"info","message":"File Is uploaded","timestamp":"13:02:22"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"13:02:49"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"13:02:50"}
+{"level":"info","message":"No Conversation Found With conv Id:  5b9cb968598c1d80144a5fb2","timestamp":"13:02:50"}
+{"level":"info","message":"File NEW Name  :photo-1537776251886.jpg","timestamp":"13:04:11"}
+{"level":"info","message":"File NEW Name  :photo-1537776251892.jpg","timestamp":"13:04:11"}
+{"level":"info","message":"File NEW Name  :photo-1537776251895.jpg","timestamp":"13:04:11"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"13:04:13"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"13:04:13"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"13:04:13"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"13:04:13"}
+{"level":"info","message":"No Conversation Found With conv Id:  5ba749b406380435b8164430","timestamp":"13:04:14"}
+{"level":"info","message":"File NEW Name  :file-1537776338899.mp3","timestamp":"13:05:38"}
+{"level":"info","message":"File Is uploaded","timestamp":"13:05:38"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"13:06:05"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"13:06:06"}
+{"level":"info","message":"No Conversation Found With conv Id:  5b9cb968598c1d80144a5fb2","timestamp":"13:06:06"}
+{"level":"info","message":"File NEW Name  :photo-1537776381076.jpg","timestamp":"13:06:21"}
+{"level":"info","message":"File NEW Name  :photo-1537776381083.jpg","timestamp":"13:06:21"}
+{"level":"info","message":"File NEW Name  :photo-1537776381089.jpg","timestamp":"13:06:21"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"13:06:22"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"13:06:22"}
+{"level":"info","message":"No Conversation Found With conv Id:  5ba749b406380435b8164430","timestamp":"13:06:23"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"13:06:24"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"13:06:24"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"13:06:24"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"13:06:24"}
+{"level":"info","message":"No Conversation Found With conv Id:  5ba749b406380435b8164430","timestamp":"13:06:24"}
+{"level":"info","message":"No Conversation Found With conv Id:  5ba749b406380435b8164430","timestamp":"13:06:24"}
+{"level":"info","message":" Exit AppController.addAttachment Method","timestamp":"13:06:56"}
+{"level":"info","message":"Attachment saved succuessfully","timestamp":"13:06:56"}
+{"level":"info","message":"No Conversation Found With conv Id:  5ba749b406380435b8164430","timestamp":"13:06:57"}
