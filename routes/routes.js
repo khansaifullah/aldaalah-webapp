@@ -1550,32 +1550,38 @@ module.exports = function(app) {
 									message:"Error Uploading File",
 									object:[]});
 					 }else{        
-						logger.info ("Photo Is uploaded");
+						logger.info ("File Is uploaded");
 						console.log(req.body.title);
-						var form = new FormData();
-						form.append('file', fs.createReadStream( './/public//images//'+tempFileName));
-						form.submit('http://postvideo.exaride.com', function(err, resp) {
-						 if (err) {
-							 logger.info("Error : "+ err);
-							 res.jsonp({status:"Failure",
-							 message:"Error Uploading File",
-							 object:[]});
-						 }else {
-							var body = '';
-							resp.on('data', function(chunk) {
-							  body += chunk;
-							});
-							resp.on('end', function() {
-							  var urls = JSON.parse(body);
-							  console.log("File Url : "+urls.url);
-							  var fileUrl=urls.url;
-							  AppController.addAttachment(req, fileUrl, res, function(data){
-								tempFileName="";
-						   }); 
-						   });
-						 }
-					 });
-					 
+
+						if(tempFileNamesList[i]){
+							var form = new FormData();
+							await form.append('image', fs.createReadStream( './/public//images//'+tempFileNamesList[i]));
+							await form.submit('http://exagic.com/postimage.php', function(err, resp) {
+							if (err) {
+								logger.info("Error : "+ err);
+								res.jsonp({status:"Failure",
+								message:"Error Uploading File",
+								object:[]});
+							  }else {
+							   var body = '';
+							   resp.on('data', function(chunk) {
+								 body += chunk;
+							   });
+							   resp.on('end',async function() {
+								 var urls = JSON.parse(body);
+								 
+									console.log("Url : "+urls);
+									console.log("File Url : "+urls.imageurl);
+									var fileUrl=urls.imageurl;    
+								
+									
+									AppController.addAttachment(req, fileUrl, res, function(data){
+										tempFileName="";
+								   });  
+								});
+							  }
+							 });
+						}					 
 						 
 					}
 				 

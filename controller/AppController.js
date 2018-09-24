@@ -304,6 +304,7 @@ exports.addAttachment = async function(req, fileUrl, res) {
   
 		var messageObj;
 		var excludedMember;
+		
 
 		var newAttachment = new Attachment({  
 			attachmentType: req.body.type ,
@@ -330,7 +331,7 @@ exports.addAttachment = async function(req, fileUrl, res) {
 					logger.error('Error Occured Wile Finding User' + errUser );
 			
 				   }else{
-					var errorMessageObj={message:"Attachment Upload Failed."};   
+					var errorMessageObj={message:"Attachment Upload Failed.", attachmentobj: []};   
 					NotificationController.sendNotifcationToPlayerId(user.palyer_id,errorMessageObj,"attachmentUploadFailed");
 				   }
 				});
@@ -339,7 +340,10 @@ exports.addAttachment = async function(req, fileUrl, res) {
 				logger.info('Attachment saved succuessfully');
 
 				//Send New Photo Upload Notification to Receiver
-			
+				messageObj={
+					message:"Attachment Received.",
+					attachmentobj:attachment
+				}
 				
 				var convQuery = { _id : req.body.conversationId };
 				Conversation.findOne(convQuery).exec(function(err, conversation){
