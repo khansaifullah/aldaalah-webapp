@@ -1543,7 +1543,7 @@ module.exports = function(app) {
 						 callback(null, true)
 					 }
 				 }).single('file');
-				 upload(req, res, function(err) {
+				 upload(req, res, async function(err) {
 					 if (err){
 						logger.info("Error Uploading File : " + err);
 						res.jsonp({status:"Failure",
