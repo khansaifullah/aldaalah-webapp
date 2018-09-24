@@ -1163,7 +1163,7 @@ module.exports = function(app) {
 							 .then((result)=> res.jsonp({status:"success",
 											   message:"Group Members List",
 											  object:arrayToSend}))
-							 .catch((err)=>res.send({status:"failure",
+							 .catch((err)=>res.send({status:"Failure",
 											   message:"Error Occured while finding Members" + err,
 											  object:[]}));
 						
@@ -1171,7 +1171,7 @@ module.exports = function(app) {
 					else {
 						//Send Response no members Found
 						logger.info ("members : " + members);
-						res.send({status:"failure",
+						res.send({status:"Failure",
 								  message:"No Members Found In Group",
 								  object:[]})
 						
@@ -1179,7 +1179,7 @@ module.exports = function(app) {
 				});
 			}
 			else{	
-				res.send({status:"failure",
+				res.send({status:"Failure",
 						  message:"No Such Conversation Found",
 						  object:[]})
 			}
@@ -1507,7 +1507,7 @@ module.exports = function(app) {
 					}
 			
 				}else{
-				res.jsonp({status:"failure",
+				res.jsonp({status:"Failure",
 				message:"No Files Found To Upload",
 				object:[]});
 				}
@@ -1516,7 +1516,7 @@ module.exports = function(app) {
 			}else{
 				//reset flag
 				notAnImageFlag=false;
-				res.jsonp({status:"failure",
+				res.jsonp({status:"Failure",
 				message:"Only Images are Allowed!",
 				object:[]});
 			}
@@ -1581,7 +1581,11 @@ module.exports = function(app) {
 								});
 							  }
 							 });
-						}					 
+						}	else{
+							res.jsonp({status:"Failure",
+								message:"Unable To find a file to Upload.",
+								object:[]});
+						}				 
 						 
 					}
 				 
@@ -1614,11 +1618,11 @@ module.exports = function(app) {
 		// if (error) return res.status(400).send(error.details[0].message);
 	
 		let user = await User.findOne({ email : email });
-		if (!user) return res.status(400).jsonp({ status: 'failure', message: 'No User Found With Provided Email, Please Register First.' , object: []});
+		if (!user) return res.status(400).jsonp({ status: 'Failure', message: 'No User Found With Provided Email, Please Register First.' , object: []});
 		console.log('found a user', user.email);
 	
 		const validPassword = await bcrypt.compare(password, user.password);
-		if (!validPassword) return res.status(400).jsonp({ status: 'failure', message: 'Invalid Password.' , object: []});
+		if (!validPassword) return res.status(400).jsonp({ status: 'Failure', message: 'Invalid Password.' , object: []});
 
 		const token = user.generateAuthToken();
 		res.setHeader('x-auth-token', token);
