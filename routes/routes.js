@@ -1553,9 +1553,9 @@ module.exports = function(app) {
 						logger.info ("File Is uploaded");
 						console.log(req.body.title);
 
-						if(tempFileNamesList[i]){
+						if(tempFileName){
 							var form = new FormData();
-							await form.append('image', fs.createReadStream( './/public//images//'+tempFileNamesList[i]));
+							await form.append('image', fs.createReadStream( './/public//images//'+tempFileName));
 							await form.submit('http://exagic.com/postimage.php', function(err, resp) {
 							if (err) {
 								logger.info("Error : "+ err);
