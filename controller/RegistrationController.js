@@ -386,6 +386,8 @@ exports.verifyCode=function(data,res){
           // logger.info(' verification_code : '+ user.verification_code);
             if ((code==="1234")||(code===user.verification_code)){
                  
+                const token = user.generateAuthToken();
+                res.setHeader('x-auth-token', token);
                 res.jsonp({status:"success",
                      message:"Code Verified!",
                      object:[]});                
@@ -663,7 +665,8 @@ exports.updatePlayerId = function(req,res) {
 
                  if(user) {
                     logger.info('Updating player Id: '+ playerId +' for :' + phoneNo );
-					user.palyer_id=playerId;
+                    user.palyer_id=playerId;
+                    user.deactivate_user=false;
 					  user.save(function (err, user) {
 						if (user){
 							res.jsonp({status:"success",

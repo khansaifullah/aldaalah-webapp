@@ -33,13 +33,13 @@ function notifyAllGroupMembers(conversationId, notificationObj, excludedMember, 
 		if (members){
 				logger.info ('findConversationMembers Response, Members List Size : ' + members.length);
 
-			
+				logger.info ('excludedMember: ' +excludedMember );
 				//Notifying All Group Members
 				for (var i=0; i < members.length ; i++){
 					var memberPhoneNo=members[i]._userMobile;
+					
 					if (memberPhoneNo!==excludedMember){
-						
-						
+												
 						//Sending Push Notiifcation To Group Members								
 						logger.info('Sending Onesignal Notifcation of groupConversationRequest to '+  memberPhoneNo  );
 						//var phoneNo=members[i]._userMobile;
@@ -55,8 +55,7 @@ function notifyAllGroupMembers(conversationId, notificationObj, excludedMember, 
 							if (!user.deactivate_user){
 							NotificationController.sendNotifcationToPlayerId(user.palyer_id,notificationObj,notificationTitle);	
 							}else{
-								logger.info('Can not send notification to deactivated user :  ' +memberPhoneNo  );    
-								
+								logger.info('Can not send notification to deactivated user :  ' +memberPhoneNo  );								
 							}
 							
 							}
@@ -64,6 +63,8 @@ function notifyAllGroupMembers(conversationId, notificationObj, excludedMember, 
 							 logger.info('User not Found For Phone No: ' + memberPhoneNo );                 
 							}                               
 						});
+					}else{
+						logger.info('Excluded Member: '+memberPhoneNo);    
 					}								
 				}
 		}

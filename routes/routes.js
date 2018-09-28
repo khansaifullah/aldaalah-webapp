@@ -45,10 +45,12 @@ module.exports = function(app) {
 	 //Enable All CORS Requests
 	app.use(cors());
 	app.use(function(req, res, next) {
-		//res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "*");
+		res.header("Access-Control-Expose-Headers", "*");
 		next();
 	  });
+	
     app.use(bodyParser.urlencoded({
         extended: true
     }));
@@ -1583,7 +1585,7 @@ module.exports = function(app) {
 											message:"Attachment is successfully Uploaded.",
 											object:data});
 										}else{
-											res.jsonp({status:"failure",
+											res.jsonp({status:"Failure",
 											message:"Some Error occured while uploading attachment.",
 											object:data});
 
@@ -1632,11 +1634,25 @@ module.exports = function(app) {
 		// if (error) return res.status(400).send(error.details[0].message);
 	
 		let user = await User.findOne({ email : email });
-		if (!user) return res.status(400).jsonp({ status: 'Failure', message: 'No User Found With Provided Email, Please Register First.' , object: []});
+		// if (!user) return res.status(400).jsonp({ status: 'Failure', message: 'No User Found With Provided Email, Please Register First.' , object: []});
+		if (!user)
+			res.jsonp({
+			status : "Failure",
+			message : "No user found with provided email, Please register first.",
+			object : []
+			});
+
 		console.log('found a user', user.email);
 	
 		const validPassword = await bcrypt.compare(password, user.password);
-		if (!validPassword) return res.status(400).jsonp({ status: 'Failure', message: 'Invalid Password.' , object: []});
+		//if (!validPassword) return res.status(400).jsonp({ status: 'Failure', message: 'Invalid Password.' , object: []});
+
+		if (!validPassword)
+			res.jsonp({
+			status : "Failure",
+			message : "Invalid password, Please try again with correct password.",
+			object : []
+			});
 
 		const token = user.generateAuthToken();
 		res.setHeader('x-auth-token', token);
