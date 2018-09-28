@@ -67,7 +67,10 @@ function inRadiusNotification(phoneNo,userLoc,marker){
 				
 				title:marker.title,
 				description:marker.description,
+				description_arb:marker.description_arb,
+				description_eng:marker.description_eng,
 				marker_photo_url:marker.marker_photo_url,
+				marker_audio_url:marker.marker_audio_url,
 				longitude:marker.loc[0],
 				latitude:marker.loc[1],				
 				radius:marker.radius
