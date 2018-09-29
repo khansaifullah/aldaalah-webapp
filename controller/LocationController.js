@@ -25,10 +25,11 @@ var markerExists=function(id,callback){
      Marker.findOne(query).exec(function(err, marker){
         if (err){
             logger.error('Some Error while finding Marker' + err );
-            res.status(400).send({status:"failure",
-                                  message:err,
-                                  object:[]
-            });
+            // res.status(400).send({status:"failure",
+            //                       message:err,
+            //                       object:[]
+			// });
+			callback(null);
         }
         else{
             if (marker){                
@@ -493,6 +494,45 @@ exports.updateMarker=function(reqData,res){
 	}
 }
 
+// GET next Marker Id
+exports.getNextMarker=function(markerId,res){
+	try{
+		markerExists(markerId,function(marker){
+			if (marker){ 
+				Marker.find({_categoryId:marker._categoryId, sort_order: {$gt: marker.sort_order}}, function(err, greaterMarker) {
+					if (greaterMarker){
+						
+						logger.info('Greater Marker Found');
+						logger.info('greaterMarker.id: ' + greaterMarker._id);
+						logger.info('greaterMarker.title: ' + greaterMarker.title);
+						logger.info('greaterMarker.Sort Order: ' + greaterMarker.sort_order);
+						logger.info('greaterMarker._categoryId: ' + greaterMarker._categoryId);
+						res.jsonp({status:"success",
+						message:"Next Marker.",
+						object:greaterMarker}); 
+					}else{
+						logger.info('Greater Marker Found');
+						res.jsonp({status:"failure",
+						message:"No Next Marker Found",
+						object:[]}); 
+						
+					}
+				}).sort({sort_order: 1}).limit(1);
+
+
+			}else {
+				logger.info(' Marker Not Found with id: ' + markerId);
+				res.jsonp({status:"failure",
+				message:"Error occured while finding marker with provided id.",
+				object:[]}); 
+
+			}
+		})
+
+	}catch( exception){
+
+	}
+}
 
 //Delete Marker
 

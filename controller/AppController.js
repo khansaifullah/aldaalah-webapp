@@ -28,6 +28,10 @@ var mongoose = require('mongoose');
 
 function notifyAllGroupMembers(conversationId, notificationObj, excludedMember, notificationTitle){
 
+	console.log('inside notifyAllGroupMembers notificationObj.attachmentobj.createdAt: ' + notificationObj.attachmentobj.createdAt);
+	
+	console.log('inside notifyAllGroupMembers notificationObj.attachmentobj.updatedAt: ' + notificationObj.attachmentobj.updatedAt);
+
 	//Sending update group Notifcation
 	ChatController.findConversationMembers(conversationId, function(members){
 		if (members){
@@ -321,7 +325,7 @@ exports.addAttachment = async function(req, fileUrl, res, callback) {
 			
 			 });
 			
-			 newAttachment.save(function (err, attachment) {
+			 newAttachment.save(async function (err, attachment) {
 			if(err){
 				logger.error('Some Error while saving Attachment' + err );
 			
@@ -340,10 +344,35 @@ exports.addAttachment = async function(req, fileUrl, res, callback) {
 			else{
 				logger.info('Attachment saved succuessfully');
 
-				//Send New Photo Upload Notification to Receiver
+				//Convert created and updatedat in milisec
+				var createdAtDate = await new Date(attachment.createdAt);
+				 var createdAtinMs = await createdAtDate.getTime();
+				 // attachment.createdAt = createdAtinMs;
+
+				// console.log('createdAtinMs: '+ createdAtinMs);
+				console.log('attachment.createdAt: '+ attachment.createdAt);
+				var updatedAtDate = await new Date(attachment.updatedAt);
+				var updatedAtinMs=await updatedAtDate.getTime();
+
+				//Send New Photo Upload Notification to Receiver	
+
+				var attachmentObj={
+					_id: attachment._id,
+					attachmentType: attachment.attachmentType ,
+					attachmentTitle: attachment.attachmentTitle ,
+					attachmentUrl: attachment.attachmentUrl,
+					_conversationId: attachment._conversationId ,
+					_attachmentFromMobile: attachment._attachmentFromMobile ,
+					_attachmentToMobile: attachment._attachmentToMobile  ,
+					attachmentDeliverStatus: attachment.attachmentDeliverStatus,
+					attachmentGroupId: attachment.attachmentGroupId,
+					createdAt: createdAtinMs,
+					updatedAt: updatedAtinMs
+
+				}
 				messageObj={
 					message:"Attachment Received.",
-					attachmentobj:attachment
+					attachmentobj:attachmentObj
 				}
 				
 				var convQuery = { _id : req.body.conversationId };

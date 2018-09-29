@@ -183,3 +183,54 @@
 {"level":"info","message":"Sending Notification to player id d08b16b3-e797-41a8-9c12-08ab0605223d","timestamp":"15:52:58"}
 {"level":"info","message":"User Found For Phone No: +923124999213","timestamp":"15:52:58"}
 {"level":"info","message":"Sending Notification to player id 35c2c2a6-fbd7-43df-9b20-e5dcccd5263b","timestamp":"15:52:58"}
+{"level":"info","message":"markerExists Method Called","timestamp":"18:44:15"}
+{"level":"info","message":" Exit MarkerExists Method","timestamp":"18:44:15"}
+{"level":"error","message":"Some Error while finding MarkerCastError: Cast to ObjectId failed for value \"\" at path \"_id\" for model \"Marker\"","timestamp":"18:44:15"}
+{"level":"info","message":"markerExists Method Called","timestamp":"18:46:55"}
+{"level":"info","message":" Exit MarkerExists Method","timestamp":"18:46:55"}
+{"level":"error","message":"Some Error while finding MarkerCastError: Cast to ObjectId failed for value \"\" at path \"_id\" for model \"Marker\"","timestamp":"18:46:55"}
+{"level":"info","message":" Marker Not Found with id: ","timestamp":"18:46:55"}
+{"level":"info","message":"markerExists Method Called","timestamp":"18:47:44"}
+{"level":"info","message":" Exit MarkerExists Method","timestamp":"18:47:44"}
+{"level":"info","message":"Marker Not Found with id :59ed9423f323790012cb84d0","timestamp":"18:47:44"}
+{"level":"info","message":" Marker Not Found with id: 59ed9423f323790012cb84d0","timestamp":"18:47:44"}
+{"level":"info","message":"markerExists Method Called","timestamp":"18:48:53"}
+{"level":"info","message":" Exit MarkerExists Method","timestamp":"18:48:53"}
+{"level":"info","message":"Marker Found with id :5a47701c717ad337ec448333","timestamp":"18:48:53"}
+{"level":"info","message":"Greater Marker Found","timestamp":"18:48:54"}
+{"level":"info","message":"greaterMarker.id: undefined","timestamp":"18:48:54"}
+{"level":"info","message":"greaterMarker.title: undefined","timestamp":"18:48:54"}
+{"level":"info","message":"greaterMarker.Sort Order: undefined","timestamp":"18:48:54"}
+{"level":"info","message":"greaterMarker._categoryId: undefined","timestamp":"18:48:54"}
+{"level":"info","message":"markerExists Method Called","timestamp":"18:49:09"}
+{"level":"info","message":" Exit MarkerExists Method","timestamp":"18:49:09"}
+{"level":"info","message":"Marker Found with id :5a759b577e4bc10014e61ba2","timestamp":"18:49:09"}
+{"level":"info","message":"Greater Marker Found","timestamp":"18:49:09"}
+{"level":"info","message":"greaterMarker.id: undefined","timestamp":"18:49:09"}
+{"level":"info","message":"greaterMarker.title: undefined","timestamp":"18:49:09"}
+{"level":"info","message":"greaterMarker.Sort Order: undefined","timestamp":"18:49:09"}
+{"level":"info","message":"greaterMarker._categoryId: undefined","timestamp":"18:49:09"}
+{"level":"info","message":"markerExists Method Called","timestamp":"18:50:59"}
+{"level":"info","message":" Exit MarkerExists Method","timestamp":"18:50:59"}
+{"level":"info","message":"Marker Found with id :59e8e7e357f0b40012900dee","timestamp":"18:50:59"}
+{"level":"info","message":"Greater Marker Found","timestamp":"18:50:59"}
+{"level":"info","message":"greaterMarker.id: undefined","timestamp":"18:50:59"}
+{"level":"info","message":"greaterMarker.title: undefined","timestamp":"18:50:59"}
+{"level":"info","message":"greaterMarker.Sort Order: undefined","timestamp":"18:50:59"}
+{"level":"info","message":"greaterMarker._categoryId: undefined","timestamp":"18:50:59"}
+{"level":"info","message":"markerExists Method Called","timestamp":"18:51:28"}
+{"level":"info","message":" Exit MarkerExists Method","timestamp":"18:51:28"}
+{"level":"info","message":"Marker Found with id :5a5f19d162d23000145a396b","timestamp":"18:51:28"}
+{"level":"info","message":"Greater Marker Found","timestamp":"18:51:29"}
+{"level":"info","message":"greaterMarker.id: undefined","timestamp":"18:51:29"}
+{"level":"info","message":"greaterMarker.title: undefined","timestamp":"18:51:29"}
+{"level":"info","message":"greaterMarker.Sort Order: undefined","timestamp":"18:51:29"}
+{"level":"info","message":"greaterMarker._categoryId: undefined","timestamp":"18:51:29"}
+{"level":"info","message":"markerExists Method Called","timestamp":"18:51:52"}
+{"level":"info","message":" Exit MarkerExists Method","timestamp":"18:51:52"}
+{"level":"info","message":"Marker Found with id :5a5f18ad62d23000145a396a","timestamp":"18:51:52"}
+{"level":"info","message":"Greater Marker Found","timestamp":"18:51:52"}
+{"level":"info","message":"greaterMarker.id: undefined","timestamp":"18:51:52"}
+{"level":"info","message":"greaterMarker.title: undefined","timestamp":"18:51:52"}
+{"level":"info","message":"greaterMarker.Sort Order: undefined","timestamp":"18:51:52"}
+{"level":"info","message":"greaterMarker._categoryId: undefined","timestamp":"18:51:52"}

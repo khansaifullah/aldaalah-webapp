@@ -957,7 +957,15 @@ module.exports = function(app) {
 		 LocController.updateAlertFlag(reqData,res);
 	 });
 	
-	
+	 app.get('/nextmarker',function(req,res){
+		
+		if(req.body === undefined||req.body === null) {
+		 res.end("Empty Body"); 
+		 }
+		 var markerId = req.query.markerId;
+		 console.log("in routes /nextmarker called with marker id : "+markerId );
+		 LocController.getNextMarker(markerId,res);
+	 });
 
 	/*  Marker API's */
 	 app.post('/marker',function(req,res){
