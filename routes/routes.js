@@ -9,6 +9,8 @@ var AdminController = require('../controller/AdminController.js');
 var bodyParser = require('body-parser');
 var Country = require('../models/Country.js');
 var Conversation = require('../models/Conversation.js');
+var Marker = require('../models/Marker.js');
+
 var User = require('../models/User.js');
 var db = require('../config/db');
 var logger = require('../config/lib/logger.js');
@@ -1723,6 +1725,65 @@ module.exports = function(app) {
 	});
 
 	
+	// Test Apis
+		// GET Dummy Marker Notification
+		app.post('/dummymarkernotification',function(req,res){
+		
+			var phone= req.body.phoneNo;
+			var query = { phone : phone };
+
+			var markerObj ;
+											  
+			User.findOne(query).exec(function(err, user){
+				if (err){
+				 logger.error('Some Error occured while finding user' + err );
+				 }
+				if (user){
+
+				logger.info('User Found For Phone No: ' + phone );
+				logger.info('Sending Notification to player id ' + user.palyer_id );
+				Marker.find({}, function(err, markers) {
+					if (err){
+						logger.info('An Error Occured While Finding Markers '  + err);
+						res.jsonp({status:"failure",
+						message:"Unable to send Dummy notification",
+						object:[]});
+					}			
+					else{ 
+						markerObj ={
+				
+							title:markers[0].title,
+							description:markers[0].description,
+							description_arb:markers[0].description_arb,
+							description_eng:markers[0].description_eng,
+							marker_photo_url:markers[0].marker_photo_url,
+							marker_audio_url:markers[0].marker_audio_url,
+							longitude:markers[0].loc[0],
+							latitude:markers[0].loc[1],				
+							radius:markers[0].radius
+							
+							
+					}
+						//logger.info(markers.length + ' Marker Found');
+						NotificationController.sendNotifcationToPlayerId(user.palyer_id,markerObj,"reachedMarker");	
+						console.log("");
+						res.jsonp({status:"success",
+							message:"Sending Dummy Marker Notification to device",
+							object:[]});	
+					} 
+					});
+				
+				}
+				else {
+				 logger.info('User not Found For Phone No: ' + phone );     
+				 res.jsonp({status:"failure",
+				 message:"User not Found For Phone No: " + phone ,
+				 object:[]});            
+				}                               
+			});
+	
+		});
+
 	function validate(req) {
 		const schema = {
 		email: Joi.string().min(5).max(255).required().email(),
@@ -1730,6 +1791,7 @@ module.exports = function(app) {
 		};
 		return Joi.validate(req, schema);
 	}
+	
 		  
 };
 

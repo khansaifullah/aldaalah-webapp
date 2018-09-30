@@ -1,0 +1,49 @@
+{"level":"info","message":"in routes get markerCategory","timestamp":"15:16:22"}
+{"level":"info","message":"1 MarkerCategory Found","timestamp":"15:16:24"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"15:16:24"}
+{"level":"info","message":"LocationController.addMarkerCategory called  :Umrah","timestamp":"15:16:45"}
+{"level":"info","message":"MarkerCategory Created : Umrah","timestamp":"15:16:47"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"15:16:47"}
+{"level":"info","message":"2 MarkerCategory Found","timestamp":"15:16:48"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"15:16:48"}
+{"level":"info","message":"LocationController.addMarkerCategory called  :Others","timestamp":"15:17:14"}
+{"level":"info","message":"MarkerCategory Created : Others","timestamp":"15:17:14"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"15:17:14"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"15:17:15"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"15:17:15"}
+{"level":"info","message":"in routes get markers","timestamp":"15:21:38"}
+{"level":"info","message":"0 Markers Found","timestamp":"15:21:38"}
+{"level":"info","message":"Response Of findAllMarkers Method","timestamp":"15:21:38"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"15:22:33"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"15:22:33"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"15:22:33"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"15:24:16"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"15:24:17"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"15:24:17"}
+{"level":"info","message":"in routes get markers","timestamp":"15:25:09"}
+{"level":"info","message":"0 Markers Found","timestamp":"15:25:20"}
+{"level":"info","message":"Response Of findAllMarkers Method","timestamp":"15:25:20"}
+{"level":"info","message":"in routes get markers","timestamp":"15:30:17"}
+{"level":"info","message":"0 Markers Found","timestamp":"15:30:17"}
+{"level":"info","message":"Response Of findAllMarkers Method","timestamp":"15:30:17"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"15:30:55"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"15:30:55"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"15:30:55"}
+{"level":"info","message":"LocationController.setMarker called  :Gujar Khan**72.95560971325676**33.27607694755861","timestamp":"15:31:36"}
+{"level":"info","message":"Marker Created : Gujar Khan","timestamp":"15:31:36"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"15:31:41"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"15:31:41"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"15:31:41"}
+{"level":"info","message":"LocationController.setMarker called  :Chakwal**72.85673276013176**32.95401203683535","timestamp":"15:32:25"}
+{"level":"info","message":"Marker Created : Chakwal","timestamp":"15:32:26"}
+{"level":"info","message":"in routes get markers","timestamp":"15:32:29"}
+{"level":"info","message":"2 Markers Found","timestamp":"15:32:29"}
+{"level":"info","message":"Response Of findAllMarkers Method","timestamp":"15:32:29"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"15:33:15"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"15:33:16"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"15:33:16"}
+{"level":"info","message":"LocationController.setMarker called  :Saudia**43.879212164427145**22.667384497092023","timestamp":"15:34:15"}
+{"level":"info","message":"Marker Created : Saudia","timestamp":"15:34:16"}
+{"level":"info","message":"User not Found For Phone No:  923124999213","timestamp":"15:41:58"}
+{"level":"info","message":"User Found For Phone No: +923124999213","timestamp":"15:44:33"}
+{"level":"info","message":"Sending Notification to player id 35c2c2a6-fbd7-43df-9b20-e5dcccd5263b","timestamp":"15:44:33"}
