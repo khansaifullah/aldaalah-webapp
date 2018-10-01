@@ -1,0 +1,20 @@
+{"level":"info","message":"markerExists Method Called","timestamp":"00:09:15"}
+{"level":"info","message":" Exit MarkerExists Method","timestamp":"00:09:15"}
+{"level":"info","message":"Marker Not Found with id :5a5f18ad62d23000145a396a","timestamp":"00:09:15"}
+{"level":"info","message":" Marker Not Found with id: 5a5f18ad62d23000145a396a","timestamp":"00:09:15"}
+{"level":"info","message":"markerExists Method Called","timestamp":"00:09:52"}
+{"level":"info","message":" Exit MarkerExists Method","timestamp":"00:09:52"}
+{"level":"info","message":"Marker Found with id :5bb0a60875cf372ec83dc12d","timestamp":"00:09:52"}
+{"level":"info","message":"Greater Marker Found","timestamp":"00:09:52"}
+{"level":"info","message":"greaterMarker.id: undefined","timestamp":"00:09:52"}
+{"level":"info","message":"greaterMarker.title: undefined","timestamp":"00:09:52"}
+{"level":"info","message":"greaterMarker.Sort Order: undefined","timestamp":"00:09:52"}
+{"level":"info","message":"greaterMarker._categoryId: undefined","timestamp":"00:09:52"}
+{"level":"info","message":"markerExists Method Called","timestamp":"00:16:23"}
+{"level":"info","message":" Exit MarkerExists Method","timestamp":"00:16:23"}
+{"level":"info","message":"Marker Found with id :5bb0a60875cf372ec83dc12d","timestamp":"00:16:23"}
+{"level":"info","message":"Greater Marker Found","timestamp":"00:16:24"}
+{"level":"info","message":"greaterMarker.id: undefined","timestamp":"00:16:24"}
+{"level":"info","message":"greaterMarker.title: undefined","timestamp":"00:16:24"}
+{"level":"info","message":"greaterMarker.Sort Order: undefined","timestamp":"00:16:24"}
+{"level":"info","message":"greaterMarker._categoryId: undefined","timestamp":"00:16:24"}

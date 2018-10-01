@@ -65,7 +65,7 @@ function inRadiusNotification(phoneNo,userLoc,marker){
 	if (distance<marker.radius)
 	{
 		var markerObj ={
-				
+				_id:marker._id,
 				title:marker.title,
 				description:marker.description,
 				description_arb:marker.description_arb,
@@ -74,7 +74,10 @@ function inRadiusNotification(phoneNo,userLoc,marker){
 				marker_audio_url:marker.marker_audio_url,
 				longitude:marker.loc[0],
 				latitude:marker.loc[1],				
-				radius:marker.radius
+				radius:marker.radius,
+				updatedAt:marker.updatedAt,
+				createdAt:marker.createdAt,
+				__v:marker.__v
 				
 				
 		}
@@ -497,10 +500,33 @@ exports.updateMarker=function(reqData,res){
 // GET next Marker Id
 exports.getNextMarker=function(markerId,res){
 	try{
+		var markerObj;
 		markerExists(markerId,function(marker){
 			if (marker){ 
 				Marker.find({_categoryId:marker._categoryId, sort_order: {$gt: marker.sort_order}}, function(err, greaterMarker) {
 					if (greaterMarker){
+						if (greaterMarker[0]){
+							markerObj ={
+				
+								_id:greaterMarker[0]._id,
+								title:greaterMarker[0].title,
+								description:greaterMarker[0].description,
+								description_arb:greaterMarker[0].description_arb,
+								description_eng:greaterMarker[0].description_eng,
+								marker_photo_url:greaterMarker[0].marker_photo_url,
+								marker_audio_url:greaterMarker[0].marker_audio_url,
+								longitude:greaterMarker[0].loc[0],
+								latitude:greaterMarker[0].loc[1],		
+								//loc:markers[0].loc,		
+								radius:greaterMarker[0].radius,
+								updatedAt:greaterMarker[0].updatedAt,
+								createdAt:greaterMarker[0].createdAt,
+								__v:greaterMarker[0].__v
+								
+								
+						}
+						}
+					
 						
 						logger.info('Greater Marker Found');
 						logger.info('greaterMarker.id: ' + greaterMarker._id);
@@ -509,7 +535,7 @@ exports.getNextMarker=function(markerId,res){
 						logger.info('greaterMarker._categoryId: ' + greaterMarker._categoryId);
 						res.jsonp({status:"success",
 						message:"Next Marker.",
-						object:greaterMarker}); 
+						object:markerObj}); 
 					}else{
 						logger.info('Greater Marker Found');
 						res.jsonp({status:"failure",

@@ -1752,6 +1752,7 @@ module.exports = function(app) {
 					else{ 
 						markerObj ={
 				
+							_id:markers[0]._id,
 							title:markers[0].title,
 							description:markers[0].description,
 							description_arb:markers[0].description_arb,
@@ -1759,8 +1760,12 @@ module.exports = function(app) {
 							marker_photo_url:markers[0].marker_photo_url,
 							marker_audio_url:markers[0].marker_audio_url,
 							longitude:markers[0].loc[0],
-							latitude:markers[0].loc[1],				
-							radius:markers[0].radius
+							latitude:markers[0].loc[1],		
+							//loc:markers[0].loc,		
+							radius:markers[0].radius,
+							updatedAt:markers[0].updatedAt,
+							createdAt:markers[0].createdAt,
+							__v:markers[0].__v
 							
 							
 					}

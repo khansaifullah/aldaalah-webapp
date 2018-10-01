@@ -47,3 +47,36 @@
 {"level":"info","message":"User not Found For Phone No:  923124999213","timestamp":"15:41:58"}
 {"level":"info","message":"User Found For Phone No: +923124999213","timestamp":"15:44:33"}
 {"level":"info","message":"Sending Notification to player id 35c2c2a6-fbd7-43df-9b20-e5dcccd5263b","timestamp":"15:44:33"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"16:09:14"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"16:09:29"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"16:09:29"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"16:09:35"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"16:09:36"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"16:09:36"}
+{"level":"info","message":"LocationController.setMarker called  :Pindi Gheb**72.29093686169426**33.299036356430896","timestamp":"16:10:05"}
+{"level":"info","message":"Marker Created : Pindi Gheb","timestamp":"16:10:06"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"16:10:41"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"16:10:42"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"16:10:42"}
+{"level":"info","message":"LocationController.setMarker called  :Riyadh**46.7347635371093**25.11893791508857","timestamp":"16:11:15"}
+{"level":"info","message":"Marker Created : Riyadh","timestamp":"16:11:17"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"16:11:18"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"16:11:24"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"16:11:24"}
+{"level":"info","message":"LocationController.setMarker called  :Near riyadh**41.1976541621093**26.149038726008236","timestamp":"16:12:26"}
+{"level":"info","message":"Marker Created : Near riyadh","timestamp":"16:12:27"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"16:12:42"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"16:12:43"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"16:12:43"}
+{"level":"info","message":"LocationController.setMarker called  :Saudia 3**42.4281229121093**28.491395356048113","timestamp":"16:13:23"}
+{"level":"info","message":"Marker Created : Saudia 3","timestamp":"16:13:23"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"16:13:25"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"16:13:26"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"16:13:26"}
+{"level":"info","message":"LocationController.setMarker called  :Saudia 4**40.7582010371093**28.41412102755755","timestamp":"16:14:03"}
+{"level":"info","message":"Marker Created : Saudia 4","timestamp":"16:14:04"}
+{"level":"info","message":"in routes get markerCategory","timestamp":"16:14:09"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"16:14:10"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"16:14:10"}
+{"level":"info","message":"LocationController.setMarker called  :saudia 5**43.8343729121093**29.030727462756865","timestamp":"16:14:44"}
+{"level":"info","message":"Marker Created : saudia 5","timestamp":"16:14:44"}
