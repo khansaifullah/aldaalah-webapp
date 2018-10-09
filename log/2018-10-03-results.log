@@ -1,0 +1,29 @@
+{"level":"info","message":"UserExists Method Called","timestamp":"15:33:11"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"15:33:11"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"15:33:11"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"15:33:12"}
+{"level":"info","message":"RegistrationController.setUsernamePassword called for user  :+923345022570","timestamp":"15:33:12"}
+{"level":"info","message":"emailExists Method Called","timestamp":"15:33:12"}
+{"level":"info","message":" Exit emailExists Method","timestamp":"15:33:12"}
+{"level":"info","message":"User Found with email :khansaifullah1993@gmail.com","timestamp":"15:33:12"}
+{"level":"info","message":"UserExists Method Called","timestamp":"15:33:27"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"15:33:27"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"15:33:27"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"15:33:28"}
+{"level":"info","message":"RegistrationController.setUsernamePassword called for user  :+923345022570","timestamp":"15:33:28"}
+{"level":"info","message":"emailExists Method Called","timestamp":"15:33:28"}
+{"level":"info","message":" Exit emailExists Method","timestamp":"15:33:28"}
+{"level":"info","message":"User Not Found with email :khansaifullah1994@gmail.com","timestamp":"15:33:28"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"15:33:29"}
+{"level":"info","message":"Sucessful Response of SMS API : [object Object]","timestamp":"15:33:29"}
+{"level":"info","message":"RegistrationController.verifyCode called  :+923345022570 - 1233","timestamp":"15:33:37"}
+{"level":"info","message":"UserExists Method Called","timestamp":"15:33:37"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"15:33:37"}
+{"level":"info","message":" Exit RegistrationController.verifyCode Method","timestamp":"15:33:37"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"15:33:38"}
+{"level":"info","message":"Wrong Code Sent For Verifcation :1233","timestamp":"15:33:38"}
+{"level":"info","message":"RegistrationController.verifyCode called  :+923345022570 - 1234","timestamp":"15:33:45"}
+{"level":"info","message":"UserExists Method Called","timestamp":"15:33:45"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"15:33:45"}
+{"level":"info","message":" Exit RegistrationController.verifyCode Method","timestamp":"15:33:45"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"15:33:45"}

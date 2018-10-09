@@ -1618,6 +1618,98 @@ module.exports = function(app) {
 				 })
 				 
 			 });
+
+			 
+		
+		//Upload new Back Up File
+		app.post('/backup',function(req,res){
+
+		if(req.body === undefined||req.body === null) {
+			res.end("Empty Body "); 
+			}
+			
+			console.log("in routes  /backup");
+			
+			var upload = multer({
+				storage: storage,
+				fileFilter: function(req, file, callback) {
+					//Allow Only Image Files
+				//  var ext = path.extname(file.originalname)
+				//  if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+				// 	 return callback(res.end('Only images are allowed'), null)
+				//  }
+					callback(null, true)
+				}
+			}).single('file');
+			upload(req, res, async function(err) {
+				if (err){
+				logger.info("Error Uploading File : " + err);
+				res.jsonp({status:"Failure",
+							message:"Error Uploading File",
+							object:[]});
+				}else{        
+				logger.info ("File Is uploaded");
+				
+				if(tempFileName){
+					var form = new FormData();
+					await form.append('image', fs.createReadStream( './/public//images//'+tempFileName));
+					await form.submit('http://exagic.com/postimage.php', function(err, resp) {
+					if (err) {
+						logger.info("Error : "+ err);
+						res.jsonp({status:"Failure",
+						message:"Error Uploading File",
+						object:[]});
+						}else {
+						var body = '';
+						resp.on('data', function(chunk) {
+							body += chunk;
+						});
+						resp.on('end',async function() {
+								var urls = JSON.parse(body);
+							
+								console.log("Url : "+urls);
+								console.log("File Url : "+urls.imageurl);
+								var fileUrl=urls.imageurl;    
+							
+								
+								AppController.addBackup(req, fileUrl, res, function(data){
+									
+									});  
+							});
+							
+						}
+						});
+						
+						res.jsonp({status:"success",
+						message:"Backup InProgress.",
+						object:{}});
+
+					}else{
+
+					res.jsonp({status:"Failure",
+					message:"Unable To find a file to Upload.",
+					object:[]});
+				}				 
+					
+			}
+			
+			})
+			
+		});
+
+		// GET ALL Backups
+		app.get('/backup',function(req,res){
+			
+			console.log("in routes get backup, Phone:  " + req.query.phoneNo);
+			AppController.findBackupsByPhoneNum(req.query.phoneNo, function (backups) {
+
+				console.log("Response Of findBackupsByPhoneNum Method");
+				res.jsonp({status:"success",
+							message:"List Of Backups",
+							object:backups});
+									
+		});		
+		});
 	
 
 			 // **** API's for web User Panel 

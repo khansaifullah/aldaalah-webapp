@@ -4,6 +4,7 @@ var MarkerCategory = require('../models/MarkerCategory.js');
 var Country = require('../models/Country.js');
 var Wallpaper = require('../models/Wallpaper.js');
 var Attachment = require('../models/Attachment.js');
+var Backup = require('../models/Backup.js');
 var Friend = require('../models/Friend.js');
 var ConversationMessages = require('../models/ConversationMessages.js');
 var Conversation = require('../models/Conversation.js');
@@ -426,6 +427,113 @@ exports.addAttachment = async function(req, fileUrl, res, callback) {
 	}	
 }
 
+
+exports.addBackup = async function(req, fileUrl, res, callback) {
+	try{ 	
+		console.log("In Controller addBackup Method");   
+
+		var newBackup = new Backup({  			
+			userMobile:req.body.phone ,
+			backUpFileUrl: fileUrl			
+		});
+			
+		newBackup.save(async function (err, backup) {
+			if (err){
+				logger.error('Error while saving back Up: '+ err);
+				var errorMessageObj={message:"Backup Failed, Please try again.", object:{}};  
+				var query = { phone : req.body.phone };
+				User.findOne(query).exec(function(err, user){
+				if (user){
+					// back up failed push notification
+					NotificationController.sendNotifcationToPlayerId(user.palyer_id,errorMessageObj,"backupUploadFailed");
+			
+				}
+				});
+					// callback();
+
+			}else {
+				var createdAtDate = await new Date(backup.createdAt);
+				var createdAtinMs = await createdAtDate.getTime();
+
+			   var updatedAtDate = await new Date(backup.updatedAt);
+			   var updatedAtinMs=await updatedAtDate.getTime();
+			   var backupObj={
+				_id: backup._id,
+				userMobile:backup.userMobile,
+				downloadedCount:backup.downloadedCount,
+				backUpFileUrl: backup.backUpFileUrl,
+				createdAt: createdAtinMs,
+				updatedAt: updatedAtinMs
+
+			}
+
+				var successMessageObj={message:"Backup Completed.", object:backupObj};
+				User.findOne(query).exec(function(err, user){
+					if (user){
+						NotificationController.sendNotifcationToPlayerId(user.palyer_id,successMessageObj,"backupCompleted");
+					}
+				});
+				
+				// callback(backup);
+			}
+		});  
+
+			  
+	}catch (err){
+
+	}
+}
+
+exports.findBackupsByPhoneNum=function(phoneNo, callback){
+
+	var backupRespList=[];
+	var createdAtDate;
+	var createdAtinMs;
+	var updatedAtDate;
+	var updatedAtinMs;
+	var backupObj;
+	try{
+		var query = { userMobile : phoneNo };
+		Backup.find(query).exec(async function(err, backups){
+			if (err){
+
+				res.status(400).send({
+						status:"failure",
+						message:"Failed to get Backups.",
+						object:[]
+						});
+			}else{
+				if (backups){
+					for (var i=0; i<backups.length; i++ ){
+						createdAtDate = await new Date(backups[i].createdAt);
+						createdAtinMs = await createdAtDate.getTime();
+		
+					    updatedAtDate = await new Date(backups[i].updatedAt);
+					    updatedAtinMs=await updatedAtDate.getTime();
+					    backupObj={
+						_id: backups[i]._id,
+						userMobile:backups[i].userMobile,
+						downloadedCount:backups[i].downloadedCount,
+						backUpFileUrl: backups[i].backUpFileUrl,
+						createdAt: createdAtinMs,
+						updatedAt: updatedAtinMs
+		
+						}
+						backupRespList.push (backupObj);
+
+					}
+					callback(backupRespList);
+
+				}else{
+					callback();
+				}
+
+			}
+		});
+	}catch (err){
+		logger.info('An Exception Has occured in findAllWallpapers method' + err);
+	}
+}
 exports.findFriendsByPhoneNum=function(phoneNo, callback){
     
     try{
