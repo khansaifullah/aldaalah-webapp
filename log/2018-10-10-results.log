@@ -1,0 +1,49 @@
+{"level":"info","message":"RegistrationController.verifyCode called  :+923345022570 - 111","timestamp":"11:07:07"}
+{"level":"info","message":"UserExists Method Called","timestamp":"11:07:07"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"11:07:07"}
+{"level":"info","message":" Exit RegistrationController.verifyCode Method","timestamp":"11:07:07"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"11:07:07"}
+{"level":"info","message":"Wrong Code Sent For Verifcation :111","timestamp":"11:07:07"}
+{"level":"info","message":"RegistrationController.verifyCode called  :+923345022570 - 1234","timestamp":"11:07:29"}
+{"level":"info","message":"UserExists Method Called","timestamp":"11:07:29"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"11:07:29"}
+{"level":"info","message":" Exit RegistrationController.verifyCode Method","timestamp":"11:07:29"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"11:07:29"}
+{"level":"info","message":"RegistrationController.verifyCode called  :+923345022571 - 1234","timestamp":"11:09:21"}
+{"level":"info","message":"UserExists Method Called","timestamp":"11:09:21"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"11:09:21"}
+{"level":"info","message":" Exit RegistrationController.verifyCode Method","timestamp":"11:09:21"}
+{"level":"info","message":"User Found with Phone Num. :+923345022571","timestamp":"11:09:21"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:39:29"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:39:29"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:40:14"}
+{"level":"info","message":"decoded: 5b5c38cba7a91400141faf24","timestamp":"11:40:14"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:40:15"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:40:35"}
+{"level":"info","message":"decoded: 5b71250dbefe3e0014669ff0","timestamp":"11:40:35"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:40:35"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:41:36"}
+{"level":"info","message":"decoded._id : 5b71250dbefe3e0014669ff0","timestamp":"11:41:36"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:41:36"}
+{"level":"info","message":"user._id: 5b5c38cba7a91400141faf24","timestamp":"11:41:36"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:41:50"}
+{"level":"info","message":"decoded._id : 5b5c38cba7a91400141faf24","timestamp":"11:41:50"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:41:50"}
+{"level":"info","message":"user._id: 5b5c38cba7a91400141faf24","timestamp":"11:41:50"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:46:03"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:46:06"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:47:12"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:47:13"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:47:18"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:47:19"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"11:47:23"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"11:47:24"}
+{"level":"info","message":"Phone #: undefined","timestamp":"11:49:26"}
+{"level":"info","message":"user not found with phone no undefined","timestamp":"11:49:27"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"11:51:24"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"11:51:27"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"11:51:32"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"11:51:32"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:51:39"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:51:40"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:51:47"}

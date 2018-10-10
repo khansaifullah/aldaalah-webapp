@@ -214,7 +214,7 @@ exports.createGroup=function(groupData,profilePhotoUrl,res){
 					});
                      newconversation.save(function (err, conversation) {
                          if (err) {
-							 logger.error('Error Occured while Saving new conversation :'+ err);
+							logger.error('Error Occured while Saving new conversation :'+ err);
 							res.jsonp({status:"failure",
 							message:"An Error Occured while Creating Group",
 							object:[]});

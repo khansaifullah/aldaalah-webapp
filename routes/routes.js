@@ -1,3 +1,5 @@
+const adminAuth = require('../middleware/adminAuth');
+const auth = require('../middleware/auth');
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 var regCtrl= require('../controller/RegistrationController.js');
@@ -97,7 +99,7 @@ module.exports = function(app) {
 	});
     
     
-	   app.post('/deactivateAccount',function(req,res){                         
+	   app.post('/deactivateAccount', auth, function(req,res){                         
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body");  
@@ -125,7 +127,7 @@ module.exports = function(app) {
 	});
 
 
-	app.post('/profile',function(req,res){
+	app.post('/profile', auth,function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -187,7 +189,7 @@ module.exports = function(app) {
 	});
     
 
-	app.post('/profilePhoto',function(req,res){
+	app.post('/profilePhoto', auth,function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -250,7 +252,7 @@ module.exports = function(app) {
 		
 	});
 	
-	app.post('/updateProfile',  function(req,res){
+	app.post('/updateProfile', auth, function(req,res){
 		try {
 
 		console.log("in routes /updateProfile");
@@ -400,7 +402,7 @@ module.exports = function(app) {
 		            
 	});
 
-    app.post('/contacts',function(req,res){
+    app.post('/contacts', auth, function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -454,7 +456,7 @@ module.exports = function(app) {
 	});		
 	});
 
-	app.post('/group',function(req,res){
+	app.post('/group', auth,function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -524,7 +526,7 @@ module.exports = function(app) {
 	});
 	
 	
-	app.post('/updateGroup',function(req,res){
+	app.post('/updateGroup', auth,function(req,res){
 		
 		console.log("in routes updateGroup");
 		var conversation;
@@ -866,7 +868,7 @@ module.exports = function(app) {
 			});            
 	});
 	
-     app.post('/deleteGroup',function(req,res){
+     app.post('/deleteGroup', auth, function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -875,7 +877,7 @@ module.exports = function(app) {
 		ChatController.closeGroup(req,res);
 	});
 	
-	 app.post('/groupMember',function(req,res){
+	 app.post('/groupMember', auth,function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -884,7 +886,7 @@ module.exports = function(app) {
 
 		ChatController.addGroupMember(req,res);
 	});
-	 app.post('/deleteMember',function(req,res){
+	 app.post('/deleteMember', auth,function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -898,7 +900,7 @@ module.exports = function(app) {
 	//get location From Client
 	
 
-    app.post('/location',function(req,res){
+    app.post('/location', auth, function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -929,7 +931,7 @@ module.exports = function(app) {
 	});
 		
 	
-	  app.get('/groupLocation',function(req,res){
+	  app.get('/groupLocation', auth, function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -939,7 +941,7 @@ module.exports = function(app) {
 		LocController.getGroupUserLocations(conversationId,res);
 	});
 	
-	app.post('/shareLocation',function(req,res){
+	app.post('/shareLocation', auth, function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -949,7 +951,7 @@ module.exports = function(app) {
 		LocController.updateShareLocationFlag(reqData,res);
 	});
 
-	app.post('/alert',function(req,res){
+	app.post('/alert', auth, function(req,res){
 		
 		if(req.body === undefined||req.body === null) {
 		 res.end("Empty Body"); 
@@ -959,7 +961,7 @@ module.exports = function(app) {
 		 LocController.updateAlertFlag(reqData,res);
 	 });
 	
-	 app.get('/nextmarker',function(req,res){
+	 app.get('/nextmarker', auth, function(req,res){
 		
 		if(req.body === undefined||req.body === null) {
 		 res.end("Empty Body"); 
@@ -1011,7 +1013,7 @@ module.exports = function(app) {
 		});
 
 		//Set User Preference
-		app.post('/preference',function(req,res){
+		app.post('/preference', auth, function(req,res){
 		
 			if(req.body === undefined||req.body === null) {
 			 res.end("Empty Body"); 
@@ -1433,7 +1435,7 @@ module.exports = function(app) {
 
 
 	// GET ALL Wallpapers
-		app.get('/wallpaper',function(req,res){
+		app.get('/wallpaper', function(req,res){
 				
 				console.log("in routes get wallpaper");
 				AppController.findAllWallpapers(function (wallpapers) {
@@ -1459,7 +1461,7 @@ module.exports = function(app) {
 				}
 			})
 		//app.post('/attachment/photos', uploadPhotos.fields([{ name: 'video', maxCount: 1}, { name: 'image', maxCount: 3}]), function (req, res, next) {
-		app.post('/attachment/photo', uploadPhotos.array('photo', 12),async function (req, res, next) {
+		app.post('/attachment/photo', auth, uploadPhotos.array('photo', 12),async function (req, res, next) {
 			// req.files is array of `photos` files
 			// req.body will contain the text fields, if there were any
 			console.log("in routes  /attachment/photo");
@@ -1536,7 +1538,7 @@ module.exports = function(app) {
 			});
 
 			 //Add New Attachment
-			 app.post('/attachment',function(req,res){
+			 app.post('/attachment', auth, function(req,res){
 		
 				if(req.body === undefined||req.body === null) {
 				 res.end("Empty Body "); 
@@ -1622,7 +1624,7 @@ module.exports = function(app) {
 			 
 		
 		//Upload new Back Up File
-		app.post('/backup',function(req,res){
+		app.post('/backup', auth, function(req,res){
 
 		if(req.body === undefined||req.body === null) {
 			res.end("Empty Body "); 
@@ -1698,7 +1700,8 @@ module.exports = function(app) {
 		});
 
 		// GET ALL Backups
-		app.get('/backup',function(req,res){
+		app.get('/backup', auth, function(req,res){
+			
 			
 			console.log("in routes get backup, Phone:  " + req.query.phoneNo);
 			AppController.findBackupsByPhoneNum(req.query.phoneNo, function (backups) {
