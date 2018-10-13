@@ -17,25 +17,22 @@ module.exports = function (req, res, next) {
     phoneNo=req.query.phoneNo;
     
     // Parsing Required on server side
-  if (req.body.phoneNo)
-  phoneNo=JSON.parse(req.body.phoneNo);
-
-  
-  //uncomment for local
   // if (req.body.phoneNo)
-  // phoneNo=req.body.phoneNo;
+  // phoneNo=JSON.parse(req.body.phoneNo);
+
+  if (req.body.phoneNo)
+  phoneNo=req.body.phoneNo;
   
   if (req.query.phone)
     phoneNo=req.query.phone;
     
     
     // Parsing Required on server side
-  if (req.body.phone)
-  phoneNo=JSON.parse(req.body.phone);
-
-  //uncomment for local
   // if (req.body.phone)
-  // phoneNo=req.body.phone;
+  // phoneNo=JSON.parse(req.body.phone);
+
+  if (req.body.phone)
+  phoneNo=req.body.phone;
 
   logger.info("Phone #: " + phoneNo);
 
