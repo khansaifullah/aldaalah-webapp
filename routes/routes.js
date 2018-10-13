@@ -155,6 +155,7 @@ module.exports = function(app) {
 			else{
 				logger.info ("File Is uploaded");
 				if (tempFileName!==undefined){
+					try{			
 					var form = new FormData();
 					form.append('image', fs.createReadStream( './/public//images//'+tempFileName));
 					form.submit('http://exagic.com/postimage.php', function(err, resp) {
@@ -178,6 +179,13 @@ module.exports = function(app) {
 					   });
 					 }
 				   });
+					}catch(err){
+
+						logger.info("Error Uploading File : " + err);
+						res.jsonp({status:"Failure",
+									message:"Unable to update profile.",
+									object:[]});
+					}
 				  }else {
 					regCtrl.completeProfile(req.body,'',res);
 				  }
