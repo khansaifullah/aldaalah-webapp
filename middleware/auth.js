@@ -12,12 +12,18 @@ module.exports = function (req, res, next) {
   if (req.query.phoneNo)
     phoneNo=req.query.phoneNo;
     
+  if (JSON.parse(req.body.phoneNo))
+  phoneNo=JSON.parse(req.body.phoneNo);
+
   if (req.body.phoneNo)
   phoneNo=req.body.phoneNo;
   
   if (req.query.phone)
     phoneNo=req.query.phone;
     
+  if (JSON.parse(req.body.phone))
+  phoneNo=JSON.parse(req.body.phone);
+
   if (req.body.phone)
   phoneNo=req.body.phone;
   logger.info("Phone #: " + phoneNo);
