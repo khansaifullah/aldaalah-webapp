@@ -9,9 +9,9 @@ module.exports = function (req, res, next) {
   const token = req.header('x-auth-token');
   if (!token) 
   //return res.status(401).send('Access denied. No token provided.');
-  // return res.jsonp({status:"Failure",
-  // message:"Access denied. No token provided.",
-  // object:[]});
+  return res.jsonp({status:"Failure",
+  message:"Access denied. No token provided.",
+  object:[]});
   var phoneNo;
   if (req.query.phoneNo)
     phoneNo=req.query.phoneNo;
@@ -47,19 +47,20 @@ module.exports = function (req, res, next) {
         if (userId.equals(decodedId)){
           logger.info('User is authentic');
           req.user = decoded; 
+          next();
          
          }else{
           logger.info('Token provided is not valid for this user.');
          // res.status(400).send('Token provided is not valid for this user.');
-          // res.jsonp({status:"Failure",
-          // message:"Token provided is not valid for this user.",
-          // object:[]});
+          res.jsonp({status:"Failure",
+          message:"Token provided is not valid for this user.",
+          object:[]});
          }
        }else{
           logger.info('Unable to find user.');
-        //  res.jsonp({status:"Failure",
-        //  message:"Unable to find user.",
-        //  object:[]});
+         res.jsonp({status:"Failure",
+         message:"Unable to find user.",
+         object:[]});
        }
           
     });
@@ -69,9 +70,9 @@ module.exports = function (req, res, next) {
   catch (ex) {
     // res.status(400).send('Invalid token.');
     logger.info('Exception Occured.' + ex);
-    // res.jsonp({status:"Failure",
-    // message:"Invalid token.",
-    // object:[]});
-    next();
+    res.jsonp({status:"Failure",
+    message:"Invalid token.",
+    object:[]});
+   
   }
 }
