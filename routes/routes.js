@@ -171,7 +171,7 @@ module.exports = function(app) {
 						body += chunk;
 					  });
 					  resp.on('end', function() {
-						  if (body){
+						  if (body.indexOf("imageurl")>0){
 							var urls = JSON.parse(body);
 							console.log("File Url : "+urls.imageurl);
 							var fileUrl=urls.imageurl;    
