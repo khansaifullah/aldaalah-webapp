@@ -128,6 +128,12 @@ module.exports = function(app) {
 
 
 	app.post('/profile', auth, function(req,res){
+
+		if (!req.user){
+			  res.jsonp({status:"Failure",
+				message:"Only Authorised user can have access.",
+				object:[]});
+		}
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
