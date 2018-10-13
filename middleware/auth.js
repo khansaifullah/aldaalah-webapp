@@ -51,7 +51,10 @@ module.exports = function (req, res, next) {
           res.status(400).send('Token provided is not valid for this user.');
          }
        }else{
-        res.status(400).send('Unable to find user.');
+         logger.info('Unable to find user.');
+         res.jsonp({status:"Failure",
+         message:"Unable to find user.",
+         object:[]});
        }
           
     });
