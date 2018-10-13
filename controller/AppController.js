@@ -163,7 +163,7 @@ exports.userExists=function(phoneNo,callback){
 					}
 					else{
 						logger.info("user not found with phone no "+phoneNo);
-						callback( user);
+						callback();
 						
 					}
 			   }
