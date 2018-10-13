@@ -247,12 +247,17 @@ module.exports = function(app) {
 					body += chunk;
 				});
 				resp.on('end', function() {
+					if (body.indexOf("imageurl")>0){
 					var urls = JSON.parse(body);
 					console.log("File Url : "+urls.imageurl);
 					var fileUrl=urls.imageurl;    
 					regCtrl.updateProfilePhoto(req.body.phone,fileUrl,function(data){
 						tempFileName="";
 						});
+					}else {
+						regCtrl.updateProfilePhoto(req.body.phone,'',function(data){
+							tempFileName="";});
+					}
 				});
 				}
 			});
@@ -314,10 +319,15 @@ module.exports = function(app) {
 						body += chunk;
 						});
 						resp.on('end', function() {
-						var urls = JSON.parse(body);
-						console.log("File Url : "+urls.imageurl);
-						var fileUrl=urls.imageurl;
-		
+							var urls;
+							var fileUrl;
+						if (body.indexOf("imageurl")>0){
+							urls = JSON.parse(body);
+							console.log("File Url : "+urls.imageurl);
+							fileUrl=urls.imageurl;
+						}else {
+							fileUrl='';
+						}
 						AppController.userExists(req.body.phoneNo,async function (user) {
 							logger.info("Response Of userExists Method : " + user);
 			
@@ -359,6 +369,7 @@ module.exports = function(app) {
 							}
 											
 							});
+						
 					});
 					}
 				});
@@ -521,10 +532,15 @@ module.exports = function(app) {
 				body += chunk;
 				});
 				resp.on('end', function() {
-					var urls = JSON.parse(body);
+				var urls;
+				var fileUrl;
+				if (body.indexOf("imageurl")>0){
+					urls = JSON.parse(body);
 					console.log("File Url : "+urls.imageurl);
-					var fileUrl=urls.imageurl; 
-		
+					fileUrl=urls.imageurl;
+				}else {
+					fileUrl='';
+				}		
 				ChatController.createGroup(req.body,fileUrl,res);	
 				tempFileName="";
 
@@ -595,9 +611,15 @@ module.exports = function(app) {
 					  body += chunk;
 					});
 					resp.on('end', function() {
-						var urls = JSON.parse(body);
-						console.log("File Url : "+urls.imageurl);
-						var fileUrl=urls.imageurl; 
+						var urls;
+						var fileUrl;
+						if (body.indexOf("imageurl")>0){
+							urls = JSON.parse(body);
+							console.log("File Url : "+urls.imageurl);
+							fileUrl=urls.imageurl;
+						}else {
+							fileUrl='';
+						} 
 					 	profilePhotoUrl=fileUrl;
 					  	var updateProfilePhotoFlag = JSON.parse(req.body.updateProfilePhoto);
 					  	var updateNameFlag = JSON.parse(req.body.updateName);
@@ -1427,10 +1449,16 @@ module.exports = function(app) {
 							body += chunk;
 						  });
 						  resp.on('end', function() {
-							var urls = JSON.parse(body);
-							console.log("File Url : "+urls.imageurl);
-							var fileUrl=urls.imageurl;    
-						   
+							var urls;
+							var fileUrl;
+							if (body.indexOf("imageurl")>0){
+								urls = JSON.parse(body);
+								console.log("File Url : "+urls.imageurl);
+								fileUrl=urls.imageurl;
+							}else {
+								fileUrl='';
+							}
+							
 							AppController.addWallpaper(req.body.title, fileUrl, res, function(data){
 								tempFileName="";
 						   }); 
@@ -1509,14 +1537,16 @@ module.exports = function(app) {
 									 body += chunk;
 								   });
 								   resp.on('end',async function() {
-									 var urls = JSON.parse(body);
-									 
-										console.log("Url : "+urls);
+									var urls;
+									var fileUrl;
+									if (body.indexOf("imageurl")>0){
+										urls = JSON.parse(body);
 										console.log("File Url : "+urls.imageurl);
-										var fileUrl=urls.imageurl;    
+										fileUrl=urls.imageurl;
+									}else {
+										fileUrl='';
+									}    
 									
-										// regCtrl.completeProfile(req.body,fileUrl,res);
-										//  tempFileName="";
 										await AppController.addAttachment(req, fileUrl, res, function(data){
 											//tempFileName="";
 										}); 
@@ -1597,13 +1627,15 @@ module.exports = function(app) {
 								 body += chunk;
 							   });
 							   resp.on('end',async function() {
-								 var urls = JSON.parse(body);
-								 
-									console.log("Url : "+urls);
+								var urls;
+								var fileUrl;
+								if (body.indexOf("imageurl")>0){
+									urls = JSON.parse(body);
 									console.log("File Url : "+urls.imageurl);
-									var fileUrl=urls.imageurl;    
-								
-									
+									fileUrl=urls.imageurl;
+								}else {
+									fileUrl='';
+								}
 									AppController.addAttachment(req, fileUrl, res, function(data){
 
 										tempFileName="";
@@ -1682,12 +1714,15 @@ module.exports = function(app) {
 							body += chunk;
 						});
 						resp.on('end',async function() {
-								var urls = JSON.parse(body);
-							
-								console.log("Url : "+urls);
+							var urls;
+							var fileUrl;
+							if (body.indexOf("imageurl")>0){
+								urls = JSON.parse(body);
 								console.log("File Url : "+urls.imageurl);
-								var fileUrl=urls.imageurl;    
-							
+								fileUrl=urls.imageurl;
+							}else {
+								fileUrl='';
+							}
 								
 								AppController.addBackup(req, fileUrl, res, function(data){
 									
