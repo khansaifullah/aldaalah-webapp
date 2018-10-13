@@ -179,7 +179,7 @@ module.exports = function(app) {
 						   regCtrl.completeProfile(req.body,fileUrl,res);
 							tempFileName="";
 						  }else {
-							  logger.eror("Invalid Response");
+							  logger.error("unable to get file url");
 							  regCtrl.completeProfile(req.body,'',res);
 						  }
 						
