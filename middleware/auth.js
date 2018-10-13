@@ -48,7 +48,10 @@ module.exports = function (req, res, next) {
           req.user = decoded; 
           next();
          }else{
-          res.status(400).send('Token provided is not valid for this user.');
+         // res.status(400).send('Token provided is not valid for this user.');
+          res.jsonp({status:"Failure",
+          message:"Token provided is not valid for this user.",
+          object:[]});
          }
        }else{
          logger.info('Unable to find user.');
@@ -61,6 +64,10 @@ module.exports = function (req, res, next) {
 
   }
   catch (ex) {
-    res.status(400).send('Invalid token.');
+    // res.status(400).send('Invalid token.');
+    res.jsonp({status:"Failure",
+    message:"Invalid token.",
+    object:[]});
+
   }
 }
