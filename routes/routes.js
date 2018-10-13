@@ -165,17 +165,24 @@ module.exports = function(app) {
 					   message:"Error Uploading File",
 					   object:[]});
 					 }else {
+						logger.info("Not an Error");
 					  var body = '';
 					  resp.on('data', function(chunk) {
 						body += chunk;
 					  });
 					  resp.on('end', function() {
-						var urls = JSON.parse(body);
-						console.log("File Url : "+urls.imageurl);
-						var fileUrl=urls.imageurl;    
-					   
-					   regCtrl.completeProfile(req.body,fileUrl,res);
-						tempFileName="";
+						  if (body){
+							var urls = JSON.parse(body);
+							console.log("File Url : "+urls.imageurl);
+							var fileUrl=urls.imageurl;    
+						   
+						   regCtrl.completeProfile(req.body,fileUrl,res);
+							tempFileName="";
+						  }else {
+							  logger.eror("Invalid Response");
+							  regCtrl.completeProfile(req.body,'',res);
+						  }
+						
 					   });
 					 }
 				   });
