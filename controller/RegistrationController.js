@@ -113,21 +113,20 @@ exports.sendVerificationCode=function(reqData,res){
     userExists(phoneNo,function(user){
 		logger.info('User Exists Response : ' + user );
         if (!user){
-             console.log (" User do not exist,  Creating user");
+             console.log (" User does not exist,  Creating user");
             if (resend==="true"||resend==1){
             res.jsonp({status:"failure",
-            message:"Please Create User First",
+            message:"Please Register User First.",
             object:[]}); 
             
             }
             else{
             
-                     var newuser = new User({  
-
-                    phone: phoneNo,
-                    country_code:countryCode,
-                    verified_user:false,                            
-                    verification_code:code
+                    var newuser = new User({  
+                        phone: phoneNo,
+                        country_code:countryCode,
+                        verified_user:false,                            
+                        verification_code:code
                      });
                      newuser.save(function (err, user) {
                     if(err){
@@ -743,7 +742,7 @@ exports.deactivateAccount=function(reqData,res){
 }
 
 // Set Username & password for Web User (First Time)
-exports.setUsernamePassword = async function(req, res) {
+exports.initialWebRegisteration = async function(req, res) {
 	try{ 	
   
         var phoneNo = req.body.phone;
@@ -754,7 +753,7 @@ exports.setUsernamePassword = async function(req, res) {
         var city = req.body.city;
         var country = req.body.country;
         
-            //generate a code and set to user.verification_code
+        //generate a code and set to user.verification_code
         var code=randomize('0', 4);
         var verificationMsg="Verification code for Aldaalah Application : " + code;
         // var code  = req.body.code; 
@@ -769,19 +768,19 @@ exports.setUsernamePassword = async function(req, res) {
                     if (userWithEmail){
 
                         res.jsonp({status:"failure",
-                        message:" User exist with same Email Address, please try an other. ",
+                        message:" User exist with same Email Address, Please try another. ",
                         object:[]});
 
                     }else {
 
-                        const salt = await bcrypt.genSalt(10);
-                        user.email=email, 
-                        user.password=await bcrypt.hash(password, salt);
+                        // const salt = await bcrypt.genSalt(10);
+                        // user.email=email, 
+                        // user.password=await bcrypt.hash(password, salt);
                         user.verification_code=code;
-                        user.gender=gender;
-                        user.city=city;
-                        user.country=country;
-                        user.dob=dob;
+                        // user.gender=gender;
+                        // user.city=city;
+                        // user.country=country;
+                        // user.dob=dob;
                         user.save(function (err, user){
                             if(err){
                             logger.error('Some Error while updating user status' + err ); 
@@ -840,7 +839,83 @@ exports.setUsernamePassword = async function(req, res) {
             }else{
                 logger.info('No User Found to Update ');
                 res.jsonp({status:"failure",
-                message:"No user Exist with provided Phone Num.",
+                message:"No such user exists, Please register from Aldaalah mobile app first.",
+                object:[]});
+            }
+        });
+        logger.info(' Exit RegistrationController.setUsernamePassword Method');
+
+	}catch (err){
+		logger.info('An Exception Has occured in setUsernamePassword method' + err);
+	}	
+}
+
+// Update Info
+exports.updateInfo = async function(req, res) {
+	try{ 	
+  
+        var phoneNo = req.body.phone;
+        var email = req.body.email; 
+        var password = req.body.password;
+        var gender = req.body.gender;
+        var dob = req.body.dob;
+        var city = req.body.city;
+        var country = req.body.country;
+        
+        //generate a code and set to user.verification_code
+        // var code=randomize('0', 4);
+        // var verificationMsg="Verification code for Aldaalah Application : " + code;
+        // var code  = req.body.code; 
+        //find user by phone no.
+        userExists(phoneNo, async function(user){
+            console.log("In Controller setUsernamePassword Method");           
+            if (user){ 
+               
+                logger.info('RegistrationController.setUsernamePassword called for user  :'  + user.phone  );    
+                emailExists(email, async function(userWithEmail){
+
+                    if (userWithEmail){
+
+                        res.jsonp({status:"failure",
+                        message:" User exist with same Email Address, Please try another. ",
+                        object:[]});
+
+                    }else {
+
+                        const salt = await bcrypt.genSalt(10);
+                        user.email=email, 
+                        user.password=await bcrypt.hash(password, salt);
+                        // user.verification_code=code;
+                        user.gender=gender;
+                        user.city=city;
+                        user.country=country;
+                        user.dob=dob;
+                        user.save(function (err, user){
+                            if(err){
+                            logger.error('Some Error while updating user status' + err ); 
+                            res.jsonp({status:"failure",
+                            message:" Unable to set Email or Password.",
+                            object:[]});
+                            }
+                            else{
+
+                            logger.info('User Name updated With Phone Num ' + user.phone );
+                            res.jsonp({status:"success",
+                            message:"Email and Password updated successfully.",
+                            object: user});
+                        
+                            }
+                        });
+                        
+                    }
+                        
+
+                });                    
+                       
+            }else{
+                logger.info('No User Found to Update ');
+                res.jsonp({status:"failure",
+                message:"No such user exists, Please register from Aldaalah mobile app first.",
                 object:[]});
             }
         });

@@ -127,7 +127,7 @@ module.exports = function(app) {
 	});
 
 
-	app.post('/profile', auth,function(req,res){
+	app.post('/profile',function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -1065,7 +1065,7 @@ module.exports = function(app) {
 	});		
 	});
 		 // getting User  By user id in Query Params
-	app.post('/user',function(req,res){
+	app.post('/user', auth, function(req,res){
       	var phoneNo = req.body.phoneNo;
 		//let phoneNo = req.query.phoneNo;
 		logger.info("In routes get single user, where phone NO. : "+phoneNo);
@@ -1715,7 +1715,8 @@ module.exports = function(app) {
 		});
 	
 
-			 // **** API's for web User Panel 
+		// **** API's for web User Panel 
+
 
 		//Set Username Password
 		app.post('/signup',function(req,res){
@@ -1725,10 +1726,21 @@ module.exports = function(app) {
 			}
 				
 			console.log("in routes  /signup : " + req.body.phone);
-			regCtrl.setUsernamePassword(req, res);
+			regCtrl.initialWebRegisteration(req, res);
 			
 		});
 	
+		app.post('/updateInfo',function(req,res){
+
+			if(req.body === undefined||req.body === null) {
+				res.end("Empty Body "); 
+			}
+				
+			console.log("in routes  /updateInfo : " + req.body.phone);
+			regCtrl.updateInfo(req, res);
+			
+		});
+
 		// login to web panel
 			
 	app.post('/auth', async (req, res) => {
