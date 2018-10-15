@@ -112,7 +112,7 @@ module.exports = function(app) {
 		console.log('req.user : ' +req.user );
 		if (!req.user){
 			res.jsonp({status:"Failure",
-			message:"Authetication Failed",
+			message:req.responseMsg,
 			object:[]});
 		}else{
 			logger.info('deactivateAccount-POST called ');         
@@ -168,7 +168,7 @@ module.exports = function(app) {
 				console.log('req.user : ' +req.user );
 				if (!req.user){
 					res.jsonp({status:"Failure",
-					message:"Authetication Failed",
+					message:req.responseMsg,
 					object:[]});
 				}else{
 				if (tempFileName!==undefined){
@@ -255,7 +255,7 @@ module.exports = function(app) {
 			console.log('req.user : ' +req.user );
 			if (!req.user){
 				res.jsonp({status:"Failure",
-				message:"Authetication Failed",
+				message:req.responseMsg,
 				object:[]});
 			}else {
 			if (tempFileName!==undefined){
@@ -334,7 +334,7 @@ module.exports = function(app) {
 				console.log('req.user : ' +req.user );
 				if (!req.user){
 					res.jsonp({status:"Failure",
-					message:"Authetication Failed",
+					message:req.responseMsg,
 					object:[]});
 				}else{
 				if (tempFileName!==undefined){
@@ -473,7 +473,7 @@ module.exports = function(app) {
 		console.log('req.user : ' +req.user );
 		if (!req.user){
 			res.jsonp({status:"Failure",
-			message:"Authetication Failed",
+			message:req.responseMsg,
 			object:[]});
 		}else{
 
@@ -562,7 +562,7 @@ module.exports = function(app) {
 		console.log('req.user : ' +req.user );
 		if (!req.user){
 			res.jsonp({status:"Failure",
-			message:"Authetication Failed",
+			message:req.responseMsg,
 			object:[]});
 		}else{
 		console.log('tempFileName: ' +tempFileName );
@@ -648,7 +648,7 @@ module.exports = function(app) {
 				console.log('req.user : ' +req.user );
 				if (!req.user){
 					res.jsonp({status:"Failure",
-					message:"Authetication Failed",
+					message:req.responseMsg,
 					object:[]});
 				}else{
 
@@ -973,7 +973,7 @@ module.exports = function(app) {
 		console.log('req.user : ' +req.user );
 		if (!req.user){
 			res.jsonp({status:"Failure",
-			message:"Authetication Failed",
+			message:req.responseMsg,
 			object:[]});
 		}else{
 			console.log("in routes post /deleteGroup");
@@ -991,7 +991,7 @@ module.exports = function(app) {
 		console.log('req.user : ' +req.user );
 		if (!req.user){
 			res.jsonp({status:"Failure",
-			message:"Authetication Failed",
+			message:req.responseMsg,
 			object:[]});
 		}else{
 			console.log("in routes POST /groupMember");
@@ -1008,7 +1008,7 @@ module.exports = function(app) {
 		console.log('req.user : ' +req.user );
 		if (!req.user){
 			res.jsonp({status:"Failure",
-			message:"Authetication Failed",
+			message:req.responseMsg,
 			object:[]});
 		}else{
 			console.log("in routes post /groupMember");
@@ -1031,7 +1031,7 @@ module.exports = function(app) {
 	  console.log('req.user : ' +req.user );
 	  if (!req.user){
 		  res.jsonp({status:"Failure",
-		  message:"Authetication Failed",
+		  message:req.responseMsg,
 		  object:[]});
 	  }else{
 			console.log("in routes /location");
@@ -1050,7 +1050,7 @@ module.exports = function(app) {
 		console.log('req.user : ' +req.user );
 		if (!req.user){
 			res.jsonp({status:"Failure",
-			message:"Authetication Failed",
+			message:req.responseMsg,
 			object:[]});
 		}else{
 			var conversationId = req.query.conversationId;
@@ -1069,7 +1069,7 @@ module.exports = function(app) {
 		console.log('req.user : ' +req.user );
 		if (!req.user){
 			res.jsonp({status:"Failure",
-			message:"Authetication Failed",
+			message:req.responseMsg,
 			object:[]});
 		}else{
 				
@@ -1090,7 +1090,7 @@ module.exports = function(app) {
 		 console.log('req.user : ' +req.user );
 		 if (!req.user){
 			 res.jsonp({status:"Failure",
-			 message:"Authetication Failed",
+			 message:req.responseMsg,
 			 object:[]});
 		 }else{
 			console.log("in routes /alert");
@@ -1110,7 +1110,7 @@ module.exports = function(app) {
 		console.log('req.user : ' +req.user );
 		if (!req.user){
 			res.jsonp({status:"Failure",
-			message:"Authetication Failed",
+			message:req.responseMsg,
 			object:[]});
 		}else{
 			var markerId = req.query.markerId;
@@ -1171,7 +1171,7 @@ module.exports = function(app) {
 			console.log('req.user : ' +req.user );
 			if (!req.user){
 				res.jsonp({status:"Failure",
-				message:"Authetication Failed",
+				message:req.responseMsg,
 				object:[]});
 			}else{
 				console.log("in routes POST:  /markerCategory");
@@ -1228,7 +1228,7 @@ module.exports = function(app) {
 		console.log('req.user : ' +req.user );
 		if (!req.user){
 			res.jsonp({status:"Failure",
-			message:"Authetication Failed",
+			message:req.responseMsg,
 			object:[]});
 		}else{
 			var phoneNo = req.body.phoneNo;
@@ -1648,7 +1648,7 @@ module.exports = function(app) {
 					console.log('req.user : ' +req.user );
 					if (!req.user){
 						res.jsonp({status:"Failure",
-						message:"Authetication Failed",
+						message:req.responseMsg,
 						object:[]});
 					}else{
 
@@ -1754,7 +1754,7 @@ module.exports = function(app) {
 						console.log('req.user : ' +req.user );
 						if (!req.user){
 							res.jsonp({status:"Failure",
-							message:"Authetication Failed",
+							message:req.responseMsg,
 							object:[]});
 						}else{
 						if(tempFileName){
@@ -1849,7 +1849,7 @@ module.exports = function(app) {
 				console.log('req.user : ' +req.user );
 				if (!req.user){
 					res.jsonp({status:"Failure",
-					message:"Authetication Failed",
+					message:req.responseMsg,
 					object:[]});
 				}else{
 				
@@ -1911,7 +1911,7 @@ module.exports = function(app) {
 			console.log('req.user : ' +req.user );
 			if (!req.user){
 				res.jsonp({status:"Failure",
-				message:"Authetication Failed",
+				message:req.responseMsg,
 				object:[]});
 			}else{
 			

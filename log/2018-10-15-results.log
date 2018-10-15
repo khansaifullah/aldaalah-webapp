@@ -343,3 +343,32 @@
 {"level":"info","message":"Phone #: +923345022571","timestamp":"13:11:08"}
 {"level":"info","message":"user found with phone no +923345022571","timestamp":"13:11:08"}
 {"level":"info","message":"Token provided is not valid for this user.","timestamp":"13:11:08"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1539594627444.jpg","timestamp":"14:10:27"}
+{"level":"info","message":"File Is uploaded","timestamp":"14:10:27"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryhdeRILDxttMfB33D","timestamp":"14:10:27"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"14:10:27"}
+{"level":"info","message":"req.body: +923345022571","timestamp":"14:10:27"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"14:10:27"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"14:10:28"}
+{"level":"info","message":"Token provided is not valid for this user.","timestamp":"14:10:28"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1539594636234.jpg","timestamp":"14:10:36"}
+{"level":"info","message":"File Is uploaded","timestamp":"14:10:36"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundarymgCxul7sYt1nYszL","timestamp":"14:10:36"}
+{"level":"info","message":"token: undefined","timestamp":"14:10:36"}
+{"level":"info","message":"req.body: +923345022571","timestamp":"14:10:36"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"14:10:36"}
+{"level":"info","message":"Exception Occured.JsonWebTokenError: jwt must be provided","timestamp":"14:10:36"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1539594643005.jpg","timestamp":"14:10:43"}
+{"level":"info","message":"File Is uploaded","timestamp":"14:10:43"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundarynu7fTyBuZCJVXTYn","timestamp":"14:10:43"}
+{"level":"info","message":"token: undefined","timestamp":"14:10:43"}
+{"level":"info","message":"req.body: +923345022571","timestamp":"14:10:43"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"14:10:43"}
+{"level":"info","message":"Exception Occured.JsonWebTokenError: jwt must be provided","timestamp":"14:10:43"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1539594678686.jpg","timestamp":"14:11:18"}
+{"level":"info","message":"File Is uploaded","timestamp":"14:11:18"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryk2ipuvhzueyikz3I","timestamp":"14:11:18"}
+{"level":"info","message":"token: undefined","timestamp":"14:11:18"}
+{"level":"info","message":"req.body: +923345022571","timestamp":"14:11:18"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"14:11:18"}
+{"level":"info","message":"Exception Occured.JsonWebTokenError: jwt must be provided","timestamp":"14:11:18"}

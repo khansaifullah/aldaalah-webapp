@@ -10,8 +10,11 @@ module.exports = function (req, res) {
   return new Promise(function (resolve, reject)   {
   const contentTypeheader = req.header('content-type');
   const token = req.header('x-auth-token');
-   if (!token) 
-   resolve();
+   if (!token) {
+    req.responseMsg='Access denied. No token provided.';
+    resolve();
+   }
+   
   //return res.status(401).send('Access denied. No token provided.');
   // return res.jsonp({status:"Failure",
   // message:"Access denied. No token provided.",
@@ -57,6 +60,7 @@ module.exports = function (req, res) {
           
           }else{
             logger.info('Token provided is not valid for this user.');
+            req.responseMsg='Token provided is not valid for this user.';
             resolve();
           // res.status(400).send('Token provided is not valid for this user.');
             // res.jsonp({status:"Failure",
@@ -65,6 +69,7 @@ module.exports = function (req, res) {
           }
         }else{
             logger.info('Unable to find user.');
+            req.responseMsg='Unable to find user.';
             resolve();
           // res.jsonp({status:"Failure",
           // message:"Unable to find user.",
@@ -74,6 +79,7 @@ module.exports = function (req, res) {
       });
     }else {
        logger.info('Phone No.' + phoneNo);
+       req.responseMsg='Phone No. Not found.';
        resolve();
       // res.jsonp({status:"Failure",
       // message:"Phone No. Not found",
