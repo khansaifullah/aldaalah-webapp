@@ -1,5 +1,8 @@
-const adminAuth = require('../middleware/adminAuth');
+// const express = require('express');
+// const router = express.Router();
+// const adminAuth = require('../middleware/adminAuth');
 const auth = require('../middleware/auth');
+const authJson = require('../middleware/authJson');
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 var regCtrl= require('../controller/RegistrationController.js');
@@ -23,6 +26,7 @@ var path = require('path');
 var multer = require('multer');
 var FormData = require('form-data');
 var fs = require('fs');
+
 var tempFileName;
 var tempFileNamesList =[] ;
 var notAnImageFlag=false;
@@ -45,19 +49,18 @@ var storage = multer.diskStorage({
 
 module.exports = function(app) {	
 	 
-	 
-	 //Enable All CORS Requests
+	//Enable All CORS Requests
 	app.use(cors());
 	app.use(function(req, res, next) {
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "*");
 		res.header("Access-Control-Expose-Headers", "*");
 		next();
-	  });
+	});
 	
-    app.use(bodyParser.urlencoded({
-        extended: true
-    }));
+	app.use(bodyParser.urlencoded({
+		extended: true
+	}));
 	// parse application/json
 	app.use(bodyParser.json())
 	
@@ -99,19 +102,25 @@ module.exports = function(app) {
 	});
     
     
-	   app.post('/deactivateAccount', auth, function(req,res){                         
+	   app.post('/deactivateAccount',async function(req,res){                         
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body");  
         }
-            
-        logger.info('deactivateAccount-POST called ');
-            
-        var reqData=req.body;
-        console.log("Phone No : "+ reqData.phoneNo);
-		console.log("in routes /deactivateAccount ");
-         
-        regCtrl.deactivateAccount(reqData,res);	
+		// authenticate
+		await auth(req,res);
+		console.log('req.user : ' +req.user );
+		if (!req.user){
+			res.jsonp({status:"Failure",
+			message:"Authetication Failed",
+			object:[]});
+		}else{
+			logger.info('deactivateAccount-POST called ');         
+			var reqData=req.body;
+			console.log("Phone No : "+ reqData.phoneNo);
+			console.log("in routes /deactivateAccount "); 
+			regCtrl.deactivateAccount(reqData,res);	
+		}
 	
 		});
 	
@@ -127,14 +136,8 @@ module.exports = function(app) {
 	});
 
 
-	app.post('/profile', auth, function(req,res){
+	app.post('/profile', function(req,res){
 
-		// if (!req.user){
-		// 	  res.jsonp({status:"Failure",
-		// 		message:"Only Authorised user can have access.",
-		// 		object:[]});
-		// }
-		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
@@ -150,7 +153,7 @@ module.exports = function(app) {
 				callback(null, true)
 			}
 		}).single('profilePhoto');
-		upload(req, res, function(err) {
+		upload(req, res,async function(err) {
 			if (err){
 				
 				logger.info("Error Uploading File : " + err);
@@ -160,6 +163,14 @@ module.exports = function(app) {
 			}
 			else{
 				logger.info ("File Is uploaded");
+				// authenticate
+				await auth(req,res);
+				console.log('req.user : ' +req.user );
+				if (!req.user){
+					res.jsonp({status:"Failure",
+					message:"Authetication Failed",
+					object:[]});
+				}else{
 				if (tempFileName!==undefined){
 					try{			
 					var form = new FormData();
@@ -202,6 +213,7 @@ module.exports = function(app) {
 				  }else {
 					regCtrl.completeProfile(req.body,'',res);
 				  }
+				}
 				
 			}
 			
@@ -210,7 +222,7 @@ module.exports = function(app) {
 	});
     
 
-	app.post('/profilePhoto', auth,function(req,res){
+	app.post('/profilePhoto', function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -228,7 +240,7 @@ module.exports = function(app) {
 				callback(null, true)
 			}
 		}).single('profilePhoto');
-		upload(req, res, function(err) {
+		upload(req, res,async function(err) {
 			if (err){
 				logger.info("Error Uploading File : " + err);
 				res.jsonp({status:"Failure",
@@ -237,7 +249,15 @@ module.exports = function(app) {
 			}
 			else{        
 			logger.info ("Photo Is uploaded");
-			console.log(req.body.phone);         
+			console.log(req.body.phone); 
+			// authenticate     
+			await auth(req,res);
+			console.log('req.user : ' +req.user );
+			if (!req.user){
+				res.jsonp({status:"Failure",
+				message:"Authetication Failed",
+				object:[]});
+			}else {
 			if (tempFileName!==undefined){
 				var form = new FormData();
 				form.append('image', fs.createReadStream( './/public//images//'+tempFileName));
@@ -271,14 +291,15 @@ module.exports = function(app) {
 				regCtrl.updateProfilePhoto(req.body.phone,'',function(data){
 				tempFileName="";
 				});
-		  	}
+			  }
+			}
 			}
 		
 		});
 		
 	});
 	
-	app.post('/updateProfile', auth, function(req,res){
+	app.post('/updateProfile', function(req,res){
 		try {
 
 		console.log("in routes /updateProfile");
@@ -308,7 +329,14 @@ module.exports = function(app) {
 			
 				logger.info ("Photo Is uploaded");
 				console.log(req.body.phoneNo);
-
+				// authenticate
+				await auth(req,res);
+				console.log('req.user : ' +req.user );
+				if (!req.user){
+					res.jsonp({status:"Failure",
+					message:"Authetication Failed",
+					object:[]});
+				}else{
 				if (tempFileName!==undefined){
 					var form = new FormData();
 					form.append('image', fs.createReadStream( './/public//images//'+tempFileName));
@@ -426,6 +454,7 @@ module.exports = function(app) {
 					});
 				
 			}
+		}
 			}
 			});
 		}catch(err){
@@ -434,28 +463,37 @@ module.exports = function(app) {
 		            
 	});
 
-    app.post('/contacts', auth, function(req,res){
+    app.post('/contacts',async function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
-        }
-		console.log("in routes /contacts");
-		var phoneNo=req.body.phoneNo;
-		var query = { phone : phoneNo };
-		
-		User.findOne(query).exec(function(err, me){
-			if (me){
-				regCtrl.syncContacts(req, res, me);
-				
-			}else {
-				res.jsonp({status:"Failure",
-				message:"Unable to Find User",
-			   object:[]});
-			}
+		}
+		// authenticate
+		await auth(req,res);
+		console.log('req.user : ' +req.user );
+		if (!req.user){
+			res.jsonp({status:"Failure",
+			message:"Authetication Failed",
+			object:[]});
+		}else{
+
+			console.log("in routes /contacts");
+			var phoneNo=req.body.phoneNo;
+			var query = { phone : phoneNo };
+			
+			User.findOne(query).exec(function(err, me){
+				if (me){
+					regCtrl.syncContacts(req, res, me);
+					
+				}else {
+					res.jsonp({status:"Failure",
+					message:"Unable to Find User",
+				object:[]});
+				}
 
 
-		});
-		
+			});
+		}
 	});
   
     
@@ -488,7 +526,7 @@ module.exports = function(app) {
 	});		
 	});
 
-	app.post('/group', auth,function(req,res){
+	app.post('/group', function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
@@ -510,7 +548,7 @@ module.exports = function(app) {
 			}
 		}).single('profilePhoto');
 
-	upload(req, res, function(err) {
+	upload(req, res, async function(err) {
         if (err){
 			logger.info("Error Uploading File : " + err);
             res.jsonp({status:"Failure",
@@ -519,9 +557,14 @@ module.exports = function(app) {
         }else{  
         logger.info ("Photo Is uploaded");
 		console.log (req.files);
-
-	
-
+		// authenticate
+		await auth(req,res);
+		console.log('req.user : ' +req.user );
+		if (!req.user){
+			res.jsonp({status:"Failure",
+			message:"Authetication Failed",
+			object:[]});
+		}else{
 		console.log('tempFileName: ' +tempFileName );
 		if (tempFileName!==undefined){	
 		var form = new FormData();
@@ -556,6 +599,7 @@ module.exports = function(app) {
 		}else {
 			ChatController.createGroup(req.body,'',res);	
 		  }
+		}
 			
 		}
 		
@@ -563,7 +607,7 @@ module.exports = function(app) {
 	});
 	
 	
-	app.post('/updateGroup', auth,function(req,res){
+	app.post('/updateGroup', function(req,res){
 		
 		console.log("in routes updateGroup");
 		var conversation;
@@ -581,7 +625,7 @@ module.exports = function(app) {
 				callback(null, true)
 			}
 		}).single('profilePhoto');
-		upload(req, res, function(err) {
+		upload(req, res,async function(err) {
 			if (err){
 				logger.info("Error Uploading File : " + err);
 				res.jsonp({status:"Failure",
@@ -599,7 +643,14 @@ module.exports = function(app) {
 				var profilePhotoUrl="https://aldaalah.herokuapp.com/images/profileImages/"+tempFileName;
 				//var profilePhotoUrl ="https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAA1DAAAAJDAzYjg1ZDYwLTI1YjQtNDJkOS04OTkwLTUyMjkwNGJiMTY4Yg.jpg";
 				console.log ("updateProfilePhotoFlag Without Parsing: " + req.body.updateProfilePhoto);
-
+				// authenticate
+				await auth(req,res);
+				console.log('req.user : ' +req.user );
+				if (!req.user){
+					res.jsonp({status:"Failure",
+					message:"Authetication Failed",
+					object:[]});
+				}else{
 
 				if (tempFileName){
 				var form = new FormData();
@@ -904,6 +955,7 @@ module.exports = function(app) {
 					}
 
 				}
+			}
 			}catch (err){
 				logger.info('An Exception Has occured in updateGroupName method' + err);
 				}		
@@ -911,31 +963,57 @@ module.exports = function(app) {
 			});            
 	});
 	
-     app.post('/deleteGroup', auth, function(req,res){
+     app.post('/deleteGroup',async function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
-        }
-		console.log("in routes post /deleteGroup");
-		ChatController.closeGroup(req,res);
+		}
+		// authenticate
+		await auth(req,res);
+		console.log('req.user : ' +req.user );
+		if (!req.user){
+			res.jsonp({status:"Failure",
+			message:"Authetication Failed",
+			object:[]});
+		}else{
+			console.log("in routes post /deleteGroup");
+			ChatController.closeGroup(req,res);
+		}
 	});
 	
-	 app.post('/groupMember', auth,function(req,res){
+	 app.post('/groupMember',async function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
-        }
-		console.log("in routes POST /groupMember");
-
-		ChatController.addGroupMember(req,res);
+		}
+		// authenticate
+		await auth(req,res);
+		console.log('req.user : ' +req.user );
+		if (!req.user){
+			res.jsonp({status:"Failure",
+			message:"Authetication Failed",
+			object:[]});
+		}else{
+			console.log("in routes POST /groupMember");
+			ChatController.addGroupMember(req,res);
+		}
 	});
-	 app.post('/deleteMember', auth,function(req,res){
+	 app.post('/deleteMember',async function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
-        }
-		console.log("in routes post /groupMember");
-		ChatController.removeGroupMember(req,res);
+		}
+		// authenticate
+		await auth(req,res);
+		console.log('req.user : ' +req.user );
+		if (!req.user){
+			res.jsonp({status:"Failure",
+			message:"Authetication Failed",
+			object:[]});
+		}else{
+			console.log("in routes post /groupMember");
+			ChatController.removeGroupMember(req,res);
+		}
 	});
 
 
@@ -943,75 +1021,102 @@ module.exports = function(app) {
 	//get location From Client
 	
 
-    app.post('/location', auth, function(req,res){
+    app.post('/location',async function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
         }
-		/*
-		  console.log("start"); 
-	      var country = new Country({ 
-                    _id:"4",
-                    country_id:4,
-                    name: "India", 
-                    code:"021",
-                    shortForm:"ind"
-                     });
-          country.save(function (err, country) {
-               console.log("in save"); 
-                    if(err){
-                       console.log(err); 
-                    }
-              else
-                  console.log("Country Saved"+country); 
-                    
-          });
-*/
-		console.log("in routes /location");
-		var reqData=req.body;
-        // console.log(reqData);
-		LocController.updateUserLocation(reqData,res);
+ 	 // authenticate
+	  await auth(req,res);
+	  console.log('req.user : ' +req.user );
+	  if (!req.user){
+		  res.jsonp({status:"Failure",
+		  message:"Authetication Failed",
+		  object:[]});
+	  }else{
+			console.log("in routes /location");
+			var reqData=req.body;
+			LocController.updateUserLocation(reqData,res);
+	  }
 	});
 		
 	
-	  app.get('/groupLocation', auth, function(req,res){
+	  app.get('/groupLocation',async function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
-        }
-		var conversationId = req.query.conversationId;
-		console.log("in routes /location for group : "+conversationId );
-		LocController.getGroupUserLocations(conversationId,res);
+        } 	 // authenticate
+		await auth(req,res);
+		console.log('req.user : ' +req.user );
+		if (!req.user){
+			res.jsonp({status:"Failure",
+			message:"Authetication Failed",
+			object:[]});
+		}else{
+			var conversationId = req.query.conversationId;
+			console.log("in routes /location for group : "+conversationId );
+			LocController.getGroupUserLocations(conversationId,res);
+		}
 	});
 	
-	app.post('/shareLocation', auth, function(req,res){
+	app.post('/shareLocation',async function(req,res){
 		
 	   if(req.body === undefined||req.body === null) {
         res.end("Empty Body"); 
-        }
-		console.log("in routes /shareLocation");
-		var reqData=req.body;      
-		LocController.updateShareLocationFlag(reqData,res);
+		}
+		// authenticate
+		await auth(req,res);
+		console.log('req.user : ' +req.user );
+		if (!req.user){
+			res.jsonp({status:"Failure",
+			message:"Authetication Failed",
+			object:[]});
+		}else{
+				
+			console.log("in routes /shareLocation");
+			var reqData=req.body;      
+			LocController.updateShareLocationFlag(reqData,res);
+
+		}
 	});
 
-	app.post('/alert', auth, function(req,res){
+	app.post('/alert',async function(req,res){
 		
 		if(req.body === undefined||req.body === null) {
 		 res.end("Empty Body"); 
 		 }
-		 console.log("in routes /alert");
-		 var reqData=req.body;      
-		 LocController.updateAlertFlag(reqData,res);
+		 // authenticate
+		 await auth(req,res);
+		 console.log('req.user : ' +req.user );
+		 if (!req.user){
+			 res.jsonp({status:"Failure",
+			 message:"Authetication Failed",
+			 object:[]});
+		 }else{
+			console.log("in routes /alert");
+			var reqData=req.body;      
+			LocController.updateAlertFlag(reqData,res);
+		 }
+		
 	 });
 	
-	 app.get('/nextmarker', auth, function(req,res){
+	 app.get('/nextmarker',async function(req,res){
 		
 		if(req.body === undefined||req.body === null) {
 		 res.end("Empty Body"); 
 		 }
-		 var markerId = req.query.markerId;
-		 console.log("in routes /nextmarker called with marker id : "+markerId );
-		 LocController.getNextMarker(markerId,res);
+		// authenticate
+		await auth(req,res);
+		console.log('req.user : ' +req.user );
+		if (!req.user){
+			res.jsonp({status:"Failure",
+			message:"Authetication Failed",
+			object:[]});
+		}else{
+			var markerId = req.query.markerId;
+			console.log("in routes /nextmarker called with marker id : "+markerId );
+			LocController.getNextMarker(markerId,res);
+		}
 	 });
 
 	/*  Marker API's */
@@ -1056,41 +1161,50 @@ module.exports = function(app) {
 		});
 
 		//Set User Preference
-		app.post('/preference', auth, function(req,res){
+		app.post('/preference',async function(req,res){
 		
 			if(req.body === undefined||req.body === null) {
 			 res.end("Empty Body"); 
 			 }
-			 console.log("in routes POST:  /markerCategory");
-			 var preferenceId=req.body.preferenceId;
-			 var phoneNo=req.body.phoneNo;
-
-			 AppController.userExists(phoneNo,function (user) {
-				logger.info("Response Of userExists Method : " + user);
-				if (user){
-					user._preferenceId=preferenceId;
-					
-					user.save(function (err, savedUser) {
-					
-						if(err){
-							logger.error('Some Error occured while saving user' + err );
-							res.jsonp({status:"Failure",
-							message:"Unable to Set Prefernce!",
-							object:[]});
-						}
-					else{
-						res.jsonp({status:"success",
-							message:"User Preference is Successfully updated!",
-							object:savedUser});
-					}								
-					});				
-				}
-				else{
+			 	 // authenticate
+			await auth(req,res);
+			console.log('req.user : ' +req.user );
+			if (!req.user){
 				res.jsonp({status:"Failure",
-							message:"User Not Found",
-							object:[]});
-				}						 
-		});	
+				message:"Authetication Failed",
+				object:[]});
+			}else{
+				console.log("in routes POST:  /markerCategory");
+				var preferenceId=req.body.preferenceId;
+				var phoneNo=req.body.phoneNo;
+
+				AppController.userExists(phoneNo,function (user) {
+					logger.info("Response Of userExists Method : " + user);
+					if (user){
+						user._preferenceId=preferenceId;
+						
+						user.save(function (err, savedUser) {
+						
+							if(err){
+								logger.error('Some Error occured while saving user' + err );
+								res.jsonp({status:"Failure",
+								message:"Unable to Set Prefernce!",
+								object:[]});
+							}
+						else{
+							res.jsonp({status:"success",
+								message:"User Preference is Successfully updated!",
+								object:savedUser});
+						}								
+						});				
+					}
+					else{
+					res.jsonp({status:"Failure",
+								message:"User Not Found",
+								object:[]});
+					}						 
+				});	
+			}
 		 });
 	
 	/********  Admin Panel Apis********/
@@ -1108,27 +1222,36 @@ module.exports = function(app) {
 	});		
 	});
 		 // getting User  By user id in Query Params
-	app.post('/user', auth, function(req,res){
-      	var phoneNo = req.body.phoneNo;
-		//let phoneNo = req.query.phoneNo;
-		logger.info("In routes get single user, where phone NO. : "+phoneNo);
-		AppController.userExists(phoneNo,function (user) {
-            logger.info("Response Of userExists Method : " + user);
-			
-			
-			if (user){
-			res.jsonp({status:"success",
-                        message:"User Found",
-                        object:user});
-			}
-			else{
+	app.post('/user', async function(req,res){
+		// authenticate
+		await auth(req,res);
+		console.log('req.user : ' +req.user );
+		if (!req.user){
 			res.jsonp({status:"Failure",
-                        message:"User Not Found",
-                        object:[]});
+			message:"Authetication Failed",
+			object:[]});
+		}else{
+			var phoneNo = req.body.phoneNo;
+			//let phoneNo = req.query.phoneNo;
+			logger.info("In routes get single user, where phone NO. : "+phoneNo);
+			AppController.userExists(phoneNo,function (user) {
+				logger.info("Response Of userExists Method : " + user);
 				
-			}
-                             
-	});		
+				
+				if (user){
+				res.jsonp({status:"success",
+							message:"User Found",
+							object:user});
+				}
+				else{
+				res.jsonp({status:"Failure",
+							message:"User Not Found",
+							object:[]});
+					
+				}
+								
+			});		
+		}
 	});
 	
 	 // getting List of Groups
@@ -1510,7 +1633,7 @@ module.exports = function(app) {
 				}
 			})
 		//app.post('/attachment/photos', uploadPhotos.fields([{ name: 'video', maxCount: 1}, { name: 'image', maxCount: 3}]), function (req, res, next) {
-		app.post('/attachment/photo', auth, uploadPhotos.array('photo', 12),async function (req, res, next) {
+		app.post('/attachment/photo', uploadPhotos.array('photo', 12),async function (req, res, next) {
 			// req.files is array of `photos` files
 			// req.body will contain the text fields, if there were any
 			console.log("in routes  /attachment/photo");
@@ -1520,6 +1643,14 @@ module.exports = function(app) {
 				if (!notAnImageFlag){
 	
 				if (req.files){
+						// authenticate
+					await auth(req,res);
+					console.log('req.user : ' +req.user );
+					if (!req.user){
+						res.jsonp({status:"Failure",
+						message:"Authetication Failed",
+						object:[]});
+					}else{
 
 					console.log('Files Length : '+ req.files.length);
 
@@ -1570,6 +1701,7 @@ module.exports = function(app) {
 						message:"Picture/Pictures are Uploading.",
 						object:[]});
 					}
+				}
 			
 				}else{
 				res.jsonp({status:"Failure",
@@ -1589,7 +1721,7 @@ module.exports = function(app) {
 			});
 
 			 //Add New Attachment
-			 app.post('/attachment', auth, function(req,res){
+			 app.post('/attachment', function(req,res){
 		
 				if(req.body === undefined||req.body === null) {
 				 res.end("Empty Body "); 
@@ -1617,7 +1749,14 @@ module.exports = function(app) {
 					 }else{        
 						logger.info ("File Is uploaded");
 						console.log(req.body.title);
-
+						// authenticate
+						await auth(req,res);
+						console.log('req.user : ' +req.user );
+						if (!req.user){
+							res.jsonp({status:"Failure",
+							message:"Authetication Failed",
+							object:[]});
+						}else{
 						if(tempFileName){
 							var form = new FormData();
 							await form.append('image', fs.createReadStream( './/public//images//'+tempFileName));
@@ -1666,7 +1805,8 @@ module.exports = function(app) {
 							res.jsonp({status:"Failure",
 								message:"Unable To find a file to Upload.",
 								object:[]});
-						}				 
+						}
+					}				 
 						 
 					}
 				 
@@ -1674,17 +1814,17 @@ module.exports = function(app) {
 				 
 			 });
 
-			 
+		 
 		
 		//Upload new Back Up File
-		app.post('/backup', auth, function(req,res){
+		app.post('/backup', function(req,res){
 
 		if(req.body === undefined||req.body === null) {
 			res.end("Empty Body "); 
 			}
 			
 			console.log("in routes  /backup");
-			
+			console.log("req.body.phone: " +req.body.phone);
 			var upload = multer({
 				storage: storage,
 				fileFilter: function(req, file, callback) {
@@ -1704,6 +1844,14 @@ module.exports = function(app) {
 							object:[]});
 				}else{        
 				logger.info ("File Is uploaded");
+				// Autheticate
+				await auth(req,res);
+				console.log('req.user : ' +req.user );
+				if (!req.user){
+					res.jsonp({status:"Failure",
+					message:"Authetication Failed",
+					object:[]});
+				}else{
 				
 				if(tempFileName){
 					var form = new FormData();
@@ -1750,24 +1898,33 @@ module.exports = function(app) {
 				}				 
 					
 			}
+			}
 			
 			})
 			
 		});
 
 		// GET ALL Backups
-		app.get('/backup', auth, function(req,res){
+		app.get('/backup',async function(req,res){
+			// authenticate
+			await auth(req,res);
+			console.log('req.user : ' +req.user );
+			if (!req.user){
+				res.jsonp({status:"Failure",
+				message:"Authetication Failed",
+				object:[]});
+			}else{
 			
-			
-			console.log("in routes get backup, Phone:  " + req.query.phoneNo);
-			AppController.findBackupsByPhoneNum(req.query.phoneNo, function (backups) {
+				console.log("in routes get backup, Phone:  " + req.query.phoneNo);
+				AppController.findBackupsByPhoneNum(req.query.phoneNo, function (backups) {
 
-				console.log("Response Of findBackupsByPhoneNum Method");
-				res.jsonp({status:"success",
-							message:"List Of Backups",
-							object:backups});
-									
-		});		
+					console.log("Response Of findBackupsByPhoneNum Method");
+					res.jsonp({status:"success",
+								message:"List Of Backups",
+								object:backups});
+										
+				});	
+			}	
 		});
 	
 

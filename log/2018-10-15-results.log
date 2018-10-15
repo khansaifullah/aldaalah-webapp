@@ -1,0 +1,345 @@
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:32:24"}
+{"level":"info","message":"req.body: undefined","timestamp":"10:32:24"}
+{"level":"info","message":"Phone #: undefined","timestamp":"10:32:24"}
+{"level":"info","message":"Phone No.undefined","timestamp":"10:32:24"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:33:10"}
+{"level":"info","message":"req.body: undefined","timestamp":"10:33:10"}
+{"level":"info","message":"Phone #: undefined","timestamp":"10:33:10"}
+{"level":"info","message":"Phone No.undefined","timestamp":"10:33:10"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:33:55"}
+{"level":"info","message":"req.body: +55555555","timestamp":"10:33:55"}
+{"level":"info","message":"Phone #: +55555555","timestamp":"10:33:55"}
+{"level":"info","message":"user not found with phone no +55555555","timestamp":"10:33:56"}
+{"level":"info","message":"Unable to find user.","timestamp":"10:33:56"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:36:13"}
+{"level":"info","message":"req.body: undefined","timestamp":"10:36:13"}
+{"level":"info","message":"Phone #: undefined","timestamp":"10:36:13"}
+{"level":"info","message":"Phone No.undefined","timestamp":"10:36:13"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:37:39"}
+{"level":"info","message":"req.body: undefined","timestamp":"10:37:39"}
+{"level":"info","message":"Phone #: undefined","timestamp":"10:37:39"}
+{"level":"info","message":"Phone No.undefined","timestamp":"10:37:39"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:38:16"}
+{"level":"info","message":"req.body: +923345022570","timestamp":"10:38:16"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"10:38:16"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"10:38:16"}
+{"level":"info","message":"User is authentic","timestamp":"10:38:16"}
+{"level":"info","message":"File Is uploaded","timestamp":"10:38:16"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:49:17"}
+{"level":"info","message":"req.body: undefined","timestamp":"10:49:17"}
+{"level":"info","message":"Phone #: undefined","timestamp":"10:49:17"}
+{"level":"info","message":"Phone No.undefined","timestamp":"10:49:17"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:51:58"}
+{"level":"info","message":"req.body: undefined","timestamp":"10:51:58"}
+{"level":"info","message":"Phone #: undefined","timestamp":"10:51:58"}
+{"level":"info","message":"Phone No.undefined","timestamp":"10:51:58"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:52:09"}
+{"level":"info","message":"req.body: undefined","timestamp":"10:52:09"}
+{"level":"info","message":"Phone #: undefined","timestamp":"10:52:09"}
+{"level":"info","message":"Phone No.undefined","timestamp":"10:52:09"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:52:15"}
+{"level":"info","message":"req.body: +55555555","timestamp":"10:52:15"}
+{"level":"info","message":"Phone #: +55555555","timestamp":"10:52:15"}
+{"level":"info","message":"user not found with phone no +55555555","timestamp":"10:52:15"}
+{"level":"info","message":"Unable to find user.","timestamp":"10:52:15"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundary79iBI9O4FyTeD1zq","timestamp":"10:55:44"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:55:44"}
+{"level":"info","message":"req.body: undefined","timestamp":"10:55:44"}
+{"level":"info","message":"Phone #: undefined","timestamp":"10:55:44"}
+{"level":"info","message":"Phone No.undefined","timestamp":"10:55:44"}
+{"level":"info","message":"contentTypeheader: application/json","timestamp":"10:56:27"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:56:27"}
+{"level":"info","message":"req.body: +55555555","timestamp":"10:56:27"}
+{"level":"info","message":"Phone #: +55555555","timestamp":"10:56:27"}
+{"level":"info","message":"user not found with phone no +55555555","timestamp":"10:56:27"}
+{"level":"info","message":"Unable to find user.","timestamp":"10:56:27"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundarytinyj4OVETDHif3U","timestamp":"10:57:52"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:57:52"}
+{"level":"info","message":"req.body: undefined","timestamp":"10:57:52"}
+{"level":"info","message":"Phone #: undefined","timestamp":"10:57:52"}
+{"level":"info","message":"Phone No.undefined","timestamp":"10:57:52"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryZcGUY4cE2GLxq3Ba","timestamp":"10:59:42"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"10:59:42"}
+{"level":"info","message":"req.body: undefined","timestamp":"10:59:42"}
+{"level":"info","message":"Phone #: undefined","timestamp":"10:59:42"}
+{"level":"info","message":"Phone No.undefined","timestamp":"10:59:42"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryudocj6k0vptA8KoY","timestamp":"11:00:38"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:00:38"}
+{"level":"info","message":"req.body: undefined","timestamp":"11:00:38"}
+{"level":"info","message":"Phone #: undefined","timestamp":"11:00:38"}
+{"level":"info","message":"Phone No.undefined","timestamp":"11:00:38"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryTFDwZ0B4yI3Od9Ym","timestamp":"11:00:45"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:00:45"}
+{"level":"info","message":"req.body: undefined","timestamp":"11:00:45"}
+{"level":"info","message":"Phone #: undefined","timestamp":"11:00:45"}
+{"level":"info","message":"Phone No.undefined","timestamp":"11:00:45"}
+{"level":"info","message":"contentTypeheader: undefined","timestamp":"11:00:54"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMjUwZGJlZmUzZTAwMTQ2NjlmZjAiLCJpYXQiOjE1MzkxNTE3NjF9.hCvXavjbhYKYiWFdcbWWg6IxrIj1An3zsBiyUKme7QY","timestamp":"11:00:54"}
+{"level":"info","message":"req.body: undefined","timestamp":"11:00:54"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"11:00:54"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"11:00:54"}
+{"level":"info","message":"User is authentic","timestamp":"11:00:54"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryTIK91F5AHIPQB0HE","timestamp":"11:01:51"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:01:51"}
+{"level":"info","message":"req.body: undefined","timestamp":"11:01:51"}
+{"level":"info","message":"Phone #: undefined","timestamp":"11:01:51"}
+{"level":"info","message":"Phone No.undefined","timestamp":"11:01:51"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundarykIofD9wnxSL5Pmtk","timestamp":"11:03:21"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:03:21"}
+{"level":"info","message":"req.body: undefined","timestamp":"11:03:21"}
+{"level":"info","message":"Phone #: undefined","timestamp":"11:03:21"}
+{"level":"info","message":"Phone No.undefined","timestamp":"11:03:21"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryjZL6bwwwzDuyZVWK","timestamp":"11:03:54"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:03:54"}
+{"level":"info","message":"req.body: undefined","timestamp":"11:03:54"}
+{"level":"info","message":"Phone #: undefined","timestamp":"11:03:54"}
+{"level":"info","message":"Phone No.undefined","timestamp":"11:03:54"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundary2IogxMnt7h9lzjTf","timestamp":"11:07:13"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:07:13"}
+{"level":"info","message":"req.body: undefined","timestamp":"11:07:13"}
+{"level":"info","message":"Phone #: undefined","timestamp":"11:07:13"}
+{"level":"info","message":"Phone No.undefined","timestamp":"11:07:13"}
+{"level":"info","message":"File NEW Name  :file-1539583633607.png","timestamp":"11:07:13"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:07:13"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryfcgAVwh3p2Gyf4O9","timestamp":"11:07:45"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:07:45"}
+{"level":"info","message":"req.body: undefined","timestamp":"11:07:45"}
+{"level":"info","message":"Phone #: undefined","timestamp":"11:07:45"}
+{"level":"info","message":"Phone No.undefined","timestamp":"11:07:45"}
+{"level":"info","message":"File NEW Name  :file-1539583665490.png","timestamp":"11:07:45"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:07:45"}
+{"level":"info","message":"File NEW Name  :file-1539583695061.png","timestamp":"11:08:15"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:08:15"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryuRhvHLk5GOZHYAit","timestamp":"11:22:19"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:22:19"}
+{"level":"info","message":"req.body: undefined","timestamp":"11:22:19"}
+{"level":"info","message":"Phone #: undefined","timestamp":"11:22:19"}
+{"level":"info","message":"Phone No.undefined","timestamp":"11:22:19"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryd4tqr81W7J3owl9s","timestamp":"11:22:26"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:22:26"}
+{"level":"info","message":"req.body: undefined","timestamp":"11:22:26"}
+{"level":"info","message":"Phone #: undefined","timestamp":"11:22:26"}
+{"level":"info","message":"Phone No.undefined","timestamp":"11:22:26"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryHAcq9GYotL068lYT","timestamp":"11:22:31"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:22:31"}
+{"level":"info","message":"req.body: undefined","timestamp":"11:22:31"}
+{"level":"info","message":"Phone #: undefined","timestamp":"11:22:31"}
+{"level":"info","message":"Phone No.undefined","timestamp":"11:22:31"}
+{"level":"info","message":"File NEW Name  :file-1539584665391.png","timestamp":"11:24:25"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:24:25"}
+{"level":"info","message":"File NEW Name  :file-1539584978971.jpg","timestamp":"11:29:38"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:29:38"}
+{"level":"info","message":"File NEW Name  :file-1539585121961.jpg","timestamp":"11:32:01"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:32:01"}
+{"level":"info","message":"File NEW Name  :file-1539585147535.jpg","timestamp":"11:32:27"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:32:27"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryqAYxGX63tqklATcK","timestamp":"11:32:27"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:32:27"}
+{"level":"info","message":"req.body: +923345022570","timestamp":"11:32:27"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:32:27"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:32:27"}
+{"level":"info","message":"User is authentic","timestamp":"11:32:27"}
+{"level":"info","message":"File NEW Name  :file-1539585740879.jpg","timestamp":"11:42:20"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:42:20"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryFZuYoJhA9NnI1va5","timestamp":"11:42:20"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:42:20"}
+{"level":"info","message":"req.body: +923345022570","timestamp":"11:42:20"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:42:20"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:42:22"}
+{"level":"info","message":"User is authentic","timestamp":"11:42:22"}
+{"level":"info","message":"File NEW Name  :file-1539585751344.jpg","timestamp":"11:42:31"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:42:31"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundarysbk0sW7aaPqqPqpP","timestamp":"11:42:31"}
+{"level":"info","message":"token: undefined","timestamp":"11:42:31"}
+{"level":"info","message":"req.body: +923345022570","timestamp":"11:42:31"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:42:31"}
+{"level":"info","message":"Exception Occured.JsonWebTokenError: jwt must be provided","timestamp":"11:42:31"}
+{"level":"info","message":"File NEW Name  :file-1539585888074.jpg","timestamp":"11:44:48"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:44:48"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundary0UGZuKVumgaGT9V6","timestamp":"11:44:48"}
+{"level":"info","message":"token: undefined","timestamp":"11:44:48"}
+{"level":"info","message":"req.body: +923345022570","timestamp":"11:44:48"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:44:48"}
+{"level":"info","message":"Exception Occured.JsonWebTokenError: jwt must be provided","timestamp":"11:44:48"}
+{"level":"info","message":"File NEW Name  :file-1539586021008.jpg","timestamp":"11:47:01"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:47:01"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryqNo7izGqwrjkhD83","timestamp":"11:47:01"}
+{"level":"info","message":"token: undefined","timestamp":"11:47:01"}
+{"level":"info","message":"req.body: +923345022570","timestamp":"11:47:01"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:47:01"}
+{"level":"info","message":"Exception Occured.JsonWebTokenError: jwt must be provided","timestamp":"11:47:01"}
+{"level":"info","message":"File NEW Name  :file-1539586028639.jpg","timestamp":"11:47:08"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:47:08"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryJekPFOBBph444yjZ","timestamp":"11:47:08"}
+{"level":"info","message":"token: undefined","timestamp":"11:47:08"}
+{"level":"info","message":"req.body: undefined","timestamp":"11:47:08"}
+{"level":"info","message":"Phone #: undefined","timestamp":"11:47:08"}
+{"level":"info","message":"Phone No.undefined","timestamp":"11:47:08"}
+{"level":"info","message":"File NEW Name  :file-1539586035914.jpg","timestamp":"11:47:15"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:47:15"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundarySZfLtyiEzrrtrdJm","timestamp":"11:47:15"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:47:15"}
+{"level":"info","message":"req.body: +923345022570","timestamp":"11:47:15"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:47:15"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:47:16"}
+{"level":"info","message":"User is authentic","timestamp":"11:47:16"}
+{"level":"info","message":"File Is uploaded","timestamp":"11:47:26"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundary2NlBZ56skFsrGAoC","timestamp":"11:47:26"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"11:47:26"}
+{"level":"info","message":"req.body: +923345022570","timestamp":"11:47:26"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"11:47:26"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"11:47:27"}
+{"level":"info","message":"User is authentic","timestamp":"11:47:27"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:07:09"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryAjM0aqQRI0wsZ1IF","timestamp":"12:07:09"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"12:07:09"}
+{"level":"info","message":"req.body: +923345022570","timestamp":"12:07:09"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"12:07:09"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:07:10"}
+{"level":"info","message":"User is authentic","timestamp":"12:07:10"}
+{"level":"info","message":"File NEW Name  :file-1539587247741.png","timestamp":"12:07:27"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:07:27"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryChcqEqiyUZpWlNHv","timestamp":"12:07:27"}
+{"level":"info","message":"token: undefined","timestamp":"12:07:27"}
+{"level":"info","message":"req.body: +923345022570","timestamp":"12:07:27"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"12:07:27"}
+{"level":"info","message":"Exception Occured.JsonWebTokenError: jwt must be provided","timestamp":"12:07:27"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"12:07:58"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"12:07:58"}
+{"level":"info","message":"Token provided is not valid for this user.","timestamp":"12:07:58"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"12:08:04"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"12:08:04"}
+{"level":"info","message":"User is authentic","timestamp":"12:08:04"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"12:08:28"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"12:08:28"}
+{"level":"info","message":"User is authentic","timestamp":"12:08:28"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"12:08:45"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"12:08:45"}
+{"level":"info","message":"Token provided is not valid for this user.","timestamp":"12:08:45"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"12:08:57"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"12:08:57"}
+{"level":"info","message":"User is authentic","timestamp":"12:08:57"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"12:10:00"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"12:10:00"}
+{"level":"info","message":"User is authentic","timestamp":"12:10:00"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"12:12:56"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"12:12:57"}
+{"level":"info","message":"User is authentic","timestamp":"12:12:57"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"12:15:14"}
+{"level":"info","message":"LocationController.updateAlertFlag called  :+923345022570**false","timestamp":"12:15:14"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:15:14"}
+{"level":"info","message":"Token provided is not valid for this user.","timestamp":"12:15:14"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:15:14"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"12:17:22"}
+{"level":"info","message":"LocationController.updateAlertFlag called  :+923345022570**false","timestamp":"12:17:22"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:17:23"}
+{"level":"info","message":"+923345022570Alerts flag : false","timestamp":"12:17:23"}
+{"level":"info","message":"User Alerts Flag updated With Phone Num +923345022570 at  :Mon Oct 15 2018 12:17:23 GMT+0500 (Pakistan Standard Time)","timestamp":"12:17:23"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:17:23"}
+{"level":"info","message":"Token provided is not valid for this user.","timestamp":"12:17:23"}
+{"level":"info","message":"contentTypeheader: application/json","timestamp":"12:20:01"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMjUwZGJlZmUzZTAwMTQ2NjlmZjAiLCJpYXQiOjE1MzkxNTE3NjF9.hCvXavjbhYKYiWFdcbWWg6IxrIj1An3zsBiyUKme7QY","timestamp":"12:20:01"}
+{"level":"info","message":"req.body: undefined","timestamp":"12:20:01"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"12:20:01"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:20:03"}
+{"level":"info","message":"Token provided is not valid for this user.","timestamp":"12:20:03"}
+{"level":"info","message":"contentTypeheader: application/json","timestamp":"12:20:14"}
+{"level":"info","message":"token: undefined","timestamp":"12:20:14"}
+{"level":"info","message":"req.body: undefined","timestamp":"12:20:14"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"12:20:14"}
+{"level":"info","message":"Exception Occured.JsonWebTokenError: jwt must be provided","timestamp":"12:20:14"}
+{"level":"info","message":"contentTypeheader: application/json","timestamp":"12:20:21"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMjUwZGJlZmUzZTAwMTQ2NjlmZjAiLCJpYXQiOjE1MzkxNTE3NjF9.hCvXavjbhYKYiWFdcbWWg6IxrIj1An3zsBiyUKme7QY","timestamp":"12:20:22"}
+{"level":"info","message":"req.body: undefined","timestamp":"12:20:22"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"12:20:22"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"12:20:22"}
+{"level":"info","message":"User is authentic","timestamp":"12:20:22"}
+{"level":"info","message":"LocationController.updateAlertFlag called  :+923345022571**false","timestamp":"12:20:22"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"12:20:22"}
+{"level":"info","message":"+923345022571Alerts flag : false","timestamp":"12:20:22"}
+{"level":"info","message":"User Alerts Flag updated With Phone Num +923345022571 at  :Mon Oct 15 2018 12:20:22 GMT+0500 (Pakistan Standard Time)","timestamp":"12:20:22"}
+{"level":"info","message":"contentTypeheader: application/json","timestamp":"12:31:22"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMjUwZGJlZmUzZTAwMTQ2NjlmZjAiLCJpYXQiOjE1MzkxNTE3NjF9.hCvXavjbhYKYiWFdcbWWg6IxrIj1An3zsBiyUKme7QY","timestamp":"12:31:22"}
+{"level":"info","message":"req.body: undefined","timestamp":"12:31:22"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"12:31:22"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"12:31:22"}
+{"level":"info","message":"User is authentic","timestamp":"12:31:22"}
+{"level":"info","message":"LocationController.updateAlertFlag called  :+923345022571**false","timestamp":"12:31:22"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"12:31:23"}
+{"level":"info","message":"+923345022571Alerts flag : false","timestamp":"12:31:23"}
+{"level":"info","message":"User Alerts Flag updated With Phone Num +923345022571 at  :Mon Oct 15 2018 12:31:23 GMT+0500 (Pakistan Standard Time)","timestamp":"12:31:23"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:32:13"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryXLslUJUAsOFncD6W","timestamp":"12:32:13"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"12:32:13"}
+{"level":"info","message":"req.body: undefined","timestamp":"12:32:13"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"12:32:13"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:32:14"}
+{"level":"info","message":"User is authentic","timestamp":"12:32:14"}
+{"level":"info","message":"Profile Photo Not Found ","timestamp":"12:32:14"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:32:14"}
+{"level":"info","message":"Response Of userExists Method : { _id: 5b5c38cba7a91400141faf24,\n  updatedAt: 2018-10-13T15:16:42.217Z,\n  createdAt: 2018-07-28T09:35:07.401Z,\n  phone: '+923345022570',\n  country_code: '+92',\n  verified_user: true,\n  verification_code: '9079',\n  __v: 0,\n  OS: 'android',\n  active: false,\n  full_name: 'Saif1',\n  _preferenceId: 5b5c3d27a7a91400141faf25,\n  password: '$2b$10$wASuHSbWDqj76MkQtAJnI.t4VX0gyTuBZfQK/sl6S2ILVHJfHD1uK',\n  user_name: 'saifkhan',\n  email: 'khansaifullah1995@gmail.com',\n  city: 'kohaat',\n  dob: 1994-11-06T19:00:00.000Z,\n  gender: '1',\n  country: 'BHR',\n  status: 'My Status 1',\n  last_shared_loc_time: 2018-07-28T09:35:07.393Z,\n  alert_flag: false,\n  share_loc_flag_time: 2018-07-28T09:35:07.393Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: '' }","timestamp":"12:32:14"}
+{"level":"info","message":"RegistrationController.updateStatus called for user  :+923345022570","timestamp":"12:32:14"}
+{"level":"info","message":" Exit RegistrationController.updateStatus Method","timestamp":"12:32:14"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"12:32:14"}
+{"level":"info","message":"RegistrationController.updateName called for user  :+923345022570","timestamp":"12:32:14"}
+{"level":"info","message":" Exit RegistrationController.updateName Method","timestamp":"12:32:14"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"12:32:15"}
+{"level":"info","message":"RegistrationController.updateProfilePhoto called for user  :+923345022570","timestamp":"12:32:15"}
+{"level":"info","message":" Exit RegistrationController.updateProfilePhoto Method","timestamp":"12:32:15"}
+{"level":"info","message":"User Name updated With Phone Num +923345022570","timestamp":"12:32:15"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:32:19"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryyuiB1cUThVGwpA8x","timestamp":"12:32:19"}
+{"level":"info","message":"token: undefined","timestamp":"12:32:19"}
+{"level":"info","message":"req.body: undefined","timestamp":"12:32:19"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"12:32:19"}
+{"level":"info","message":"Exception Occured.JsonWebTokenError: jwt must be provided","timestamp":"12:32:19"}
+{"level":"info","message":"Photo Is uploaded","timestamp":"12:32:29"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryscZ7mSWM0nAVYABo","timestamp":"12:32:29"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"12:32:29"}
+{"level":"info","message":"req.body: undefined","timestamp":"12:32:29"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"12:32:29"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"12:32:29"}
+{"level":"info","message":"Token provided is not valid for this user.","timestamp":"12:32:29"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:34:16"}
+{"level":"info","message":"contentTypeheader: undefined","timestamp":"12:34:16"}
+{"level":"info","message":"token: undefined","timestamp":"12:34:16"}
+{"level":"info","message":"req.body: undefined","timestamp":"12:34:16"}
+{"level":"info","message":"Phone #: undefined","timestamp":"12:34:16"}
+{"level":"info","message":"Phone No.undefined","timestamp":"12:34:16"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:34:29"}
+{"level":"info","message":"contentTypeheader: undefined","timestamp":"12:34:29"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"12:34:29"}
+{"level":"info","message":"req.body: undefined","timestamp":"12:34:29"}
+{"level":"info","message":"Phone #: undefined","timestamp":"12:34:29"}
+{"level":"info","message":"Phone No.undefined","timestamp":"12:34:29"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:34:45"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryGkgquJr3kGHiUnHx","timestamp":"12:34:45"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"12:34:45"}
+{"level":"info","message":"req.body: +92334502271","timestamp":"12:34:45"}
+{"level":"info","message":"Phone #: +92334502271","timestamp":"12:34:45"}
+{"level":"info","message":"user not found with phone no +92334502271","timestamp":"12:34:46"}
+{"level":"info","message":"Unable to find user.","timestamp":"12:34:46"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1539588925527.jpg","timestamp":"12:35:25"}
+{"level":"info","message":"File Is uploaded","timestamp":"12:35:25"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryJrEptjdfK5OQmKan","timestamp":"12:35:25"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"12:35:25"}
+{"level":"info","message":"req.body: +923345022570","timestamp":"12:35:25"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"12:35:25"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"12:35:25"}
+{"level":"info","message":"User is authentic","timestamp":"12:35:25"}
+{"level":"info","message":"Not an Error","timestamp":"12:35:26"}
+{"level":"error","message":"unable to get file url","timestamp":"12:35:27"}
+{"level":"info","message":"RegistrationController.completeProfile called for user  :+923345022570","timestamp":"12:35:27"}
+{"level":"info","message":"UserExists Method Called","timestamp":"12:35:27"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"12:35:27"}
+{"level":"info","message":" Exit RegistrationController.completeProfile Method","timestamp":"12:35:27"}
+{"level":"info","message":"User Found with Phone Num. :+923345022570","timestamp":"12:35:27"}
+{"level":"info","message":"User updated With Phone Num +923345022570","timestamp":"12:35:27"}
+{"level":"info","message":"File NEW Name  :profilePhoto-1539591068201.jpg","timestamp":"13:11:08"}
+{"level":"info","message":"File Is uploaded","timestamp":"13:11:08"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryGiYlTM9GAKhHY2dB","timestamp":"13:11:08"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"13:11:08"}
+{"level":"info","message":"req.body: +923345022571","timestamp":"13:11:08"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"13:11:08"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"13:11:08"}
+{"level":"info","message":"Token provided is not valid for this user.","timestamp":"13:11:08"}
