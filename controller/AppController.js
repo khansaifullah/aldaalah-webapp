@@ -430,7 +430,7 @@ exports.addAttachment = async function(req, fileUrl, res, callback) {
 
 exports.addBackup = async function(req, fileUrl, res, callback) {
 	try{ 	
-		console.log("In Controller addBackup Method");   
+		console.log("In Controller addBackup Method : " + req.body.phone);   
 
 		var newBackup = new Backup({  			
 			userMobile:req.body.phone ,
@@ -445,7 +445,9 @@ exports.addBackup = async function(req, fileUrl, res, callback) {
 				User.findOne(query).exec(function(err, user){
 				if (user){
 					// back up failed push notification
-					NotificationController.sendNotifcationToPlayerId(user.palyer_id,errorMessageObj,"backupUploadFailed");
+					logger.info('User Found With num  : '  + user.phone);
+					logger.info('Sending backupUploadFailed Notification to Player Id: '+ user.palyer_id);
+					NotificationController.sendNotifcationToPlayerId(user._palyer_id,errorMessageObj,"backupUploadFailed");
 			
 				}
 				});
@@ -468,8 +470,11 @@ exports.addBackup = async function(req, fileUrl, res, callback) {
 			}
 
 				var successMessageObj={message:"Backup Completed.", object:backupObj};
+				var query = { phone : req.body.phone };
 				User.findOne(query).exec(function(err, user){
 					if (user){
+						logger.info('User Found With num  : '  + user.phone);
+						logger.info('Sending backupCompleted Notification to Player Id: '+ user.palyer_id);
 						NotificationController.sendNotifcationToPlayerId(user.palyer_id,successMessageObj,"backupCompleted");
 					}
 				});

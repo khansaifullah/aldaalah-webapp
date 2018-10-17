@@ -1,0 +1,155 @@
+{"level":"info","message":"in routes get userpreference : +923074802433","timestamp":"14:28:54"}
+{"level":"info","message":"in routes get userpreference : +923074802433","timestamp":"14:29:43"}
+{"level":"info","message":"user._preferenceId : null","timestamp":"14:29:44"}
+{"level":"info","message":"in routes get preference","timestamp":"14:30:48"}
+{"level":"info","message":"3 MarkerCategory Found","timestamp":"14:30:48"}
+{"level":"info","message":"Response Of findAllMarkerCategories Method","timestamp":"14:30:48"}
+{"level":"info","message":"contentTypeheader: text/plain;charset=UTF-8","timestamp":"14:32:13"}
+{"level":"info","message":"token: undefined","timestamp":"14:32:13"}
+{"level":"info","message":"req.body: undefined","timestamp":"14:32:13"}
+{"level":"info","message":"Phone #: undefined","timestamp":"14:32:13"}
+{"level":"info","message":"Phone No.undefined","timestamp":"14:32:13"}
+{"level":"info","message":"contentTypeheader: text/plain;charset=UTF-8","timestamp":"14:34:51"}
+{"level":"info","message":"token: undefined","timestamp":"14:34:51"}
+{"level":"info","message":"req.body: undefined","timestamp":"14:34:51"}
+{"level":"info","message":"Phone #: undefined","timestamp":"14:34:51"}
+{"level":"info","message":"Phone No.undefined","timestamp":"14:34:51"}
+{"level":"info","message":"contentTypeheader: text/plain;charset=UTF-8","timestamp":"14:35:41"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Yjk5NjE3NjU5MGMwNjAwMTRiMjcwMDciLCJpYXQiOjE1Mzk2NzU4MjV9.zprbysNKcCh7HR9imGvyeymHhKtDa_NFfzFa9bqrHtw","timestamp":"14:35:41"}
+{"level":"info","message":"req.body: undefined","timestamp":"14:35:41"}
+{"level":"info","message":"Phone #: undefined","timestamp":"14:35:41"}
+{"level":"info","message":"Phone No.undefined","timestamp":"14:35:41"}
+{"level":"info","message":"contentTypeheader: application/json","timestamp":"14:36:25"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Yjk5NjE3NjU5MGMwNjAwMTRiMjcwMDciLCJpYXQiOjE1Mzk2NzU4MjV9.zprbysNKcCh7HR9imGvyeymHhKtDa_NFfzFa9bqrHtw","timestamp":"14:36:25"}
+{"level":"info","message":"req.body: undefined","timestamp":"14:36:25"}
+{"level":"info","message":"Phone #: +923074802433","timestamp":"14:36:25"}
+{"level":"info","message":"user found with phone no +923074802433","timestamp":"14:36:26"}
+{"level":"info","message":"User is authentic","timestamp":"14:36:26"}
+{"level":"info","message":"user found with phone no +923074802433","timestamp":"14:36:26"}
+{"level":"info","message":"Response Of userExists Method : { _id: 5b996176590c060014b27007,\n  updatedAt: 2018-10-16T19:52:47.947Z,\n  createdAt: 2018-09-12T18:56:54.368Z,\n  phone: '+923074802433',\n  country_code: '+92',\n  verified_user: true,\n  verification_code: '9973',\n  __v: 85,\n  palyer_id: 'cb7d7d30-b3af-4bbc-84dc-beb4937bc37f',\n  OS: 'Android',\n  active: false,\n  full_name: 'Zohaib',\n  loc: [ 73.0145154, 33.5940369 ],\n  _preferenceId: null,\n  status: 'This is my test status',\n  last_shared_loc_time: 2018-10-05T09:47:47.457Z,\n  alert_flag: true,\n  share_loc_flag_time: 2018-09-12T18:56:54.366Z,\n  share_location: true,\n  deactivate_user: false,\n  profile_photo_url: '' }","timestamp":"14:36:26"}
+{"level":"info","message":"in routes get userpreference : +923074802433","timestamp":"14:36:45"}
+{"level":"info","message":"user._preferenceId : 5bb0a28d75cf372ec83dc12b","timestamp":"14:36:46"}
+{"level":"info","message":"contentTypeheader: undefined","timestamp":"14:38:20"}
+{"level":"info","message":"token: undefined","timestamp":"14:38:20"}
+{"level":"info","message":"req.body: undefined","timestamp":"14:38:20"}
+{"level":"info","message":"Phone #: +923074802433","timestamp":"14:38:20"}
+{"level":"info","message":"Exception Occured.JsonWebTokenError: jwt must be provided","timestamp":"14:38:20"}
+{"level":"info","message":"contentTypeheader: undefined","timestamp":"14:38:23"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Yjk5NjE3NjU5MGMwNjAwMTRiMjcwMDciLCJpYXQiOjE1Mzk2NzU4MjV9.zprbysNKcCh7HR9imGvyeymHhKtDa_NFfzFa9bqrHtw","timestamp":"14:38:23"}
+{"level":"info","message":"req.body: undefined","timestamp":"14:38:23"}
+{"level":"info","message":"Phone #: +923074802433","timestamp":"14:38:23"}
+{"level":"info","message":"user found with phone no +923074802433","timestamp":"14:38:23"}
+{"level":"info","message":"User is authentic","timestamp":"14:38:23"}
+{"level":"info","message":"in routes get userpreference : +923074802433","timestamp":"14:38:23"}
+{"level":"info","message":"user._preferenceId : 5bb0a28d75cf372ec83dc12b","timestamp":"14:38:23"}
+{"level":"info","message":"contentTypeheader: undefined","timestamp":"14:46:22"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Yjk5NjE3NjU5MGMwNjAwMTRiMjcwMDciLCJpYXQiOjE1Mzk2NzU4MjV9.zprbysNKcCh7HR9imGvyeymHhKtDa_NFfzFa9bqrHtw","timestamp":"14:46:22"}
+{"level":"info","message":"req.body: undefined","timestamp":"14:46:22"}
+{"level":"info","message":"Phone #: +923074802433","timestamp":"14:46:22"}
+{"level":"info","message":"user found with phone no +923074802433","timestamp":"14:46:23"}
+{"level":"info","message":"User is authentic","timestamp":"14:46:23"}
+{"level":"info","message":"contentTypeheader: undefined","timestamp":"14:49:43"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"14:49:43"}
+{"level":"info","message":"req.body: undefined","timestamp":"14:49:43"}
+{"level":"info","message":"Phone #: +923345022570","timestamp":"14:49:43"}
+{"level":"info","message":"user found with phone no +923345022570","timestamp":"14:49:43"}
+{"level":"info","message":"User is authentic","timestamp":"14:49:43"}
+{"level":"info","message":"File Is uploaded","timestamp":"15:19:21"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryPpyemQ99Aa5wXHZH","timestamp":"15:19:21"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMmEyNGJlZmUzZTAwMTQ2NjlmZjIiLCJpYXQiOjE1Mzk3NzE0MjV9.qeujZn0jRd4TFpdW-OfdaB6j13At2Slj3QmIPVuDUTc","timestamp":"15:19:21"}
+{"level":"info","message":"req.body: +923124999213","timestamp":"15:19:21"}
+{"level":"info","message":"Phone #: +923124999213","timestamp":"15:19:21"}
+{"level":"info","message":"user found with phone no +923124999213","timestamp":"15:19:21"}
+{"level":"info","message":"User is authentic","timestamp":"15:19:21"}
+{"level":"info","message":"File NEW Name  :file-1539771582918.png","timestamp":"15:19:42"}
+{"level":"info","message":"File Is uploaded","timestamp":"15:19:42"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryRWmoJiz0bCEpcTRV","timestamp":"15:19:42"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMmEyNGJlZmUzZTAwMTQ2NjlmZjIiLCJpYXQiOjE1Mzk3NzE0MjV9.qeujZn0jRd4TFpdW-OfdaB6j13At2Slj3QmIPVuDUTc","timestamp":"15:19:42"}
+{"level":"info","message":"req.body: +923124999213","timestamp":"15:19:42"}
+{"level":"info","message":"Phone #: +923124999213","timestamp":"15:19:42"}
+{"level":"info","message":"user found with phone no +923124999213","timestamp":"15:19:43"}
+{"level":"info","message":"User is authentic","timestamp":"15:19:43"}
+{"level":"info","message":"File NEW Name  :file-1539772128507.png","timestamp":"15:28:48"}
+{"level":"info","message":"File Is uploaded","timestamp":"15:28:48"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryOi6ehyb2EO1BYqAA","timestamp":"15:28:48"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMmEyNGJlZmUzZTAwMTQ2NjlmZjIiLCJpYXQiOjE1Mzk3NzE0MjV9.qeujZn0jRd4TFpdW-OfdaB6j13At2Slj3QmIPVuDUTc","timestamp":"15:28:48"}
+{"level":"info","message":"req.body: +923124999213","timestamp":"15:28:48"}
+{"level":"info","message":"Phone #: +923124999213","timestamp":"15:28:48"}
+{"level":"info","message":"user found with phone no +923124999213","timestamp":"15:28:48"}
+{"level":"info","message":"User is authentic","timestamp":"15:28:48"}
+{"level":"error","message":"Sending backupCompleted Notification to Player Id: undefined","timestamp":"15:28:53"}
+{"level":"info","message":"File NEW Name  :file-1539772259289.png","timestamp":"15:30:59"}
+{"level":"info","message":"File Is uploaded","timestamp":"15:30:59"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundarybSWA1cnV2n2rVaOi","timestamp":"15:30:59"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMmEyNGJlZmUzZTAwMTQ2NjlmZjIiLCJpYXQiOjE1Mzk3NzE0MjV9.qeujZn0jRd4TFpdW-OfdaB6j13At2Slj3QmIPVuDUTc","timestamp":"15:30:59"}
+{"level":"info","message":"req.body: +923124999213","timestamp":"15:30:59"}
+{"level":"info","message":"Phone #: +923124999213","timestamp":"15:30:59"}
+{"level":"info","message":"user found with phone no +923124999213","timestamp":"15:30:59"}
+{"level":"info","message":"User is authentic","timestamp":"15:30:59"}
+{"level":"info","message":"User Found With num  : +923345022570","timestamp":"15:31:03"}
+{"level":"info","message":"Sending backupCompleted Notification to Player Id: undefined","timestamp":"15:31:03"}
+{"level":"info","message":"File NEW Name  :file-1539772290949.png","timestamp":"15:31:30"}
+{"level":"info","message":"File Is uploaded","timestamp":"15:31:30"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryB2f33zZRP6KlDatB","timestamp":"15:31:30"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMmEyNGJlZmUzZTAwMTQ2NjlmZjIiLCJpYXQiOjE1Mzk3NzE0MjV9.qeujZn0jRd4TFpdW-OfdaB6j13At2Slj3QmIPVuDUTc","timestamp":"15:31:30"}
+{"level":"info","message":"req.body: +923124999213","timestamp":"15:31:30"}
+{"level":"info","message":"Phone #: +923124999213","timestamp":"15:31:31"}
+{"level":"info","message":"user found with phone no +923124999213","timestamp":"15:31:31"}
+{"level":"info","message":"User is authentic","timestamp":"15:31:31"}
+{"level":"info","message":"User Found With num  : +923345022570","timestamp":"15:31:35"}
+{"level":"info","message":"Sending backupCompleted Notification to Player Id: undefined","timestamp":"15:31:35"}
+{"level":"info","message":"File NEW Name  :file-1539772348804.png","timestamp":"15:32:28"}
+{"level":"info","message":"File Is uploaded","timestamp":"15:32:28"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundary4fglRyO96bwHwvhW","timestamp":"15:32:28"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjVjMzhjYmE3YTkxNDAwMTQxZmFmMjQiLCJpYXQiOjE1MzkxNTE2NDl9.cpRY9lEqRjoJ4vpb9y1tMf69IU3J-uT1qWOKp2K-jg8","timestamp":"15:32:28"}
+{"level":"info","message":"req.body: +923345022571","timestamp":"15:32:28"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"15:32:28"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"15:32:29"}
+{"level":"info","message":"Token provided is not valid for this user.","timestamp":"15:32:29"}
+{"level":"info","message":"File NEW Name  :file-1539772371180.png","timestamp":"15:32:51"}
+{"level":"info","message":"File Is uploaded","timestamp":"15:32:51"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryWB5JWtJkd3BfdHAv","timestamp":"15:32:51"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMjUwZGJlZmUzZTAwMTQ2NjlmZjAiLCJpYXQiOjE1MzkxNTE3NjF9.hCvXavjbhYKYiWFdcbWWg6IxrIj1An3zsBiyUKme7QY","timestamp":"15:32:51"}
+{"level":"info","message":"req.body: +923345022571","timestamp":"15:32:51"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"15:32:51"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"15:32:51"}
+{"level":"info","message":"User is authentic","timestamp":"15:32:51"}
+{"level":"info","message":"User Found With num  : +923345022570","timestamp":"15:32:55"}
+{"level":"info","message":"Sending backupCompleted Notification to Player Id: undefined","timestamp":"15:32:55"}
+{"level":"info","message":"File NEW Name  :file-1539773026154.png","timestamp":"15:43:46"}
+{"level":"info","message":"File Is uploaded","timestamp":"15:43:46"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryGJ4EnB2LZ9ghnuq5","timestamp":"15:43:46"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMjUwZGJlZmUzZTAwMTQ2NjlmZjAiLCJpYXQiOjE1MzkxNTE3NjF9.hCvXavjbhYKYiWFdcbWWg6IxrIj1An3zsBiyUKme7QY","timestamp":"15:43:46"}
+{"level":"info","message":"req.body: +923345022571","timestamp":"15:43:46"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"15:43:46"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"15:43:46"}
+{"level":"info","message":"User is authentic","timestamp":"15:43:46"}
+{"level":"info","message":"User Found With num  : +923345022570","timestamp":"15:43:50"}
+{"level":"info","message":"Sending backupCompleted Notification to Player Id: undefined","timestamp":"15:43:50"}
+{"level":"info","message":"File NEW Name  :file-1539773092214.png","timestamp":"15:44:52"}
+{"level":"info","message":"File Is uploaded","timestamp":"15:44:52"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundaryn5fzjunmSokQwC3J","timestamp":"15:44:52"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMjUwZGJlZmUzZTAwMTQ2NjlmZjAiLCJpYXQiOjE1MzkxNTE3NjF9.hCvXavjbhYKYiWFdcbWWg6IxrIj1An3zsBiyUKme7QY","timestamp":"15:44:52"}
+{"level":"info","message":"req.body: +923345022571","timestamp":"15:44:52"}
+{"level":"info","message":"Phone #: +923345022571","timestamp":"15:44:52"}
+{"level":"info","message":"user found with phone no +923345022571","timestamp":"15:44:53"}
+{"level":"info","message":"User is authentic","timestamp":"15:44:53"}
+{"level":"info","message":"User Found With num  : +923345022571","timestamp":"15:44:57"}
+{"level":"info","message":"Sending backupCompleted Notification to Player Id: undefined","timestamp":"15:44:57"}
+{"level":"info","message":"File NEW Name  :file-1539773109731.png","timestamp":"15:45:09"}
+{"level":"info","message":"File Is uploaded","timestamp":"15:45:09"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundarywDBShdG7yygCVsZY","timestamp":"15:45:09"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMjUwZGJlZmUzZTAwMTQ2NjlmZjAiLCJpYXQiOjE1MzkxNTE3NjF9.hCvXavjbhYKYiWFdcbWWg6IxrIj1An3zsBiyUKme7QY","timestamp":"15:45:09"}
+{"level":"info","message":"req.body: +923124999213","timestamp":"15:45:09"}
+{"level":"info","message":"Phone #: +923124999213","timestamp":"15:45:09"}
+{"level":"info","message":"user found with phone no +923124999213","timestamp":"15:45:09"}
+{"level":"info","message":"Token provided is not valid for this user.","timestamp":"15:45:09"}
+{"level":"info","message":"File Is uploaded","timestamp":"15:46:10"}
+{"level":"info","message":"contentTypeheader: multipart/form-data; boundary=----WebKitFormBoundary4XGi4TYHF0iBJOAQ","timestamp":"15:46:10"}
+{"level":"info","message":"token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjcxMmEyNGJlZmUzZTAwMTQ2NjlmZjIiLCJpYXQiOjE1Mzk3NzMxMzZ9.D_3uMwPa6xWN_Zd0Kofn1BJuLx4zxa3ejIh1OnseZC8","timestamp":"15:46:10"}
+{"level":"info","message":"req.body: +923124999213","timestamp":"15:46:10"}
+{"level":"info","message":"Phone #: +923124999213","timestamp":"15:46:10"}
+{"level":"info","message":"user found with phone no +923124999213","timestamp":"15:46:10"}
+{"level":"info","message":"User is authentic","timestamp":"15:46:10"}
+{"level":"info","message":"User Found With num  : +923124999213","timestamp":"15:46:14"}
+{"level":"info","message":"Sending backupCompleted Notification to Player Id: 35c2c2a6-fbd7-43df-9b20-e5dcccd5263b","timestamp":"15:46:14"}

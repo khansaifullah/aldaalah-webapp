@@ -15,6 +15,7 @@ var bodyParser = require('body-parser');
 var Country = require('../models/Country.js');
 var Conversation = require('../models/Conversation.js');
 var Marker = require('../models/Marker.js');
+var MarkerCategory = require('../models/MarkerCategory.js');
 
 var User = require('../models/User.js');
 var db = require('../config/db');
@@ -1159,7 +1160,37 @@ module.exports = function(app) {
 									
 		});		
 		});
-
+		// getting User Preference / Markers Category
+		app.get('/userpreference',async function(req,res){ 
+			if(req.body === undefined||req.body === null) {
+				res.end("Empty Body"); 
+				}
+					 // authenticate
+			   await auth(req,res);
+			   console.log('req.user : ' +req.user );
+			   if (!req.user){
+				   res.jsonp({status:"Failure",
+				   message:req.responseMsg,
+				   object:[]});
+			   }else{
+					let preference=[] ;
+					logger.info("in routes get userpreference : " +req.query.phoneNo);
+					let user = await User.findOne({ phone : req.query.phoneNo });
+					if (!user)
+					res.jsonp({
+					status : "Failure",
+					message : "No user found with provided email, Please register first.",
+					object : []
+					});
+					logger.info("user._preferenceId : " +user._preferenceId);
+					if (user._preferenceId)
+					preference = await MarkerCategory.findOne({ _id : user._preferenceId});
+						res.jsonp({status:"success",
+									message:"User Preference",
+									object:preference});
+		}					
+			
+		});
 		//Set User Preference
 		app.post('/preference',async function(req,res){
 		
@@ -1871,17 +1902,24 @@ module.exports = function(app) {
 							var urls;
 							var fileUrl;
 							if (body.indexOf("imageurl")>0){
+
 								urls = JSON.parse(body);
 								console.log("File Url : "+urls.imageurl);
 								fileUrl=urls.imageurl;
+								AppController.addBackup(req, fileUrl, res, function(data){});  
 							}else {
-								fileUrl='';
+								logger.info("Back Up File Upload Failed : ");	
+								var errorMessageObj={message:"Backup Failed, Please try again.", object:{}};  
+								var query = { phone : req.body.phone };
+								User.findOne(query).exec(function(err, user){
+									if (user){
+										// back up failed push notification
+										NotificationController.sendNotifcationToPlayerId(user.palyer_id,errorMessageObj,"backupUploadFailed");
+									}
+								});	
 							}
 								
-								AppController.addBackup(req, fileUrl, res, function(data){
-									
-									});  
-							});
+						});
 							
 						}
 						});
