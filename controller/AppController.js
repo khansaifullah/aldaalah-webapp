@@ -393,11 +393,11 @@ exports.addAttachment = async function(req, fileUrl, res, callback) {
 							// send Push Notification to Single Member
 							logger.info("Is not a group Conversation.");
 							
-							var query = { phone : req.body.fromUserPhone };
-							User.findOne(query).exec(function(err, user){
-							if (user){
-								logger.info("Sending Push Notification to user.palyer_id :"+ user.palyer_id);
-								NotificationController.sendNotifcationToPlayerId(user.palyer_id,messageObj,"attachmentReceived");			
+							var query = { phone : req.body.toUserPhone };
+							User.findOne(query).exec(function(err, toUser){
+							if (toUser){
+								logger.info("Sending Push Notification to user.palyer_id :"+ toUser.palyer_id);
+								NotificationController.sendNotifcationToPlayerId(toUser.palyer_id,messageObj,"attachmentReceived");			
 			
 							}else {
 								logger.info("Unable to Send Push Notification ");
@@ -420,7 +420,7 @@ exports.addAttachment = async function(req, fileUrl, res, callback) {
 			}
 		});
             
-        logger.info(' Exit AppController.addAttachment Method');
+        // logger.info(' Exit AppController.addAttachment Method');
   
 	}catch (err){
 		logger.info('An Exception Has occured in addAttachment method' + err);
