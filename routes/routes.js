@@ -195,10 +195,11 @@ module.exports = function(app) {
 							var fileUrl=urls.imageurl;    
 						   
 						   regCtrl.completeProfile(req.body,fileUrl,res);
-							tempFileName="";
+							tempFileName=undefined;
 						  }else {
 							  logger.error("unable to get file url");
 							  regCtrl.completeProfile(req.body,'',res);
+							  tempFileName=undefined;
 						  }
 						
 					   });
@@ -213,6 +214,7 @@ module.exports = function(app) {
 					}
 				  }else {
 					regCtrl.completeProfile(req.body,'',res);
+					tempFileName=undefined;
 				  }
 				}
 				
@@ -279,18 +281,18 @@ module.exports = function(app) {
 					console.log("File Url : "+urls.imageurl);
 					var fileUrl=urls.imageurl;    
 					regCtrl.updateProfilePhoto(req.body.phone,fileUrl,function(data){
-						tempFileName="";
+						tempFileName=undefined;
 						});
 					}else {
 						regCtrl.updateProfilePhoto(req.body.phone,'',function(data){
-							tempFileName="";});
+							tempFileName=undefined;});
 					}
 				});
 				}
 			});
 			}else {
 				regCtrl.updateProfilePhoto(req.body.phone,'',function(data){
-				tempFileName="";
+					tempFileName=undefined;
 				});
 			  }
 			}
