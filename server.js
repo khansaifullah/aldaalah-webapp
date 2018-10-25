@@ -481,13 +481,18 @@ io.sockets.on('connection', function(socket) {
 							if (err){
 								  logger.error('Some Error occured while finding user' + err );												
 							}
-							if (user){												  
-								logger.info('User Found For Phone No: ' + data._messageToMobile );
-								logger.info('Sending Notification to player id ' + user.palyer_id );
-								logger.info('Msg Object : ' + msg);
-								//logger.info('Individual Conversation msg  before Push Notification:'  );		
-								NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
-								//msg=null;
+							if (user){	
+								if (!user.deactivate_user){
+									logger.info('User Found For Phone No: ' + data._messageToMobile );
+									logger.info('Sending Notification to player id ' + user.palyer_id );
+									logger.info('Msg Object : ' + msg);
+									//logger.info('Individual Conversation msg  before Push Notification:'  );		
+									NotificationController.sendNotifcationToPlayerId(user.palyer_id,msg,"receiveMessage");
+									//msg=null;
+								}	else {
+									logger.info('User is not active ' );
+								}										  
+							
 							}
 							else {
 								logger.info('User not Found For Phone No: ' + data._messageToMobile );                 												  
