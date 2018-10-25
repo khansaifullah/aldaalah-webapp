@@ -704,7 +704,8 @@ exports.deactivateAccount=function(reqData,res){
     userExists(phoneNo,function(user){
 		logger.info('User Exists Response : ' + user );
         if (user){
-			user.deactivate_user=true;
+            user.deactivate_user=true;
+            user.palyer_id='';
          
                      user.save(function (err, user) {
                     if(err){
