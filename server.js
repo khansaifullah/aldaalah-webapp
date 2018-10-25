@@ -422,6 +422,7 @@ io.sockets.on('connection', function(socket) {
 			
 			var conversationMessage = new ConversationMessages();
 			conversationMessage.messageType = data.messageType;
+			if(data.messageType!=='photo')
 			conversationMessage.messageText = EncryptionController.encrypt(data.messageText);
 			conversationMessage._conversationId = data._conversationId;
 			conversationMessage._messageToMobile = data._messageToMobile;
