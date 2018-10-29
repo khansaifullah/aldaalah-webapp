@@ -392,6 +392,7 @@ module.exports = function(app) {
 								if (updateProfilePhotoFlag){
 									var userAfterUpdatePhoto = await regCtrl.updateProfilePhoto(user,profilePhotoUrl);
 									user=userAfterUpdatePhoto;
+									tempFileName=undefined;
 								}
 								
 								res.jsonp({ status:"success",
@@ -441,6 +442,7 @@ module.exports = function(app) {
 						if (updateProfilePhotoFlag){
 							var userAfterUpdatePhoto = await regCtrl.updateProfilePhoto(user,profilePhotoUrl);
 							user=userAfterUpdatePhoto;
+							tempFileName=undefined;
 						}
 						
 						res.jsonp({ status:"success",
@@ -594,13 +596,14 @@ module.exports = function(app) {
 					fileUrl='';
 				}		
 				ChatController.createGroup(req.body,fileUrl,res);	
-				tempFileName="";
+				tempFileName=undefined;
 
 			});
 			}
 		 });
 		}else {
 			ChatController.createGroup(req.body,'',res);	
+			tempFileName=undefined;
 		  }
 		}
 			
@@ -687,7 +690,7 @@ module.exports = function(app) {
 					  if ((updateProfilePhotoFlag)&&(updateNameFlag)){
 						  //update picture
 						  ChatController.updateGroupProfilePhoto(conversationId,profilePhotoUrl,function (data){
-							  tempFileName="";
+							tempFileName=undefined;
 						  if (data){
 							   logger.info ('data received after updating Group profile picture');
 							   //update Name
@@ -761,7 +764,7 @@ module.exports = function(app) {
 					  else {
 						  if (updateProfilePhotoFlag){
 							  ChatController.updateGroupProfilePhoto(conversationId,profilePhotoUrl,function (data){
-								  tempFileName="";
+								tempFileName=undefined;
 							  if (data){
 								   conversation=data;
 									
@@ -884,7 +887,7 @@ module.exports = function(app) {
 							  });
 						  }
 					  }
-						tempFileName="";
+					  tempFileName=undefined;
 				 
 				   });
 				 }
@@ -1622,14 +1625,14 @@ module.exports = function(app) {
 							}
 							
 							AppController.addWallpaper(req.body.title, fileUrl, res, function(data){
-								tempFileName="";
+								tempFileName=undefined;
 						   }); 
 						   });
 						 }
 					   });
 					  }else {
 						AppController.addWallpaper(req.body.title, '', res, function(data){
-							tempFileName="";
+							tempFileName=undefined;
 					   }); 
 					  } 
 						
@@ -1693,6 +1696,7 @@ module.exports = function(app) {
 
 							if(tempFileNamesList[i]){
 
+								logger.info('Temp File # '+ i +  tempFileNamesList[i] );
 								var form = new FormData();
 								await form.append('image', fs.createReadStream( './/public//images//'+tempFileNamesList[i]));
 								await form.submit('http://exagic.com/postimage.php', function(err, resp) {
@@ -1708,18 +1712,16 @@ module.exports = function(app) {
 								   });
 								   resp.on('end',async function() {
 									var urls;
-									var fileUrl;
+									var fileUrl='';
 									if (body.indexOf("imageurl")>0){
 										urls = JSON.parse(body);
 										console.log("File Url : "+urls.imageurl);
 										fileUrl=urls.imageurl;
+										await AppController.addAttachment(req, fileUrl, res, function(data){}); 
 									}else {
-										fileUrl='';
-									}    
+										await AppController.addAttachment(req, fileUrl, res, function(data){}); 
+									}
 									
-										await AppController.addAttachment(req, fileUrl, res, function(data){
-											//tempFileName="";
-										}); 
 									});
 								  }
 						 		});
@@ -1816,7 +1818,7 @@ module.exports = function(app) {
 								}
 									AppController.addAttachment(req, fileUrl, res, function(data){
 
-										tempFileName="";
+										tempFileName=undefined;
 										if (data){
 											res.jsonp({status:"success",
 											message:"Attachment is successfully Uploaded.",
@@ -1908,7 +1910,8 @@ module.exports = function(app) {
 								urls = JSON.parse(body);
 								console.log("File Url : "+urls.imageurl);
 								fileUrl=urls.imageurl;
-								AppController.addBackup(req, fileUrl, res, function(data){});  
+								AppController.addBackup(req, fileUrl, res, function(data){tempFileName=undefined;});  
+								
 							}else {
 								logger.info("Back Up File Upload Failed : ");	
 								var errorMessageObj={message:"Backup Failed, Please try again.", object:{}};  
