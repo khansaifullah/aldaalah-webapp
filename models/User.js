@@ -33,7 +33,7 @@ var userSchema = new Schema({
         index: '2d'      // create the geospatial index
         },
       last_shared_loc_time: { type: Date, default: Date.now },
-      status: {type:String, default:null },
+      status: {type:String, default:"*I am using Aldaalah*" },
       _preferenceId: { type: mongoose.Schema.Types.ObjectId, ref: 'MarkerCategory' },
       password: {
         type: String,

@@ -595,6 +595,7 @@ exports.syncContacts = function(req, res, me) {
 					 tempObject=new Object ();
 					 tempObject.phoneNo=user.phone;
                      tempObject.profileUrl=user.profile_photo_url;
+                     tempObject.userStatus=user.status;
                      arrayToSend.push(tempObject);
                      var query = {_userId:me._id, _friendId:user._id },
                         update = {_userId:me._id, _friendId:user._id, friendName:friend.friendName },

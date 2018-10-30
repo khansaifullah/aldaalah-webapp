@@ -297,14 +297,13 @@ exports.findAllWallpapers=function(callback){
 
 exports.addAttachment = async function(req, fileUrl, res, callback) {
 	try{ 	
-  
+   
 		console.log("In Controller addAttachment Method");     
 		      
-		console.log("req.body.type : " +  req.body.type); 		
-		console.log("req.body.title : " +  req.body.title);   
+		// console.log("req.body.type : " +  req.body.type); 		
+		// console.log("req.body.title : " +  req.body.title);   
 		console.log("fileUrl : " +  fileUrl); 
 		console.log("req.body.conversationId : " +  req.body.conversationId); 
-		// console.log("req.body.toUserId : " + req.body.toUserId); 
 		console.log("req.body.fromUserPhone : " +  req.body.fromUserPhone); 
 		console.log("req.body.toUserPhone  : " +  req.body.toUserPhone ); 
   
@@ -381,6 +380,11 @@ exports.addAttachment = async function(req, fileUrl, res, callback) {
 				   if (err){
 				   }else {
 					   if (conversation){
+						messageObj.attachmentobj.conversationImageUrl=conversation.conversationImageUrl;
+						messageObj.attachmentobj.conversationName=conversation.conversationName;
+						logger.info("messageObj.attachmentobj.conversationName : " + messageObj.attachmentobj.conversationName);
+						logger.info("messageObj.attachmentobj.conversationImageUrl : " + messageObj.attachmentobj.conversationImageUrl);
+						
 						if (conversation.isGroupConversation){
 							logger.info("Is A group Conversation.");	
 							// send Push Notification to all members except Sender
@@ -407,9 +411,6 @@ exports.addAttachment = async function(req, fileUrl, res, callback) {
 						 callback(attachment);
 					   }else {
 						logger.info("No Conversation Found With conv Id:  " +req.body.conversationId);
-						// res.jsonp({status:"failure",
-						// 			message:"No Conversation Found With conversation Id:  " +req.body.conversationId,
-						// 			object:[]});
 						callback();
 					   }
 					  

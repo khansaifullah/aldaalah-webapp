@@ -1707,7 +1707,7 @@ module.exports = function(app) {
 									object:[]});
 								  }else {
 								   var body = '';
-								   resp.on('data', function(chunk) {
+									resp.on('data', function(chunk) {
 									 body += chunk;
 								   });
 								   resp.on('end',async function() {
@@ -1717,9 +1717,13 @@ module.exports = function(app) {
 										urls = JSON.parse(body);
 										console.log("File Url : "+urls.imageurl);
 										fileUrl=urls.imageurl;
-										await AppController.addAttachment(req, fileUrl, res, function(data){}); 
+										await AppController.addAttachment(req, fileUrl, res, function(data){
+											fileUrl='';
+										}); 
 									}else {
-										await AppController.addAttachment(req, fileUrl, res, function(data){}); 
+										await AppController.addAttachment(req, fileUrl, res, function(data){
+											fileUrl='';
+										}); 
 									}
 									
 									});
