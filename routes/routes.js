@@ -1697,14 +1697,16 @@ module.exports = function(app) {
 						object:[]});
 					}else{
 
-					console.log('Files Length : '+ req.files.length);
+						logger.info('Files Length : '+ req.files.length);
 
+					// logging 
 					for(var f=0; f<req.files.length; f++){
-						console.log('File Size : '+req.files[f].size);
+						logger.info('File Size : '+req.files[f].size);
+						logger.info('File path : '+req.files[f].path);
 					}
 					if (tempFileNamesList){
 						for(var i=0; i<tempFileNamesList.length; i++){
-							console.log('Temp File Name : '+tempFileNamesList[i] );
+							logger.info('Temp File Name : '+tempFileNamesList[i] );
 
 							if(tempFileNamesList[i]){
 
