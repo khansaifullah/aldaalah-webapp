@@ -1699,6 +1699,9 @@ module.exports = function(app) {
 
 					console.log('Files Length : '+ req.files.length);
 
+					for(var f=0; f<req.files.length; f++){
+						console.log('File Size : '+req.files[f].size);
+					}
 					if (tempFileNamesList){
 						for(var i=0; i<tempFileNamesList.length; i++){
 							console.log('Temp File Name : '+tempFileNamesList[i] );
