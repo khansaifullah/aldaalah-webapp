@@ -1674,10 +1674,53 @@ module.exports = function(app) {
 					callback(null, true)
 				}
 			})
+		
+			function sendPhoto(fileName){									
+				return new Promise((resolve,reject) => {
+
+					logger.info('File Name :'  + fileName);
+					var form = new FormData();
+					await form.append('image', fs.createReadStream( './/public//images//'+fileName));
+					await form.submit('http://exagic.com/postimage.php', function(err, resp) {
+					if (err) {
+						logger.info("Error : "+ err);
+						res.jsonp({status:"Failure",
+						message:"Error Uploading File",
+						object:[]});
+					  }else {
+					   var body = '';
+						resp.on('data', function(chunk) {
+						 body += chunk;
+					   });
+					   resp.on('end',async function() {
+						var urls;
+						var fileUrl='';
+						if (body.indexOf("imageurl")>0){
+							urls = JSON.parse(body);
+							console.log("File Url : "+urls.imageurl);
+							fileUrl=urls.imageurl;
+							await AppController.addAttachment(req, fileUrl, res, function(data){
+								fileUrl='';
+								resolve();
+							}); 
+						}else {
+							await AppController.addAttachment(req, fileUrl, res, function(data){
+								fileUrl='';
+								resolve();
+							}); 
+						}
+						
+						});
+					  }
+					 });
+					
+				});
+			}	
 		//app.post('/attachment/photos', uploadPhotos.fields([{ name: 'video', maxCount: 1}, { name: 'image', maxCount: 3}]), function (req, res, next) {
 		app.post('/attachment/photo', uploadPhotos.array('photo', 12),async function (req, res, next) {
 			// req.files is array of `photos` files
 			// req.body will contain the text fields, if there were any
+			let promiseArr = [];
 			console.log("in routes  /attachment/photo");
 			if(req.body === undefined||req.body === null) {
 				res.end("Empty Body "); 
@@ -1702,53 +1745,63 @@ module.exports = function(app) {
 						logger.info('File path : '+req.files[f].path);
 					}
 					if (tempFileNamesList){
-						for(var i=0; i<tempFileNamesList.length; i++){
-							logger.info('Temp File Name : '+tempFileNamesList[i] );
+						
+						tempFileNamesList.forEach(function(fileName) {								
+							promiseArr.push(sendPhoto(fileName));
+						});
+						Promise.all(promiseArr)
+						.then((result)=> tempFileNamesList= [])
+						.catch((err)=> tempFileNamesList= []);
 
-							if(tempFileNamesList[i]){
 
-								logger.info('Temp File # '+ i +  tempFileNamesList[i]);
-								var form = new FormData();
-								await form.append('image', fs.createReadStream( './/public//images//'+tempFileNamesList[i]));
-								await form.submit('http://exagic.com/postimage.php', function(err, resp) {
-								if (err) {
-									logger.info("Error : "+ err);
-									res.jsonp({status:"Failure",
-									message:"Error Uploading File",
-									object:[]});
-								  }else {
-								   var body = '';
-									resp.on('data', function(chunk) {
-									 body += chunk;
-								   });
-								   resp.on('end',async function() {
-									var urls;
-									var fileUrl='';
-									if (body.indexOf("imageurl")>0){
-										urls = JSON.parse(body);
-										console.log("File Url : "+urls.imageurl);
-										fileUrl=urls.imageurl;
-										await AppController.addAttachment(req, fileUrl, res, function(data){
-											fileUrl='';
-										}); 
-									}else {
-										await AppController.addAttachment(req, fileUrl, res, function(data){
-											fileUrl='';
-										}); 
-									}
 
-									console.log('Clearing Temp File List');
-									if (i===(req.files.length-1)) {
-										tempFileNamesList=[];
-									}
+						// for(var i=0; i<req.files.length; i++){
+						// 	logger.info('Temp File Name : '+tempFileNamesList[i] );
+
+						// 	if(tempFileNamesList[i]){
+
+						// 		logger.info('Temp File # '+ i +  tempFileNamesList[i]);
+						// 		var form = new FormData();
+						// 		await form.append('image', fs.createReadStream( './/public//images//'+tempFileNamesList[i]));
+						// 		await form.submit('http://exagic.com/postimage.php', function(err, resp) {
+						// 		if (err) {
+						// 			logger.info("Error : "+ err);
+						// 			res.jsonp({status:"Failure",
+						// 			message:"Error Uploading File",
+						// 			object:[]});
+						// 		  }else {
+						// 		   var body = '';
+						// 			resp.on('data', function(chunk) {
+						// 			 body += chunk;
+						// 		   });
+						// 		   resp.on('end',async function() {
+						// 			var urls;
+						// 			var fileUrl='';
+						// 			if (body.indexOf("imageurl")>0){
+						// 				urls = JSON.parse(body);
+						// 				console.log("File Url : "+urls.imageurl);
+						// 				fileUrl=urls.imageurl;
+						// 				await AppController.addAttachment(req, fileUrl, res, function(data){
+						// 					fileUrl='';
+						// 				}); 
+						// 			}else {
+						// 				await AppController.addAttachment(req, fileUrl, res, function(data){
+						// 					fileUrl='';
+						// 				}); 
+						// 			}
+
+						// 			console.log('Clearing Temp File List');
+						// 			if (i===(req.files.length-1)) {
+						// 				tempFileNamesList=[];
+						// 			}
 									
-									});
-								  }
-						 		});
-							}
+						// 			});
+						// 		  }
+						//  		});
+						// 	}
 							
 							
-						}
+						// }
 						
 
 						res.jsonp({status:"success",
