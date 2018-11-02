@@ -1675,7 +1675,7 @@ module.exports = function(app) {
 				}
 			})
 		
-			async function sendPhoto(fileName){									
+			async function sendPhoto(req, res, fileName){									
 				return new Promise(async (resolve,reject) => {
 
 					logger.info('File Name :'  + fileName);
@@ -1747,7 +1747,7 @@ module.exports = function(app) {
 					if (tempFileNamesList){
 
 						tempFileNamesList.forEach(function(fileName) {								
-							promiseArr.push(sendPhoto(fileName));
+							promiseArr.push(sendPhoto(req, res, fileName));
 						});
 						Promise.all(promiseArr)
 						.then((result)=> tempFileNamesList= [])
