@@ -1675,7 +1675,7 @@ module.exports = function(app) {
 				}
 			})
 		
-			function sendPhoto(fileName){									
+			async function sendPhoto(fileName){									
 				return new Promise((resolve,reject) => {
 
 					logger.info('File Name :'  + fileName);
@@ -1745,7 +1745,7 @@ module.exports = function(app) {
 						logger.info('File path : '+req.files[f].path);
 					}
 					if (tempFileNamesList){
-						
+
 						tempFileNamesList.forEach(function(fileName) {								
 							promiseArr.push(sendPhoto(fileName));
 						});
@@ -1799,8 +1799,7 @@ module.exports = function(app) {
 						// 		  }
 						//  		});
 						// 	}
-							
-							
+														
 						// }
 						
 
