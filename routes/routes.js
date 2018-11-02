@@ -1676,7 +1676,7 @@ module.exports = function(app) {
 			})
 		
 			async function sendPhoto(fileName){									
-				return new Promise((resolve,reject) => {
+				return new Promise(async (resolve,reject) => {
 
 					logger.info('File Name :'  + fileName);
 					var form = new FormData();
