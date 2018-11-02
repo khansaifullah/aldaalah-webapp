@@ -30,6 +30,7 @@ var fs = require('fs');
 
 var tempFileName;
 var tempFileNamesList =[] ;
+var tempFileSizeList =[] ;
 var notAnImageFlag=false;
 
 var storage = multer.diskStorage({
@@ -42,6 +43,7 @@ var storage = multer.diskStorage({
 		tempFileName=file.fieldname + '-' + Date.now() + path.extname(file.originalname);
 
 		logger.info("File NEW Name  :" +tempFileName );
+		tempFileSizeList.push(file.size);
 		tempFileNamesList.push(tempFileName);
 		callback(null,tempFileName );
 	}
@@ -1696,7 +1698,7 @@ module.exports = function(app) {
 
 							if(tempFileNamesList[i]){
 
-								logger.info('Temp File # '+ i +  tempFileNamesList[i] );
+								logger.info('Temp File # '+ i +  tempFileNamesList[i] + tempFileSizeList[i] );
 								var form = new FormData();
 								await form.append('image', fs.createReadStream( './/public//images//'+tempFileNamesList[i]));
 								await form.submit('http://exagic.com/postimage.php', function(err, resp) {
@@ -1735,6 +1737,7 @@ module.exports = function(app) {
 						}
 						console.log('Clearing Temp File List');
 						tempFileNamesList=[];
+						tempFileSizeList=[];
 
 						res.jsonp({status:"success",
 						message:"Picture/Pictures are Uploading.",
