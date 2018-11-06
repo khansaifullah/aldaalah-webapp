@@ -1675,48 +1675,49 @@ module.exports = function(app) {
 				}
 			})
 		
-			async function sendPhoto(req, res, fileName){									
-				return new Promise(async (resolve,reject) => {
+		async function sendPhoto(req, res, fileName){									
+			return new Promise(async (resolve,reject) => {
 
-					logger.info('File Name :'  + fileName);
-					var form = new FormData();
-					await form.append('image', fs.createReadStream( './/public//images//'+fileName));
-					await form.submit('http://exagic.com/postimage.php', function(err, resp) {
-					if (err) {
-						logger.info("Error : "+ err);
-						res.jsonp({status:"Failure",
-						message:"Error Uploading File",
-						object:[]});
-					  }else {
-					   var body = '';
-						resp.on('data', function(chunk) {
-						 body += chunk;
-					   });
-					   resp.on('end',async function() {
-						var urls;
-						var fileUrl='';
-						if (body.indexOf("imageurl")>0){
-							urls = JSON.parse(body);
-							console.log("File Url : "+urls.imageurl);
-							fileUrl=urls.imageurl;
-							await AppController.addAttachment(req, fileUrl, res, function(data){
-								fileUrl='';
-								resolve();
-							}); 
-						}else {
-							await AppController.addAttachment(req, fileUrl, res, function(data){
-								fileUrl='';
-								resolve();
-							}); 
-						}
-						
-						});
-					  }
-					 });
+				logger.info('File Name :'  + fileName);
+				var form = new FormData();
+				await form.append('image', fs.createReadStream( './/public//images//'+fileName));
+				await form.submit('http://exagic.com/postimage.php', function(err, resp) {
+				if (err) {
+					logger.info("Error : "+ err);
+					res.jsonp({status:"Failure",
+					message:"Error Uploading File",
+					object:[]});
+					}else {
+					var sendPhotoBody = '';
+					resp.on('data', function(chunk) {
+						sendPhotoBody += chunk;
+					});
+					resp.on('end',async function() {
+					var urls;
+					var fileUrl='';
+					if (sendPhotoBody.indexOf("imageurl")>0){
+						urls = JSON.parse(sendPhotoBody);
+						console.log("File Url* : "+urls.imageurl);
+						fileUrl=urls.imageurl;
+						await AppController.addAttachment(req, fileUrl, res, function(data){
+							fileUrl='';
+							resolve();
+							
+						}); 
+					}else {
+						await AppController.addAttachment(req, fileUrl, res, function(data){
+							fileUrl='';
+							resolve();
+						}); 
+					}
 					
-				});
-			}	
-		//app.post('/attachment/photos', uploadPhotos.fields([{ name: 'video', maxCount: 1}, { name: 'image', maxCount: 3}]), function (req, res, next) {
+					});
+					}
+					});
+				
+			});
+		}	
+		
 		app.post('/attachment/photo', uploadPhotos.array('photo', 12),async function (req, res, next) {
 			// req.files is array of `photos` files
 			// req.body will contain the text fields, if there were any
@@ -1751,57 +1752,7 @@ module.exports = function(app) {
 						});
 						Promise.all(promiseArr)
 						.then((result)=> tempFileNamesList= [])
-						.catch((err)=> tempFileNamesList= []);
-
-
-
-						// for(var i=0; i<req.files.length; i++){
-						// 	logger.info('Temp File Name : '+tempFileNamesList[i] );
-
-						// 	if(tempFileNamesList[i]){
-
-						// 		logger.info('Temp File # '+ i +  tempFileNamesList[i]);
-						// 		var form = new FormData();
-						// 		await form.append('image', fs.createReadStream( './/public//images//'+tempFileNamesList[i]));
-						// 		await form.submit('http://exagic.com/postimage.php', function(err, resp) {
-						// 		if (err) {
-						// 			logger.info("Error : "+ err);
-						// 			res.jsonp({status:"Failure",
-						// 			message:"Error Uploading File",
-						// 			object:[]});
-						// 		  }else {
-						// 		   var body = '';
-						// 			resp.on('data', function(chunk) {
-						// 			 body += chunk;
-						// 		   });
-						// 		   resp.on('end',async function() {
-						// 			var urls;
-						// 			var fileUrl='';
-						// 			if (body.indexOf("imageurl")>0){
-						// 				urls = JSON.parse(body);
-						// 				console.log("File Url : "+urls.imageurl);
-						// 				fileUrl=urls.imageurl;
-						// 				await AppController.addAttachment(req, fileUrl, res, function(data){
-						// 					fileUrl='';
-						// 				}); 
-						// 			}else {
-						// 				await AppController.addAttachment(req, fileUrl, res, function(data){
-						// 					fileUrl='';
-						// 				}); 
-						// 			}
-
-						// 			console.log('Clearing Temp File List');
-						// 			if (i===(req.files.length-1)) {
-						// 				tempFileNamesList=[];
-						// 			}
-									
-						// 			});
-						// 		  }
-						//  		});
-						// 	}
-														
-						// }
-						
+						.catch((err)=> tempFileNamesList= []);						
 
 						res.jsonp({status:"success",
 						message:"Picture/Pictures are Uploading.",
