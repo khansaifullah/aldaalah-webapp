@@ -1219,6 +1219,7 @@ module.exports = function(app) {
 				var preferenceId=req.body.preferenceId;
 				var phoneNo=req.body.phoneNo;
 				console.log("in routes POST:  /preference , id :" + preferenceId);
+				console.log("req.body" + req.body);
 
 				AppController.userExists(phoneNo,function (user) {
 					logger.info("Response Of userExists Method : " + user);
