@@ -1,0 +1,43 @@
+{"level":"info","message":"UserExists Method Called","timestamp":"10:44:18"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"10:44:18"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"10:44:18"}
+{"level":"info","message":"User Found with Phone Num. :+923124999213","timestamp":"10:44:18"}
+{"level":"info","message":"RegistrationController.setUsernamePassword called for user  :+923124999213","timestamp":"10:44:18"}
+{"level":"info","message":"emailExists Method Called","timestamp":"10:44:18"}
+{"level":"info","message":" Exit emailExists Method","timestamp":"10:44:18"}
+{"level":"info","message":"User Found with email :nadeem@gmail.com","timestamp":"10:44:18"}
+{"level":"info","message":"UserExists Method Called","timestamp":"10:44:36"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"10:44:36"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"10:44:36"}
+{"level":"info","message":"User Found with Phone Num. :+923124999213","timestamp":"10:44:37"}
+{"level":"info","message":"RegistrationController.setUsernamePassword called for user  :+923124999213","timestamp":"10:44:37"}
+{"level":"info","message":"emailExists Method Called","timestamp":"10:44:37"}
+{"level":"info","message":" Exit emailExists Method","timestamp":"10:44:37"}
+{"level":"info","message":"User Not Found with email :nadeem1@gmail.com","timestamp":"10:44:37"}
+{"level":"info","message":"User Name updated With Phone Num +923124999213","timestamp":"10:44:37"}
+{"level":"info","message":"Sucessful Response of SMS API : [object Object]","timestamp":"10:44:38"}
+{"level":"info","message":"RegistrationController.verifyCode called  :+923124999213 - 6442","timestamp":"10:44:52"}
+{"level":"info","message":"UserExists Method Called","timestamp":"10:44:52"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"10:44:52"}
+{"level":"info","message":" Exit RegistrationController.verifyCode Method","timestamp":"10:44:52"}
+{"level":"info","message":"User Found with Phone Num. :+923124999213","timestamp":"10:44:52"}
+{"level":"info","message":"Wrong Code Sent For Verifcation :6442","timestamp":"10:44:52"}
+{"level":"info","message":"RegistrationController.verifyCode called  :+923124999213 - 6443","timestamp":"10:44:57"}
+{"level":"info","message":"UserExists Method Called","timestamp":"10:44:57"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"10:44:57"}
+{"level":"info","message":" Exit RegistrationController.verifyCode Method","timestamp":"10:44:57"}
+{"level":"info","message":"User Found with Phone Num. :+923124999213","timestamp":"10:44:57"}
+{"level":"info","message":"UserExists Method Called","timestamp":"10:44:57"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"10:44:57"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"10:44:57"}
+{"level":"info","message":"User Found with Phone Num. :+923124999213","timestamp":"10:44:58"}
+{"level":"info","message":"RegistrationController.setUsernamePassword called for user  :+923124999213","timestamp":"10:44:58"}
+{"level":"info","message":"emailExists Method Called","timestamp":"10:44:58"}
+{"level":"info","message":" Exit emailExists Method","timestamp":"10:44:58"}
+{"level":"info","message":"User Not Found with email :nadeem1@gmail.com","timestamp":"10:44:58"}
+{"level":"info","message":"User Name updated With Phone Num +923124999213","timestamp":"10:44:58"}
+{"level":"info","message":"UserExists Method Called","timestamp":"11:12:11"}
+{"level":"info","message":" Exit UserExists Method","timestamp":"11:12:11"}
+{"level":"info","message":" Exit RegistrationController.setUsernamePassword Method","timestamp":"11:12:11"}
+{"level":"info","message":"User Not Found with Phone Num. :undefined","timestamp":"11:12:11"}
+{"level":"info","message":"No User Found to Update ","timestamp":"11:12:11"}

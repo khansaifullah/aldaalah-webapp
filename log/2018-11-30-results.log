@@ -1,0 +1,10 @@
+{"level":"info","message":"in routes get friend","timestamp":"11:41:20"}
+{"level":"info","message":"Getting List of Friends for Phone No.:  undefined","timestamp":"11:41:20"}
+{"level":"info","message":"User not found","timestamp":"11:41:20"}
+{"level":"info","message":"Response Of findFriendsByPhoneNum Method","timestamp":"11:41:20"}
+{"level":"info","message":"in routes get friend","timestamp":"11:42:15"}
+{"level":"info","message":"Getting List of Friends for Phone No.:  +923074802433","timestamp":"11:42:15"}
+{"level":"info","message":"Response Of findFriendsByPhoneNum Method","timestamp":"11:42:16"}
+{"level":"info","message":"in routes get friend","timestamp":"11:42:36"}
+{"level":"info","message":"Getting List of Friends for Phone No.:  +923345022570","timestamp":"11:42:36"}
+{"level":"info","message":"Response Of findFriendsByPhoneNum Method","timestamp":"11:42:36"}

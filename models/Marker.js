@@ -10,7 +10,7 @@ var MarkerSchema   = new mongoose.Schema({
 	description_arb:{type:String,default:null },
 	description_eng:{type:String,default:null },
 	marker_photo_url:{type:String,default:null },
-	marker_audio_url:{type:String,default:"http://exagic.com/upload/2018-09-2809-14-13-WTCimage.mp3" },
+	marker_audio_url:{type:String,default:"http://exagic.com/upload/deebacha.mp3" },
 	radius:Number,
 	loc: {
 	type: [Number],  // [<longitude>, <latitude>]

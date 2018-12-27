@@ -1216,9 +1216,9 @@ module.exports = function(app) {
 				message:req.responseMsg,
 				object:[]});
 			}else{
-				console.log("in routes POST:  /markerCategory");
 				var preferenceId=req.body.preferenceId;
 				var phoneNo=req.body.phoneNo;
+				console.log("in routes POST:  /preference , id :" + preferenceId);
 
 				AppController.userExists(phoneNo,function (user) {
 					logger.info("Response Of userExists Method : " + user);
@@ -2062,10 +2062,11 @@ module.exports = function(app) {
 
 	
 	 // getting List of Friends 
-	 app.post('/friends',function(req,res){
+	 app.get('/friends',function(req,res){
       	
 		logger.info("in routes get friend");
-		var phoneNo= req.body.phoneNo;
+		var phoneNo= req.query.phoneNo;
+		logger.info("Getting List of Friends for Phone No.:  "+ phoneNo);
 		AppController.findFriendsByPhoneNum(phoneNo,function (friends) {
             logger.info("Response Of findFriendsByPhoneNum Method");
 			 res.jsonp({status:"success",

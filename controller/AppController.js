@@ -512,8 +512,7 @@ exports.findBackupsByPhoneNum=function(phoneNo, callback){
 				if (backups){
 					for (var i=0; i<backups.length; i++ ){
 						createdAtDate = await new Date(backups[i].createdAt);
-						createdAtinMs = await createdAtDate.getTime();
-		
+						createdAtinMs = await createdAtDate.getTime();		
 					    updatedAtDate = await new Date(backups[i].updatedAt);
 					    updatedAtinMs=await updatedAtDate.getTime();
 					    backupObj={
@@ -522,8 +521,7 @@ exports.findBackupsByPhoneNum=function(phoneNo, callback){
 						downloadedCount:backups[i].downloadedCount,
 						backUpFileUrl: backups[i].backUpFileUrl,
 						createdAt: createdAtinMs,
-						updatedAt: updatedAtinMs
-		
+						updatedAt: updatedAtinMs		
 						}
 						backupRespList.push (backupObj);
 
@@ -545,18 +543,44 @@ exports.findFriendsByPhoneNum=function(phoneNo, callback){
     try{
 
 		var query = { phone : phoneNo };
+		var friendResp;
+		var friendRespList;
 		 User.findOne(query).exec(function(err, user){
 			if (user){
 
-				Friend.find({_userId:user._id}, function(err, friends) {
+				Friend.find({_userId:user._id}, async function(err, friends) {
 					if (err){
 						res.status(400).send({status:"failure",
 												message:err,
 												object:[]
 					});
 					}else{
-						callback(friends);
-					
+						for (var i=0; i <friends.length; i++){
+							var id = friends(i)._userId;
+							await User.findById(id, function (err, user) {
+								if (err){
+								 logger.error('Some Error occured while finding user' + err );								
+								}else {
+									// friendResp={};
+									// friendResp.user_name=user.user_name;
+									// friendResp.phone=user.phone;
+									// friendResp.full_name=user.full_name;
+									// friendResp.profile_photo_url=user.profile_photo_url;
+									// friendResp.active=user.active;
+									// friendResp.email=user.email;
+									// friendResp.deactivate_user=user.deactivate_user;
+									// friendResp.country_code=user.country_code;
+									// friendResp.loc=user.loc;
+									// friendResp.status=user.status;
+									// friendResp.country=user.country;
+									// friendResp.gender=user.gender;
+									// friendRespList.push (friendResp);
+
+
+								}
+							 });
+						}
+						callback(friendRespList);					
 					} 
 					});
 			}else {
