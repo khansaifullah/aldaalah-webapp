@@ -12,6 +12,7 @@ var mongoose = require('mongoose');
 var geolib = require('geolib');
 var multer  = require('multer');
 
+
 var upload = multer({ dest: './public/images/profileImages' })
 //mongoose.createConnection(db.url);
 
@@ -94,10 +95,13 @@ function inRadiusNotification(phoneNo,userLoc,marker){
 						logger.info('marker._categoryId: ' + marker._categoryId );
 						logger.info('marker Object : latitude = ' + markerObj.latitude + "** longitude =" + markerObj.longitude + "** radius =" + markerObj.radius);
 						//logger.info('Individual Conversation msg  before Push Notification:'  );
-						
+						var userPrefId = mongoose.Types.ObjectId(user._preferenceId);
+						var categoryId = mongoose.Types.ObjectId(marker._categoryId);
+				
+					
 						//Check User Preference and Marker category is same, Send Push Notification
 						if (user._preferenceId !== undefined  && marker._categoryId !== undefined ){
-							if (user._preferenceId===marker._categoryId){
+							if (userPrefId.equals(categoryId)){
 								logger.info('User Preference and Marker Catgory Is Matched, sending Notiification ' );
 								logger.info('Sending Notification to player id ' + user.palyer_id );
 								NotificationController.sendNotifcationToPlayerId(user.palyer_id,markerObj,"reachedMarker");
