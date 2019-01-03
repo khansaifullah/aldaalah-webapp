@@ -1114,18 +1114,15 @@ module.exports = function(app) {
 	
 	 app.get('/nextmarker',async function(req,res){
 		
-		if(req.body === undefined||req.body === null) {
-		 res.end("Empty Body"); 
-		 }
-		// authenticate
-		await auth(req,res);
+	
+		var markerId = req.query.markerId;
 		console.log('req.user : ' +req.user );
-		if (!req.user){
+		if (!markerId){
 			res.jsonp({status:"Failure",
-			message:req.responseMsg,
+			message:"Marker Id Not Found.",
 			object:[]});
 		}else{
-			var markerId = req.query.markerId;
+			
 			console.log("in routes /nextmarker called with marker id : "+markerId );
 			LocController.getNextMarker(markerId,res);
 		}
