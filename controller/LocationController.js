@@ -90,7 +90,8 @@ function inRadiusNotification(phoneNo,userLoc,marker){
 					}
 					if (user){												  
 						logger.info('User Found For Phone No: ' + phoneNo );
-						logger.info('Sending Notification to player id ' + user.palyer_id );
+						logger.info('user._preferenceId: ' + user._preferenceId );
+						logger.info('marker._categoryId: ' + marker._categoryId );
 						logger.info('marker Object : latitude = ' + markerObj.latitude + "** longitude =" + markerObj.longitude + "** radius =" + markerObj.radius);
 						//logger.info('Individual Conversation msg  before Push Notification:'  );
 						
@@ -98,6 +99,7 @@ function inRadiusNotification(phoneNo,userLoc,marker){
 						if (user._preferenceId !== undefined  && marker._categoryId !== undefined ){
 							if (user._preferenceId===marker._categoryId){
 								logger.info('User Preference and Marker Catgory Is Matched, sending Notiification ' );
+								logger.info('Sending Notification to player id ' + user.palyer_id );
 								NotificationController.sendNotifcationToPlayerId(user.palyer_id,markerObj,"reachedMarker");
 							}else {
 								logger.info('User Preference and Marker Catgory Is not Matched ' );
