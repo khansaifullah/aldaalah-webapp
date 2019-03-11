@@ -1,0 +1,28 @@
+{"level":"info","message":"Admin register Method Called","timestamp":"16:02:34"}
+{"level":"info","message":" Exit Admin Login Method","timestamp":"16:02:34"}
+{"level":"info","message":"Creating New admin with username :undefined","timestamp":"16:02:34"}
+{"level":"info","message":"Admin register Method Called","timestamp":"16:03:13"}
+{"level":"info","message":" Exit Admin Login Method","timestamp":"16:03:13"}
+{"level":"info","message":"Creating New admin with username :undefined","timestamp":"16:03:15"}
+{"level":"info","message":"Admin register Method Called","timestamp":"16:04:37"}
+{"level":"info","message":" Exit Admin Login Method","timestamp":"16:04:37"}
+{"level":"info","message":"Creating New admin with username :undefined","timestamp":"16:04:40"}
+{"level":"info","message":"Admin register Method Called","timestamp":"16:06:13"}
+{"level":"info","message":" Exit Admin Login Method","timestamp":"16:06:13"}
+{"level":"info","message":"Creating New admin with username :saif","timestamp":"16:06:14"}
+{"level":"info","message":"Admin Created Successfully.","timestamp":"16:06:14"}
+{"level":"info","message":"Admin register Method Called","timestamp":"16:09:40"}
+{"level":"info","message":" Exit Admin Login Method","timestamp":"16:09:40"}
+{"level":"info","message":"Creating New admin with username :saif","timestamp":"16:09:40"}
+{"level":"info","message":"Admin Created Successfully.","timestamp":"16:09:41"}
+{"level":"info","message":"Admin register Method Called","timestamp":"16:13:01"}
+{"level":"info","message":" Exit Admin Login Method","timestamp":"16:13:01"}
+{"level":"info","message":"Can not create, admin Found with username :saif","timestamp":"16:13:02"}
+{"level":"info","message":"Admin register Method Called","timestamp":"16:13:26"}
+{"level":"info","message":" Exit Admin Login Method","timestamp":"16:13:26"}
+{"level":"info","message":"Creating New admin with username :saifi","timestamp":"16:13:27"}
+{"level":"info","message":"Admin Created Successfully.","timestamp":"16:13:27"}
+{"level":"info","message":"invalid password","timestamp":"16:38:59"}
+{"level":"info","message":"invalid password","timestamp":"16:39:07"}
+{"level":"info","message":"invalid password","timestamp":"16:39:17"}
+{"level":"info","message":"valid password","timestamp":"16:39:35"}

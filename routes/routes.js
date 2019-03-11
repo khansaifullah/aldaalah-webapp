@@ -13,6 +13,7 @@ var NotificationController = require('../controller/PushNotificationController.j
 var AdminController = require('../controller/AdminController.js');
 var bodyParser = require('body-parser');
 var Country = require('../models/Country.js');
+var Admin = require('../models/Admin.js');
 var Conversation = require('../models/Conversation.js');
 var Marker = require('../models/Marker.js');
 var MarkerCategory = require('../models/MarkerCategory.js');
@@ -1425,9 +1426,39 @@ module.exports = function(app) {
 	});		
 	});
 	
+
 	
+	// Admin Register
+		app.post('/adminregister',function(req,res){
+			
+			if(req.body === undefined||req.body === null) {
+			res.end("Empty Body"); 
+			}
+			
+			var userName = req.body.username;
+			var password = req.body.password;
+			var email = req.body.email;
+			console.log("in routes /adminregister : ", userName);
+			AdminController.register(userName,password,email, function (admin) {
+				
+			if (admin){
+				res.header("Access-Control-Allow-Headers", "*");
+				res.setHeader("App-Awt-Token", "xhbqabsbasa17ascxxkk");
+				res.jsonp({status:"success",
+							message:"Admin Successfuly Registered",
+							object:admin});
+				}
+				else{
+				res.jsonp({status:"Failure",
+							message:"Some error Occured while Registering Admin",
+							object:[]});
+					
+				}
+		});
+		});
 		// Admin Login
-	app.post('/adminlogin',function(req,res){
+
+		app.post('/adminlogin',async function(req,res){
 		
 		if(req.body === undefined||req.body === null) {
        	 res.end("Empty Body"); 
@@ -1436,22 +1467,54 @@ module.exports = function(app) {
 		var userName = req.body.username;
         var password = req.body.password;
 
-		AdminController.login(userName,password,function (admin) {
+		
+		let admin = await Admin.findOne({ user_name : userName });
+		if (!admin){
+		logger.info("No Admin found with provided User Name", userName);
+		res.jsonp({
+		status : "Failure",
+		message : "No Admin found with provided User Name",
+		object : []
+		});
+		}else {
+		console.log('Found an admin',userName );
+		const validPassword = await bcrypt.compare(password, admin.password);
+		if (!validPassword){
+			logger.info("invalid password");
+			res.jsonp({
+			status : "Failure",
+			message : "Invalid password, Please try again with correct password.",
+			object : []
+			});
+		}
+		else{
+			logger.info("valid password");
+			const token = admin.generateAuthToken();
+			res.setHeader('App-Awt-Token', token);
+			res.jsonp({
+			status : "success",
+			message : "successfully Logged In",
+			object : admin
+			});
+		}
+		}
+
+	// 	AdminController.login(userName,password,function (admin) {
 			
-          if (admin){
-			res.header("Access-Control-Allow-Headers", "*");
-			res.setHeader("App-Awt-Token", "xhbqabsbasa17ascxxkk");
-			res.jsonp({status:"success",
-                        message:"Successful Login",
-                        object:admin});
-			}
-			else{
-			res.jsonp({status:"Failure",
-                        message:"Wrong username or Password",
-                        object:[]});
+    //       if (admin){
+	// 		res.header("Access-Control-Allow-Headers", "*");
+	// 		res.setHeader("App-Awt-Token", "xhbqabsbasa17ascxxkk");
+	// 		res.jsonp({status:"success",
+    //                     message:"Successful Login",
+    //                     object:admin});
+	// 		}
+	// 		else{
+	// 		res.jsonp({status:"Failure",
+    //                     message:"Wrong username or Password",
+    //                     object:[]});
 				
-			}
-	});
+	// 		}
+	// });
 	});
 
 
@@ -2024,29 +2087,22 @@ module.exports = function(app) {
 		let email = req.body.email;
 		let password = req.body.password;
 	
-		// const { error } = validate(req.body);
-		// if (error) return res.status(400).send(error.details[0].message);
-	
 		let user = await User.findOne({ email : email });
-		// if (!user) return res.status(400).jsonp({ status: 'Failure', message: 'No User Found With Provided Email, Please Register First.' , object: []});
 		if (!user)
-			res.jsonp({
-			status : "Failure",
-			message : "No user found with provided email, Please register first.",
-			object : []
-			});
+		res.jsonp({
+		status : "Failure",
+		message : "No user found with provided email, Please register first.",
+		object : []
+		});
 
 		console.log('found a user', user.email);
-	
 		const validPassword = await bcrypt.compare(password, user.password);
-		//if (!validPassword) return res.status(400).jsonp({ status: 'Failure', message: 'Invalid Password.' , object: []});
-
 		if (!validPassword)
-			res.jsonp({
-			status : "Failure",
-			message : "Invalid password, Please try again with correct password.",
-			object : []
-			});
+		res.jsonp({
+		status : "Failure",
+		message : "Invalid password, Please try again with correct password.",
+		object : []
+		});
 
 		const token = user.generateAuthToken();
 		res.setHeader('x-auth-token', token);
