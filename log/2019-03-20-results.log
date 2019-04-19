@@ -1,0 +1,29 @@
+{"level":"info","message":"in routes get friend","timestamp":"11:29:37"}
+{"level":"info","message":"Getting List of Friends for Phone No.:  +923345022570","timestamp":"11:29:37"}
+{"level":"info","message":"in routes get friend","timestamp":"11:31:35"}
+{"level":"info","message":"Getting List of Friends for Phone No.:  +923345022570","timestamp":"11:31:35"}
+{"level":"info","message":"Response Of findFriendsByPhoneNum Method","timestamp":"11:31:37"}
+{"level":"info","message":"in routes get friend","timestamp":"12:41:05"}
+{"level":"info","message":"Getting List of Friends for Phone No.:  +923345022570","timestamp":"12:41:05"}
+{"level":"info","message":"in routes get friend","timestamp":"12:42:18"}
+{"level":"info","message":"Getting List of Friends for Phone No.:  +923345022570","timestamp":"12:42:18"}
+{"level":"info","message":"in routes get friend","timestamp":"12:50:50"}
+{"level":"info","message":"Getting List of Friends for Phone No.:  +923345022570","timestamp":"12:50:50"}
+{"level":"info","message":"No. of Friends: 2","timestamp":"12:50:51"}
+{"level":"info","message":"Response Of findFriendsByPhoneNum Method","timestamp":"12:50:51"}
+{"level":"info","message":"in routes get friend","timestamp":"12:52:16"}
+{"level":"info","message":"Getting List of Friends for Phone No.:  +923335580946","timestamp":"12:52:16"}
+{"level":"info","message":"No. of Friends: 8","timestamp":"12:52:17"}
+{"level":"info","message":"Response Of findFriendsByPhoneNum Method","timestamp":"12:52:19"}
+{"level":"info","message":"in routes get friend","timestamp":"12:53:55"}
+{"level":"info","message":"Getting List of Friends for Phone No.:  +923335580946","timestamp":"12:53:55"}
+{"level":"info","message":"No. of Friends: 8","timestamp":"12:53:56"}
+{"level":"info","message":"Response Of findFriendsByPhoneNum Method","timestamp":"12:53:58"}
+{"level":"info","message":"in routes get friend","timestamp":"12:54:13"}
+{"level":"info","message":"Getting List of Friends for Phone No.:  +923345022570","timestamp":"12:54:13"}
+{"level":"info","message":"No. of Friends: 2","timestamp":"12:54:13"}
+{"level":"info","message":"Response Of findFriendsByPhoneNum Method","timestamp":"12:54:14"}
+{"level":"info","message":"in routes get friend","timestamp":"15:22:02"}
+{"level":"info","message":"Getting List of Friends for Phone No.:  +923345022570","timestamp":"15:22:02"}
+{"level":"info","message":"No. of Friends: 2","timestamp":"15:22:03"}
+{"level":"info","message":"Response Of findFriendsByPhoneNum Method","timestamp":"15:22:03"}

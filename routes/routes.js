@@ -1779,7 +1779,7 @@ module.exports = function(app) {
 				
 			});
 		}	
-		
+// For android only		
 		app.post('/attachment/photo', uploadPhotos.array('photo', 12),async function (req, res, next) {
 			// req.files is array of `photos` files
 			// req.body will contain the text fields, if there were any
@@ -1839,7 +1839,69 @@ module.exports = function(app) {
 				
 			});
 
-			 //Add New Attachment
+			// changed Endpoint in IOS DEV req
+			app.post('/iosattachment/photo', uploadPhotos.array('photo', 12),async function (req, res, next) {
+				// req.files is array of `photos` files
+				// req.body will contain the text fields, if there were any
+				let promiseArr = [];
+				console.log("in routes  /iosattachment/photo");
+				if(req.body === undefined||req.body === null) {
+					res.end("Empty Body "); 
+					}
+					if (!notAnImageFlag){
+		
+					if (req.files){
+							// authenticate
+						await auth(req,res);
+						console.log('req.user : ' +req.user );
+						if (!req.user){
+							res.jsonp({status:"Failure",
+							message:req.responseMsg,
+							object:[]});
+						}else{
+	
+							logger.info('Files Length : '+ req.files.length);
+	
+						// logging 
+						for(var f=0; f<req.files.length; f++){
+							logger.info('File Size : '+req.files[f].size);
+							logger.info('File path : '+req.files[f].path);
+						}
+						if (tempFileNamesList){
+	
+							tempFileNamesList.forEach(function(fileName) {								
+								promiseArr.push(sendPhoto(req, res, fileName));
+							});
+							Promise.all(promiseArr)
+							.then((result)=> tempFileNamesList= [])
+							.catch((err)=> tempFileNamesList= []);						
+	
+							res.jsonp({status:"success",
+							message:"Picture/Pictures are Uploading.",
+							object:[]});
+						}
+					}
+				
+					}else{
+					res.jsonp({status:"Failure",
+					message:"No Files Found To Upload",
+					object:[]});
+					}
+	
+	
+				}else{
+					//reset flag
+					notAnImageFlag=false;
+					res.jsonp({status:"Failure",
+					message:"Only Images are Allowed!",
+					object:[]});
+				}
+					
+				});
+	
+
+
+			 //Add New Attachment , android only
 			 app.post('/attachment', function(req,res){
 		
 				if(req.body === undefined||req.body === null) {
@@ -1934,6 +1996,101 @@ module.exports = function(app) {
 			 });
 
 		 
+			// changed Endpoint in IOS DEV req
+			
+			 //Add New Attachment , IOS only
+			 app.post('/iosattachment', function(req,res){
+		
+				if(req.body === undefined||req.body === null) {
+				 res.end("Empty Body "); 
+				 }
+				 
+				 console.log("in routes  /iosattachment");
+				 
+				 var upload = multer({
+					 storage: storage,
+					 fileFilter: function(req, file, callback) {
+						 //Allow Only Image Files
+						//  var ext = path.extname(file.originalname)
+						//  if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' && ext !== '.PNG' && ext !== '.JPG' && ext !== '.GIF' && ext !== '.JPEG') {
+						// 	 return callback(res.end('Only images are allowed'), null)
+						//  }
+						 callback(null, true)
+					 }
+				 }).single('file');
+				 upload(req, res, async function(err) {
+					 if (err){
+						logger.info("Error Uploading File : " + err);
+						res.jsonp({status:"Failure",
+									message:"Error Uploading File",
+									object:[]});
+					 }else{        
+						logger.info ("File Is uploaded");
+						console.log(req.body.title);
+						// authenticate
+						await auth(req,res);
+						console.log('req.user : ' +req.user );
+						if (!req.user){
+							res.jsonp({status:"Failure",
+							message:req.responseMsg,
+							object:[]});
+						}else{
+						if(tempFileName){
+							var form = new FormData();
+							await form.append('image', fs.createReadStream( './/public//images//'+tempFileName));
+							await form.submit('http://exagic.com/postimage.php', function(err, resp) {
+							if (err) {
+								logger.info("Error : "+ err);
+								res.jsonp({status:"Failure",
+								message:"Error Uploading File",
+								object:[]});
+							  }else {
+							   var body = '';
+							   resp.on('data', function(chunk) {
+								 body += chunk;
+							   });
+							   resp.on('end',async function() {
+								var urls;
+								var fileUrl;
+								if (body.indexOf("imageurl")>0){
+									urls = JSON.parse(body);
+									console.log("File Url : "+urls.imageurl);
+									fileUrl=urls.imageurl;
+								}else {
+									fileUrl='';
+								}
+									AppController.addAttachment(req, fileUrl, res, function(data){
+
+										tempFileName=undefined;
+										if (data){
+											res.jsonp({status:"success",
+											message:"Attachment is successfully Uploaded.",
+											object:data});
+										}else{
+											res.jsonp({status:"Failure",
+											message:"Some Error occured while uploading attachment.",
+											object:data});
+
+										}
+										
+								   });  
+								});
+								  
+							}
+							 });
+							 
+						}	else{
+							res.jsonp({status:"Failure",
+								message:"Unable To find a file to Upload.",
+								object:[]});
+						}
+					}				 
+						 
+					}
+				 
+				 })
+				 
+			 });
 		
 		//Upload new Back Up File
 		app.post('/backup', function(req,res){

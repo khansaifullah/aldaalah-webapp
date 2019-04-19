@@ -544,7 +544,7 @@ exports.findFriendsByPhoneNum=function(phoneNo, callback){
 
 		var query = { phone : phoneNo };
 		var friendResp;
-		var friendRespList;
+		var friendRespList=[];
 		 User.findOne(query).exec(function(err, user){
 			if (user){
 
@@ -555,32 +555,36 @@ exports.findFriendsByPhoneNum=function(phoneNo, callback){
 												object:[]
 					});
 					}else{
-						for (var i=0; i <friends.length; i++){
-							var id = friends(i)._userId;
-							await User.findById(id, function (err, user) {
-								if (err){
-								 logger.error('Some Error occured while finding user' + err );								
-								}else {
-									// friendResp={};
-									// friendResp.user_name=user.user_name;
-									// friendResp.phone=user.phone;
-									// friendResp.full_name=user.full_name;
-									// friendResp.profile_photo_url=user.profile_photo_url;
-									// friendResp.active=user.active;
-									// friendResp.email=user.email;
-									// friendResp.deactivate_user=user.deactivate_user;
-									// friendResp.country_code=user.country_code;
-									// friendResp.loc=user.loc;
-									// friendResp.status=user.status;
-									// friendResp.country=user.country;
-									// friendResp.gender=user.gender;
-									// friendRespList.push (friendResp);
+						if (friends){
+							 logger.info( 'No. of Friends: ' + friends.length );	
+							for (var i=0; i <friends.length; i++){
+								var id = friends[i]._friendId;
+								await User.findById(id, function (err, user) {
+									if (err){
+									logger.error('Some Error occured while finding user' + err );								
+									}else {
+										friendResp={};
+										friendResp._id=user._id;
+										friendResp.user_name=user.user_name;
+										friendResp.phone=user.phone;
+										friendResp.full_name=user.full_name;
+										friendResp.profile_photo_url=user.profile_photo_url;
+										friendResp.active=user.active;
+										friendResp.email=user.email;
+										friendResp.deactivate_user=user.deactivate_user;
+										friendResp.country_code=user.country_code;
+										friendResp.loc=user.loc;
+										friendResp.status=user.status;
+										friendResp.country=user.country;
+										friendResp.gender=user.gender;
+										friendRespList.push (friendResp);
 
 
-								}
-							 });
-						}
-						callback(friendRespList);					
+									}
+								});
+							}
+							callback(friendRespList);	
+						}				
 					} 
 					});
 			}else {
