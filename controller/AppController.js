@@ -385,13 +385,24 @@ exports.addAttachment = async function(req, fileUrl, res, callback) {
 						logger.info("messageObj.attachmentobj.conversationName : " + messageObj.attachmentobj.conversationName);
 						logger.info("messageObj.attachmentobj.conversationImageUrl : " + messageObj.attachmentobj.conversationImageUrl);
 						
+							//Send Attachment Sent Notification to User Who Sent
+							var fromquery = { phone : req.body.fromUserPhone };
+							User.findOne(fromquery).exec(function(errUseri, fromUser){
+							if (errUseri){
+								logger.error('Error Occured Wile Finding User' + errUseri );
+						
+							}else{
+								   
+								NotificationController.sendNotifcationToPlayerId(fromUser.palyer_id,attachmentObj,"attachmentSent");
+							}
+							});
+							
 						if (conversation.isGroupConversation){
 							logger.info("Is A group Conversation.");	
 							// send Push Notification to all members except Sender
 							excludedMember=req.body.fromUserPhone ;
 							notifyAllGroupMembers(conversation._id,messageObj,excludedMember, "attachmentReceived");
 							
-
 						}else{
 
 							// send Push Notification to Single Member
