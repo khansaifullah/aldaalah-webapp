@@ -2089,38 +2089,39 @@ module.exports = function(app) {
 		let password = req.body.password;
 	
 		let user = await User.findOne({ email : email });
-		if (!user)
-		res.jsonp({
-		status : "Failure",
-		message : "No user found with provided email, Please register first.",
-		object : []
-		});
-
-		console.log('found a user', user.email);
-		if (user.password){
-			const validPassword = await bcrypt.compare(password, user.password);
-			if (!validPassword)
+		if (!user){
 			res.jsonp({
 			status : "Failure",
-			message : "Invalid password, Please try again with correct password.",
+			message : "No user found with provided email, Please register first.",
 			object : []
 			});
-		}else {
-			res.jsonp({
+		}else{
+			console.log('found a user', user.email);
+			console.log('password : ', user.password);
+			if (user.password){
+				const validPassword = await bcrypt.compare(password, user.password);
+				if (!validPassword)
+				res.jsonp({
 				status : "Failure",
-				message : "Please Register First.",
+				message : "Invalid password, Please try again with correct password.",
 				object : []
 				});
-		}
-	
+			}else {
+				res.jsonp({
+					status : "Failure",
+					message : "Please Register First.",
+					object : []
+					});
+			}
 
-		const token = user.generateAuthToken();
-		res.setHeader('x-auth-token', token);
-		res.jsonp({
-		status : "success",
-		message : "successfully Logged In",
-		object : user
-		}); 
+			const token = user.generateAuthToken();
+			res.setHeader('x-auth-token', token);
+			res.jsonp({
+			status : "success",
+			message : "successfully Logged In",
+			object : user
+			}); 
+		}
 	
 	});
 
