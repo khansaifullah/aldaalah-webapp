@@ -755,10 +755,7 @@ exports.initialWebRegisteration = async function(req, res) {
         var city = req.body.city;
         var country = req.body.country;
         
-        //generate a code and set to user.verification_code
-        var code=randomize('0', 4);
-        var verificationMsg="Verification code for Aldaalah Application : " + code;
-        // var code  = req.body.code; 
+        
         //find user by phone no.
         userExists(phoneNo, async function(user){
             console.log("In Controller setUsernamePassword Method");           
@@ -775,14 +772,14 @@ exports.initialWebRegisteration = async function(req, res) {
 
                     }else {
 
-                        // const salt = await bcrypt.genSalt(10);
-                        // user.email=email, 
-                        // user.password=await bcrypt.hash(password, salt);
-                        user.verification_code=code;
-                        // user.gender=gender;
-                        // user.city=city;
-                        // user.country=country;
-                        // user.dob=dob;
+                        const salt = await bcrypt.genSalt(10);
+                        user.email=email, 
+                        user.password=await bcrypt.hash(password, salt);
+                       
+                        user.gender=gender;
+                        user.city=city;
+                        user.country=country;
+                        user.dob=dob;
                         user.save(function (err, user){
                             if(err){
                             logger.error('Some Error while updating user status' + err ); 
@@ -800,39 +797,9 @@ exports.initialWebRegisteration = async function(req, res) {
                             }
                         });
 
-                        //sending verification Code 
-                        var headers = {
-
-                            'Authorization':       'Basic ZmFsY29uLmV5ZTowMzM1NDc3OTU0NA==',
-                            'Content-Type':     'application/json',
-                            'Accept':       'application/json'
-                        }
-
-                        // Configure the request
-                        var options = {
-                            url: 'http://107.20.199.106/sms/1/text/single',
-                            method: 'POST',
-                            headers: headers,
-                            //form: {'from': 'ALDAALAH', 'to': user.phone,'text':verificationMsg}
-                            json: {
-                                'from': 'ALDAALAH',
-                                'to': user.phone,
-                                'text':verificationMsg
-                            }
-                        }
-
-                        // Start the request
-                        request(options, async function (error, response, body) {
-                            if (!error ) {
-                                // Print out the response body
-                                console.log(body)
-                                logger.info('Sucessful Response of SMS API : ' + body );
-                        
-                            }
-                            else{
-                                logger.info('Response/Error of SMS API : ' + error );
-                            }
-                        });
+                     
+                
+                    
                     }
                         
 
