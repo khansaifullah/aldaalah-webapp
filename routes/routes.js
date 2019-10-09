@@ -2096,7 +2096,7 @@ module.exports = function(app) {
 			object : []
 			});
 		}else{
-			console.log('found a user', user.email);
+			console.log('found a user', user._id, ' - ', user.phone);
 			console.log('password : ', user.password);
 			if (user.password){
 				const validPassword = await bcrypt.compare(password, user.password);
