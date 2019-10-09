@@ -48,7 +48,7 @@ var storage = multer.diskStorage({
 		logger.info("NEW File Size  :" +file.size );
 		logger.info("NEW File Buffer  :" +file.buffer );
 		logger.info("NEW File destination  :" +file.destination );
-		
+		logger.info("Receiver Phone Num : " + req.body.toUserPhone );
 		tempFileNamesList.push(tempFileName);
 		callback(null,tempFileName );
 	}
@@ -2097,13 +2097,22 @@ module.exports = function(app) {
 		});
 
 		console.log('found a user', user.email);
-		const validPassword = await bcrypt.compare(password, user.password);
-		if (!validPassword)
-		res.jsonp({
-		status : "Failure",
-		message : "Invalid password, Please try again with correct password.",
-		object : []
-		});
+		if (user.password){
+			const validPassword = await bcrypt.compare(password, user.password);
+			if (!validPassword)
+			res.jsonp({
+			status : "Failure",
+			message : "Invalid password, Please try again with correct password.",
+			object : []
+			});
+		}else {
+			res.jsonp({
+				status : "Failure",
+				message : "Please Register First.",
+				object : []
+				});
+		}
+	
 
 		const token = user.generateAuthToken();
 		res.setHeader('x-auth-token', token);
